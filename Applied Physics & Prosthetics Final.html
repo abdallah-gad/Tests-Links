@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Applied Physics & Prosthetics Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Applied Physics & Prosthetics Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>⚡ A.D.Gad | Applied Physics & Prosthetics Final</h1>
+        <p class="sub">📚 Final Exam MCQ Bank — Dr. Aya</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="physics">⚡ Physics</button>
+            <button data-cat="afo">🦿 AFO</button>
+            <button data-cat="kafo">🦿 KAFO</button>
+            <button data-cat="prosthetics">🦾 Prosthetics</button>
+            <button data-cat="orthotics">🩼 Orthotics</button>
+            <button data-cat="tf">✅ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from Applied Physics Final file
+const QUESTIONS = [
+    // ========== PHYSICS ==========
+    {n:1, cat:'physics', q:'Which has neither a definite volume nor a definite shape?', opts:['Liquid','Solid','Fluid','Gas'], c:3, exp:'الغاز (Gas) ليس له حجم ولا شكل محددين.'},
+    {n:2, cat:'physics', q:'The magnitude of the buoyant force on an object always equals the weight of the fluid displaced by the object is:', opts:["Kirchhoff's law","Pascal's law","Archimedes's law","Newton's law"], c:2, exp:'قانون أرخميدس: قوة الطفو = وزن السائل المزاح.'},
+    {n:3, cat:'physics', q:'Stainless steel, aluminum alloys and titanium are types of:', opts:['Fabric','Rubber','Metal','Plastic'], c:2, exp:'الفولاذ المقاوم للصدأ، سبائك الألومنيوم، والتيتانيوم هي معادن (Metal).'},
+    {n:4, cat:'physics', q:'Materials have acceptable appearance:', opts:['Fabric','Alloys','Metal','Plastic'], c:3, exp:'المواد البلاستيكية (Plastic) لها مظهر مقبول.'},
+    {n:5, cat:'physics', q:'A change in the pressure applied to a fluid is transmitted undiminished to every point of the fluid:', opts:["Kirchhoff's law","Pascal's law","Archimedes's law","Newton's law"], c:1, exp:'قانون باسكال: الضغط ينتقل بالتساوي في السائل.'},
+    {n:6, cat:'physics', q:'Suppose someone steps on your foot. Would you be better off if that person was:', opts:['A large professional basketball player wearing sneakers','A petite woman wearing spike-heeled shoes','None of the above','All of the above the same'], c:0, exp:'الضغط = القوة/المساحة. الكعب العالي يسبب ضغطًا أكبر، لذا اللاعب الرياضي أفضل.'},
+    {n:7, cat:'physics', q:'Two straws have radii of 3mm and 5mm. In which straw is the speed of the liquid the highest?', opts:['The speed is the same','The one of radius 3mm','The one of radius 5mm','None of the above'], c:1, exp:'معادلة الاستمرارية: السرعة تتناسب عكسياً مع المساحة، فالمساحة الأصغر تعطي سرعة أكبر.'},
+    {n:8, cat:'physics', q:'Each particle of the fluid follows a smooth path; different particles never cross each other is:', opts:['Turbulent flow','Laminar flow','Continuity flow','None of the above'], c:1, exp:'التدفق الصفحي (Laminar flow): جسيمات السائل تتبع مسارات ناعمة ولا تتقاطع.'},
+    {n:9, cat:'physics', q:'_______ is a measure of the fluid\'s resistance to flow or internal friction in a fluid:', opts:['Density','Continuity','Velocity','Viscosity'], c:3, exp:'اللزوجة (Viscosity) هي مقياس مقاومة السائل للتدفق.'},
+    {n:10, cat:'physics', q:'Spacecraft carries a steel sphere to a planet with higher pressure. The higher pressure causes the radius to decrease. To describe stress and strain, you would use:', opts:["Young's modulus",'Shear modulus','Bulk modulus','None of the above'], c:2, exp:'تغير الحجم بسبب الضغط يستخدم معامل الحجم (Bulk modulus).'},
+    {n:11, cat:'physics', q:'The rate of flow of a fluid in a round tube depends on viscosity, pressure difference, and dimensions of the tube:', opts:["Bernoulli's Equation",'The Venturi Tube',"Poiseuille's Equation",'None of the above'], c:2, exp:'معادلة بوازوي (Poiseuille\'s Equation) تصف تدفق السائل في أنبوب.'},
+    {n:12, cat:'physics', q:'In Torricelli\'s law, if the pressure P at the top of the liquid is increased, the liquid leaves with:', opts:['Lower speed','Higher speed','The same speed','None of the above'], c:1, exp:'زيادة الضغط يزيد من سرعة خروج السائل (Torricelli).'},
+    {n:13, cat:'physics', q:'_______ is defined to be the pressure equivalent of a column of mercury that is exactly 0.76m in height at 0°C:', opts:['Fluid pressure','Gauge pressure','Atmosphere pressure','All the above'], c:2, exp:'الضغط الجوي = ضغط عمود زئبق ارتفاعه 0.76 م.'},
+    {n:14, cat:'physics', q:'The product AU has the dimensions of volume per unit time. This is the:', opts:['Flow rate','Density','Elasticity','Surface tension'], c:0, exp:'معدل التدفق (Flow rate) = المساحة × السرعة (AU).'},
+    {n:15, cat:'physics', q:'The surface tension of the liquid behaves like a _______ under tension:', opts:['Cover','Density','Layer','Membrane'], c:3, exp:'التوتر السطحي يجعل السطح behaves like a membrane under tension.'},
+    {n:16, cat:'physics', q:'Inelastic materials are those that:', opts:['Return to original shape','Do not return to original shape','Are always elastic','Are fluids'], c:1, exp:'المواد غير المرنة لا تعود إلى شكلها الأصلي بعد إزالة القوة.'},
+    {n:17, cat:'physics', q:'A fluid is any substance that can:', opts:['Flow','Be solid','Be compressed','Expand'], c:0, exp:'المائع هو أي مادة يمكنها الجريان (Flow).'},
+    {n:18, cat:'physics', q:'Fundamental units of CGS system are:', opts:['Centimeter-gram-second','Centimeter-kilogram-second','Meter-gram-second','Foot-kilogram-second'], c:0, exp:'وحدات CGS: سنتيمتر، جرام، ثانية.'},
+    {n:19, cat:'physics', q:'The dimension formula of speed is:', opts:['M^0 L^2 T','M L T','M L T2','M^0 L T^-1'], c:3, exp:'بعد السرعة = L T^-1.'},
+    {n:20, cat:'physics', q:'The prefix for Pico (p) is:', opts:['10^12','10^9','10^-12','10^-9'], c:2, exp:'Pico = 10^-12.'},
+    {n:21, cat:'physics', q:'Shear modulus measures resistance to changes in:', opts:['Length (parallel)','Length (perpendicular)','Volume','None'], c:1, exp:'معامل القص يقيس مقاومة التغير في الطول بشكل عمودي (Perpendicular).'},
+    {n:22, cat:'physics', q:'The product of area and fluid speed at all points along a pipe is constant is:', opts:['Flow rate','Density','Elasticity','Surface tension'], c:0, exp:'معدل التدفق = A × V (ثابت).'},
+    {n:23, cat:'physics', q:'The speed of the liquid as it leaves the hole when the liquid\'s level is a distance h above the hole is:', opts:['Newton law','Pascal law','Archimedes law',"Torricelli's law"], c:3, exp:'قانون توريسيلي: v = √(2gh).'},
+    {n:24, cat:'physics', q:'In a car lift, compressed air exerts a force on a small piston (r=5cm). Pressure is transmitted to a piston (r=15cm). Find the force to lift a car weighing 13300 N:', opts:['2.48×10^3 N','1.48×10^3 N','3.48×10^3 N','0.48×10^3 N'], c:1, exp:'F1/F2 = A1/A2 = (r1/r2)^2 = (5/15)^2 = 1/9 → F1 = 13300/9 = 1477.8 N ≈ 1.48×10^3 N.'},
+    {n:25, cat:'physics', q:'A large storage tank open at top develops a hole 16m below water level. Rate of flow is 2.5×10^-3 m³/min. Determine the speed at which water leaves the hole:', opts:['16.5 m/s','17.7 m/s','15.76 m/s','18.9 m/s'], c:1, exp:'v = √(2gh) = √(2×9.8×16) = √313.6 = 17.7 m/s.'},
+    {n:26, cat:'physics', q:'Convert 15 inches to centimeters:', opts:['48.5','58.1','38.1','28.4'], c:2, exp:'15 × 2.54 = 38.1 cm.'},
+    {n:27, cat:'physics', q:'The dimension formula of volume is:', opts:['M L^3 T^0','M L T','M L T2','M^0 L T^-2'], c:0, exp:'بعد الحجم = L^3.'},
+    {n:28, cat:'physics', q:'The prefix for Femto (f) is:', opts:['10^15','10^9','10^-15','10^-9'], c:2, exp:'Femto = 10^-15.'},
+    {n:29, cat:'physics', q:'Young modulus measures resistance to changes in:', opts:['Length (parallel)','Length (perpendicular)','Volume','None'], c:0, exp:'معامل يونغ يقيس مقاومة التغير في الطول بشكل موازي (Parallel).'},
+    {n:30, cat:'physics', q:'Atmosphere pressure is defined as the pressure equivalent of a column of mercury that is exactly _______ m in height at 0°C:', opts:['0.89','0.98','0.67','0.76'], c:3, exp:'الضغط الجوي = 0.76 متر زئبق.'},
+    {n:31, cat:'physics', q:'A 50-kg woman balances on one heel (r=0.5 cm). What pressure does she exert on the floor?', opts:['5.125×10^6','6.236×10^6','4.345×10^6','7.345×10^6'], c:1, exp:'P = F/A = (50×9.8)/(π×(0.005)^2) = 490/(7.85×10^-5) = 6.24×10^6 Pa.'},
+    {n:32, cat:'physics', q:'Water flows through a fire hose (d=6.35cm) at 0.012 m³/s. Nozzle inner diameter = 2.2cm. Find speed with which water exits the nozzle:', opts:['3.155×10^3','4.65×10^3','2.005×10^3','1.335×10^3'], c:0, exp:'v = Q/A = 0.012/(π×(0.011)^2) = 0.012/3.8×10^-4 = 31.55 m/s.'},
+    {n:33, cat:'physics', q:'Convert 15 miles to meters:', opts:['27,490','30,000','55,460','24,135'], c:3, exp:'15 × 1609.34 = 24,140 m.'},
+
+    // ========== AFO ==========
+    {n:34, cat:'afo', q:'AFO manufacturing materials used in the last decade:', opts:['Prefabricated metals','Plastic','Wood','Rubber'], c:0, exp:'المواد المستخدمة في تصنيع AFO في العقد الماضي: المعادن الجاهزة.'},
+    {n:35, cat:'afo', q:'Example on Prefabricated metals AFO manufacturing materials:', opts:['Aluminium','Stainless steel','Polyethylene','A & B'], c:3, exp:'الألومنيوم والفولاذ المقاوم للصدأ هما مثالان على المعادن الجاهزة.'},
+    {n:36, cat:'afo', q:'Control the alignment and motions of the joints of the foot and ankle is:', opts:['AFO Construction','AFO Primary Function','All of the above','No correct answer'], c:1, exp:'الوظيفة الأساسية لـ AFO هي التحكم في محاذاة وحركات مفاصل القدم والكاحل.'},
+    {n:37, cat:'afo', q:'The most commonly used method of attachment is riveted directly to the sole of the shoe:', opts:['Stirrup','Caliper','Shoe insert','Limit stops'], c:0, exp:'طريقة التثبيت الأكثر شيوعًا هي الرِّكاب (Stirrup).'},
+    {n:38, cat:'afo', q:'The pivot of the mechanical joint is at the level of the shoe heel, considerably distal to the anatomic ankle joint:', opts:['Caliper function','Caliper prime drawback','Caliper advantage','No correct answer'], c:1, exp:'العيب الرئيسي للكالبر هو أن محور المفصل يكون عند مستوى كعب الحذاء.'},
+    {n:39, cat:'afo', q:'Greater mediolateral correction can be gained by this rigid component:', opts:['Uprights and calf bands','The buckled insert','Varus-valgus corrections','Shoe insert'], c:1, exp:'الإدخال المقوس (Buckled insert) يعطي تصحيحًا جانبيًا أكبر.'},
+    {n:40, cat:'afo', q:'(Dorsiflexion-plantar flexion assist, Ankle joint with dorsiflexion assist, etc.) are types of:', opts:['Free motion ankle joint','Limit stops','The buckled insert','Ankle joint assists'], c:3, exp:'أنواع مساعدات مفصل الكاحل (Ankle joint assists).'},
+    {n:41, cat:'afo', q:'Adds rigidity to the orthosis, maintains proper alignment, secures the orthosis to the limb is function of:', opts:['Uprights and calf bands','The buckled insert','Ankle joint assists','Stirrup'], c:0, exp:'الأعمدة وأربطة الساق (Uprights and calf bands) تضيف صلابة.'},
+    {n:42, cat:'afo', q:'This orthosis has corrugations incorporated in its posterior surface, adding strength and stability:', opts:['Plastic AFO with posterolateral corrugations','Spiral AFO','Patellar-tendon bearing orthosis','Hemi spiral AFO'], c:0, exp:'AFO البلاستيكي مع تموجات خلفية جانبية.'},
+    {n:43, cat:'afo', q:'The most common plastic AFO is characterized by a relatively narrow calf shell:', opts:['Solid Ankle AFO','Posterior leaf spring','Spiral AFO','AFO with flange'], c:0, exp:'Solid Ankle AFO هو النوع الأكثر شيوعًا.'},
+    {n:44, cat:'afo', q:'Prefabricated metals are more flexible than plastic:', opts:['True','False'], c:1, exp:'المعادن الجاهزة أقل مرونة من البلاستيك (خطأ).'},
+    {n:45, cat:'afo', q:'Plastic materials have acceptable appearance than prefabricated metals:', opts:['True','False'], c:0, exp:'المواد البلاستيكية لها مظهر أفضل من المعادن الجاهزة (صحيح).'},
+
+    // ========== KAFO ==========
+    {n:46, cat:'kafo', q:'KAFO extends from the thigh to the:', opts:['Elbow','Joint','Foot','Knee'], c:2, exp:'KAFO يمتد من الفخذ إلى القدم.'},
+    {n:47, cat:'kafo', q:'KAFO used to support for the:', opts:['Femur only','Tibia only','Both femur & tibia','No correct answer'], c:2, exp:'KAFO يدعم عظم الفخذ والظنبوب معًا.'},
+    {n:48, cat:'kafo', q:'Knee joint allows unrestricted flexion and extension:', opts:['Free motion','Offset','All of the above','No correct answer'], c:0, exp:'مفصل الركبة ذو الحركة الحرة يسمح بالثني والبسط غير المقيدين.'},
+    {n:49, cat:'kafo', q:'Knee can be stabilized during stance phase without a lock and is free to bend during swing phase:', opts:['Free motion','Offset','All of the above','No correct answer'], c:0, exp:'الحركة الحرة تسمح بالتثبيت أثناء الوقوف والانحناء أثناء التأرجح.'},
+    {n:50, cat:'kafo', q:'The most commonly used knee lock to control flexion is the:', opts:['Knee lock','Drop lock','Pawl lock','Fan lock'], c:1, exp:'القفل الساقط (Drop lock) هو الأكثر استخدامًا للتحكم في الثني.'},
+    {n:51, cat:'kafo', q:'It is easier to release when a flexion force exists at the knee joint:', opts:['Knee lock','Drop lock','Pawl lock','Fan lock'], c:1, exp:'القفل الساقط يسهل تحريره عند وجود قوة ثني.'},
+    {n:52, cat:'kafo', q:'Maintains the desired knee position in standing and walking but can be unlocked to permit full knee flexion when sitting:', opts:['Knee lock','Drop lock','Pawl lock','Fan lock'], c:0, exp:'قفل الركبة يحافظ على وضع الركبة المطلوب.'},
+    {n:53, cat:'kafo', q:'Attaching a hip joint and a pelvic band to the lateral upright of the KAFO:', opts:['AFO','KAFO','No correct answer','HKAFO'], c:3, exp:'إضافة مفصل الورك وحزام الحوض إلى KAFO يحولها إلى HKAFO.'},
+    {n:54, cat:'kafo', q:'Are of limited usefulness for children who have difficulty maintaining the sitting position:', opts:['Hip joints and locks','A double-axis joint','Two-position hip locks','No correct answer'], c:2, exp:'أقفال الورك ذات الوضعين محدودة الفائدة للأطفال.'},
+    {n:55, cat:'kafo', q:'_______ encircles the knee immediately below the patella:', opts:['Infrapatellar strap','Swedish knee cage','Dynamic patellar','Three-way knee stabilizer'], c:0, exp:'الحزام تحت الرضفة (Infrapatellar strap) يحيط بالركبة أسفل الرضفة مباشرة.'},
+    {n:56, cat:'kafo', q:'Its purpose is to prevent lateral subluxation or dislocation of the patella:', opts:['Infrapatellar strap','Swedish knee cage','Dynamic patellar orthoses','Three-way knee stabilizer'], c:1, exp:'القفص السويدي للركبة يمنع الخلع الجانبي للرضفة.'},
+    {n:57, cat:'kafo', q:'Two anterior straps and one posterior strap held in position by the metal frame:', opts:['Infrapatellar strap','Swedish knee cage','Dynamic patellar orthoses','Three-way knee stabilizer'], c:3, exp:'مثبت الركبة ثلاثي الاتجاهات يحتوي على حزامين أماميين وحزام خلفي.'},
+    {n:58, cat:'kafo', q:'More cosmetic. Allow almost complete range of knee flexion:', opts:['Infrapatellar strap','Swedish knee cage','Dynamic patellar orthoses','Three-way knee stabilizer'], c:2, exp:'التقويم الديناميكي للرضفة أكثر تجميلاً ويسمح بنطاق حركة كامل.'},
+    {n:59, cat:'kafo', q:'Incorporated into the polypropylene thigh and calf shells covering the anterior limb surfaces:', opts:['Dynamic patellar orthoses','Swedish knee cage','Knee orthoses with suspension wedge','Infrapatellar strap'], c:0, exp:'التقويم الديناميكي للرضفة مدمج في أصداف البولي بروبلين.'},
+
+    // ========== PROSTHETICS ==========
+    {n:60, cat:'prosthetics', q:'Is an artificially made substitute for a limb lost through a congenital defect:', opts:['Artificial limb','Knee','Socket','Elbow'], c:0, exp:'الطرف الاصطناعي هو بديل للطرف المفقود.'},
+    {n:61, cat:'prosthetics', q:'Type of prosthesis is designed to be purely cosmetic highly functional:', opts:['Artificial elbow','Artificial legs','Artificial hand','No answer'], c:2, exp:'اليد الاصطناعية مصممة لتكون تجميلية وعالية الوظيفة.'},
+    {n:62, cat:'prosthetics', q:'How many types of prosthesis?', opts:['3','6','5','7'], c:0, exp:'هناك 3 أنواع رئيسية من الأطراف الاصطناعية.'},
+    {n:63, cat:'prosthetics', q:'Types of prosthesis are:', opts:['Below & above the knee','Below & above the elbow','No answer','All of the above'], c:3, exp:'أنواع الأطراف الاصطناعية تشمل الأطراف السفلية والعلوية.'},
+    {n:64, cat:'prosthetics', q:'Prosthesis\'s Parts:', opts:['The prosthetic limb itself & the socket','The attachment mechanism','The control system modulus','All of the above'], c:3, exp:'أجزاء الطرف الاصطناعي: الطرف نفسه، المقبس، آلية التثبيت، ونظام التحكم.'},
+    {n:65, cat:'prosthetics', q:'Type of prosthesis designed to be purely cosmetic highly functional:', opts:['Artificial elbow','Artificial legs','Artificial hand','No answer'], c:2, exp:'اليد الاصطناعية مصممة لتكون تجميلية وعالية الوظيفة.'},
+
+    // ========== ORTHOTICS ==========
+    {n:66, cat:'orthotics', q:'Useful for patients who have weakened muscles:', opts:['Static orthosis','Dynamic orthosis','All of the above','None of these'], c:1, exp:'التقويم الديناميكي مفيد للمرضى الذين يعانون من ضعف العضلات.'},
+    {n:67, cat:'orthotics', q:'Some orthosis don\'t contain joints:', opts:['Static orthosis','Dynamic orthosis','All of the above','None of these'], c:0, exp:'التقويم الثابت لا يحتوي على مفاصل.'},
+    {n:68, cat:'orthotics', q:'Can maintain the joint at a particular angle, providing support:', opts:['Static orthosis','Dynamic orthosis','All of the above','None of these'], c:0, exp:'التقويم الثابت يمكنه تثبيت المفصل بزاوية معينة.'},
+    {n:69, cat:'orthotics', q:'Stainless steel, aluminum alloys and titanium are types of:', opts:['Fabric','Rubber','Metal','Plastic'], c:2, exp:'المعادن (Metal) تشمل الفولاذ المقاوم للصدأ والألومنيوم والتيتانيوم.'},
+    {n:70, cat:'orthotics', q:'Cotton, wool, polyester, nylon are types of:', opts:['Fabric','Rubber','Metal','Plastic'], c:0, exp:'الأقمشة (Fabric) تشمل القطن والصوف والبوليستر والنايلون.'},
+    {n:71, cat:'orthotics', q:'Prostheses and Orthoses must be:', opts:['Light weight','Durable','Adjustable','All of the above'], c:3, exp:'يجب أن تكون الأطراف الاصطناعية والتقويمية خفيفة الوزن ومتينة وقابلة للتعديل.'},
+    {n:72, cat:'orthotics', q:'The insect can hold on liquid surface due to:', opts:['Viscosity','Density','Surface tension','Elasticity'], c:2, exp:'الحشرات تقف على سطح السائل بسبب التوتر السطحي (Surface tension).'},
+    {n:73, cat:'orthotics', q:'Matter is normally of three states:', opts:['True','False'], c:0, exp:'المادة عادةً في ثلاث حالات: صلبة، سائلة، غازية (صحيح).'},
+    {n:74, cat:'orthotics', q:'Liquid can be classified as fluids:', opts:['True','False'], c:0, exp:'السوائل تصنف كموائع (صحيح).'},
+    {n:75, cat:'orthotics', q:'Gas can be classified as fluids:', opts:['True','False'], c:0, exp:'الغازات تصنف كموائع (صحيح).'},
+
+    // ========== TRUE/FALSE ==========
+    {n:76, cat:'tf', q:'Matter is normally of three states: Solid, Liquid, Gas.', opts:['True','False'], c:0, exp:'المادة عادةً في ثلاث حالات (صحيح).'},
+    {n:77, cat:'tf', q:'Each particle of the fluid follows a smooth path in turbulent motion.', opts:['True','False'], c:1, exp:'في التدفق المضطرب، المسارات غير منتظمة (خطأ).'},
+    {n:78, cat:'tf', q:'In case of viscous fluid the velocity approaching max at center.', opts:['True','False'], c:0, exp:'في السائل اللزج، السرعة قصوى عند المركز (صحيح).'},
+    {n:79, cat:'tf', q:'Liquid can be classified as fluids.', opts:['True','False'], c:0, exp:'السوائل تصنف كموائع (صحيح).'},
+    {n:80, cat:'tf', q:'Fundamental units of CGS system are Centimeter-kilogram-second.', opts:['True','False'], c:1, exp:'وحدات CGS: سنتيمتر-جرام-ثانية وليس كيلوجرام (خطأ).'},
+    {n:81, cat:'tf', q:'Matter is normally states Solid, Gas only.', opts:['True','False'], c:1, exp:'المادة في ثلاث حالات وليس اثنتين فقط (خطأ).'},
+    {n:82, cat:'tf', q:'Each particle of the fluid follows irregular paths in turbulent motion.', opts:['True','False'], c:0, exp:'في التدفق المضطرب، المسارات غير منتظمة (صحيح).'},
+    {n:83, cat:'tf', q:'In case of viscous fluid the velocity approaching max at wall.', opts:['True','False'], c:1, exp:'السرعة قصوى عند المركز وليس الجدار (خطأ).'},
+    {n:84, cat:'tf', q:'Gas can be classified as fluids.', opts:['True','False'], c:0, exp:'الغازات تصنف كموائع (صحيح).'},
+    {n:85, cat:'tf', q:'Orthosis Provide support or stabilization.', opts:['True','False'], c:0, exp:'التقويمات توفر الدعم والتثبيت (صحيح).'},
+    {n:86, cat:'tf', q:'Orthosis don\'t prevent progression of fixed deformities.', opts:['True','False'], c:1, exp:'التقويمات تمنع تقدم التشوهات الثابتة (خطأ).'},
+    {n:87, cat:'tf', q:'Prostheses and Orthoses are Lightweight, Durable & Adjustable.', opts:['True','False'], c:0, exp:'الأطراف الاصطناعية والتقويمية خفيفة ومتينة وقابلة للتعديل (صحيح).'},
+    {n:88, cat:'tf', q:'Prostheses and Orthoses aren\'t easy to maintain and clean.', opts:['True','False'], c:1, exp:'الأطراف الاصطناعية سهلة الصيانة والتنظيف (خطأ).'},
+    {n:89, cat:'tf', q:'Prostheses and Orthoses doesn\'t have an acceptable appearance.', opts:['True','False'], c:1, exp:'الأطراف الاصطناعية لها مظهر مقبول (خطأ).'},
+    {n:90, cat:'tf', q:'Spiral AFO design consists of the 3 parts.', opts:['True','False'], c:0, exp:'تصميم Spiral AFO يتكون من 3 أجزاء (صحيح).'},
+    {n:91, cat:'tf', q:'Spiral AFO design the upright makes only a half turn around the leg.', opts:['True','False'], c:0, exp:'العمود في Spiral AFO يدور نصف دورة حول الساق (صحيح).'},
+    {n:92, cat:'tf', q:'Solid Ankle AFO Used when reduction of weight transmission through the middle or distal tibia, ankle, or foot is indicated.', opts:['True','False'], c:0, exp:'Solid Ankle AFO يستخدم لتقليل نقل الوزن عبر الظنبوب (صحيح).'},
+    {n:93, cat:'tf', q:'Knee joints principal designs consist of two meshing gears & a plate with two pivots.', opts:['True','False'], c:0, exp:'تصميمات مفاصل الركبة تتكون من ترسين متشابكين ولوحة بمحورين (صحيح).'},
+    {n:94, cat:'tf', q:'The gear type in knee joints provides a fixed path of rotation.', opts:['True','False'], c:1, exp:'النوع الترسي لا يوفر مسار دوران ثابت (خطأ).'},
+    {n:95, cat:'tf', q:'The most commonly used knee joints are the single-axis types.', opts:['True','False'], c:0, exp:'مفاصل الركبة الأكثر استخدامًا هي أحادية المحور (صحيح).'},
+    {n:96, cat:'tf', q:'Spring-loaded retention button can be included to prevent the ring from dropping inadvertently due to gravity.', opts:['True','False'], c:0, exp:'يمكن إضافة زر احتجاز لمنع سقوط الحلقة (صحيح).'},
+    {n:97, cat:'tf', q:'Hip joints and locks most hip joints have a double axis, permitting flexion and extension, and include an adjustable stop.', opts:['True','False'], c:0, exp:'مفاصل الورك لها محور مزدوج للثني والبسط مع توقف قابل للتعديل (صحيح).'},
+    {n:98, cat:'tf', q:'A double-axis joint flexion-extension axis may be free or locked as required.', opts:['True','False'], c:0, exp:'مفصل الورك ثنائي المحور يمكن أن يكون حرًا أو مقفولاً (صحيح).'},
+    {n:99, cat:'tf', q:'HIP ORTHOSES have two-position lock (full extension and 95° of hip flexion) and an adjustable adduction stop.', opts:['True','False'], c:0, exp:'تقويم الورك له قفل ثنائي الوضع (بسط كامل وثني 95°) مع توقف تقريب قابل للتعديل (صحيح).'},
+    {n:100, cat:'tf', q:'Prefabricated metals are more flexible than plastic.', opts:['True','False'], c:1, exp:'المعادن الجاهزة أقل مرونة من البلاستيك (خطأ).'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') {
+            filtered = QUESTIONS;
+        } else if (currentCategory === 'tf') {
+            filtered = QUESTIONS.filter(q => q.cat === 'tf');
+        } else {
+            filtered = QUESTIONS.filter(q => q.cat === currentCategory);
+        }
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') {
+        currentQuestions = [...QUESTIONS];
+    } else if (currentCategory === 'tf') {
+        currentQuestions = QUESTIONS.filter(q => q.cat === 'tf');
+    } else {
+        currentQuestions = QUESTIONS.filter(q => q.cat === currentCategory);
+    }
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        physics: '⚡ Physics',
+        afo: '🦿 AFO',
+        kafo: '🦿 KAFO',
+        prosthetics: '🦾 Prosthetics',
+        orthotics: '🩼 Orthotics',
+        tf: '✅ True / False'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const isTF = q.cat === 'tf';
+        const catLabel = isTF ? '✅ True / False' : (catNames[q.cat] || q.cat);
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="0" onclick="selectAnswer(${idx}, 0)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="1" onclick="selectAnswer(${idx}, 1)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Applied Physics!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${q.opts[q.c]}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
