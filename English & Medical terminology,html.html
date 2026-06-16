@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A.D.Gad | Medical Ethics Quiz</title>
+<title>A.D.Gad | Medical Terminology Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -686,7 +686,7 @@ body {
     <div class="nav-container">
         <div class="logo-area">
             <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
-            <span class="brand">A.D.Gad | Medical Ethics</span>
+            <span class="brand">A.D.Gad | Medical Terminology mid-term</span>
         </div>
         <div class="progress-stats">
             <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
@@ -703,15 +703,15 @@ body {
 <div class="start-screen" id="startScreen">
     <div class="start-card">
         <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
-        <h1>⚖️ Medical Ethics</h1>
-        <p class="sub">📚 MCQ Bank for Review — Dr. Mohamed</p>
+        <h1>📚 A.D.Gad | Medical Terminology mid-term</h1>
+        <p class="sub">📋 Mid Term MCQ Bank — Dr. Nahed</p>
         <div class="filter-btns" id="filterBtns">
             <button class="active" data-cat="all">📚 All</button>
-            <button data-cat="principles">📜 Principles</button>
-            <button data-cat="consent">📝 Consent</button>
-            <button data-cat="confidentiality">🔒 Confidentiality</button>
-            <button data-cat="malpractice">⚕️ Malpractice</button>
-            <button data-cat="general">📋 General</button>
+            <button data-cat="suffixes">🔤 Suffixes</button>
+            <button data-cat="prefixes">🔤 Prefixes</button>
+            <button data-cat="procedures">⚕️ Procedures</button>
+            <button data-cat="diseases">🩺 Diseases</button>
+            <button data-cat="anatomy">🧠 Anatomy</button>
         </div>
         <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
         <button class="btn-start" id="startBtn">▶ Start Quiz</button>
@@ -753,52 +753,49 @@ body {
 <script>
 const L = ['A', 'B', 'C', 'D'];
 
-// All questions from Medical Ethics file - English with Arabic explanation
+// All questions from Medical Terminology Mid Term file
 const QUESTIONS = [
-    // Principles
-    {n:1, cat:'principles', q:'What is the primary focus of medical ethics?', opts:['Increasing hospital profits','Establishing legal standards for healthcare','Guiding the moral conduct of medical professionals','Standardizing medical procedures'], c:2, exp:'الأخلاقيات الطبية تركز على توجيه السلوك الأخلاقي للمهنيين الطبيين.'},
-    {n:2, cat:'principles', q:'What distinguishes ethics from the law in medical practice?', opts:['Ethics are legally binding.','Ethics are more concerned with moral standards.','Ethics only apply in private practice.','Ethics are enforced by government agencies.'], c:1, exp:'الأخلاقيات تهتم بالمعايير الأخلاقية، بينما القانون قواعد تفرضها الحكومة.'},
-    {n:4, cat:'principles', q:'What does the principle of non-maleficence entail?', opts:['Always obeying patient requests','Doing no harm to the patient','Providing only curative treatments','Offering free healthcare'], c:1, exp:'مبدأ "لا ضرر" يعني عدم إلحاق الضرر بالمريض.'},
-    {n:5, cat:'principles', q:'Beneficence in medical ethics promotes:', opts:['Financial gains for practitioners','Actions that benefit the patient','Following patient demands without question','Avoidance of complex cases'], c:1, exp:'مبدأ الإحسان يعزز الأفعال التي تفيد المريض.'},
-    {n:6, cat:'principles', q:'What is an example of autonomy in healthcare?', opts:['Forcing patients to follow specific treatments','Allowing patients to make informed decisions about their care','Withholding treatment options from patients','Disregarding patient preferences'], c:1, exp:'الاستقلالية تعني السماح للمريض باتخاذ قرارات مستنيرة.'},
-    {n:7, cat:'principles', q:'Justice in medical ethics ensures:', opts:['Equal treatment for all patients','Preference for wealthy patients','Prioritizing emergencies over other cases','Following hospital policies'], c:0, exp:'مبدأ العدالة يضمن المعاملة المتساوية لجميع المرضى.'},
-    {n:12, cat:'principles', q:'What is the main distinction between ethics and law in medical practice?', opts:['Ethics are mandatory, while laws are optional.','Laws address morality, while ethics focus on legal enforcement.','Ethics focus on moral principles, while laws are government-enforced rules.','Laws only apply to private medical practitioners.'], c:2, exp:'الأخلاقيات تركز على المبادئ الأخلاقية، بينما القوانين قواعد تفرضها الحكومة.'},
+    // Anatomy & Specialties
+    {n:1, cat:'anatomy', q:'What is the term for a doctor who specializes in the treatment of Heart diseases?', opts:['Oncologist','Cardiologist','Neurologist','Dermatologist'], c:1, exp:'طبيب القلب (Cardiologist) متخصص في علاج أمراض القلب.'},
+    {n:13, cat:'anatomy', q:'What is the term for a doctor who specializes in the treatment of Heart diseases?', opts:['Oncologist','Cardiologist','Neurologist','Dermatologist'], c:1, exp:'طبيب القلب (Cardiologist) متخصص في علاج أمراض القلب.'},
+    {n:24, cat:'anatomy', q:'Which term refers to the medical study of the digestive system?', opts:['Gastroenterology','Proctology','Endocrinology','Nephrology'], c:0, exp:'Gastroenterology هو دراسة الجهاز الهضمي.'},
+    {n:25, cat:'anatomy', q:'The term "stomat/o" refers to which part of the digestive system?', opts:['Esophagus','Stomach','Mouth','Intestine'], c:2, exp:'Stomat/o يشير إلى الفم (Mouth).'},
+    {n:27, cat:'anatomy', q:'The term "hepat/o" refers to which organ?', opts:['Pancreas','Liver','Kidney','Gallbladder'], c:1, exp:'Hepat/o يشير إلى الكبد (Liver).'},
 
-    // Confidentiality
-    {n:8, cat:'confidentiality', q:'What does professional secrecy require from healthcare professionals?', opts:['Disclosure of patient information for research purposes','Keeping patient information confidential','Sharing patient details with their family without consent','Publishing patient cases in journals without consent'], c:1, exp:'السرية المهنية تتطلب الحفاظ على معلومات المريض سرية.'},
-    {n:9, cat:'confidentiality', q:'Which situation might require breaching professional secrecy?', opts:['To impress colleagues','To comply with a court order','To discuss the case in public','To share information with non-medical staff'], c:1, exp:'قد يتم كشف السرية المهنية للامتثال لأمر قضائي.'},
-    {n:20, cat:'confidentiality', q:'What is the primary duty of healthcare professionals regarding confidentiality?', opts:['Share patient information when convenient.','Disclose information only with patient consent.','Store patient records in public databases.','Inform all family members about patient conditions.'], c:1, exp:'الواجب الأساسي هو الكشف عن المعلومات فقط بموافقة المريض.'},
-    {n:25, cat:'confidentiality', q:'What should a doctor do in case of a "notifiable disease"?', opts:['Keep the information confidential under all circumstances','Notify relevant public health authorities','Disclose the patient\'s condition to their family','Avoid reporting unless the disease spreads'], c:1, exp:'في حالة الأمراض المُبلَغ عنها، يجب إخطار سلطات الصحة العامة.'},
-    {n:26, cat:'confidentiality', q:'Which of the following represents "professional secrecy"?', opts:['Sharing patient information with other doctors without consent','Discussing cases with family members without the patient\'s permission','Keeping patient information confidential unless legally required otherwise','Storing patient records in public files'], c:2, exp:'السرية المهنية تعني الحفاظ على معلومات المريض سرية إلا إذا تطلب القانون خلاف ذلك.'},
-    {n:47, cat:'confidentiality', q:'What is the first step in ensuring patient confidentiality?', opts:['Obtaining written consent for all discussions','Avoiding unnecessary sharing of patient information','Limiting communication with patients','Reporting all medical findings publicly'], c:1, exp:'الخطوة الأولى هي تجنب المشاركة غير الضرورية لمعلومات المريض.'},
+    // Suffixes
+    {n:28, cat:'suffixes', q:'The suffix "-phagia" means:', opts:['Swallowing','Digestion','Secretion','Defecation'], c:0, exp:'-phagia تعني البلع (Swallowing).'},
+    {n:19, cat:'suffixes', q:'What is the medical term for difficult digestion?', opts:['Dysphasia','Dyspepsia','Dysphagia','Dysuria'], c:1, exp:'Dyspepsia تعني عسر الهضم (صعوبة الهضم).'},
+    {n:30, cat:'suffixes', q:'The medical term for difficulty swallowing is:', opts:['Dysphagia','Dyspepsia','Dysphonia','Dysuria'], c:0, exp:'Dysphagia تعني صعوبة البلع.'},
 
-    // Consent
-    {n:10, cat:'consent', q:'What is informed consent?', opts:['Forcing the patient to accept treatment','A voluntary agreement after understanding risks and benefits','A signed form without explanation','An assumption of agreement in emergencies'], c:1, exp:'الموافقة المستنيرة هي اتفاق طوعي بعد فهم المخاطر والفوائد.'},
-    {n:21, cat:'consent', q:'What does the term "informed consent" mean?', opts:['A general agreement to all medical procedures','Permission given after the patient is fully informed of all risks and benefits','A formal request from family members for treatment','A quick verbal agreement from the patient'], c:1, exp:'الموافقة المستنيرة تعني الإذن بعد إعلام المريض بجميع المخاطر والفوائد.'},
-    {n:22, cat:'consent', q:'What is the purpose of "therapeutic privilege"?', opts:['To withhold specific information if its disclosure may harm the patient','To allow doctors to perform emergency surgeries without patient knowledge','To override patient autonomy for legal compliance','To bypass informed consent requirements in all cases'], c:0, exp:'الامتياز العلاجي يسمح بحجب معلومات معينة إذا كان الكشف عنها قد يضر المريض.'},
-    {n:24, cat:'consent', q:'What is "implied consent"?', opts:['Written agreement for major procedures','Verbal acknowledgment of medical terms','Consent inferred from the patient\'s actions, like extending an arm for an injection','A legal document for long-term treatment'], c:2, exp:'الموافقة الضمنية تُستنتج من تصرفات المريض، مثل مد الذراع لأخذ حقنة.'},
-    {n:35, cat:'consent', q:'Which of the following is an exception to obtaining informed consent?', opts:['Routine checkups','Emergency situations','Minor procedures','Cosmetic surgeries'], c:1, exp:'في حالات الطوارئ، قد لا يكون من الممكن الحصول على الموافقة المستنيرة.'},
-    {n:45, cat:'consent', q:'Which type of consent is inferred from patient actions?', opts:['Written consent','Implied consent','Oral consent','General consent'], c:1, exp:'الموافقة الضمنية تُستنتج من تصرفات المريض.'},
+    // Procedures - Surgical
+    {n:2, cat:'procedures', q:'What is the term for the surgical removal of the gallbladder?', opts:['Colectomy','Gastrectomy','Cholecystectomy','Hysterectomy'], c:2, exp:'Cholecystectomy = استئصال المرارة.'},
+    {n:14, cat:'procedures', q:'What is the term for the surgical removal of the gallbladder?', opts:['Colectomy','Gastrectomy','Cholecystectomy','Hysterectomy'], c:2, exp:'Cholecystectomy = استئصال المرارة.'},
+    {n:12, cat:'procedures', q:'What is the term for the surgical removal of the appendix?', opts:['Cholecystectomy','Hysterectomy','Appendectomy','Gastrectomy'], c:2, exp:'Appendectomy = استئصال الزائدة الدودية.'},
+    {n:10, cat:'procedures', q:'What is a surgical incision into the colon?', opts:['Colostomy','Colectomy','Colotomy','Chyme'], c:2, exp:'Colotomy = شق في القولون.'},
+    {n:22, cat:'procedures', q:'What is a surgical incision into the colon?', opts:['Colostomy','Colectomy','Colotomy','Chyme'], c:2, exp:'Colotomy = شق في القولون.'},
+    {n:23, cat:'procedures', q:'What is the term for surgical repair of the abdomen?', opts:['Colectomy','Abdominocentesis','Abdominoplasty','Celiotomy'], c:2, exp:'Abdominoplasty = ترميم البطن (شد البطن).'},
+    {n:3, cat:'procedures', q:'What is surgical puncture to aspirate fluid from the abdomen?', opts:['Abdominocentesis','Amniocentesis','Arthrocentesis','Arthroscopy'], c:0, exp:'Abdominocentesis = بزل البطن.'},
+    {n:15, cat:'procedures', q:'What is surgical puncture to aspirate fluid from the abdomen?', opts:['Abdominocentesis','Amniocentesis','Arthrocentesis','Arthroscopy'], c:0, exp:'Abdominocentesis = بزل البطن.'},
+    {n:11, cat:'procedures', q:'What is the term for surgical repair of the abdomen?', opts:['Colectomy','Abdominocentesis','Abdominoplasty','Celiotomy'], c:2, exp:'Abdominoplasty = ترميم البطن.'},
 
-    // Malpractice
-    {n:27, cat:'malpractice', q:'What defines negligence in medical practice?', opts:['Intentional harm to patients','Failure to exercise reasonable care, resulting in harm','Following evidence-based practices','Adhering to ethical guidelines'], c:1, exp:'الإهمال الطبي هو الفشل في ممارسة الرعاية المعقولة مما يؤدي إلى الضرر.'},
-    {n:28, cat:'malpractice', q:'Which is an example of medical malpractice?', opts:['Informing patients about risks','Performing surgery on the wrong site','Following proper infection control practices','Ensuring accurate patient records'], c:1, exp:'إجراء عملية جراحية في المكان الخطأ هو مثال على سوء الممارسة الطبية.'},
+    // Diagnostic Procedures
+    {n:8, cat:'procedures', q:'What is the medical term for radiographic image of the bile duct?', opts:['Celiogram','Cholangiogram','Cholangioma','Coligram'], c:1, exp:'Cholangiogram = صورة إشعاعية للقناة الصفراوية.'},
+    {n:20, cat:'procedures', q:'What is the medical term for radiographic image of the bile duct?', opts:['Celiogram','Cholangiogram','Cholangioma','Coligram'], c:1, exp:'Cholangiogram = صورة إشعاعية للقناة الصفراوية.'},
 
-    // General
-    {n:16, cat:'general', q:'How can autonomy be preserved in medical practice?', opts:['By limiting patient involvement in decisions','By enforcing treatment plans','By providing sufficient information for informed decision-making','By avoiding patient discussions'], c:2, exp:'يمكن الحفاظ على الاستقلالية من خلال توفير معلومات كافية لاتخاذ قرارات مستنيرة.'},
-    {n:30, cat:'general', q:'What should a healthcare provider prioritize during emergencies?', opts:['Ensuring payment is made upfront','Offering humanitarian care regardless of circumstances','Obtaining detailed patient history first','Referring patients to other facilities'], c:1, exp:'في حالات الطوارئ، يجب تقديم الرعاية الإنسانية بغض النظر عن الظروف.'},
-    {n:3, cat:'general', q:'Which of the following best describes medical ethics?', opts:['A set of laws governing medical practice','A code of conduct for healthcare professionals based on moral principles','Financial guidelines for hospitals','Regulations for pharmaceutical companies'], c:1, exp:'الأخلاقيات الطبية هي مدونة سلوك للمهنيين الصحيين تقوم على المبادئ الأخلاقية.'},
-    {n:11, cat:'general', q:'What is the purpose of medical ethics?', opts:['To maximize hospital revenue','To protect patient rights and dignity','To simplify medical procedures','To reduce the number of doctors'], c:1, exp:'الغرض من الأخلاقيات الطبية هو حماية حقوق المريض وكرامته.'},
-    {n:13, cat:'general', q:'Which principle requires doctors to act in the patient\'s best interest?', opts:['Autonomy','Non-maleficence','Beneficence','Justice'], c:2, exp:'مبدأ الإحسان (Beneficence) يطلب من الأطباء العمل لمصلحة المريض.'},
-    {n:14, cat:'general', q:'What does "do no harm" refer to in medical ethics?', opts:['Autonomy','Beneficence','Non-maleficence','Justice'], c:2, exp:'مبدأ "لا ضرر" يشير إلى عدم الإضرار بالمريض.'},
-    {n:15, cat:'general', q:'What is the role of patient autonomy?', opts:['To limit the doctor\'s authority','To allow patients to make informed choices about their health','To prioritize hospital policies','To reduce medical costs'], c:1, exp:'دور استقلالية المريض هو السماح له باتخاذ خيارات مستنيرة بشأن صحته.'},
-    {n:17, cat:'general', q:'What is the main challenge in balancing autonomy and beneficence?', opts:['Both principles are identical','Respecting patient choices while ensuring beneficial outcomes','Patients always know what is best','Beneficence always takes priority'], c:1, exp:'التحدي هو احترام اختيارات المريض مع ضمان نتائج مفيدة.'},
-    {n:18, cat:'general', q:'Which ethical principle is often considered the most important?', opts:['Justice','Non-maleficence','Autonomy','Beneficence'], c:1, exp:'مبدأ "لا ضرر" غالباً ما يعتبر الأهم.'},
-    {n:19, cat:'general', q:'What is the relationship between ethics and law in healthcare?', opts:['Ethics and law are identical','Ethics sets higher standards than law in some areas','Law always overrides ethics','Ethics is irrelevant to legal practice'], c:1, exp:'الأخلاقيات تضع معايير أعلى من القانون في بعض المجالات.'},
-    {n:23, cat:'general', q:'What is the purpose of "advance directives"?', opts:['To allow patients to make decisions about future care in case they become incapacitated','To replace the need for informed consent','To override patient autonomy','To limit medical treatments'], c:0, exp:'التوجيهات المسبقة تسمح للمريض باتخاذ قرارات بشأن الرعاية المستقبلية في حال أصبح غير قادر.'},
-    {n:29, cat:'general', q:'What is the role of "medical ethics committees"?', opts:['To manage hospital finances','To review ethical dilemmas and provide guidance','To replace the need for legal advice','To reduce patient care costs'], c:1, exp:'لجان الأخلاقيات الطبية تراجع المعضلات الأخلاقية وتقدم التوجيه.'},
-    {n:31, cat:'general', q:'What is "futility" in medical treatment?', opts:['Treatment that is not financially viable','Treatment that has no reasonable chance of benefiting the patient','Treatment that is painful','Treatment that is experimental'], c:1, exp:'العلاج غير المجدي هو الذي لا توجد له فرصة معقولة لفائدة المريض.'},
-    {n:32, cat:'general', q:'What is "therapeutic misconception"?', opts:['A doctor\'s error in prescribing medication','A patient\'s belief that research participation will provide direct therapeutic benefit','A hospital policy error','A legal error in medical documentation'], c:1, exp:'المفهوم العلاجي الخاطئ هو اعتقاد المريض أن المشاركة في البحث ستوفر فائدة علاجية مباشرة.'}
+    // Diseases - Digestive
+    {n:4, cat:'diseases', q:'What is the term for abnormally swollen veins in the lower part of the esophagus, often associated with liver disease?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:1, exp:'دوالي المريء (Esophageal varices) هي أوردة منتفخة في المريء.'},
+    {n:16, cat:'diseases', q:'What is the term for abnormally swollen veins in the lower part of the esophagus, often associated with liver disease?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:1, exp:'دوالي المريء (Esophageal varices) هي أوردة منتفخة في المريء.'},
+    {n:5, cat:'diseases', q:'What is the term for swollen, enlarged veins that form inside and outside of your anus and rectum?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:0, exp:'البواسير (Hemorrhoids) هي أوردة منتفخة حول فتحة الشرج والمستقيم.'},
+    {n:17, cat:'diseases', q:'What is the term for swollen, enlarged veins that form inside and outside of your anus and rectum?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:0, exp:'البواسير (Hemorrhoids) هي أوردة منتفخة حول فتحة الشرج والمستقيم.'},
+    {n:6, cat:'diseases', q:'What is the term for chronic inflammatory bowel disease that affects the lining of the digestive tract?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:2, exp:'داء كرون (Crohn\'s disease) هو مرض التهابي مزمن في الأمعاء.'},
+    {n:18, cat:'diseases', q:'What is the term for chronic inflammatory bowel disease that affects the lining of the digestive tract?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:2, exp:'داء كرون (Crohn\'s disease) هو مرض التهابي مزمن في الأمعاء.'},
+    {n:26, cat:'diseases', q:'What is the term for inflammation of the stomach?', opts:['Gastritis','Enteritis','Hepatitis','Cholecystitis'], c:0, exp:'Gastritis = التهاب المعدة.'},
+    {n:31, cat:'diseases', q:'The condition characterized by inflammation of the small intestine is:', opts:['Enteritis','Gastritis','Proctitis','Hepatitis'], c:0, exp:'Enteritis = التهاب الأمعاء الدقيقة.'},
+    {n:9, cat:'diseases', q:'What is the term for condition of stones in the common bile duct?', opts:['Cholelithiasis','Choledocholithiasis',"Crohn's disease",'Urolithiasis'], c:1, exp:'Choledocholithiasis = حصوات في القناة الصفراوية المشتركة.'},
+    {n:21, cat:'diseases', q:'What is the term for condition of stones in the common bile duct?', opts:['Cholelithiasis','Choledocholithiasis',"Crohn's disease",'Urolithiasis'], c:1, exp:'Choledocholithiasis = حصوات في القناة الصفراوية المشتركة.'},
+    {n:29, cat:'diseases', q:'What does "cholelithiasis" refer to?', opts:['Inflammation of the pancreas','Formation of gallstones','Presence of ulcers','Enlargement of the liver'], c:1, exp:'Cholelithiasis = تكون حصوات المرارة.'},
+    {n:32, cat:'diseases', q:'The term "steatorrhea" refers to:', opts:['Blood in the stool','Excessive fat in the stool','Frequent urination','Inflammation of the rectum'], c:1, exp:'Steatorrhea = دهون زائدة في البراز.'},
+    {n:7, cat:'diseases', q:'What is the medical term for difficult digestion?', opts:['Dysphasia','Dyspepsia','Dysphagia','Dysuria'], c:1, exp:'Dyspepsia = عسر الهضم.'}
 ];
 
 let currentCategory = 'all';
@@ -855,11 +852,11 @@ function renderQuestions() {
     container.innerHTML = '';
 
     const catNames = {
-        principles: '📜 Principles',
-        consent: '📝 Consent',
-        confidentiality: '🔒 Confidentiality',
-        malpractice: '⚕️ Malpractice',
-        general: '📋 General'
+        anatomy: '🧠 Anatomy',
+        suffixes: '🔤 Suffixes',
+        prefixes: '🔤 Prefixes',
+        procedures: '⚕️ Procedures',
+        diseases: '🩺 Diseases'
     };
 
     let lastCat = '';
@@ -961,7 +958,7 @@ function showResults() {
     document.getElementById('scoreFill').style.strokeDashoffset = offset;
 
     let msg = '';
-    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Medical Ethics!';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Medical Terminology!';
     else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
     else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
     else msg = '📚 Needs more revision — You can do better!';

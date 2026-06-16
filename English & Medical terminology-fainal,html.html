@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Medical Terminology Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Medical Terminology Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>📚 A.D.Gad | Medical Terminology Final</h1>
+        <p class="sub">📋 Final Exam MCQ Bank — Dr. Nahed</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="digestive">🫃 Digestive</button>
+            <button data-cat="cardiovascular">❤️ Cardiovascular</button>
+            <button data-cat="endocrine">🧬 Endocrine</button>
+            <button data-cat="integumentary">🧴 Integumentary</button>
+            <button data-cat="prefixes">🔤 Prefixes</button>
+            <button data-cat="tf">✅ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from Medical Terminology Final file
+const QUESTIONS = [
+    // Digestive System
+    {n:1, cat:'digestive', q:'Which term refers to the medical study of the digestive system?', opts:['Gastroenterology','Proctology','Endocrinology','Nephrology'], c:0, exp:'Gastroenterology هو دراسة الجهاز الهضمي.'},
+    {n:2, cat:'digestive', q:'The term "stomat/o" refers to which part of the digestive system?', opts:['Esophagus','Stomach','Mouth','Intestine'], c:2, exp:'Stomat/o يشير إلى الفم (Mouth).'},
+    {n:3, cat:'digestive', q:'What is the term for inflammation of the stomach?', opts:['Gastritis','Enteritis','Hepatitis','Cholecystitis'], c:0, exp:'Gastritis = التهاب المعدة.'},
+    {n:4, cat:'digestive', q:'The term "hepat/o" refers to which organ?', opts:['Pancreas','Liver','Kidney','Gallbladder'], c:1, exp:'Hepat/o يشير إلى الكبد (Liver).'},
+    {n:5, cat:'digestive', q:'The suffix "-phagia" means:', opts:['Swallowing','Digestion','Secretion','Defecation'], c:0, exp:'-phagia تعني البلع (Swallowing).'},
+    {n:6, cat:'digestive', q:'What does "cholelithiasis" refer to?', opts:['Inflammation of the pancreas','Formation of gallstones','Presence of ulcers','Enlargement of the liver'], c:1, exp:'Cholelithiasis = تكون حصوات المرارة.'},
+    {n:7, cat:'digestive', q:'The medical term for difficulty swallowing is:', opts:['Dysphagia','Dyspepsia','Dysphonia','Dysuria'], c:0, exp:'Dysphagia = صعوبة البلع.'},
+    {n:8, cat:'digestive', q:'What is the term for the surgical removal of the gallbladder?', opts:['Cholecystectomy','Cholecystitis','Hepatectomy','Colectomy'], c:0, exp:'Cholecystectomy = استئصال المرارة.'},
+    {n:9, cat:'digestive', q:'The combining form "proct/o" refers to:', opts:['Stomach','Rectum and anus','Liver','Pancreas'], c:1, exp:'Proct/o يشير إلى المستقيم والشرج.'},
+    {n:10, cat:'digestive', q:'The condition characterized by inflammation of the small intestine is:', opts:['Enteritis','Gastritis','Proctitis','Hepatitis'], c:0, exp:'Enteritis = التهاب الأمعاء الدقيقة.'},
+    {n:11, cat:'digestive', q:'The term "steatorrhea" refers to:', opts:['Blood in the stool','Excessive fat in the stool','Frequent urination','Inflammation of the rectum'], c:1, exp:'Steatorrhea = دهون زائدة في البراز.'},
+    {n:12, cat:'digestive', q:'The suffix "-emesis" means:', opts:['Vomiting','Swelling','Inflammation','Digestion'], c:0, exp:'-emesis تعني القيء (Vomiting).'},
+    {n:13, cat:'digestive', q:'What does "melena" refer to?', opts:['Yellowing of the skin','Black, tarry stools','Swollen abdomen','Loss of appetite'], c:1, exp:'Melena = براز أسود قطراني (نزيف هضمي علوي).'},
+    {n:14, cat:'digestive', q:'The esophagus connects the:', opts:['Mouth to stomach','Stomach to small intestine','Liver to pancreas','Large intestine to rectum'], c:0, exp:'المريء يصل بين الفم والمعدة.'},
+    {n:15, cat:'digestive', q:'Which term refers to the presence of gallstones?', opts:['Cholecystitis','Cholelithiasis','Cholecystectomy','Cholelithotomy'], c:1, exp:'Cholelithiasis = وجود حصوات في المرارة.'},
+    {n:16, cat:'digestive', q:'What does "hematemesis" mean?', opts:['Blood in the stool','Vomiting blood','Blood in the urine','Pain in the stomach'], c:1, exp:'Hematemesis = تقيؤ دم.'},
+    {n:25, cat:'digestive', q:'What is the term for the surgical removal of the appendix?', opts:['Cholecystectomy','Hysterectomy','Appendectomy','Gastrectomy'], c:2, exp:'Appendectomy = استئصال الزائدة الدودية.'},
+    {n:26, cat:'digestive', q:'What is the term for a doctor who specializes in the treatment of Heart diseases?', opts:['Oncologist','Cardiologist','Neurologist','Dermatologist'], c:1, exp:'طبيب القلب (Cardiologist) متخصص في علاج أمراض القلب.'},
+    {n:27, cat:'digestive', q:'What is the term for the surgical removal of the gallbladder?', opts:['Colectomy','Gastrectomy','Cholecystectomy','Hysterectomy'], c:2, exp:'Cholecystectomy = استئصال المرارة.'},
+    {n:28, cat:'digestive', q:'What is surgical puncture to aspirate fluid from the abdomen?', opts:['Abdominocentesis','Amniocentesis','Arthrocentesis','Arthroscopy'], c:0, exp:'Abdominocentesis = بزل البطن.'},
+    {n:29, cat:'digestive', q:'What is the term for abnormally swollen veins in the lower part of the esophagus?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:1, exp:'دوالي المريء (Esophageal varices) هي أوردة منتفخة في المريء.'},
+    {n:30, cat:'digestive', q:'What is the term for swollen, enlarged veins that form inside and outside of your anus and rectum?', opts:['Hemorrhoids','Esophageal varices',"Crohn's disease",'Diverticulitis'], c:0, exp:'البواسير (Hemorrhoids) هي أوردة منتفخة حول فتحة الشرج والمستقيم.'},
+    {n:31, cat:'digestive', q:'What is a surgical incision into the colon?', opts:['Colostomy','Colectomy','Colotomy','Chyme'], c:2, exp:'Colotomy = شق في القولون.'},
+    {n:32, cat:'digestive', q:'What is the term for surgical repair of the abdomen?', opts:['Colectomy','Abdominocentesis','Abdominoplasty','Celiotomy'], c:2, exp:'Abdominoplasty = ترميم البطن.'},
+    {n:33, cat:'digestive', q:'What is the term for creation of an artificial opening in the colon?', opts:['Colectomy','Colostomy','Colostomy','Celiotomy'], c:1, exp:'Colostomy = فتحة صناعية في القولون.'},
+    {n:34, cat:'digestive', q:'The term "Laparotomy" refers to the incision into which organ?', opts:['Stomach','Gallbladder','Appendix','Abdominal cavity'], c:3, exp:'Laparotomy = شق في تجويف البطن.'},
+    {n:35, cat:'digestive', q:'What is the term for study of disease and disorders of the rectum?', opts:['Cardiology','Proctology','Proctoptosis','Nephrology'], c:1, exp:'Proctology = دراسة أمراض المستقيم.'},
+    {n:36, cat:'digestive', q:'What is the term for inflammation of irregular bulging pouches in the wall of the large intestine?', opts:['Stomatitis','Steatohepatitis','Glossitis','Diverticulitis'], c:3, exp:'Diverticulitis = التهاب الرتوج في جدار الأمعاء الغليظة.'},
+
+    // Cardiovascular
+    {n:17, cat:'cardiovascular', q:'The right atrium receives deoxygenated blood from:', opts:['Pulmonary vein','Aorta','Superior and inferior vena cava','Coronary arteries'], c:2, exp:'الأذين الأيمن يستقبل الدم غير المؤكسج من الوريدين الأجوفين العلوي والسفلي.'},
+    {n:18, cat:'cardiovascular', q:'Which valve is located between the right atrium and right ventricle?', opts:['Aortic valve','Pulmonary valve','Mitral valve','Tricuspid valve'], c:3, exp:'الصمام ثلاثي الشرفات (Tricuspid valve) يقع بين الأذين الأيمن والبطين الأيمن.'},
+    {n:19, cat:'cardiovascular', q:'What does the term ischemia mean?', opts:['Infection in the heart muscle','Lack of blood supply to tissues','Increased blood flow','Abnormal heart rhythm'], c:1, exp:'Ischemia = نقص تروية (نقص إمداد الدم للأنسجة).'},
+    {n:20, cat:'cardiovascular', q:'Which term describes the absence of breathing?', opts:['Dyspnea','Tachypnea','Apnea','Bradypnea'], c:2, exp:'Apnea = انقطاع التنفس.'},
+    {n:21, cat:'cardiovascular', q:'The medical term for difficulty breathing is:', opts:['Tachypnea','Dyspnea','Apnea','Orthopnea'], c:1, exp:'Dyspnea = صعوبة التنفس.'},
+    {n:22, cat:'cardiovascular', q:'What is the medical term for a nosebleed?', opts:['Hemoptysis','Epistaxis','Sinusitis','Rhinorrhea'], c:1, exp:'Epistaxis = نزيف الأنف.'},
+    {n:23, cat:'cardiovascular', q:'The term "hypoxia" means:', opts:['Low oxygen in the blood','Excess oxygen in the blood','High carbon dioxide levels','Normal oxygen levels'], c:0, exp:'Hypoxia = نقص الأكسجين في الدم.'},
+    {n:24, cat:'cardiovascular', q:'The suffix "-ectasis" means:', opts:['Narrowing','Expansion or dilation','Inflammation','Surgical removal'], c:1, exp:'-ectasis تعني توسع أو اتساع.'},
+
+    // Endocrine
+    {n:45, cat:'endocrine', q:'The term "Hyperthyroidism" describes:', opts:['Excessive thyroid gland activity','Deficient secretion of thyroid hormones','Inflammation of the thyroid gland','Enlargement of the thyroid gland'], c:0, exp:'Hyperthyroidism = فرط نشاط الغدة الدرقية.'},
+    {n:46, cat:'endocrine', q:'The term "hyperglycemia" refers to:', opts:['Abnormally low blood sugar','Abnormally high blood calcium','Abnormally high blood sugar','Abnormally low blood potassium'], c:2, exp:'Hyperglycemia = ارتفاع نسبة السكر في الدم.'},
+    {n:47, cat:'endocrine', q:'The term "Hyponatremia" refers to:', opts:['Abnormally low blood sugar','Abnormally high blood calcium','Abnormally low blood sodium','Abnormally low blood potassium'], c:2, exp:'Hyponatremia = نقص الصوديوم في الدم.'},
+    {n:48, cat:'endocrine', q:'The term "polydipsia" refers to:', opts:['Excessive thirst','Excessive urination','Excessive hunger','Excessive sweating'], c:0, exp:'Polydipsia = العطش المفرط.'},
+    {n:49, cat:'endocrine', q:'The term "thyroidectomy" refers to the:', opts:['Inflammation of the thyroid gland','Surgical removal of the thyroid gland','Enlargement of the thyroid gland','Overactivity of the thyroid gland'], c:1, exp:'Thyroidectomy = استئصال الغدة الدرقية.'},
+    {n:50, cat:'endocrine', q:'The term "pancreatitis" refers to the:', opts:['Surgical removal of the pancreas','Inflammation of the pancreas','Underactivity of the pancreas','Overactivity of the pancreas'], c:1, exp:'Pancreatitis = التهاب البنكرياس.'},
+    {n:51, cat:'endocrine', q:'Which term refers to a condition of excessive thyroid hormone production?', opts:['Hypothyroidism','Hyperthyroidism','Thyroiditis','Thyroidectomy'], c:1, exp:'Hyperthyroidism = فرط إنتاج هرمونات الغدة الدرقية.'},
+    {n:52, cat:'endocrine', q:'What does the prefix "adreno-" refer to in medical terminology?', opts:['Liver','Pancreas','Kidney','Adrenal gland'], c:3, exp:'Adreno- يشير إلى الغدة الكظرية.'},
+    {n:53, cat:'endocrine', q:'What does "hypoglycemia" mean?', opts:['High thyroid hormone','Low calcium in the blood','Low blood sugar','Excess insulin'], c:2, exp:'Hypoglycemia = انخفاض نسبة السكر في الدم.'},
+    {n:54, cat:'endocrine', q:'What is the medical term for "enlarged thyroid"?', opts:['Thyroiditis','Thyromegaly','Hyperthyroidism','Goitrectomy'], c:1, exp:'Thyromegaly = تضخم الغدة الدرقية.'},
+    {n:55, cat:'endocrine', q:'Which prefix means "under" or "below normal"?', opts:['Hyper-','Dys-','Hypo-','Anti-'], c:2, exp:'Hypo- تعني تحت أو أقل من الطبيعي.'},
+    {n:56, cat:'endocrine', q:'"Pancreatectomy" refers to:', opts:['Enlargement of the pancreas','Inflammation of the pancreas','Surgical removal of the pancreas','Dysfunction of the pancreas'], c:2, exp:'Pancreatectomy = استئصال البنكرياس.'},
+    {n:57, cat:'endocrine', q:'Which condition results from hypersecretion of growth hormone in adults?', opts:['Gigantism','Dwarfism','Acromegaly','Hypopituitarism'], c:2, exp:'Acromegaly = ضخامة الأطراف (زيادة هرمون النمو عند البالغين).'},
+    {n:58, cat:'endocrine', q:'What does "Hypercalcemia" mean?', opts:['High thyroid hormone','High calcium in the blood','High blood sugar','High potassium in the blood'], c:1, exp:'Hypercalcemia = ارتفاع الكالسيوم في الدم.'},
+    {n:59, cat:'endocrine', q:'What does "Hyperkalemia" mean?', opts:['High thyroid hormone','High calcium in the blood','High blood sugar','High potassium in the blood'], c:3, exp:'Hyperkalemia = ارتفاع البوتاسيوم في الدم.'},
+    {n:60, cat:'endocrine', q:'What does "Adenosis" mean?', opts:['Enlarged gland','Abnormal condition of a gland','Excision of the adrenal glands','Inflammation of the gland'], c:1, exp:'Adenosis = حالة غير طبيعية في الغدة.'},
+    {n:61, cat:'endocrine', q:'Which condition is caused by hypersecretion of growth hormone in children?', opts:['Acromegaly','Gigantism','Dwarfism','Diabetes'], c:1, exp:'Gigantism = العملقة (زيادة هرمون النمو عند الأطفال).'},
+
+    // Integumentary
+    {n:62, cat:'integumentary', q:'Which prefix refers to skin in medical terms?', opts:['Myo-','Derma-','Neuro-','Hepat-'], c:1, exp:'Derma- يشير إلى الجلد.'},
+    {n:63, cat:'integumentary', q:'What does the term subcutaneous mean?', opts:['Beneath the skin','Over the skin','Through the skin','Around the skin'], c:0, exp:'Subcutaneous = تحت الجلد.'},
+    {n:64, cat:'integumentary', q:'The term dermatitis means:', opts:['Skin tumor','Skin inflammation','Skin pain','Skin hardening'], c:1, exp:'Dermatitis = التهاب الجلد.'},
+    {n:65, cat:'integumentary', q:'What is the term for a fatty tumor under the skin?', opts:['Melanoma','Carcinoma','Lipoma','Fibroma'], c:2, exp:'Lipoma = ورم دهني حميد تحت الجلد.'},
+    {n:66, cat:'integumentary', q:'Which condition is a fungal infection of the skin?', opts:['Psoriasis','Tinea','Eczema','Urticaria'], c:1, exp:'Tinea = عدوى فطرية في الجلد (السعفة).'},
+    {n:67, cat:'integumentary', q:'What does melanoma mean?', opts:['Tumor of fat','Skin inflammation','Malignant tumor of pigment cells','Infection of sebaceous gland'], c:2, exp:'Melanoma = ورم خبيث في الخلايا الصبغية (الميلانوما).'},
+    {n:68, cat:'integumentary', q:'Which term means plastic surgery of the skin?', opts:['Dermatoplasty','Dermectomy','Dermoscopy','Dermatitis'], c:0, exp:'Dermatoplasty = جراحة تجميلية للجلد.'},
+    {n:69, cat:'integumentary', q:'What is the meaning of onychomycosis?', opts:['Nail inflammation','Nail fungus infection','Nail discoloration','Nail removal'], c:1, exp:'Onychomycosis = عدوى فطرية في الأظافر.'},
+    {n:70, cat:'integumentary', q:'Which term refers to sweat glands?', opts:['Sebaceous','Apocrine','Eccrine','Sudoriferous'], c:3, exp:'Sudoriferous = الغدد العرقية.'},
+    {n:71, cat:'integumentary', q:'What does hidradenitis mean?', opts:['Inflammation of sebaceous glands','Inflammation of sweat glands','Inflammation of hair follicles','Inflammation of subcutaneous tissue'], c:1, exp:'Hidradenitis = التهاب الغدد العرقية.'},
+    {n:72, cat:'integumentary', q:'Which of the following best defines carcinoma?', opts:['Benign tumor','Malignant skin cancer','Inflammatory skin disease','Fungal infection'], c:1, exp:'Carcinoma = سرطان جلدي خبيث.'},
+    {n:73, cat:'integumentary', q:'Which cells produce melanin?', opts:['Keratinocytes','Melanocytes','Fibroblasts','Langerhans cells'], c:1, exp:'Melanocytes = الخلايا المنتجة للميلانين (صبغة الجلد).'},
+    {n:74, cat:'integumentary', q:'What is the outer, protective layer of the skin?', opts:['Epidermis','Stratum basale','Dermis','Subcutaneous fat'], c:0, exp:'Epidermis = الطبقة الخارجية للجلد.'},
+    {n:75, cat:'integumentary', q:'What is the meaning of Onychophagia?', opts:['Nail inflammation','Nail fungus infection','Nail discoloration','Nail biting'], c:3, exp:'Onychophagia = قضم الأظافر.'},
+    {n:76, cat:'integumentary', q:'What is the meaning of Onychocystis?', opts:['Nail inflammation','Nail fungus infection','An ingrown nail','Nail biting'], c:2, exp:'Onychocystis = ظفر نامٍ (غائر).'},
+    {n:77, cat:'integumentary', q:'Which combining form means nail?', opts:['Trich/o','Seb/o','Onych/o','Pil/o'], c:2, exp:'Onych/o يشير إلى الظفر.'},
+    {n:78, cat:'integumentary', q:'Which of the following is not part of the integumentary system?', opts:['Skin','Hair','Teeth','Nails'], c:2, exp:'الأسنان ليست جزءاً من الجهاز الجلدي (Integumentary System).'},
+    {n:79, cat:'integumentary', q:'A white discoloration of the skin is called:', opts:['Melanosis','Leukoderma','Erythema','Xanthoderma'], c:1, exp:'Leukoderma = بياض الجلد.'},
+    {n:80, cat:'integumentary', q:'Yellow discoloration of the skin is termed:', opts:['Erythema','Cyanosis','Jaundice','Melanoma'], c:2, exp:'Jaundice = اليرقان (اصفرار الجلد).'},
+    {n:81, cat:'integumentary', q:'Swelling caused by fluid retention is:', opts:['Edema','Erythema','Cyanosis','Jaundice'], c:0, exp:'Edema = وذمة (احتباس السوائل).'},
+    {n:82, cat:'integumentary', q:'A surgical incision into the skin is:', opts:['Dermatitis','Dermatoplasty','Dermotomy','Dermabrasion'], c:2, exp:'Dermotomy = شق جراحي في الجلد.'},
+    {n:83, cat:'integumentary', q:'What is the term for surgical removal of skin tissue?', opts:['Dermectomy','Dermatoplasty','Biopsy','Dermabrasion'], c:0, exp:'Dermectomy = استئصال نسيج الجلد.'},
+    {n:84, cat:'integumentary', q:'Necrosis of skin refers to:', opts:['Inflammation','Overgrowth','Tissue death','Swelling'], c:2, exp:'Necrosis = موت الأنسجة.'},
+    {n:85, cat:'integumentary', q:'What is the term for fibrous tumor of the skin?', opts:['Dermectomy','Dermatoplasty','Dermatofibroma','Dermabrasion'], c:2, exp:'Dermatofibroma = ورم ليفي في الجلد.'},
+
+    // Movements
+    {n:37, cat:'prefixes', q:'Which term refers to a movement that decreases the angle of a joint?', opts:['Flexion','Extension','Abduction','Adduction'], c:0, exp:'Flexion = ثني (انخفاض زاوية المفصل).'},
+    {n:38, cat:'prefixes', q:'Which of the following statements describes abduction of a joint?', opts:['Decreases the joint angle','Movement away from the midline','Increases the joint angle','Movement towards the midline'], c:1, exp:'Abduction = إبعاد (حركة بعيداً عن خط المنتصف).'},
+    {n:39, cat:'prefixes', q:'Which term describes the movement of a body part away from the midline?', opts:['Flexion','Extension','Abduction','Adduction'], c:2, exp:'Abduction = إبعاد (بعيداً عن خط المنتصف).'},
+    {n:40, cat:'prefixes', q:'Which term describes the movement of a body part towards the midline?', opts:['Flexion','Extension','Abduction','Adduction'], c:3, exp:'Adduction = تقريب (نحو خط المنتصف).'},
+    {n:41, cat:'prefixes', q:'Which term describes the movement of the foot points more superiorly?', opts:['Flexion','Dorsiflexion','Abduction','Plantarflexion'], c:1, exp:'Dorsiflexion = ثني ظهري (رفع القدم لأعلى).'},
+    {n:42, cat:'prefixes', q:'Which term describes the movement of the hand or foot turning upward?', opts:['Pronation','Dorsiflexion','Supination','Plantarflexion'], c:2, exp:'Supination = استلقاء (رفع اليد أو القدم لأعلى).'},
+    {n:43, cat:'prefixes', q:'Which term describes the movement of the hand or foot turning downward?', opts:['Pronation','Dorsiflexion','Supination','Plantarflexion'], c:0, exp:'Pronation = كب (اليد أو القدم لأسفل).'},
+    {n:44, cat:'prefixes', q:'Which term refers to a movement that increases the angle of a joint?', opts:['Flexion','Extension','Abduction','Adduction'], c:1, exp:'Extension = بسط (زيادة زاوية المفصل).'},
+
+    // Prefixes
+    {n:86, cat:'prefixes', q:'What does the prefix "a-" or "an-" mean?', opts:['With','Not or without','Before','After'], c:1, exp:'a- / an- تعني بدون أو عدم.'},
+    {n:87, cat:'prefixes', q:'What does the prefix "peri-" mean?', opts:['Outside','Near','Around','Before'], c:2, exp:'peri- تعني حول (Around).'},
+    {n:88, cat:'prefixes', q:'What does the prefix "re-" mean?', opts:['Outside','Near','Around','Again'], c:3, exp:'re- تعني مرة أخرى (Again).'},
+    {n:89, cat:'prefixes', q:'What does the prefix "pseud(o)-" mean?', opts:['Outside','False','True','Again'], c:1, exp:'pseudo- تعني كاذب أو زائف (False).'},
+    {n:90, cat:'prefixes', q:'What does the prefix "eu-" mean?', opts:['Outside','False','True','Again'], c:2, exp:'eu- تعني سليم أو طبيعي (True/normal).'}
+];
+
+// True/False Questions
+const TF_QUESTIONS = [
+    {n:1, cat:'tf', q:'Acromegaly refers to enlargement of the extremities.', ans:true, exp:'Acromegaly = ضخامة الأطراف (صحيح).'},
+    {n:2, cat:'tf', q:'Adenectomy means inflammation of a gland.', ans:false, exp:'Adenectomy = استئصال الغدة وليس التهابها (خطأ).'},
+    {n:3, cat:'tf', q:'Adenitis is inflammation of a gland.', ans:true, exp:'Adenitis = التهاب الغدة (صحيح).'},
+    {n:4, cat:'tf', q:'Adenomegaly means enlarged gland.', ans:true, exp:'Adenomegaly = تضخم الغدة (صحيح).'},
+    {n:5, cat:'tf', q:'Adenosis means normal condition of a gland.', ans:false, exp:'Adenosis = حالة غير طبيعية في الغدة (خطأ).'},
+    {n:6, cat:'tf', q:'Adrenalectomy is excision of the adrenal glands.', ans:true, exp:'Adrenalectomy = استئصال الغدة الكظرية (صحيح).'},
+    {n:7, cat:'tf', q:'Adrenomegaly means shrinkage of adrenal glands.', ans:false, exp:'Adrenomegaly = تضخم الغدة الكظرية (خطأ).'},
+    {n:8, cat:'tf', q:'Endocrinology is the study of the endocrine system.', ans:true, exp:'Endocrinology = دراسة جهاز الغدد الصماء (صحيح).'},
+    {n:9, cat:'tf', q:'Endocrinopathy means disease of the endocrine system.', ans:true, exp:'Endocrinopathy = مرض جهاز الغدد الصماء (صحيح).'},
+    {n:10, cat:'tf', q:'Euglycemia means excessive sugar in the blood.', ans:false, exp:'Euglycemia = مستوى سكر طبيعي (خطأ).'},
+    {n:11, cat:'tf', q:'Hypercalcemia means excessive calcium in the blood.', ans:true, exp:'Hypercalcemia = ارتفاع الكالسيوم في الدم (صحيح).'},
+    {n:12, cat:'tf', q:'Hyperglycemia means low blood sugar.', ans:false, exp:'Hyperglycemia = ارتفاع السكر في الدم (خطأ).'},
+    {n:13, cat:'tf', q:'Hyperkalemia means excessive potassium in the blood.', ans:true, exp:'Hyperkalemia = ارتفاع البوتاسيوم في الدم (صحيح).'},
+    {n:14, cat:'tf', q:'Hyperthyroidism refers to decreased thyroid activity.', ans:false, exp:'Hyperthyroidism = فرط نشاط الغدة الدرقية (خطأ).'},
+    {n:15, cat:'tf', q:'Hyponatremia means deficient sodium in the blood.', ans:true, exp:'Hyponatremia = نقص الصوديوم في الدم (صحيح).'},
+    {n:16, cat:'tf', q:'Parathyroidectomy means removal of the parathyroid glands.', ans:true, exp:'Parathyroidectomy = استئصال الغدد جارات الدرقية (صحيح).'},
+    {n:17, cat:'tf', q:'Polydipsia means condition of excessive thirst.', ans:true, exp:'Polydipsia = العطش المفرط (صحيح).'},
+    {n:18, cat:'tf', q:'Acromegaly results from low growth hormone levels.', ans:false, exp:'Acromegaly ينتج من زيادة هرمون النمو (خطأ).'},
+    {n:19, cat:'tf', q:'Adrenopathy means disease of the adrenal glands.', ans:true, exp:'Adrenopathy = مرض الغدة الكظرية (صحيح).'},
+    {n:20, cat:'tf', q:'Parathyroidoma is a tumor of the parathyroid glands.', ans:true, exp:'Parathyroidoma = ورم الغدد جارات الدرقية (صحيح).'}
+];
+
+// Combine all questions
+const ALL_QUESTIONS = [...QUESTIONS, ...TF_QUESTIONS];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') {
+            filtered = ALL_QUESTIONS;
+        } else if (currentCategory === 'tf') {
+            filtered = TF_QUESTIONS;
+        } else {
+            filtered = QUESTIONS.filter(q => q.cat === currentCategory);
+        }
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = ALL_QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') {
+        currentQuestions = [...ALL_QUESTIONS];
+    } else if (currentCategory === 'tf') {
+        currentQuestions = [...TF_QUESTIONS];
+    } else {
+        currentQuestions = QUESTIONS.filter(q => q.cat === currentCategory);
+    }
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        digestive: '🫃 Digestive System',
+        cardiovascular: '❤️ Cardiovascular',
+        endocrine: '🧬 Endocrine',
+        integumentary: '🧴 Integumentary',
+        prefixes: '🔤 Prefixes & Movements',
+        tf: '✅ True / False'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const isTF = q.ans !== undefined;
+        const catLabel = isTF ? '✅ True / False' : (catNames[q.cat] || q.cat);
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="true" onclick="selectTFAnswer(${idx}, true)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="false" onclick="selectTFAnswer(${idx}, false)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectMCQAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectMCQAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${q.opts[q.c]}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function selectTFAnswer(qIdx, selected) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = selected === q.ans;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        const optVal = opt.dataset.opt === 'true' ? true : false;
+        if (optVal === q.ans) {
+            opt.classList.add('correct');
+        } else if (optVal === selected && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const correctText = q.ans ? 'True' : 'False';
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${correctText}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function showFeedback(qIdx, isCorrect, message) {
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${message}` : `❌ Wrong! ${message}`;
+}
+
+function updateCounts(isCorrect) {
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Medical Terminology!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            const isTF = q.ans !== undefined;
+            const correctAns = isTF ? (q.ans ? 'True' : 'False') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctAns}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
