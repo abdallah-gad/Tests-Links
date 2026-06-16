@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Anatomy Final Exam Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;        /* أخضر زيتي غامق */
+    --primary-light: #52b788;  /* أخضر زيتي فاتح */
+    --primary-dark: #1b4332;   /* أخضر زيتي داكن */
+    --secondary: #1e7a7a;      /* بترولي غامق */
+    --secondary-light: #3d9e9e; /* بترولي فاتح */
+    --tertiary: #a8d5ba;       /* أخضر ناعم */
+    --dark: #1a2a2a;
+    --darker: #0d1818;
+    --card-bg: rgba(255,255,255,0.08);
+    --card-bg-hover: rgba(255,255,255,0.14);
+    --light: #e8f0ee;
+    --gray: #9ab0aa;
+    --gray-light: #c5d9d3;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+    --warning: #b8a07c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.06) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.08);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.15);
+    padding: 12px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(45,106,79,0.06);
+    border: 1px solid rgba(45,106,79,0.12);
+    color: var(--dark);
+}
+
+.stat-answered { background: rgba(30,122,122,0.06); border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.10); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.08); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.08); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 160px;
+    height: 5px;
+    background: rgba(45,106,79,0.12);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.12);
+    border-radius: 32px;
+    padding: 50px 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.04);
+}
+
+.start-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.06);
+}
+
+.main-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.2); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 25px;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.filter-btns button {
+    padding: 8px 20px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.05);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 20px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 14px 40px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.25);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 100px 20px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0 20px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: rgba(45,106,79,0.06);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(45,106,79,0.08);
+    transition: all 0.3s;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-5px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 25px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.04);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.04);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.08);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.04);
+    border-color: var(--primary);
+    transform: translateX(-5px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.08);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.08);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.06);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.06);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 14px 50px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.25);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 40px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.10);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.04);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 20px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    margin: 25px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.08);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 15px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.result-stat {
+    padding: 15px;
+    border-radius: 16px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.06); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.06); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.06); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 30px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 10px 5px;
+    transition: all 0.3s;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.12);
+    padding: 12px 30px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 10px 5px;
+    transition: all 0.3s;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 30px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    text-align: right;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 30px 20px; margin: 0 15px; }
+    .start-card h1 { font-size: 1.5rem; }
+    .question-card { padding: 18px; }
+    .results-screen { padding: 25px; margin: 80px 15px 30px; }
+    .results-stats { gap: 8px; }
+    .result-stat .num { font-size: 1.3rem; }
+    .stat-badge { font-size: 0.7rem; padding: 3px 8px; }
+    .progress-bar-container { width: 100px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/40?text=ADGad'">
+            <span class="brand">A.D.Gad</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/100?text=ADGad'">
+        <h1>A.D.Gad | Anatomy Exam</h1>
+        <p class="sub">📚 MCQ Bank for Paramedical Students — Dr. Adel Elhawary</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="general">🔬 General</button>
+            <button data-cat="bones">🦴 Bones</button>
+            <button data-cat="joints">🔗 Joints</button>
+            <button data-cat="organs">🧠 Organs</button>
+            <button data-cat="digestive">🫃 Digestive</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/80?text=ADGad'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="75" cy="75" r="60"/>
+            <circle class="score-fill" id="scoreFill" cx="75" cy="75" r="60" stroke-dasharray="377" stroke-dashoffset="377"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.7rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+const CATS = {
+    general: '🔬 General Anatomy',
+    bones: '🦴 Bones',
+    joints: '🔗 Joints',
+    organs: '🧠 Organs',
+    digestive: '🫃 Digestive System'
+};
+
+// جميع الأسئلة من البنك - MCQ (1-98) بالإنجليزية
+const ALL = [
+    // 1-5: Anatomical Position & Planes
+    {n:1,cat:'general',q:"In Anatomical Position:",opts:["The face upwards, Arms along the sides and Palms facing forwards.","The face forward, Arms along the sides and Palms facing backwards.","The face forward, Arms along the sides and Palms facing forwards.","The face forward, Arms together and Palms facing forwards."],c:2,exp:"الوضع التشريحي القياسي: الوجه للأمام، الذراعين بجانب الجسم، والكفين للأمام."},
+    {n:2,cat:'general',q:"Midsagittal plane is:",opts:["Vertical plane dividing the body into equal right and left halves.","Vertical plane dividing the body into unequal right and left parts.","Vertical plane dividing the body into unequal anterior and posterior parts.","Vertical plane dividing the body into upper and lower halves."],c:0,exp:"المستوى النصفي هو مستوى عمودي يقسم الجسم إلى نصفين أيمن وأيسر متساويين."},
+    {n:3,cat:'general',q:"Parasagittal planes:",opts:["Vertical plane dividing the body into equal right and left halves.","Vertical plane dividing the body into unequal right and left parts.","Vertical plane dividing the body into unequal anterior and posterior parts.","Vertical plane dividing the body into upper and lower halves."],c:1,exp:"المستويات المجاورة للنصفي تقسم الجسم إلى أجزاء يمنى ويسرى غير متساوية."},
+    {n:4,cat:'general',q:"Coronal plane:",opts:["Vertical plane dividing the body into equal right and left halves.","Vertical plane dividing the body into unequal right and left parts.","Vertical plane dividing the body into unequal anterior and posterior parts.","Transverse plane dividing the body into unequal upper and lower parts."],c:2,exp:"المستوى الإكليلي يقسم الجسم إلى أجزاء أمامية وخلفية."},
+    {n:5,cat:'general',q:"Transverse plane:",opts:["Vertical plane dividing the body into unequal right and left parts.","Vertical plane dividing the body into unequal anterior and posterior parts.","Horizontal plane dividing the body into unequal upper and lower parts.","Horizontal plane dividing the body into equal right and left halves."],c:2,exp:"المستوى العرضي يقسم الجسم إلى أجزاء علوية وسفلية غير متساوية."},
+    {n:6,cat:'general',q:"Which of the following positions describes anatomical position?",opts:["standing erect.","curled into a ball, as a baby in the uterus.","sitting comfortably with your hands on your knees","lying on one's side"],c:0,exp:"الوضع التشريحي هو الوقوف منتصباً مع توجيه الوجه للأمام والكفين للأمام."},
+    {n:7,cat:'general',q:"The following is a feature of the anatomical position:",opts:["palms of the hands directed medially","facing laterally","ankles are apart","Upper limbs are by side, and the palms facing forward"],c:3,exp:"في الوضع التشريحي: الأطراف العلوية بجانب الجسم والكفين للأمام."},
+    {n:8,cat:'general',q:"The vertical plane that divided the body into anterior and posterior parts is:",opts:["Sagittal","Horizontal","Parasagittal","Coronal"],c:3,exp:"المستوى الإكليلي يقسم الجسم إلى أجزاء أمامية وخلفية."},
+    {n:9,cat:'general',q:"Regarding the anatomical planes, choose the correct answer:",opts:["Sagittal plane divides body into anterior and posterior halves.","Coronal plane is a horizontal plane.","Parasagittal plane is perpendicular to median plane","Coronal plane divides body into anterior and posterior parts"],c:3,exp:"المستوى الإكليلي يقسم الجسم إلى أجزاء أمامية وخلفية."},
+    {n:10,cat:'general',q:"The plane which passes through the midline of the body, dividing it into right and left halves:",opts:["coronal","midsagittal","parasagittal","transverse"],c:1,exp:"المستوى النصفي يقسم الجسم إلى نصفين أيمن وأيسر متساويين."},
+    {n:11,cat:'general',q:"Regarding the movements, the correct statement is:",opts:["Adduction : Movement away from the midline of the body","flexion : Increase the angle between two bones","Pronation : Upward or palm upward","Lateral flexion : Bending a part of the body in coronal plane"],c:3,exp:"الانثناء الجانبي هو ثني جزء من الجسم في المستوى الإكليلي."},
+    {n:12,cat:'general',q:"The anatomical term Superficial means:",opts:["A point which is nearer to the front of the body.","A point which is nearer to the back of the body.","A point which is nearer to the mid-sagittal plane.","A point which is nearer to the surface of the body."],c:3,exp:"سطحى يعني أقرب إلى سطح الجسم."},
+    {n:13,cat:'general',q:"Hairs are present over the whole surface of the body except:",opts:["scalp.","Face.","palms of hands.","skin of chest."],c:2,exp:"الشعر غير موجود في راحة اليدين وأخمص القدمين."},
+    {n:14,cat:'general',q:"Sebaceous Glands:",opts:["Are few in the scalp.","Are abundant in palms and soles.","Consist of a single coiled tube lying deep in the dermis.","Secrete a fatty material called sebum."],c:3,exp:"الغدد الدهنية تفرز مادة دهنية تسمى الزهم."},
+    {n:15,cat:'bones',q:"An example of a girdle bone is:",opts:["Hip bone.","Humerus.","Femur.","Metacarpal bone."],c:0,exp:"عظم الورك هو مثال على عظام الحزام."},
+    {n:16,cat:'bones',q:"An example of axial bone is:",opts:["Hip bone.","Humerus.","Femur.","Sternum."],c:3,exp:"عظم القص هو جزء من الهيكل المحوري."},
+    {n:17,cat:'bones',q:"The maxilla is considered:",opts:["Long bone","Irregular bone","Flat bone","Pneumatic bone"],c:3,exp:"عظم الفك العلوي هو عظم هوائي لاحتوائه على جيوب هوائية."},
+    {n:18,cat:'bones',q:"The following bone is a part of the appendicular skeleton:",opts:["Skull.","Ribs.","Vertebrae.","Scapula."],c:3,exp:"عظم الكتف جزء من الهيكل الطرفي."},
+    {n:19,cat:'bones',q:"Which of these is a normal function of the skeleton?",opts:["mineral and glycogen storage","protection of underlying tissues","formation of proteins","regulation of body temperature"],c:1,exp:"الهيكل العظمي يقوم بحماية الأنسجة والأعضاء الأساسية."},
+    {n:20,cat:'bones',q:"Besides support and protection, the skeleton serves other important functions, including:",opts:["Reproduction","Locomotion","Respiration","Circulation"],c:1,exp:"الهيكل العظمي يسهل الحركة من خلال عمل العضلات."},
+    {n:21,cat:'bones',q:"Examples of bones classification according to their shape, choose the correct:",opts:["Femur (pneumatic bone)","Tarsal bones (short bone)","Scapula (irregular)","Patella (flat bone)"],c:1,exp:"عظام الرصغ هي عظام قصيرة."},
+    {n:22,cat:'bones',q:"Concerning the bones the following are correct EXCEPT:",opts:["Give the shape of the body.","Carry the blood and nerve supply to the muscles.","Contain bone marrow.","Give attachment to the muscles."],c:1,exp:"العظام لا تحمل إمداد الدم والأعصاب للعضلات مباشرة."},
+    {n:23,cat:'general',q:"Which term describes the position of the radius bone to the ulna:",opts:["Lateral.","Distal.","Anterior.","Proximal."],c:0,exp:"عظم الكعبرة يقع جانبياً بالنسبة لعظم الزند."},
+    {n:24,cat:'joints',q:"Regarding the primary cartilaginous joints choose the correct statement:",opts:["Ossify by age.","The intervening cartilage is elastic.","All are quite mobile.","superior radio-ulnar joint is an example."],c:0,exp:"المفاصل الغضروفية الأولية تتعظم مع التقدم في العمر."},
+    {n:25,cat:'joints',q:"An example of secondary cartilaginous joints is:",opts:["Sagittal suture of the skull.","Intervertebral joints.","Inferior tibio-fibular joint.","Knee joint."],c:1,exp:"المفاصل بين الفقرات هي مثال على المفاصل الغضروفية الثانوية."},
+    {n:26,cat:'joints',q:"The shoulder joint is:",opts:["Fibrous.","Cartilaginous.","Biaxial.","Polyaxial"],c:3,exp:"مفصل الكتف هو مفصل زلالي متعدد المحاور."},
+    {n:27,cat:'joints',q:"Syndemosis is:",opts:["Fibrous joint.","Primary cartilagenous joint.","Secondary cartilaginous joint.","Synovial plane Joint."],c:0,exp:"الارتباط الرباطي هو مفصل ليفي."},
+    {n:28,cat:'joints',q:"Concerning ball and socket joint, all are true EXCEPT:",opts:["It is a synovial joint.","Allows movements in different directions.","Articular surfaces are concavo-convex.","Shoulder joint is an example."],c:2,exp:"السطوح المفصلية في مفصل الكرة والحق هي كروية وليست محدبة-مقعرة."},
+    {n:29,cat:'joints',q:"The type of cartilage found in intervertebral discs is:",opts:["hyaline cartilage","elastic cartilage","costal cartilage","fibrocartilage"],c:3,exp:"الأقراص بين الفقرات تحتوي على غضروف ليفي."},
+    {n:30,cat:'joints',q:"The Following is cartilaginous joint:",opts:["Sagittal suture","Gomphosis","Pubic symphysis","Syndesmosis"],c:2,exp:"ارتفاق العانة هو مفصل غضروفي ثانوي."},
+    {n:31,cat:'joints',q:"Regarding the saddle joint, one of the following is true:",opts:["It is a fibrous joint.","Articular surfaces are concave.","It is a cartilaginous joint.","The carpometacarpal joint of the thumb is an example."],c:3,exp:"المفصل الرسغي السنعي للإبهام هو مفصل سرجي."},
+    {n:32,cat:'joints',q:"Regarding the primary cartilaginous joints choose the correct:",opts:["The intervening cartilage is elastic.","Ultimately ossify.","All are quite mobile.","superior radio-ulnar joint is an example."],c:1,exp:"المفاصل الغضروفية الأولية تتعظم في النهاية مع التقدم في العمر."},
+    {n:33,cat:'joints',q:"The inferior tibio-fibular joint is an example of:",opts:["Fibrous joint.","Plane synovial joint.","Uniaxial synovial joint.","Cartilaginous joint."],c:0,exp:"المفصل الظنبوبي الشظوي السفلي هو مفصل ليفي."},
+    {n:34,cat:'joints',q:"An example of syndesmosis is:",opts:["Sagittal suture of the skull.","Intervertebral joints.","Inferior tibio-fibular joint.","Knee joint."],c:2,exp:"المفصل الظنبوبي الشظوي السفلي هو مثال على الارتباط الرباطي."},
+    {n:35,cat:'joints',q:"Elbow joint is an examples of:",opts:["Fibrous joint.","Plane synovial joint.","Uniaxial synovial joint.","Biaxial synovial joint."],c:2,exp:"مفصل المرفق هو مفصل زلالي أحادي المحور."},
+    {n:36,cat:'joints',q:"An example of secondary cartilaginous joints is:",opts:["Sagittal suture of the skull.","Intervertebral joints.","Inferior tibio-fibular joint.","Knee joint."],c:1,exp:"المفاصل بين الفقرات هي مثال على المفاصل الغضروفية الثانوية."},
+    {n:37,cat:'joints',q:"The shoulder joint is:",opts:["Fibrous.","Cartilaginous.","Uniaxial.","Polyaxial"],c:3,exp:"مفصل الكتف هو مفصل زلالي متعدد المحاور."},
+    {n:38,cat:'joints',q:"An injury to the elbow joint will affect, which movement of it:",opts:["Extension","Supination","Pronation","Medial rotation"],c:0,exp:"إصابة مفصل المرفق تؤثر على حركة البسط."},
+    {n:39,cat:'joints',q:"Regarding the carpo-metacarpal joint of the thumb, its type is:",opts:["Hinge joint.","Condyloid joint.","Saddle joint.","Ball and socket joint."],c:2,exp:"المفصل الرسغي السنعي للإبهام هو مفصل سرجي."},
+    {n:40,cat:'joints',q:"The following is bi-axial joints:",opts:["Atlanto-axial joints.","Superior radio-ulnar joints.","Elbow joints.","Wrist joints."],c:3,exp:"مفاصل الرسغ هي مفاصل ثنائية المحور."},
+    {n:41,cat:'joints',q:"Regarding the synovial joints, choose the correct answer:",opts:["They are joints of limited movements.","The articulating bones are covered with a synovial membrane.","synovial membrane connect the articulating bones.","The articulating bones are separated by a joint cavity."],c:3,exp:"في المفاصل الزلالية، العظام المفصلية مفصولة بتجويف مفصلي."},
+    {n:42,cat:'joints',q:"The joint that connects the root of a tooth with its socket:",opts:["gomphosis","suture","syndesmosis","cartilaginous"],c:0,exp:"المفصل الوتدي يربط جذر السن بتجويفه في عظم الفك."},
+    {n:43,cat:'joints',q:"The type of joint that allows limited movement and is found both in the symphysis pubis and in intervertebral discs is:",opts:["gomphosis","secondary cartilagenous","primary cartilagenous","syndesmosis"],c:1,exp:"المفصل الغضروفي الثانوي يسمح بحركة محدودة."},
+    {n:44,cat:'joints',q:"An epiphyseal plate is what type of joint?",opts:["suture","secondary cartilagenous","primary cartilaginous","syndesmosis"],c:2,exp:"الصفيحة المشاشية هي مفصل غضروفي أولي."},
+    {n:45,cat:'joints',q:"The shoulder and hip joints are of this type:",opts:["ball-and-socket","pivot","saddle","plane"],c:0,exp:"مفصل الكتف والورك هما من نوع كرة وحق."},
+    {n:46,cat:'joints',q:"The type of joint that is distinguished by having a fluid-filled joint cavity is:",opts:["fibrous","cartilaginous","synovial","suture"],c:2,exp:"المفصل الزلالي يتميز بوجود تجويف مفصلي مملوء بالسائل."},
+    {n:47,cat:'organs',q:"Regarding arteries, all of the following is true except:",opts:["They transport blood from the heart to different tissues.","They have no valves.","All arteries carry oxygenated blood.","Arterioles are the smallest arteries, less than 0.1 mm in diameter."],c:2,exp:"ليس جميع الشرايين تحمل دماً مؤكسجاً، فالشرايين الرئوية تحمل دماً غير مؤكسج."},
+    {n:48,cat:'organs',q:"Regarding the heart, all of the following are false except:",opts:["The base of the heart is directed downwards","The apex of the heart is formed by left ventricle.","The apex of the heart is directed upwards","The base of the heart is formed by right and left ventricles."],c:1,exp:"قمة القلب مكونة من البطين الأيسر."},
+    {n:49,cat:'organs',q:"Regarding the heart, all of the following are true except:",opts:["Right atrium receives deoxygenated blood by superior and inferior vena cava.","Right ventricles forces oxygenated blood to pass through the pulmonary artery.","Oxygenated blood returns from lungs to left atrium through pulmonary veins.","Left ventricle forces the blood to pass through the aorta"],c:1,exp:"البطين الأيمن يدفع الدم غير المؤكسج عبر الشريان الرئوي."},
+    {n:50,cat:'organs',q:"The nerves and blood vessels are present in the following part of the tooth:",opts:["dentine","pulp","enamel","cement"],c:1,exp:"الأعصاب والأوعية الدموية موجودة في لب السن."},
+    {n:51,cat:'digestive',q:"Oesophagus shows constrictions at the following sites except:",opts:["at its beginning","where it is crossed by arch of aorta","where it is crossed by right bronchus.","as it pierces the diaphragm."],c:2,exp:"المريء يعبره القصبة الهوائية اليسرى (وليس اليمنى)."},
+    {n:52,cat:'digestive',q:"The following are parts of small intestine except:",opts:["duodenum","jejenum","ileum","pylorus"],c:3,exp:"البواب هو جزء من المعدة، وليس الأمعاء الدقيقة."},
+    {n:53,cat:'digestive',q:"The following are parts of large intestine except:",opts:["caecum","appendix","pyloric canal","rectum"],c:2,exp:"القناة البوابية هي جزء من المعدة، وليس الأمعاء الغليظة."},
+    {n:54,cat:'digestive',q:"All the following are true for the temporary (deciduous) teeth except:",opts:["Number : 20 ( 10 in each jaw)","They begin to erupt at about 6 month.","They complete eruption at about 24 month","They include 6 molars in each jaw"],c:3,exp:"الأسنان اللبنية تشمل 5 أضراس فقط في كل فك (وليس 6)."},
+    {n:55,cat:'digestive',q:"All the following organs are present in the stomach bed except:",opts:["Transverse colon","Pancreas","Right kidney","Spleen"],c:2,exp:"الكلى اليمنى ليست في قاع المعدة."},
+    {n:56,cat:'digestive',q:"The following are parts of small intestine except:",opts:["Duodenum","Jejunum","Ileum","Pylorus"],c:3,exp:"البواب هو جزء من المعدة."},
+    {n:57,cat:'digestive',q:"The following are parts of large intestine except:",opts:["Caecum","Appendix","Rectum","Pyloric canal"],c:3,exp:"القناة البوابية جزء من المعدة."},
+    {n:58,cat:'general',q:"Which plane of body divides it into dorsal and ventral regions:",opts:["Transverse","Coronal","Sagittal","Parasagittal"],c:1,exp:"المستوى الإكليلي يقسم الجسم إلى مناطق ظهرية وبطنية."},
+    {n:59,cat:'general',q:"Which of the following positions describes anatomical position?",opts:["Standing erect.","Curled into a ball, as a baby in the uterus.","sitting comfortably with hands on knees","lying on one's side"],c:0,exp:"الوضع التشريحي هو الوقوف منتصباً."},
+    {n:60,cat:'general',q:"Regarding the anatomical planes, choose the correct answer:",opts:["Sagittal plane divides body into anterior and posterior.","Coronal plane is a horizontal plane.","Coronal plane divides body into anterior and posterior","Transverse plane divides the body into right and left parts."],c:2,exp:"المستوى الإكليلي يقسم الجسم إلى أجزاء أمامية وخلفية."},
+    {n:61,cat:'general',q:"The following term is correct:",opts:["Peripheral means near the center of the body.","Inferior means nearer to the head.","Distal means away from the root of the limb.","Lateral means nearer to the median plane."],c:2,exp:"Distal يعني بعيداً عن جذر الطرف."},
+    {n:62,cat:'general',q:"The humerus is to radius:",opts:["Lateral.","Distal.","Proximal.","Posterior."],c:2,exp:"عظم العضد قريب بالنسبة لعظم الكعبرة."},
+    {n:63,cat:'general',q:"Away from midline:",opts:["Lateral","Distal","Superior","Transverse"],c:0,exp:"Lateral يعني بعيداً عن خط المنتصف."},
+    {n:64,cat:'general',q:"Toward the back; opposite of Anterior:",opts:["Superior","Posterior","Inferior","Lateral"],c:1,exp:"Posterior يعني باتجاه الظهر."},
+    {n:65,cat:'general',q:"Deep opposite to:",opts:["Superficial","Distal","Medial","Proximal"],c:0,exp:"Deep مقابل Superficial (سطحى)."},
+    {n:66,cat:'general',q:"The knee is to the ankle:",opts:["proximal","lateral","distal","medial"],c:0,exp:"الركبة قريبة بالنسبة للكاحل."},
+    {n:67,cat:'general',q:"Which is the correct structural order?",opts:["tissue-cells-organ-system","cells-tissue-system-organ","tissue-cells-system-organs","cells-tissue-organ-system"],c:3,exp:"الترتيب الصحيح: خلية ← نسيج ← عضو ← جهاز."},
+    {n:68,cat:'general',q:"In the anatomical position, the palms are facing:",opts:["forward","backward","medial","lateral"],c:0,exp:"في الوضع التشريحي، راحة اليد متجهة للأمام."},
+    {n:69,cat:'general',q:"The correct anatomical position does NOT include which of the following positions:",opts:["Palms facing backwards.","Standing erect.","Hands at the sides, and feet parallel.","Head facing forward."],c:0,exp:"في الوضع التشريحي، راحة اليد للأمام وليس للخلف."},
+    {n:70,cat:'general',q:"A group of cells of the same type form a(n):",opts:["organ.","organism.","atom.","tissue."],c:3,exp:"مجموعة من الخلايا من نفس النوع تشكل نسيجاً."},
+    {n:71,cat:'general',q:"A group of tissues working together for a specific function form a(n):",opts:["Organ.","Organism.","Positive feedback system.","Organ system."],c:0,exp:"مجموعة من الأنسجة تعمل معاً تشكل عضواً."},
+    {n:72,cat:'bones',q:"Which of the following is an example of a flat bone?",opts:["Humerus","Sternum","Hamate","Maxilla"],c:1,exp:"عظم القص هو مثال على العظم المسطح."},
+    {n:73,cat:'bones',q:"The axial skeleton is formed of the following bones EXCEPT:",opts:["Vertebral column.","Femur","Skull.","Sternum"],c:1,exp:"عظم الفخذ جزء من الهيكل الطرفي وليس المحوري."},
+    {n:74,cat:'bones',q:"The following bone belongs to the axial skeleton:",opts:["Scapula.","Humerus.","Sternum.","Femur."],c:2,exp:"عظم القص ينتمي إلى الهيكل المحوري."},
+    {n:75,cat:'bones',q:"Regarding vertebral column, all of the following are correct EXCEPT:",opts:["Thoracic vertebrae are 7 in number.","It belongs to the axial skeleton.","Thoracic vertebrae are 12 in number","Sacral vertebrae are fused."],c:0,exp:"الفقرات الصدرية عددها 12 وليس 7."},
+    {n:76,cat:'bones',q:"The bones which form the shoulder girdle are:",opts:["Radius and humerus","Clavicle and humerus.","Clavicle and scapula.","Scapula and humerus","Sternum and clavicle"],c:2,exp:"حزام الكتف يتكون من الترقوة والكتف."},
+    {n:77,cat:'bones',q:"The following is an example of sesamoid bone:",opts:["Scapula","Humerus","Patella.","Femur."],c:2,exp:"الرضفة هي عظم سمسمي."},
+    {n:78,cat:'bones',q:"The scapula is an example of:",opts:["Irregular bone.","Flat bone.","Pneumatic bone","Short bone."],c:1,exp:"الكتف هو عظم مسطح."},
+    {n:79,cat:'bones',q:"The following are bones of the upper limb EXCEPT:",opts:["Patella.","Humerus.","Scapula.","Ulna","Radius"],c:0,exp:"الرضفة جزء من الطرف السفلي."},
+    {n:80,cat:'bones',q:"Which of the following is a function of the skeletal system?",opts:["Haematemsis","Haemostasis","Haemopoiesis","Digestion"],c:2,exp:"تكوين الدم هو وظيفة النخاع العظمي."},
+    {n:81,cat:'bones',q:"Which of the following comprise 7 bones?",opts:["Cervical vertebrae","Carpals","Thoracic vertebrae","Lumbar vertebrae"],c:0,exp:"الفقرات العنقية عددها 7."},
+    {n:82,cat:'bones',q:"The maxilla is considered:",opts:["Flat bone","Short bone","Long bone","Pneumatic bone"],c:3,exp:"عظم الفك العلوي هو عظم هوائي."},
+    {n:83,cat:'bones',q:"Regarding the metaphysis of long bone, it is:",opts:["The part of the diaphysis near the center of the bone.","The part of the diaphysis close to the epiphyseal cartilage.","Part of the epiphysis.","Cartilaginous plate separating the epiphysis and diaphysis of a long bone."],c:1,exp:"المشاشة هي جزء من الجسم القريب من الغضروف المشاشي."},
+    {n:84,cat:'bones',q:"The site of growth of long bone in length is due to activity of:",opts:["Epiphysis.","Metaphysis.","Diaphysis.","Epiphyseal cartilage."],c:3,exp:"نمو العظم في الطول يحدث في الغضروف المشاشي."},
+    {n:85,cat:'bones',q:"Besides support and protection, the skeleton serves other important functions, including:",opts:["Reproduction","Locomotion","Respiration","Hemostasis"],c:1,exp:"الهيكل العظمي يساعد في الحركة."},
+    {n:86,cat:'bones',q:"A long bone is covered from outside by a thin layer of connective tissue called the:",opts:["Diaphysis","Endosteum","Periosteum","Metaphysis"],c:2,exp:"السمحاق هو الغشاء الخارجي للعظم."},
+    {n:87,cat:'bones',q:"Examples of bones classification according to their shape:",opts:["Femur (short bone)","Tarsal bones (short bone)","Scapula (irregular)","Patella (flat bone)"],c:1,exp:"عظام الرصغ هي عظام قصيرة."},
+    {n:88,cat:'bones',q:"All the following arteries supply the long bones except:",opts:["Periosteal","Nutrient","Arteries to epiphyseal cartilage","Epiphyseal"],c:2,exp:"الغضروف المشاشي لا يغذى بالدم مباشرة."},
+    {n:89,cat:'bones',q:"Blood cell formation (haemopoiesis) occurs in:",opts:["Red marrow","Yellow marrow","Medullary cavity","Periosteum","Epiphyseal plate"],c:0,exp:"تكوين خلايا الدم يحدث في النخاع الأحمر."},
+    {n:90,cat:'bones',q:"There are carpal bones and tarsal bones:",opts:["7-8","8-7","8-8","7-7"],c:1,exp:"عظام الرسغ 8 وعظام الرصغ 7."},
+    {n:91,cat:'bones',q:"Which of the following is the lateral bone of the lower leg?",opts:["Fibula","Femur","Tibia","Radius"],c:0,exp:"الشظية هي العظم الجانبي للساق السفلى."},
+    {n:92,cat:'bones',q:"The ends of long bones are called the:",opts:["Epiphyses","Diaphysis","Metaphyses","Endosteum"],c:0,exp:"نهايات العظام الطويلة تسمى المشاشات."},
+    {n:93,cat:'bones',q:"In long bone, spongy bone is found in the:",opts:["Diaphysis","Epiphyses.","Periosteum","Medullary cavity"],c:1,exp:"العظم الإسفنجي يوجد في المشاشات."},
+    {n:94,cat:'joints',q:"Which of the following is an example of a cartilaginous joint?",opts:["Humeroulnar joint","Middle radiolunar joint","Intervertebral disc joint","Cranial sutural joint"],c:2,exp:"المفصل بين الفقرات هو مفصل غضروفي ثانوي."},
+    {n:95,cat:'joints',q:"Following is cartilaginous joint:",opts:["Sagittal suture","Gomphosis","Pubic symphysis","Syndesmosis"],c:2,exp:"ارتفاق العانة هو مفصل غضروفي."},
+    {n:96,cat:'joints',q:"Regarding the saddle joint, one of the following is true:",opts:["It is a fibrous joint.","Allows supination and pronation movements only","Acromio-clavicular joint is modified saddle","The carpometacarpal joint of the thumb is an example."],c:3,exp:"المفصل الرسغي السنعي للإبهام هو مفصل سرجي."},
+    {n:97,cat:'joints',q:"The inferior tibio-fibular joint is an example of:",opts:["Fibrous joint.","Plane synovial joint.","Uniaxial synovial joint.","Biaxial synovial joint","Cartilaginous joint."],c:0,exp:"المفصل الظنبوبي الشظوي السفلي هو مفصل ليفي."},
+    {n:98,cat:'joints',q:"A polyaxial synovial joint having a medial rotation movement its variety is:",opts:["Hinge.","Condyloid.","Ball and socket.","Plane joint"],c:2,exp:"مفصل الكرة والحق هو متعدد المحاور وله حركة دوران وسطي."}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// جسيمات عشوائية
+for(let i = 0; i < 40; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 5 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 20 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// أزرار التصفية
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        const filtered = currentCategory === 'all' ? ALL : ALL.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// تحميل العدد الأولي
+document.getElementById('totalQ').textContent = ALL.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...ALL] : ALL.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+    
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+    
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        if (lastCat !== q.cat) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${CATS[q.cat]}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = q.cat;
+        }
+        
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+        
+        const optsHtml = q.opts.map((opt, optIdx) => 
+            `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+        ).join('');
+        
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${CATS[q.cat]}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            <div class="options" id="opts-${idx}">${optsHtml}</div>
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+    
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+    
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+    
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+    
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+    
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+    
+    updateStats();
+    
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+    
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+    
+    const circumference = 377;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+    
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Anatomy!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+    
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+    
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${q.opts[q.c]}<br>
+                    <span style="font-size:0.8rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+    
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+    
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
