@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Computer Skills Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Computer Skills Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>💻 A.D.Gad | Computer Skills Final</h1>
+        <p class="sub">📚 Final Exam MCQ Bank — Dr. Ahmed Hamed</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="hardware">🖥️ Hardware</button>
+            <button data-cat="windows">🪟 Windows</button>
+            <button data-cat="office">📄 MS Office</button>
+            <button data-cat="network">🌐 Networks</button>
+            <button data-cat="internet">🔍 Internet</button>
+            <button data-cat="social">📱 Social Media</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from Computer Skills Final (Hardware + Windows + Office + Networks + Internet + Social Media)
+const QUESTIONS = [
+    // ========== HARDWARE (from previous) ==========
+    {n:1, cat:'hardware', q:'Where is RAM located?', opts:['Mother Board','Expansion Board','External Drive','None'], c:0, exp:'الذاكرة العشوائية (RAM) موجودة على اللوحة الأم (Motherboard).'},
+    {n:2, cat:'hardware', q:'A computer contains...?', opts:['Motherboard','Hard disk drive','Central processing unit','All of the above'], c:3, exp:'الكمبيوتر يحتوي على اللوحة الأم، القرص الصلب، ووحدة المعالجة المركزية.'},
+    {n:3, cat:'hardware', q:'Storage which loses data after power off is called...?', opts:['Hard disc','Flash memory','RAM','ROM'], c:2, exp:'الذاكرة المتطايرة (RAM) تفقد البيانات عند انقطاع التيار.'},
+    {n:4, cat:'hardware', q:'Which of these choices is an example of input device?', opts:['Keyboard','Monitor','Mouse','Both 1 & 3'], c:3, exp:'لوحة المفاتيح والماوس هما من أجهزة الإدخال.'},
+    {n:5, cat:'hardware', q:'A printer is an _______ device?', opts:['Input','Output','Processing','Monitor'], c:1, exp:'الطابعة هي جهاز إخراج (Output device).'},
+    {n:6, cat:'hardware', q:'Which memory is known as volatile memory?', opts:['RAM','ROM','Floppy','All of the above'], c:0, exp:'RAM هي الذاكرة المتطايرة (Volatile memory).'},
+    {n:7, cat:'hardware', q:'All of the following are examples of input devices except?', opts:['Scanner','Mouse','Printer','Keyboard'], c:2, exp:'الطابعة (Printer) هي جهاز إخراج وليس إدخال.'},
+    {n:8, cat:'hardware', q:'Video, sound, and network cards are all examples of...?', opts:['Adapter cards','Hard disks','Processors','Input unit'], c:0, exp:'بطاقات الفيديو والصوت والشبكة هي بطاقات محول (Adapter cards).'},
+    {n:9, cat:'hardware', q:'A byte can be represented in the range of 0 to ...?', opts:['2','255','256','1024'], c:1, exp:'البايت يمثل من 0 إلى 255 (2^8 - 1).'},
+    {n:10, cat:'hardware', q:'Which device can be used to store large amounts of data?', opts:['Flash memory','CDROM','Floppy disk','Hard disk'], c:3, exp:'القرص الصلب (Hard disk) يستخدم لتخزين كميات كبيرة من البيانات.'},
+    {n:11, cat:'hardware', q:'Desktop computers, laptops, gaming consoles, smartphones are all types of...?', opts:['Microcomputers','Supercomputers','Mainframe computers','None'], c:0, exp:'الحواسيب الصغيرة (Microcomputers) تشمل أجهزة الكمبيوتر المكتبية والمحمولة.'},
+    {n:12, cat:'hardware', q:'Health institutions, banks, educational institutions use _______ to store data and run daily operations.', opts:['Microcomputers','Supercomputers','Mainframe computers','None'], c:2, exp:'الحواسيب المركزية (Mainframe) تستخدم في المؤسسات الكبيرة.'},
+    {n:13, cat:'hardware', q:'_______ used for research and exploration purposes because they can process massive amounts of data.', opts:['Microcomputers','Supercomputers','Mainframe computers','None'], c:1, exp:'الحواسيب العملاقة (Supercomputers) تستخدم للأبحاث ومعالجة كميات هائلة من البيانات.'},
+    {n:14, cat:'hardware', q:'Unix, Linux, Mac OS, and Microsoft Windows are all...?', opts:['Operating system','Application Software','Device Drivers','Utilities'], c:0, exp:'Unix، Linux، Mac OS، و Windows هي أنظمة تشغيل (Operating systems).'},
+    {n:15, cat:'hardware', q:'System software designed to help analyze, configure, optimize, or maintain a computer like (Disk defragmenters) is called...?', opts:['Operating system','Application Software','Device Drivers','Utilities'], c:3, exp:'البرامج المساعدة (Utilities) مثل أداة إلغاء التجزئة.'},
+    {n:16, cat:'hardware', q:'Microsoft Office is an example for...?', opts:['Operating system','Application Software','Device Drivers','Utilities'], c:1, exp:'Microsoft Office هو برنامج تطبيقي (Application Software).'},
+    {n:17, cat:'hardware', q:'The read/write mechanism depends on rotational speed of a disk, measured in...?', opts:['rpm','m/s','Kg','meter'], c:0, exp:'سرعة دوران القرص تقاس بـ rpm (دورة في الدقيقة).'},
+    {n:18, cat:'hardware', q:'Factors that can control CPU performance...?', opts:['Cache memory','Multiple cores','CPU Speed','Generation','All of the above'], c:4, exp:'جميع العوامل المذكورة تتحكم في أداء وحدة المعالجة المركزية.'},
+    {n:19, cat:'hardware', q:'An internet speed of 8 Mbps can be used to download with speed of...?', opts:['8 MBps','4 MBps','2 MBps','1 MBps'], c:3, exp:'8 Mbps = 1 MBps (8 ميجابيت = 1 ميجابايت).'},
+    {n:20, cat:'hardware', q:'The GPUs interface with the motherboard by...?', opts:['AGP slot','PCI slot','RAM slot','CPU socket'], c:0, exp:'بطاقات الرسوميات تتصل عبر منفذ AGP.'},
+    {n:21, cat:'hardware', q:'_______ typically handles communications among CPU, RAM, and PCI Express?', opts:['Northbridge','Southbridge','RAM','CPU'], c:0, exp:'Northbridge يدير الاتصال بين المعالج والذاكرة و PCI Express.'},
+    {n:22, cat:'hardware', q:'_______ is an IC on the motherboard responsible for communication between hard drive controller, I/O controller and sound card, USB, etc.', opts:['Northbridge','Southbridge','RAM','CPU'], c:1, exp:'Southbridge مسؤول عن الاتصال مع وحدات الإدخال/الإخراج.'},
+    {n:23, cat:'hardware', q:'The more modern solution, supporting larger hard drives, faster boot times, more security features is...?', opts:['UEFI','BIOS','C-MOS','Legacy'], c:0, exp:'UEFI هو الحل الحديث الذي يدعم الأقراص الكبيرة والأمان.'},
+    {n:24, cat:'hardware', q:'HDMI digital signals transmit data in bits of data (on or off) in varying frequencies.', opts:['True','False'], c:0, exp:'إشارات HDMI رقمية تنقل البيانات في صورة بتات.'},
+    {n:25, cat:'hardware', q:'HDMI video cables and ports transmit data in analog.', opts:['True','False'], c:1, exp:'HDMI ينقل بيانات رقمية وليس تناظرية (Analog).'},
+    {n:26, cat:'hardware', q:'What is the fastest drive type of the following?', opts:['HDD','SSD','M.2 SSD','Flash'], c:2, exp:'M.2 SSD هو الأسرع بين الأنواع المذكورة.'},
+    {n:27, cat:'hardware', q:'What is the most powerful RAM type in the following?', opts:['SD RAM','RD RAM','DDR RAM','None'], c:2, exp:'DDR RAM هو الأقوى والأحدث بين الأنواع.'},
+    {n:28, cat:'hardware', q:'You can test a Power Supply Without Multimeter by making short on the pin until you hear a fan during working?', opts:['(green-black)','(red-black)','Any two pin',"We can't"], c:0, exp:'يمكن اختبار مزود الطاقة بتوصيل الأخضر والأسود.'},
+    {n:29, cat:'hardware', q:'If you have motherboard with 4 RAM slots (2 black & 2 blue) and 2 RAM (4GB and 2GB) which is preferred?', opts:['(2GB) > black slot & (4GB) > black slot','(2GB) > blue slot & (4GB) > blue slot','(2GB) > blue slot & (4GB) > black slot','All is the same'], c:2, exp:'يفضل وضع 2GB في الأزرق و 4GB في الأسود للتشغيل في وضع ثنائي القناة.'},
+    {n:30, cat:'hardware', q:'Socket used for (mouse - keyboard - scanner - printer - external hard disk)?', opts:['VGA','HDMI','PS2','USB'], c:3, exp:'USB يستخدم لتوصيل الماوس، لوحة المفاتيح، الماسح الضوئي، الطابعة، والقرص الصلب الخارجي.'},
+
+    // ========== WINDOWS 10 (from previous) ==========
+    {n:31, cat:'windows', q:'You can view basic information about your computer by pressing....?', opts:['WIN + R','Ctrl + WIN + D','WIN + Tab','WIN + Pause'], c:3, exp:'WIN + Pause يعرض معلومات أساسية عن الكمبيوتر.'},
+    {n:32, cat:'windows', q:'You can use Start Run dialog by pressing...?', opts:['WIN + Pause','WIN + R','Ctrl + WIN + D','WIN + Tab'], c:1, exp:'WIN + R يفتح نافذة Run.'},
+    {n:33, cat:'windows', q:'You can add a new virtual desktop by pressing...?', opts:['WIN + R','WIN + Pause','Ctrl + WIN + D','WIN + Tab'], c:2, exp:'Ctrl + WIN + D يضيف سطح مكتب افتراضي جديد.'},
+    {n:34, cat:'windows', q:'You can switch between applications by pressing...?', opts:['Ctrl + WIN + D','WIN + R','WIN + Pause','WIN + Tab'], c:3, exp:'WIN + Tab يسمح بالتبديل بين التطبيقات.'},
+    {n:35, cat:'windows', q:'You can open File Explorer by pressing...?', opts:['Ctrl + WIN + D','WIN + R','WIN + Pause','WIN + E'], c:3, exp:'WIN + E يفتح مستكشف الملفات (File Explorer).'},
+    {n:36, cat:'windows', q:'You can Install/Uninstall Applications by open Run and type...?', opts:['appwiz.cpl','msconfig','ping','msinfo32'], c:0, exp:'appwiz.cpl يفتح قائمة تثبيت/إلغاء تثبيت البرامج.'},
+    {n:37, cat:'windows', q:'To get more detailed system information use Run and type...?', opts:['appwiz.cpl','msconfig','ping','msinfo32'], c:3, exp:'msinfo32 يعرض معلومات مفصلة عن النظام.'},
+    {n:38, cat:'windows', q:'You can view file/folder structure from File Explorer from the...?', opts:['Ribbon','Preview/Details pane','Search','Navigation pane'], c:3, exp:'شريط التنقل (Navigation pane) يعرض هيكل الملفات والمجلدات.'},
+    {n:39, cat:'windows', q:'You can perform layout, formatting, and sharing tasks from...?', opts:['Ribbon','Search','Navigation pane','Preview/Details pane'], c:0, exp:'الشريط (Ribbon) يحتوي على مهام التنسيق والتخطيط.'},
+    {n:40, cat:'windows', q:'You can adjust text size, orientation, and resolution from...?', opts:['Task bar','Display Setting','Notification area','Any icons'], c:1, exp:'إعدادات العرض (Display Setting) تتحكم في حجم النص والاتجاه والدقة.'},
+    {n:41, cat:'windows', q:'Located in the far right of the taskbar is...?', opts:['Start button','Cortana','Windows Action Center','Search'], c:2, exp:'مركز الإجراءات (Windows Action Center) يقع في أقصى يمين شريط المهام.'},
+    {n:42, cat:'windows', q:'You can click the microphone button on taskbar to use your voice by using...?', opts:['Cortana','Yourself','Desktop','Icons'], c:0, exp:'Cortana تسمح باستخدام الصوت للتحدث مع الكمبيوتر.'},
+
+    // ========== MS OFFICE (from previous) ==========
+    {n:43, cat:'office', q:'Which best describes the Ribbon?', opts:['A slider that you can use to zoom the document','A toolbar with various commands','A feature that can translate text into any language','A cable that connects computer to printer'], c:1, exp:'الشريط (Ribbon) هو شريط أدوات يحتوي على أوامر متنوعة.'},
+    {n:44, cat:'office', q:'Which methods can you use to move text from one part of the document to another?', opts:['Press Print Screen key','Go to Backstage view and click Move','Press Delete key','Cut and paste the text'], c:3, exp:'يمكن نقل النص باستخدام قص ولصق (Cut and Paste).'},
+    {n:45, cat:'office', q:'Suppose you made an error while writing, the way to correct your mistake?', opts:['Delete all text and start over','Use font feature','Use Spelling and Grammar feature','Use clipboard feature'], c:2, exp:'يمكن تصحيح الأخطاء باستخدام ميزة التدقيق الإملائي والنحوي.'},
+    {n:46, cat:'office', q:'To change page orientation to landscape or portrait use the _______ tab.', opts:['File','Home','Layout','Insert'], c:2, exp:'اتجاه الصفحة (Page Orientation) موجود في علامة التبويب Layout.'},
+    {n:47, cat:'office', q:'In MS Office to Create a New Document', opts:['Ctrl + O','Ctrl + S','Ctrl + P','Ctrl + N'], c:3, exp:'Ctrl + N لإنشاء مستند جديد.'},
+    {n:48, cat:'office', q:'In MS Office to Open a Document', opts:['Ctrl + O','Ctrl + N','Ctrl + S','Ctrl + P'], c:0, exp:'Ctrl + O لفتح مستند موجود.'},
+    {n:49, cat:'office', q:'In MS Office to Save a Document', opts:['Ctrl + O','Ctrl + N','Ctrl + S','Ctrl + P'], c:2, exp:'Ctrl + S لحفظ المستند.'},
+    {n:50, cat:'office', q:'In MS Office to Print or Preview a Document', opts:['Ctrl + O','Ctrl + P','Ctrl + N','Ctrl + S'], c:1, exp:'Ctrl + P للطباعة أو المعاينة.'},
+    {n:51, cat:'office', q:'If you want to add text to the top of every page, which feature would you use?', opts:['View','Footer','Header','Backstage view'], c:2, exp:'الرأس (Header) يضيف نصًا إلى أعلى كل صفحة.'},
+    {n:52, cat:'office', q:'The process of removing unwanted part of an image is called...?', opts:['Hiding','Bordering','Cropping','Cutting'], c:2, exp:'قص الصورة (Cropping) يزيل الأجزاء غير المرغوب فيها.'},
+    {n:53, cat:'office', q:'We can insert a page number at...?', opts:['Header','Footer','Both A and B','None'], c:2, exp:'يمكن إضافة رقم الصفحة في الرأس أو التذييل.'},
+    {n:54, cat:'office', q:'To go to end of a document, press from keyboard', opts:['Num Lock','End','Tab','Home'], c:1, exp:'زر End يذهب إلى نهاية المستند.'},
+    {n:55, cat:'office', q:'To align right the selected text, the shortcut key is', opts:['Ctrl + R','Ctrl + L','Ctrl + J','Ctrl + U'], c:0, exp:'Ctrl + R لمحاذاة النص لليمين.'},
+    {n:56, cat:'office', q:'Which is Not a Font Style?', opts:['Bold','Italic','Regular','Superscript'], c:3, exp:'Superscript ليس نمط خط (Font Style) بل تأثير.'},
+    {n:57, cat:'office', q:'A feature of MS Office that saves a copy of the document in another location with another name', opts:['Save','Auto Save','Backup','Save As'], c:3, exp:'Save As يحفظ نسخة باسم أو موقع مختلف.'},
+    {n:58, cat:'office', q:'Which software was not part of Microsoft Office?', opts:['Paint','PowerPoint','Excel','MS Word'], c:0, exp:'Paint ليس جزءًا من Microsoft Office.'},
+    {n:59, cat:'office', q:'We can start MS Word by typing in the Run Dialog box.', opts:['word.exe','winword.exe','msword.exe','docx.exe'], c:1, exp:'winword.exe يبدأ تشغيل MS Word.'},
+    {n:60, cat:'office', q:'Which application uses sheets that comes with MS Office?', opts:['MS Word','MS PowerPoint','MS Excel','MS Access'], c:2, exp:'MS Excel يستخدم جداول البيانات (Sheets).'},
+    {n:61, cat:'office', q:'The options Portrait and Landscape comes under', opts:['Paper Size','Page Orientation','Page Margins','Page Rotation'], c:1, exp:'Portrait و Landscape هما خيارات اتجاه الصفحة (Page Orientation).'},
+    {n:62, cat:'office', q:'Which shortcut makes selected text Italic?', opts:['Ctrl + I','Ctrl + A','Ctrl + S','Ctrl + V'], c:0, exp:'Ctrl + I يجعل النص مائلاً (Italic).'},
+    {n:63, cat:'office', q:'We have copied an image, which shortcut will we used to paste it?', opts:['Ctrl + P','Ctrl + X','Ctrl + V','Ctrl + S'], c:2, exp:'Ctrl + V للصق.'},
+    {n:64, cat:'office', q:'What does Function Key F12 do in MS Office?', opts:["Open 'Save As' Dialog Box","Shows 'Open' Dialog Box","Display 'Save' Dialog Box","Opens 'Font' Dialog Box"], c:0, exp:'F12 يفتح نافذة Save As.'},
+    {n:65, cat:'office', q:'Which shortcut is used to select entire (all) text?', opts:['Ctrl + I','Ctrl + A','Ctrl + S','Ctrl + V'], c:1, exp:'Ctrl + A لتحديد كل النص.'},
+    {n:66, cat:'office', q:'What is the shortcut key to search for Spelling mistakes?', opts:['F2','F5','F7','F9'], c:2, exp:'F7 للتدقيق الإملائي.'},
+    {n:67, cat:'office', q:'Which one is a valid Font Style?', opts:['Superscript','Subscript','Regular','Strikethrough'], c:2, exp:'Regular هو نمط خط صحيح.'},
+    {n:68, cat:'office', q:'You can Protect Document by password using Encrypt with Password from File tab and select the...?', opts:['New','Info','Open','Save'], c:1, exp:'Encrypt with Password موجود في Info من قائمة File.'},
+    {n:69, cat:'office', q:'You can add custom lists in Excel from File >> Options >> and select...?', opts:['New','Save As','Advanced','Save'], c:2, exp:'الخيار Advanced يحتوي على إعدادات القوائم المخصصة.'},
+    {n:70, cat:'office', q:'You can add charts in MS Office by selecting...?', opts:['Home','Tab','Design','Insert'], c:3, exp:'الرسوم البيانية (Charts) تضاف من علامة Insert.'},
+    {n:71, cat:'office', q:'The best application in MS for making a presentation is', opts:['Word','Excel','Access','PowerPoint'], c:3, exp:'PowerPoint هو الأفضل لعمل العروض التقديمية.'},
+    {n:72, cat:'office', q:'The best application in MS to create a book is', opts:['Word','Excel','Access','PowerPoint'], c:0, exp:'Word هو الأفضل لإنشاء الكتب.'},
+    {n:73, cat:'office', q:'The best application in MS for calculation is', opts:['Word','Excel','Outlook','PowerPoint'], c:1, exp:'Excel هو الأفضل للحسابات.'},
+
+    // ========== NETWORKS (from 6+7+8) ==========
+    {n:74, cat:'network', q:'_______ connects network devices in a small area, such as a home, company, hospital, or school.', opts:['LAN','WAN','WLAN','VPN'], c:0, exp:'LAN (الشبكة المحلية) تربط الأجهزة في منطقة صغيرة مثل المنزل أو المستشفى.'},
+    {n:75, cat:'network', q:'_______ connects network devices in a wide area between different buildings, cities, or even countries.', opts:['LAN','Internet','VPN','WAN'], c:3, exp:'WAN (الشبكة الواسعة) تربط الأجهزة في مناطق واسعة بين المباني والمدن والدول.'},
+    {n:76, cat:'network', q:'_______ connects network devices using wireless technologies such as Wi-Fi.', opts:['LAN','Internet','WLAN','VPN'], c:2, exp:'WLAN (الشبكة المحلية اللاسلكية) تستخدم تقنيات لاسلكية مثل Wi-Fi.'},
+    {n:77, cat:'network', q:'An intranet is a network that allows use from outside the organization.', opts:['True','False'], c:1, exp:'الإنترانت هي شبكة داخلية ولا تسمح بالاستخدام من خارج المنظمة (خطأ).'},
+    {n:78, cat:'network', q:'Extranet is very similar to intranet, but it is implemented over a private WAN. It can operate between buildings, cities, and countries.', opts:['True','False'], c:0, exp:'الإكسترانت شبكة خاصة تربط بين فروع المنظمة عبر WAN (صحيح).'},
+    {n:79, cat:'network', q:'_______ is the system of global connections between all computer types around the world.', opts:['Intranet','Internet','Extranet','VPN'], c:1, exp:'الإنترنت (Internet) هو نظام الاتصالات العالمي بين جميع أنواع أجهزة الكمبيوتر.'},
+    {n:80, cat:'network', q:'_______ is a virtual connection over the Internet that can be used to communicate among private networks.', opts:['Intranet','Internet','Extranet','VPN'], c:3, exp:'VPN (الشبكة الخاصة الافتراضية) هي اتصال افتراضي عبر الإنترنت للتواصل بين الشبكات الخاصة.'},
+
+    // ========== INTERNET & SEARCH (from 6+7+8) ==========
+    {n:81, cat:'internet', q:'Which of the following isn\'t considered a web search engine?', opts:['Google.com','Bing.com','Instagram.com','Baidu.com'], c:2, exp:'Instagram هو موقع تواصل اجتماعي وليس محرك بحث.'},
+    {n:82, cat:'internet', q:'You can just type google in your browser and press _______ to be redirected to the Google server.', opts:['Ctrl+Shift','Ctrl+A','Ctrl+Enter','Ctrl+Z'], c:2, exp:'Ctrl + Enter يضيف .com ويرسل إلى جوجل.'},
+    {n:83, cat:'internet', q:'Even if you make a spelling error, Google can usually figure out what you mean and give you suggestions.', opts:['True','False'], c:0, exp:'جوجل يمكنه تصحيح الأخطاء الإملائية وتقديم اقتراحات (صحيح).'},
+    {n:84, cat:'internet', q:'If you want to search for an exact sentence "Egypt Ministry of Health" write in google search engine:', opts:['Egypt Ministry of Health','"Egypt Ministry of Health"','Egypt, Ministry, of, Health','Egypt+Ministry+of+Health'], c:1, exp:'استخدام علامات التنصيص (" ") للبحث عن جملة محددة.'},
+    {n:85, cat:'internet', q:'If you want to search for a phrase but want to allow some variations, you can use:', opts:['Egypt Ministry of Health','"Egypt Ministry of Health"','"Egypt Ministry of Health"','Egypt+Ministry+of+Health'], c:0, exp:'للبحث مع السماح ببعض الاختلافات، اكتب العبارة بدون علامات تنصيص.'},
+    {n:86, cat:'internet', q:'If you wish to search for "MOHP" word but you want to exclude "news" write:', opts:['MOHP + news','"MOHP news"','MOHP*news','MOHP - news'], c:3, exp:'استخدام علامة الطرح (-) لاستبعاد كلمة من البحث.'},
+    {n:87, cat:'internet', q:'If you need to search for "MOHP" word on a "cnn.com" website:', opts:['MOHP: cnn.com','MOHP, cnn.com','MOHP* cnn.com','MOHP> cnn.com'], c:0, exp:'استخدام site: للبحث في موقع محدد (MOHP site:cnn.com).'},
+    {n:88, cat:'internet', q:'Google engine allows you to search for a specific image by uploading your image or pasting the image\'s URL.', opts:['True','False'], c:0, exp:'جوجل يتيح البحث عن الصور عن طريق رفع الصورة أو لصق رابطها (صحيح).'},
+    {n:89, cat:'internet', q:'To get your search results in a specific file format like PDF write:', opts:['MOHP- PDF','MOHP,PDF','MOHP:PDF','MOHP*PDF'], c:0, exp:'استخدام filetype: للبحث عن ملفات بصيغة محددة (MOHP filetype:PDF).'},
+    {n:90, cat:'internet', q:'Google cannot solve your mathematical equation like (V225+33)/12.', opts:['True','False'], c:1, exp:'جوجل يمكنه حل المعادلات الرياضية (خطأ - يمكنه حلها).'},
+
+    // ========== SOCIAL MEDIA (from 6+7+8) ==========
+    {n:91, cat:'social', q:'_______ is a microblogging service through which users can broadcast short messages, or "tweets."', opts:['Instagram','Twitter','Facebook','Google+'], c:1, exp:'تويتر (Twitter) هو خدمة تدوين مصغر لنشر رسائل قصيرة (تغريدات).'},
+    {n:92, cat:'social', q:'_______ is the Internet-based social network of Google, replaced groups with "Circles" and chats with "Hangouts".', opts:['Instagram','Twitter','Facebook','Google+'], c:3, exp:'Google+ هو شبكة التواصل الاجتماعي من جوجل.'},
+    {n:93, cat:'social', q:'_______ is a social network developed specifically for the business and employment community.', opts:['Instagram','Twitter','Facebook','LinkedIn'], c:3, exp:'LinkedIn هو شبكة اجتماعية للمجتمع التجاري والتوظيف.'},
+    {n:94, cat:'social', q:'_______ is a free online encyclopedia, created and edited by volunteers around the world.', opts:['Google','Wikipedia','Instagram','Twitter'], c:1, exp:'ويكيبيديا (Wikipedia) هي موسوعة حرة عبر الإنترنت.'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = currentCategory === 'all' ? QUESTIONS : QUESTIONS.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = QUESTIONS.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...QUESTIONS] : QUESTIONS.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        hardware: '🖥️ Hardware',
+        windows: '🪟 Windows 10',
+        office: '📄 MS Office',
+        network: '🌐 Networks',
+        internet: '🔍 Internet & Search',
+        social: '📱 Social Media'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const catLabel = catNames[q.cat] || q.cat;
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        // Handle True/False questions (with 2 options)
+        let optsHtml = '';
+        if (q.opts.length === 2 && q.opts[0] === 'True' && q.opts[1] === 'False') {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="0" onclick="selectAnswer(${idx}, 0)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="1" onclick="selectAnswer(${idx}, 1)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Computer Skills!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${q.opts[q.c]}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Occupational Health & Safety Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Occupational Health & Safety Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>🛡️ A.D.Gad | Occupational Health & Safety Final</h1>
+        <p class="sub">📚 Final Exam MCQ Bank — Dr. Mayada Al-Mutawalli</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="vaccines">💉 Vaccines</button>
+            <button data-cat="hazards">⚠️ Hazards</button>
+            <button data-cat="mechanical">⚙️ Mechanical</button>
+            <button data-cat="physical">🔊 Physical</button>
+            <button data-cat="chemical">🧪 Chemical</button>
+            <button data-cat="biological">🦠 Biological</button>
+            <button data-cat="ergonomic">🪑 Ergonomic</button>
+            <button data-cat="psychosocial">🧠 Psychosocial</button>
+            <button data-cat="control">🛠️ Control</button>
+            <button data-cat="tf">✅ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from Occupational Health & Safety Final file
+const QUESTIONS = [
+    // Vaccines
+    {n:1, cat:'vaccines', q:'Which of the following vaccine should be taken by the medical staff?', opts:['HBV vaccine','HCV vaccine','HIV vaccine','HAV vaccine'], c:0, exp:'لقاح التهاب الكبد B (HBV) يجب أن يأخذه الطاقم الطبي.'},
+    {n:17, cat:'vaccines', q:'Which of the following viruses have vaccine?', opts:['HBV vaccine','HCV vaccine','HPV vaccine','1+3'], c:3, exp:'لقاحات متوفرة لفيروسات HBV و HPV.'},
+    {n:50, cat:'vaccines', q:'Which vaccine must be taken after animal bites?', opts:['Anti-rabies vaccine','HPV vaccine','HBV vaccine','HAV vaccine'], c:0, exp:'لقاح داء الكلب (Anti-rabies) يجب أخذه بعد عضات الحيوانات.'},
+    {n:51, cat:'vaccines', q:'Which of the following viruses have vaccine?', opts:['HBV','HCV','HAV','HIV'], c:0, exp:'لقاح متوفر لفيروس HBV (التهاب الكبد B).'},
+    {n:74, cat:'vaccines', q:'Which of the following viruses have vaccine?', opts:['HBV','HCV','HAV','HIV'], c:0, exp:'لقاح متوفر لفيروس HBV (التهاب الكبد B).'},
+    
+    // Occupational Accidents
+    {n:2, cat:'hazards', q:'As regard occupational accidents, How many fatalities per year?', opts:['5 million per year','4 million per year','2.3 million per year','10 million per year'], c:2, exp:'حوالي 2.3 مليون حالة وفاة سنويًا بسبب الحوادث المهنية.'},
+    {n:3, cat:'hazards', q:'Which of the following is percentage of hands and fingers injuries during work?', opts:['32%','100%','10%','5%'], c:0, exp:'32% من إصابات العمل تكون في اليدين والأصابع.'},
+    {n:4, cat:'hazards', q:'What is the percentage of hearing loss during work?', opts:['100%','22%','5%','44%'], c:1, exp:'22% من فقدان السمع يحدث بسبب العمل.'},
+    {n:18, cat:'hazards', q:'As regard occupational accidents, How many injuries per year?', opts:['373 million per year','335 million per year','337 million per year','350 million per year'], c:0, exp:'حوالي 373 مليون إصابة سنويًا بسبب الحوادث المهنية.'},
+    {n:19, cat:'hazards', q:'Which of the following is percentage of eyes injuries during work?', opts:['32%','6%','10%','5%'], c:1, exp:'6% من إصابات العمل تكون في العينين.'},
+    {n:20, cat:'hazards', q:'What is the percentage of respiratory disease during work?', opts:['21%','22%','33%','44%'], c:0, exp:'21% من أمراض الجهاز التنفسي تحدث بسبب العمل.'},
+    {n:31, cat:'hazards', q:'As regard work related disease, How many per year?', opts:['373 million per year','160 million per year','337 million per year','180 million per year'], c:1, exp:'حوالي 160 مليون حالة مرضية مرتبطة بالعمل سنويًا.'},
+    {n:32, cat:'hazards', q:'Which of the following is percentage of foot injuries during work?', opts:['40%','7%','10%','12%'], c:1, exp:'7% من إصابات العمل تكون في القدمين.'},
+    {n:33, cat:'hazards', q:'What is the percentage of leg injuries during work?', opts:['30%','15%','45%','16%'], c:0, exp:'30% من إصابات العمل تكون في الساقين.'},
+    {n:38, cat:'hazards', q:'Fatalities are considered:', opts:['2.3 million','3.2 million','5 million','7 million'], c:0, exp:'الوفيات المهنية حوالي 2.3 مليون سنويًا.'},
+    {n:39, cat:'hazards', q:'Which is correct for skin related diseases in occupational hazards?', opts:['33%','34%','35%','36%'], c:0, exp:'33% من الأمراض الجلدية مرتبطة بالعمل.'},
+    {n:65, cat:'hazards', q:'As regard work related disease, How many per year?', opts:['170 million per year','160 million per year','120 million per year','130 million per year'], c:1, exp:'حوالي 160 مليون حالة مرضية مرتبطة بالعمل سنويًا.'},
+    {n:66, cat:'hazards', q:'Which of the following is percentage of arms injuries during work?', opts:['40%','7%','10%','12%'], c:2, exp:'10% من إصابات العمل تكون في الذراعين.'},
+    {n:67, cat:'hazards', q:'What is the percentage of leg injuries during work?', opts:['30%','15%','45%','16%'], c:0, exp:'30% من إصابات العمل تكون في الساقين.'},
+    
+    // Types of Hazards
+    {n:5, cat:'hazards', q:'Which is correct for types of occupational hazards?', opts:['Mechanical hazards','Physical hazards','Biological hazards','All the above'], c:3, exp:'أنواع المخاطر المهنية تشمل الميكانيكية، الفيزيائية، والبيولوجية.'},
+    {n:21, cat:'biological', q:'Which is correct for biological hazards sources?', opts:['Bacteria','Viruses','Radiation','1+2'], c:3, exp:'مصادر المخاطر البيولوجية: البكتيريا والفيروسات.'},
+    {n:22, cat:'psychosocial', q:'Which of the following is correct for psycho-social hazards?', opts:['Caused by off-job problems','Quality of work','May cause suicide','All the above'], c:3, exp:'المخاطر النفسية الاجتماعية: مشاكل خارج العمل، جودة العمل، وقد تؤدي إلى الانتحار.'},
+    {n:29, cat:'ergonomic', q:'Sitting, Standing and lifting considered which type of occupational hazards?', opts:['Mechanical','Ergonomic','Chemical','Physical'], c:1, exp:'الجلوس والوقوف والرفع هي مخاطر إرجونومية.'},
+    {n:30, cat:'mechanical', q:'As regard badly designed machine, which type of hazards caused by it?', opts:['Chemical','Mechanical','Psychosocial','Physical'], c:1, exp:'الآلات سيئة التصميم تسبب مخاطر ميكانيكية.'},
+    {n:34, cat:'chemical', q:'Which is correct for types of vapors and fumes?', opts:['Chemical hazards','Physical hazards','Biological hazards','Ergonomic hazards'], c:0, exp:'الأبخرة والغبار هي مخاطر كيميائية.'},
+    {n:35, cat:'hazards', q:'_______ defined as placing and maintenance of works in occupational environments adapted to physical and mental needs.', opts:['Occupational health and safety','Occupational hazards','Occupational related disease','Occupational injuries'], c:0, exp:'الصحة والسلامة المهنية هي تكييف بيئة العمل مع الاحتياجات الجسدية والنفسية.'},
+    {n:36, cat:'ergonomic', q:'As regard, RSI, MSD consider:', opts:['Chemical hazards','Biological hazards','Ergonomic hazards','Physical hazards'], c:2, exp:'RSI و MSD هي مخاطر إرجونومية.'},
+    {n:37, cat:'psychosocial', q:'Suicidal tendency considers which types of hazards?', opts:['Psychosocial','Physical','Chemical','Mechanical'], c:0, exp:'النزعة الانتحارية تعتبر من المخاطر النفسية الاجتماعية.'},
+    {n:40, cat:'biological', q:'Which of the following may be transmitted by blood transfusion?', opts:['HIV','HPV','HBV','1+3'], c:3, exp:'فيروسات HIV و HBV يمكن أن تنتقل عن طريق نقل الدم.'},
+    {n:41, cat:'biological', q:'Which of the following may be transmitted by body discharge?', opts:['HCV, HPV','HBV, HIV','HAV, HCV','HAV, HCV'], c:1, exp:'فيروسات HBV و HIV يمكن أن تنتقل عن طريق الإفرازات الجسدية.'},
+    {n:42, cat:'biological', q:'Animal bites considered which type of occupational hazards?', opts:['Biological','Chemical','Mechanical','Radiological'], c:0, exp:'عضات الحيوانات تعتبر مخاطر بيولوجية.'},
+    {n:43, cat:'physical', q:'Which is correct physical hazards?', opts:['Noise, vibration','Machine','Bacteria','Improper sitting'], c:0, exp:'المخاطر الفيزيائية تشمل الضوضاء والاهتزاز.'},
+    {n:46, cat:'biological', q:'What are the major routes of entry of viruses and bacteria?', opts:['Respiratory','Contact','Contaminated objects','All the above'], c:3, exp:'طرق دخول الفيروسات والبكتيريا: الجهاز التنفسي، التلامس، والأشياء الملوثة.'},
+    {n:57, cat:'ergonomic', q:'What are the effects of ergonomic hazards?', opts:['Back problems','RSI, MSD','Fatigue','All the above'], c:3, exp:'تأثيرات المخاطر الإرجونومية: مشاكل الظهر، RSI، MSD، والإرهاق.'},
+    {n:63, cat:'ergonomic', q:'Sitting, Standing and lifting considered which type of occupational hazards?', opts:['Biological','Ergonomic','Chemical','Social'], c:1, exp:'الجلوس والوقوف والرفع هي مخاطر إرجونومية.'},
+    {n:64, cat:'mechanical', q:'As regard badly designed machine, which type of hazards caused by it?', opts:['Biological','Mechanical','Chemical','Physical'], c:1, exp:'الآلات سيئة التصميم تسبب مخاطر ميكانيكية.'},
+    {n:68, cat:'chemical', q:'Which is correct for types of vapors and fumes?', opts:['Chemical hazards','Physical hazards','Biological hazards','Ergonomic hazards'], c:0, exp:'الأبخرة والغبار هي مخاطر كيميائية.'},
+    {n:73, cat:'physical', q:'Ultraviolet rays were considered which type of hazard?', opts:['Chemical','Mechanical','Biological','Physical'], c:3, exp:'الأشعة فوق البنفسجية تعتبر من المخاطر الفيزيائية.'},
+    
+    // Mechanical Hazards
+    {n:6, cat:'mechanical', q:'Which of the following is correct for mechanical hazards?', opts:['Caused by machines','Due to floors','Poor housing','All the above'], c:3, exp:'المخاطر الميكانيكية تشمل الآلات والأرضيات والسكن الرديء.'},
+    {n:7, cat:'mechanical', q:'What are the effects of mechanical hazards?', opts:['Death','Bruises','Cuts, wounds, fingers loss','All the above'], c:3, exp:'تأثيرات المخاطر الميكانيكية: الوفاة، الكدمات، الجروح، وفقدان الأصابع.'},
+    {n:8, cat:'mechanical', q:'When is the workplace more productive?', opts:['Untidy neat workplace','Good machine guarding and good housing','Poor housing','Poor machine guarding'], c:1, exp:'مكان العمل يكون أكثر إنتاجية مع حماية جيدة للآلات وسكن جيد.'},
+    {n:15, cat:'mechanical', q:'When is the workplace more productive?', opts:['Tidy neat workplace','Untidy','Poor housing','Poor machine guarding'], c:0, exp:'مكان العمل المرتب والنظيف يكون أكثر إنتاجية.'},
+    {n:24, cat:'mechanical', q:'When is the workplace nonproductive?', opts:['Tidy neat workplace','Untidy','Good housing','Good machine guarding'], c:1, exp:'مكان العمل غير المنتج يكون غير مرتب.'},
+    
+    // Physical Hazards
+    {n:9, cat:'physical', q:'Which is correct for physical hazards?', opts:['Noise, vibration','The light','Temperature','All of the above'], c:3, exp:'المخاطر الفيزيائية تشمل الضوضاء، الاهتزاز، الضوء، ودرجة الحرارة.'},
+    {n:10, cat:'physical', q:'Which of the following is correct for major hazards for electricity?', opts:['Shock','Death','1+2','First degree burn'], c:2, exp:'مخاطر الكهرباء الرئيسية: الصدمة والموت.'},
+    {n:25, cat:'physical', q:'Which is correct for physical hazards?', opts:['Noise, vibration','The light','Temperature','All of the above'], c:3, exp:'المخاطر الفيزيائية تشمل الضوضاء، الاهتزاز، الضوء، ودرجة الحرارة.'},
+    {n:26, cat:'physical', q:'Which of the following is correct for major hazards for electricity?', opts:['First degree burn','Death','Second degree burn','Third degree burn'], c:1, exp:'الموت هو أحد المخاطر الرئيسية للكهرباء.'},
+    {n:27, cat:'physical', q:'Which of the following is correct for physical hazards effects?', opts:['Light','Radiation','Temperature','All the above'], c:3, exp:'تأثيرات المخاطر الفيزيائية تشمل الضوء، الإشعاع، ودرجة الحرارة.'},
+    
+    // Chemical Hazards
+    {n:11, cat:'chemical', q:'Which of the following is correct for chemical hazards effects?', opts:['Skin irritation','Cancer','Genetic disorders','All the above'], c:3, exp:'تأثيرات المخاطر الكيميائية: تهيج الجلد، السرطان، والاضطرابات الوراثية.'},
+    {n:72, cat:'chemical', q:'Which is correct for types of vapors and fumes?', opts:['Chemical hazards','Physical hazards','Biological hazards','Ergonomic hazards'], c:0, exp:'الأبخرة والغبار هي مخاطر كيميائية.'},
+    
+    // Ergonomic Hazards
+    {n:12, cat:'ergonomic', q:'Repetitive Strain Injuries (RSI) and Musculoskeletal Disorders (MSD) are called what type of occupational hazards?', opts:['Social hazards','Mechanical','Chemical','Ergonomic'], c:3, exp:'إصابات الإجهاد المتكرر (RSI) واضطرابات الجهاز العضلي الهيكلي (MSD) هي مخاطر إرجونومية.'},
+    {n:14, cat:'ergonomic', q:'As regard ergonomic hazards, which of the following are the sources of them?', opts:['Badly designed machine','Improper seating','Proper seating','1+2'], c:3, exp:'مصادر المخاطر الإرجونومية: الآلات سيئة التصميم والمقاعد غير المناسبة.'},
+    {n:16, cat:'ergonomic', q:'As regard ergonomic hazards, which of the following are the sources of them?', opts:['Badly designed machine','Tidy workplace','Proper seating','Good housing'], c:0, exp:'الآلات سيئة التصميم هي أحد مصادر المخاطر الإرجونومية.'},
+    {n:23, cat:'ergonomic', q:'What are the effects of ergonomic hazards?', opts:['Back problems','RSI, MSD','Fatigue','All the above'], c:3, exp:'تأثيرات المخاطر الإرجونومية: مشاكل الظهر، RSI، MSD، والإرهاق.'},
+    {n:28, cat:'ergonomic', q:'Repetitive Strain Injuries (RSI) are called what type of occupational hazards?', opts:['Social hazards','Mechanical','Chemical','Ergonomic'], c:3, exp:'إصابات الإجهاد المتكرر (RSI) هي مخاطر إرجونومية.'},
+    
+    // Psychosocial Hazards
+    {n:13, cat:'psychosocial', q:'Stress is considered which type of occupational hazards?', opts:['Mechanical','Psychosocial','Chemical','Physical'], c:1, exp:'الإجهاد (Stress) يعتبر من المخاطر النفسية الاجتماعية.'},
+    
+    // Biological Hazards & Control
+    {n:44, cat:'biological', q:'Which of the following is the most important step after animal biting?', opts:['Vaccines','Sterilization','Wash under running water for 10-20 minutes with soap','Antibiotics'], c:2, exp:'أهم خطوة بعد عضة الحيوان هي غسل الجرح بالماء الجاري والصابون لمدة 10-20 دقيقة.'},
+    {n:45, cat:'biological', q:'Which of the following is correct for insect bites?', opts:['Biological hazards','Chemical hazards','Need vaccines','Not relevant'], c:0, exp:'لسعات الحشرات تعتبر مخاطر بيولوجية.'},
+    {n:47, cat:'control', q:'What are the types of control of biological hazards?', opts:['Administrative control','Administrative and engineering control','Engineering control','Biological control'], c:1, exp:'أنواع التحكم في المخاطر البيولوجية: إداري وهندسي.'},
+    {n:48, cat:'control', q:'How to manage biological hazards?', opts:['Administrative control','Engineering control','Personal Protective Equipment (PPE)','All the above'], c:3, exp:'إدارة المخاطر البيولوجية تشمل: التحكم الإداري، الهندسي، ومعدات الوقاية الشخصية.'},
+    {n:49, cat:'control', q:'What is the first line of defence for protecting workers from biological hazards?', opts:['Administrative','Engineering control','PPE','Isolation'], c:1, exp:'الخط الأول للدفاع هو التحكم الهندسي (Engineering control).'},
+    {n:52, cat:'control', q:'As regards engineering control which is correct?', opts:['Protective cloths','Education','Negative pressure installation','Bad disposal of equipments'], c:2, exp:'تركيب الضغط السلبي (Negative pressure installation) هو تحكم هندسي.'},
+    {n:53, cat:'control', q:'Negative pressure installation and separate ventilation considers?', opts:['Administrative control','Engineering control','PPE','Biological control'], c:1, exp:'تركيب الضغط السلبي والتهوية المنفصلة يعتبران تحكمًا هندسيًا.'},
+    {n:54, cat:'control', q:'Biological hazards materials should be:', opts:['Proper storage','Proper transport','Proper disposal','All the above'], c:3, exp:'يجب أن تكون المواد الخطرة بيولوجيًا ذات تخزين ونقل وتخلص مناسب.'},
+    {n:55, cat:'control', q:'Regular cleaning of workplace considers:', opts:['Administrative control','Engineering control','PPE','Irrelevant'], c:0, exp:'التنظيف المنتظم لمكان العمل يعتبر تحكمًا إداريًا.'},
+    {n:56, cat:'control', q:'Which of the following is correct for surgical sterilization?', opts:['Prevent chemical hazards','Prevent mechanical hazards','Prevent social hazards','Prevent biological hazards'], c:3, exp:'التعقيم الجراحي يمنع المخاطر البيولوجية.'},
+    {n:58, cat:'control', q:'Written hazards control plan for biological hazards include?', opts:['Identify','Control','Manage biological hazards in the workplace','All the above'], c:3, exp:'خطة التحكم في المخاطر تشمل: تحديد، تحكم، وإدارة المخاطر البيولوجية.'},
+    {n:59, cat:'control', q:'Which is correct for surgical sterilization?', opts:['Sterilization of reusable instruments','Use new disposable instruments','Everything must be sterilized','All of the above'], c:3, exp:'التعقيم الجراحي: تعقيم الأدوات القابلة لإعادة الاستخدام واستخدام أدوات جديدة.'},
+    {n:60, cat:'control', q:'Hand washing in biological control:', opts:['Mandatory in surgical theater','Not important','Irrelevant','Not appropriate'], c:0, exp:'غسل اليدين إلزامي في غرف العمليات الجراحية.'},
+    {n:61, cat:'control', q:'Which of the following is correct for Personal Protective Equipment?', opts:['Eye glasses, gloves','Mask, over shoes','1+2','Bed cover'], c:2, exp:'معدات الوقاية الشخصية تشمل: نظارات، قفازات، أقنعة، وأحذية واقية.'},
+    {n:62, cat:'control', q:'N95 is...', opts:['Surgical mask with higher level respirators','Non-protective mask','Non-filtering mask','Not used commonly'], c:0, exp:'N95 هو قناع جراحي بمستوى عالٍ من الترشيح.'},
+    
+    // True/False
+    {n:76, cat:'tf', q:'Re-usable protective equipments should be cleaned and sterilized.', ans:true, exp:'يجب تنظيف وتعقيم معدات الوقاية القابلة لإعادة الاستخدام (صحيح).'},
+    {n:77, cat:'tf', q:'Mask N95 has high filter properties.', ans:true, exp:'قناع N95 له خصائص ترشيح عالية (صحيح).'},
+    {n:78, cat:'tf', q:'Good housing causes chemical hazards.', ans:false, exp:'السكن الجيد لا يسبب مخاطر كيميائية (خطأ).'},
+    {n:79, cat:'tf', q:'Good housing causes mechanical hazards prevention.', ans:true, exp:'السكن الجيد يمنع المخاطر الميكانيكية (صحيح).'},
+    {n:80, cat:'tf', q:'Neat and tidy workplace is also more productive place.', ans:true, exp:'مكان العمل المرتب والنظيف هو أكثر إنتاجية (صحيح).'},
+    {n:81, cat:'tf', q:'Standing on concrete floor causes fatigue.', ans:true, exp:'الوقوف على أرضية خرسانية يسبب الإرهاق (صحيح).'},
+    {n:82, cat:'tf', q:'The worker should be provided with matting.', ans:true, exp:'يجب توفير حصائر للعمال (صحيح).'},
+    {n:83, cat:'tf', q:'Stress at work cannot affect family.', ans:false, exp:'الإجهاد في العمل يمكن أن يؤثر على الأسرة (خطأ).'},
+    {n:84, cat:'tf', q:'Lifting heavy objects causes ergonomic hazards.', ans:true, exp:'رفع الأشياء الثقيلة يسبب مخاطر إرجونومية (صحيح).'},
+    {n:85, cat:'tf', q:'HCV can be transmitted to baby via lactation.', ans:false, exp:'فيروس HCV لا ينتقل للطفل عبر الرضاعة (خطأ).'},
+    {n:86, cat:'tf', q:'Viruses are considered biological hazards.', ans:true, exp:'الفيروسات تعتبر مخاطر بيولوجية (صحيح).'},
+    {n:87, cat:'tf', q:'HIV can be transmitted via body fluid and contact.', ans:true, exp:'فيروس HIV يمكن أن ينتقل عبر سوائل الجسم والتلامس (صحيح).'},
+    {n:88, cat:'tf', q:'Sterilization is important.', ans:true, exp:'التعقيم مهم (صحيح).'},
+    {n:89, cat:'tf', q:'Joint disease is 10%.', ans:false, exp:'أمراض المفاصل ليست 10% (خطأ).'},
+    {n:90, cat:'tf', q:'Temperature can cause stroke.', ans:true, exp:'درجة الحرارة يمكن أن تسبب ضربة شمس (صحيح).'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') {
+            filtered = QUESTIONS;
+        } else if (currentCategory === 'tf') {
+            filtered = QUESTIONS.filter(q => q.cat === 'tf');
+        } else {
+            filtered = QUESTIONS.filter(q => q.cat === currentCategory);
+        }
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') {
+        currentQuestions = [...QUESTIONS];
+    } else if (currentCategory === 'tf') {
+        currentQuestions = QUESTIONS.filter(q => q.cat === 'tf');
+    } else {
+        currentQuestions = QUESTIONS.filter(q => q.cat === currentCategory);
+    }
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        vaccines: '💉 Vaccines',
+        hazards: '⚠️ General Hazards',
+        mechanical: '⚙️ Mechanical Hazards',
+        physical: '🔊 Physical Hazards',
+        chemical: '🧪 Chemical Hazards',
+        biological: '🦠 Biological Hazards',
+        ergonomic: '🪑 Ergonomic Hazards',
+        psychosocial: '🧠 Psychosocial Hazards',
+        control: '🛠️ Control Measures',
+        tf: '✅ True / False'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const isTF = q.ans !== undefined;
+        const catLabel = isTF ? '✅ True / False' : (catNames[q.cat] || q.cat);
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="true" onclick="selectTFAnswer(${idx}, true)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="false" onclick="selectTFAnswer(${idx}, false)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectMCQAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectMCQAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${q.opts[q.c]}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function selectTFAnswer(qIdx, selected) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = selected === q.ans;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        const optVal = opt.dataset.opt === 'true' ? true : false;
+        if (optVal === q.ans) {
+            opt.classList.add('correct');
+        } else if (optVal === selected && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const correctText = q.ans ? 'True' : 'False';
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${correctText}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function showFeedback(qIdx, isCorrect, message) {
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${message}` : `❌ Wrong! ${message}`;
+}
+
+function updateCounts(isCorrect) {
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Occupational Health!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            const isTF = q.ans !== undefined;
+            const correctAns = isTF ? (q.ans ? 'True' : 'False') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctAns}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>

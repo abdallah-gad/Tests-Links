@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | General Chemistry Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Chemistry mid-trem</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>⚗️ A.D.Gad | Chemistry mid-trem</h1>
+        <p class="sub">📚 Mid Term MCQ Bank</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="matter">🧪 Matter</button>
+            <button data-cat="atom">⚛️ Atoms</button>
+            <button data-cat="bonding">🔗 Bonding</button>
+            <button data-cat="reactions">⚗️ Reactions</button>
+            <button data-cat="equations">📝 Equations</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from General Chemistry file
+const QUESTIONS = [
+    // Matter & Properties
+    {n:1, cat:'matter', q:'Matter is anything that has:', opts:['Color','Mass and occupies space','Shape only','Volume only'], c:1, exp:'المادة هي أي شيء له كتلة ويشغل حيزًا (Mass and occupies space).'},
+    {n:2, cat:'matter', q:'Which state of matter has fixed shape and volume?', opts:['Liquid','Gas','Solid','Plasma'], c:2, exp:'المواد الصلبة (Solids) لها شكل وحجم ثابتان.'},
+    {n:3, cat:'matter', q:'Which mixture has the same composition everywhere?', opts:['Heterogeneous mixture','Homogeneous mixture','Suspension','Colloid'], c:1, exp:'المخاليط المتجانسة (Homogeneous) لها تركيب موحد في كل مكان.'},
+    {n:4, cat:'matter', q:'Which of the following is a heterogeneous mixture?', opts:['Salt water','Air','Sand and water','Sugar solution'], c:2, exp:'الرمل والماء (Sand and water) خليط غير متجانس.'},
+    {n:5, cat:'matter', q:'A pure substance can be:', opts:['Element or compound','Mixture only','Gas only','Liquid only'], c:0, exp:'المادة النقية يمكن أن تكون عنصرًا أو مركبًا.'},
+    {n:6, cat:'matter', q:'Which of the following is an element?', opts:['H2O','CO2','O2','NaCl'], c:2, exp:'O2 هو عنصر (أكسجين).'},
+    {n:7, cat:'matter', q:'Water is a:', opts:['Mixture','Compound','Element','Solution'], c:1, exp:'الماء (H2O) هو مركب.'},
+    {n:8, cat:'matter', q:'The law stating that matter is not created or destroyed is:', opts:['Law of gravity','Law of conservation of mass','Law of energy','Law of motion'], c:1, exp:'قانون حفظ الكتلة (Law of conservation of mass) ينص على أن المادة لا تُخلق ولا تُفنى.'},
+    
+    // Atoms & Subatomic Particles
+    {n:9, cat:'atom', q:'The basic unit of an element is:', opts:['Molecule','Atom','Compound','Ion'], c:1, exp:'الذرة (Atom) هي الوحدة الأساسية للعنصر.'},
+    {n:10, cat:'atom', q:'Which subatomic particle has a negative charge?', opts:['Proton','Neutron','Electron','Nucleus'], c:2, exp:'الإلكترون (Electron) له شحنة سالبة.'},
+    {n:11, cat:'atom', q:'Which particles are located in the nucleus?', opts:['Electrons only','Protons and neutrons','Electrons and protons','Neutrons and electrons'], c:1, exp:'البروتونات والنيوترونات (Protons and neutrons) توجد في النواة.'},
+    {n:12, cat:'atom', q:'The atomic number represents the number of:', opts:['Neutrons','Electrons','Protons','Orbitals'], c:2, exp:'العدد الذري (Atomic number) يمثل عدد البروتونات.'},
+    {n:13, cat:'atom', q:'The mass number equals:', opts:['Protons + electrons','Protons + neutrons','Neutrons + electrons','Protons only'], c:1, exp:'العدد الكتلي (Mass number) = بروتونات + نيوترونات.'},
+    {n:14, cat:'atom', q:'Isotopes are atoms that have:', opts:['Same protons and neutrons','Same neutrons only','Same protons but different neutrons','Different protons'], c:2, exp:'النظائر (Isotopes) لها نفس عدد البروتونات ولكن عدد نيوترونات مختلف.'},
+    {n:15, cat:'atom', q:'Which carbon isotope is radioactive?', opts:['C-12','C-13','C-14','C-16'], c:2, exp:'C-14 هو نظير الكربون المشع.'},
+    {n:16, cat:'atom', q:'Electrons move around the nucleus in regions called:', opts:['Nuclei','Orbitals','Bonds','Ions'], c:1, exp:'الإلكترونات تتحرك في مدارات (Orbitals) حول النواة.'},
+    {n:17, cat:'atom', q:'Electrons in the outer shell are called:', opts:['Core electrons','Valence electrons','Inner electrons','Atomic electrons'], c:1, exp:'إلكترونات التكافؤ (Valence electrons) هي إلكترونات الغلاف الخارجي.'},
+    {n:18, cat:'atom', q:'Protons determine the identity of an element.', opts:['True','False'], c:0, exp:'البروتونات تحدد هوية العنصر (صحيح).'},
+    {n:19, cat:'atom', q:'Electrons determine chemical behavior.', opts:['True','False'], c:0, exp:'الإلكترونات تحدد السلوك الكيميائي (صحيح).'},
+    {n:20, cat:'atom', q:'Isotopes have the same number of neutrons.', opts:['True','False'], c:1, exp:'النظائر لها نفس عدد البروتونات وليس النيوترونات (خطأ).'},
+    
+    // Chemical Bonding
+    {n:21, cat:'bonding', q:'Atoms form bonds mainly to:', opts:['Increase mass','Become unstable','Achieve lower energy and stability','Gain neutrons'], c:2, exp:'الذرات تشكل روابط للوصول إلى حالة طاقة منخفضة واستقرار.'},
+    {n:22, cat:'bonding', q:'According to the octet rule, atoms tend to have:', opts:['2 electrons','4 electrons','8 electrons in outer shell','10 electrons'], c:2, exp:'قاعدة الثمانية (Octet rule): الذرات تميل لوجود 8 إلكترونات في الغلاف الخارجي.'},
+    {n:23, cat:'bonding', q:'Which atoms follow the duet rule?', opts:['Sodium','Chlorine','Hydrogen','Calcium'], c:2, exp:'الهيدروجين (Hydrogen) يتبع قاعدة الثنائي (Duet rule).'},
+    {n:24, cat:'bonding', q:'Ionic bonds occur between:', opts:['Two metals','Two non-metals','Metal and non-metal','Noble gases'], c:2, exp:'الرابطة الأيونية تحدث بين فلز ولا فلز.'},
+    {n:25, cat:'bonding', q:'In ionic bonding, metals usually:', opts:['Gain electrons','Lose electrons','Share electrons','Gain neutrons'], c:1, exp:'الفلزات تفقد إلكترونات في الرابطة الأيونية.'},
+    {n:26, cat:'bonding', q:'A covalent bond is formed by:', opts:['Transfer of electrons','Sharing electrons','Loss of neutrons','Nuclear attraction'], c:1, exp:'الرابطة التساهمية تتكون بمشاركة الإلكترونات.'},
+    {n:27, cat:'bonding', q:'Which bond is the strongest?', opts:['Single bond','Double bond','Triple bond','Ionic bond'], c:2, exp:'الرابطة الثلاثية (Triple bond) هي الأقوى.'},
+    {n:28, cat:'bonding', q:'A nonpolar covalent bond occurs when:', opts:['Electrons are transferred','Electrons are shared equally','Electrons are shared unequally','Electrons are lost'], c:1, exp:'الرابطة التساهمية غير القطبية تحدث عند مشاركة متساوية للإلكترونات.'},
+    {n:29, cat:'bonding', q:'Water (H2O) is an example of:', opts:['Nonpolar molecule','Polar covalent molecule','Ionic compound','Metallic compound'], c:1, exp:'الماء (H2O) جزيء تساهمي قطبي (Polar covalent).'},
+    {n:30, cat:'bonding', q:'Metallic bonding occurs between:', opts:['Non-metals','Metals','Noble gases','Molecules'], c:1, exp:'الرابطة الفلزية تحدث بين الفلزات.'},
+    {n:31, cat:'bonding', q:'Metals conduct electricity because:', opts:['They contain ions','They contain free moving electrons','They have neutrons','They have strong nuclei'], c:1, exp:'الفلزات توصل الكهرباء لوجود إلكترونات حرة.'},
+    {n:32, cat:'bonding', q:'Ionic bonds occur between metals and non-metals.', opts:['True','False'], c:0, exp:'الروابط الأيونية تحدث بين الفلزات واللافلزات (صحيح).'},
+    {n:33, cat:'bonding', q:'Covalent bonds involve electron sharing.', opts:['True','False'], c:0, exp:'الروابط التساهمية تشمل مشاركة الإلكترونات (صحيح).'},
+    {n:34, cat:'bonding', q:'Metals gain electrons during ionic bonding.', opts:['True','False'], c:1, exp:'الفلزات تفقد إلكترونات وليس تكتسبها في الرابطة الأيونية (خطأ).'},
+    {n:35, cat:'bonding', q:'Noble gases follow the octet rule naturally.', opts:['True','False'], c:0, exp:'الغازات النبيلة تتبع قاعدة الثمانية بشكل طبيعي (صحيح).'},
+    
+    // Chemical Reactions
+    {n:36, cat:'reactions', q:'A chemical reaction is a process in which:', opts:['Substances remain the same','New substances are formed','Atoms disappear','Only physical change occurs'], c:1, exp:'التفاعل الكيميائي هو عملية تتكون فيها مواد جديدة.'},
+    {n:37, cat:'reactions', q:'Chemical reactions involve:', opts:['Creating atoms','Breaking and forming chemical bonds','Only breaking bonds','Only forming bonds'], c:1, exp:'التفاعلات الكيميائية تشمل كسر وتكوين روابط كيميائية.'},
+    {n:38, cat:'reactions', q:'An exothermic reaction is a reaction that:', opts:['Absorbs heat','Releases energy','Stops the reaction','Produces gas'], c:1, exp:'التفاعل الطارد للحرارة (Exothermic) يطلق طاقة.'},
+    {n:39, cat:'reactions', q:'An endothermic reaction:', opts:['Releases energy','Absorbs energy','Produces light only','Does not require energy'], c:1, exp:'التفاعل الماص للحرارة (Endothermic) يمتص طاقة.'},
+    {n:40, cat:'reactions', q:'Reaction rate means:', opts:['Amount of product','Speed of the reaction','Temperature of reaction','Size of molecules'], c:1, exp:'معدل التفاعل (Reaction rate) هو سرعة التفاعل.'},
+    {n:41, cat:'reactions', q:'Which reaction is usually very fast?', opts:['Rusting iron','Explosion','Digestion','Corrosion'], c:1, exp:'الانفجار (Explosion) تفاعل سريع جدًا.'},
+    {n:42, cat:'reactions', q:'Which reaction is very slow?', opts:['Explosion','Burning gas','Rusting iron','Neutralization'], c:2, exp:'صدأ الحديد (Rusting iron) تفاعل بطيء جدًا.'},
+    {n:43, cat:'reactions', q:'Increasing concentration will:', opts:['Slow the reaction','Stop the reaction','Increase reaction rate','Decrease energy'], c:2, exp:'زيادة التركيز تزيد من سرعة التفاعل.'},
+    {n:44, cat:'reactions', q:'Increasing temperature usually:', opts:['Slows the reaction','Stops the reaction','Speeds up the reaction','Reduces molecules'], c:2, exp:'زيادة درجة الحرارة تزيد من سرعة التفاعل.'},
+    {n:45, cat:'reactions', q:'Laboratory reactions in biological systems often occur at:', opts:['0°C','25°C','37°C','100°C'], c:2, exp:'التفاعلات في الأنظمة البيولوجية تحدث عند 37°C.'},
+    {n:46, cat:'reactions', q:'Smaller particles increase reaction rate because:', opts:['They increase surface area','They reduce molecules','They reduce temperature','They stop the reaction'], c:0, exp:'الجسيمات الأصغر تزيد من مساحة السطح وبالتالي سرعة التفاعل.'},
+    {n:47, cat:'reactions', q:'Catalysts:', opts:['Stop reactions','Slow reactions','Speed up reactions','Destroy reactants'], c:2, exp:'العوامل المحفزة (Catalysts) تزيد من سرعة التفاعلات.'},
+    {n:48, cat:'reactions', q:'In the human body, catalysts are usually:', opts:['Hormones','Enzymes','Vitamins','Minerals'], c:1, exp:'الإنزيمات (Enzymes) هي المحفزات في جسم الإنسان.'},
+    {n:49, cat:'reactions', q:'In a synthesis reaction:', opts:['One compound breaks','Two or more substances combine','One element replaces another','Ions exchange places'], c:1, exp:'تفاعل التخليق (Synthesis): مادتان أو أكثر تتحدان.'},
+    {n:50, cat:'reactions', q:'General equation for synthesis reaction:', opts:['AB → A + B','A + BC → AC + B','A + B → AB','AB + CD → AD + CB'], c:2, exp:'معادلة التخليق العامة: A + B → AB.'},
+    {n:51, cat:'reactions', q:'Decomposition reaction means:', opts:['Two substances combine','One compound breaks into simpler substances','Exchange of ions','Reaction with oxygen'], c:1, exp:'تفاعل التحلل (Decomposition): مركب واحد يتفكك إلى مواد أبسط.'},
+    {n:52, cat:'reactions', q:'2H2O2 → 2H2O + O2 is an example of:', opts:['Synthesis','Decomposition','Combustion','Replacement'], c:1, exp:'تفاعل تحلل (Decomposition).'},
+    {n:53, cat:'reactions', q:'In single replacement reactions:', opts:['One element replaces another','Two compounds exchange ions','Molecules combine','Oxygen reacts with fuel'], c:0, exp:'تفاعل الإحلال الفردي: عنصر يحل محل عنصر آخر.'},
+    {n:54, cat:'reactions', q:'Zn + 2HCl → ZnCl2 + H2 is an example of:', opts:['Combustion','Single replacement','Double replacement','Synthesis'], c:1, exp:'تفاعل إحلال فردي (Single replacement).'},
+    {n:55, cat:'reactions', q:'In double replacement reactions:', opts:['One compound breaks','One element replaces another','Two compounds exchange ions','Fuel reacts with oxygen'], c:2, exp:'تفاعل الإحلال المزدوج: مركبان يتبادلان الأيونات.'},
+    {n:56, cat:'reactions', q:'AgNO3 + NaCl → AgCl + NaNO3 is an example of:', opts:['Synthesis','Decomposition','Double replacement','Combustion'], c:2, exp:'تفاعل إحلال مزدوج (Double replacement).'},
+    {n:57, cat:'reactions', q:'Combustion reactions involve:', opts:['Oxygen and fuel','Two metals','Water formation','Ion exchange'], c:0, exp:'تفاعلات الاحتراق تشمل الأكسجين والوقود.'},
+    {n:58, cat:'reactions', q:'Combustion reactions usually:', opts:['Absorb energy','Release energy','Stop reactions','Reduce molecules'], c:1, exp:'تفاعلات الاحتراق تطلق طاقة.'},
+    
+    // Chemical Equations
+    {n:59, cat:'equations', q:'A chemical equation is used to:', opts:['Describe physical change','Represent a chemical reaction using symbols','Show only products','Show only reactants'], c:1, exp:'المعادلة الكيميائية تمثل التفاعل الكيميائي باستخدام الرموز.'},
+    {n:60, cat:'equations', q:'Substances present before the reaction are called:', opts:['Products','Reactants','Catalysts','Solutions'], c:1, exp:'المواد الموجودة قبل التفاعل تسمى المتفاعلات (Reactants).'},
+    {n:61, cat:'equations', q:'Substances formed after the reaction are called:', opts:['Reactants','Catalysts','Products','Solvents'], c:2, exp:'المواد المتكونة بعد التفاعل تسمى النواتج (Products).'},
+    {n:62, cat:'equations', q:'The arrow (→) in a chemical equation means:', opts:['Reacts with','Produces','Equal to','Combines'], c:1, exp:'السهم (→) يعني "ينتج" أو "يتكون".'},
+    {n:63, cat:'equations', q:'The symbol (+) in chemical equations means:', opts:['Produces','Reacts with','Heat','Gas released'], c:1, exp:'الرمز (+) يعني "يتفاعل مع".'},
+    {n:64, cat:'equations', q:'The symbol (⇌) indicates:', opts:['Gas formation','Irreversible reaction','Reversible reaction','Combustion reaction'], c:2, exp:'الرمز (⇌) يشير إلى تفاعل عكوس (Reversible).'},
+    {n:65, cat:'equations', q:'Which symbol indicates a solid substance?', opts:['(g)','(s)','(l)','(aq)'], c:1, exp:'(s) تشير إلى مادة صلبة (Solid).'},
+    {n:66, cat:'equations', q:'Which symbol means aqueous solution?', opts:['(s)','(l)','(g)','(aq)'], c:3, exp:'(aq) تعني محلول مائي (Aqueous).'},
+    {n:67, cat:'equations', q:'The symbol (Δ) in a chemical equation means:', opts:['Gas released','Heat is applied','Catalyst present','Reaction stops'], c:1, exp:'(Δ) تعني أن الحرارة مطبقة على التفاعل.'},
+    {n:68, cat:'equations', q:'In chemical equations, coefficients represent:', opts:['Number of atoms in a molecule','Number of molecules','Atomic number','Energy level'], c:1, exp:'المعاملات (Coefficients) تمثل عدد الجزيئات.'},
+    {n:69, cat:'equations', q:'Balanced equation: Na + Cl2 → NaCl', opts:['Na + Cl2 → NaCl','2Na + Cl2 → 2NaCl','Na + 2Cl2 → NaCl2','2Na + 2Cl2 → 2NaCl'], c:1, exp:'المعادلة الموزونة: 2Na + Cl2 → 2NaCl.'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = currentCategory === 'all' ? QUESTIONS : QUESTIONS.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = QUESTIONS.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...QUESTIONS] : QUESTIONS.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        matter: '🧪 Matter & Properties',
+        atom: '⚛️ Atoms & Subatomic Particles',
+        bonding: '🔗 Chemical Bonding',
+        reactions: '⚗️ Chemical Reactions',
+        equations: '📝 Chemical Equations'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const catLabel = catNames[q.cat] || q.cat;
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        // Handle True/False questions (with 2 options)
+        let optsHtml = '';
+        if (q.opts.length === 2 && q.opts[0] === 'True' && q.opts[1] === 'False') {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="0" onclick="selectAnswer(${idx}, 0)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="1" onclick="selectAnswer(${idx}, 1)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Chemistry!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${q.opts[q.c]}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>

@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | General Chemistry Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Chemistry Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>⚗️ A.D.Gad | General Chemistry Final</h1>
+        <p class="sub">📚 Final Exam MCQ Bank</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="periodic">📊 Periodic Table</button>
+            <button data-cat="nomenclature">📝 Nomenclature</button>
+            <button data-cat="solutions">🧪 Solutions</button>
+            <button data-cat="acids">🧬 Acids & Bases</button>
+            <button data-cat="calculations">📐 Calculations</button>
+            <button data-cat="tf">✅ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from General Chemistry Final file
+const QUESTIONS = [
+    // ========== PERIODIC TABLE ==========
+    {n:1, cat:'periodic', q:'The modern periodic table is arranged according to:', opts:['Atomic mass','Atomic number','Density','Atomic volume'], c:1, exp:'الجدول الدوري الحديث مرتب حسب العدد الذري (Atomic number).'},
+    {n:2, cat:'periodic', q:'Horizontal rows in the periodic table are called:', opts:['Groups','Families','Periods','Blocks'], c:2, exp:'الصفوف الأفقية تسمى دورات (Periods).'},
+    {n:3, cat:'periodic', q:'How many periods are in the modern periodic table?', opts:['5','6','7','8'], c:2, exp:'يوجد 7 دورات في الجدول الدوري الحديث.'},
+    {n:4, cat:'periodic', q:'Vertical columns in the periodic table are called:', opts:['Periods','Groups','Series','Blocks'], c:1, exp:'الأعمدة الرأسية تسمى مجموعات (Groups).'},
+    {n:5, cat:'periodic', q:'Elements in the same group have the same:', opts:['Atomic number','Number of shells','Valence electrons','Mass number'], c:2, exp:'عناصر نفس المجموعة لها نفس عدد إلكترونات التكافؤ.'},
+    {n:6, cat:'periodic', q:'Atomic size across a period from left to right:', opts:['Increases','Decreases','Remains constant','Doubles'], c:1, exp:'الحجم الذري يقل من اليسار إلى اليمين في الدورة.'},
+    {n:7, cat:'periodic', q:'Electronegativity across a period from left to right:', opts:['Decreases','Increases','Remains constant','Disappears'], c:1, exp:'الكهرسلبية تزداد من اليسار إلى اليمين في الدورة.'},
+    {n:8, cat:'periodic', q:'Which group contains alkali metals?', opts:['Group 1','Group 2','Group 17','Group 18'], c:0, exp:'المجموعة 1 تحتوي على الفلزات القلوية (Alkali metals).'},
+    {n:9, cat:'periodic', q:'Which group contains alkaline earth metals?', opts:['Group 1','Group 2','Group 16','Group 17'], c:1, exp:'المجموعة 2 تحتوي على الفلزات القلوية الترابية.'},
+    {n:10, cat:'periodic', q:'Halogens are located in:', opts:['Group 15','Group 16','Group 17','Group 18'], c:2, exp:'الهالوجينات في المجموعة 17.'},
+    {n:11, cat:'periodic', q:'Noble gases are found in:', opts:['Group 16','Group 17','Group 18','Group 19'], c:2, exp:'الغازات النبيلة في المجموعة 18.'},
+    {n:12, cat:'periodic', q:'Noble gases are chemically:', opts:['Highly reactive','Inert','Metallic','Toxic'], c:1, exp:'الغازات النبيلة خاملة كيميائياً (Inert).'},
+    {n:13, cat:'periodic', q:'Metals are usually:', opts:['Poor conductors','Good conductors','Gases','Transparent'], c:1, exp:'الفلزات موصلات جيدة للكهرباء والحرارة.'},
+    {n:14, cat:'periodic', q:'Metals tend to form:', opts:['Negative ions','Positive ions','Neutral ions','No ions'], c:1, exp:'الفلزات تميل لتكوين أيونات موجبة (Positive ions).'},
+    {n:15, cat:'periodic', q:'Non-metals usually:', opts:['Lose electrons','Gain electrons','Do not react','Form metals'], c:1, exp:'اللافلزات تكتسب إلكترونات (Gain electrons).'},
+    {n:16, cat:'periodic', q:'Metalloids are located:', opts:['At the center','Along the zig-zag line','At the bottom','Outside the table'], c:1, exp:'أشباه الفلزات تقع على طول الخط المتعرج.'},
+    {n:17, cat:'periodic', q:'Which element is an alkali metal?', opts:['Na','Ca','Cl','Ne'], c:0, exp:'الصوديوم (Na) هو فلز قلوي.'},
+    {n:18, cat:'periodic', q:'Which element is a halogen?', opts:['Na','Cl','Fe','Ca'], c:1, exp:'الكلور (Cl) هو هالوجين.'},
+    {n:19, cat:'periodic', q:'Which element is a noble gas?', opts:['He','Na','Ca','Mg'], c:0, exp:'الهيليوم (He) هو غاز نبيل.'},
+    {n:20, cat:'periodic', q:'Reactivity of metals down a group:', opts:['Decreases','Increases','Remains constant','Stops'], c:1, exp:'نشاط الفلزات يزداد نزولاً في المجموعة.'},
+    {n:21, cat:'periodic', q:'Ionization energy down a group:', opts:['Increases','Decreases','Remains constant','Doubles'], c:1, exp:'طاقة التأين تقل نزولاً في المجموعة.'},
+    {n:22, cat:'periodic', q:'Metallic character across a period:', opts:['Increases','Decreases','Remains constant','Doubles'], c:1, exp:'الصفة الفلزية تقل من اليسار إلى اليمين في الدورة.'},
+    {n:23, cat:'periodic', q:'Alkali metals usually have valency:', opts:['+1','+2','-1','0'], c:0, exp:'الفلزات القلوية لها تكافؤ +1.'},
+    {n:24, cat:'periodic', q:'Alkaline earth metals have valency:', opts:['+1','+2','+3','-1'], c:1, exp:'الفلزات القلوية الترابية لها تكافؤ +2.'},
+    {n:25, cat:'periodic', q:'Halogens usually have valency:', opts:['+1','-1','+2','0'], c:1, exp:'الهالوجينات لها تكافؤ -1.'},
+    {n:26, cat:'periodic', q:'Noble gases have valency:', opts:['+1','-1','0','+2'], c:2, exp:'الغازات النبيلة لها تكافؤ 0.'},
+    {n:27, cat:'periodic', q:'Transition metals are located in:', opts:['Groups 1-2','Groups 3-12','Groups 13-18','Period 7'], c:1, exp:'الفلزات الانتقالية في المجموعات 3-12.'},
+    {n:28, cat:'periodic', q:'Transition metals often form:', opts:['Colorless compounds','Colored compounds','No compounds','Gases'], c:1, exp:'الفلزات الانتقالية تشكل مركبات ملونة.'},
+    {n:29, cat:'periodic', q:'Transition metals are often used as:', opts:['Catalysts','Insulators','Non-metals','Gases'], c:0, exp:'الفلزات الانتقالية تستخدم كعوامل محفزة (Catalysts).'},
+    {n:30, cat:'periodic', q:'Elements in the same period have the same number of:', opts:['Valence electrons','Electron shells','Protons','Neutrons'], c:1, exp:'عناصر نفس الدورة لها نفس عدد الأغلفة الإلكترونية.'},
+
+    // ========== NOMENCLATURE ==========
+    {n:31, cat:'nomenclature', q:'A molecule is formed when two or more atoms bond together.', opts:['True','False'], c:0, exp:'الجزيء يتكون عندما ترتبط ذرتان أو أكثر (صحيح).'},
+    {n:32, cat:'nomenclature', q:'An ion is an atom that has gained or lost electrons.', opts:['True','False'], c:0, exp:'الأيون هو ذرة فقدت أو اكتسبت إلكترونات (صحيح).'},
+    {n:33, cat:'nomenclature', q:'Cations are negatively charged ions.', opts:['True','False'], c:1, exp:'الكاتيونات أيونات موجبة وليست سالبة (خطأ).'},
+    {n:34, cat:'nomenclature', q:'Anions are negatively charged ions.', opts:['True','False'], c:0, exp:'الأنيونات أيونات سالبة (صحيح).'},
+    {n:35, cat:'nomenclature', q:'When an atom loses electrons it becomes a cation.', opts:['True','False'], c:0, exp:'عندما تفقد الذرة إلكترونات تصبح كاتيوناً (صحيح).'},
+    {n:36, cat:'nomenclature', q:'Na+ is an example of a cation.', opts:['True','False'], c:0, exp:'Na+ هو مثال على الكاتيون (صحيح).'},
+    {n:37, cat:'nomenclature', q:'Cl- is an example of an anion.', opts:['True','False'], c:0, exp:'Cl- هو مثال على الأنيون (صحيح).'},
+    {n:38, cat:'nomenclature', q:'Chemical nomenclature is the system used to name chemical compounds.', opts:['True','False'], c:0, exp:'التسمية الكيميائية هي نظام تسمية المركبات الكيميائية (صحيح).'},
+    {n:39, cat:'nomenclature', q:'Binary compounds contain three elements.', opts:['True','False'], c:1, exp:'المركبات الثنائية تحتوي على عنصرين وليس ثلاثة (خطأ).'},
+    {n:40, cat:'nomenclature', q:'Acids release H+ ions in solution.', opts:['True','False'], c:0, exp:'الأحماض تطلق أيونات H+ في المحلول (صحيح).'},
+    {n:41, cat:'nomenclature', q:'Bases release OH- ions in solution.', opts:['True','False'], c:0, exp:'القواعد تطلق أيونات OH- في المحلول (صحيح).'},
+    {n:42, cat:'nomenclature', q:'HCl is an example of an acid.', opts:['True','False'], c:0, exp:'HCl هو مثال على الحمض (صحيح).'},
+    {n:43, cat:'nomenclature', q:'NaOH is an example of a base.', opts:['True','False'], c:0, exp:'NaOH هو مثال على القاعدة (صحيح).'},
+    {n:44, cat:'nomenclature', q:'Hydrates contain water molecules in their structure.', opts:['True','False'], c:0, exp:'الهيدرات تحتوي على جزيئات ماء في تركيبها (صحيح).'},
+    {n:45, cat:'nomenclature', q:'Salts are formed from the reaction of an acid and a base.', opts:['True','False'], c:0, exp:'الأملاح تتكون من تفاعل حمض وقاعدة (صحيح).'},
+    {n:46, cat:'nomenclature', q:'A neutralization reaction produces salt and water.', opts:['True','False'], c:0, exp:'تفاعل التعادل ينتج ملح وماء (صحيح).'},
+    {n:47, cat:'nomenclature', q:'All molecules are ions.', opts:['True','False'], c:1, exp:'ليست كل الجزيئات أيونات (خطأ).'},
+
+    // ========== SOLUTIONS & ACIDS/BASES ==========
+    {n:48, cat:'solutions', q:'A solution is defined as:', opts:['A heterogeneous mixture','A homogeneous mixture of two or more substances','Only a solid in a solid','Only a gas in a gas'], c:1, exp:'المحلول هو خليط متجانس من مادتين أو أكثر.'},
+    {n:49, cat:'solutions', q:'In a solution, the substance present in the smaller amount is called the:', opts:['Solvent','Solute','Solution','Mixture'], c:1, exp:'المذاب (Solute) هو المادة الموجودة بكمية أقل.'},
+    {n:50, cat:'solutions', q:'Water is the solvent in:', opts:['Alloys','Air','Aqueous solutions','Dental amalgam'], c:2, exp:'الماء هو المذيب في المحاليل المائية (Aqueous solutions).'},
+    {n:51, cat:'solutions', q:'An example of a gas-in-gas solution is:', opts:['Seawater','Vinegar','Air','Soda water'], c:2, exp:'الهواء (Air) هو مثال على محلول غاز في غاز.'},
+    {n:52, cat:'solutions', q:'An example of a solid-in-liquid solution is:', opts:['Air','Seawater','Brass','Dental amalgam'], c:1, exp:'ماء البحر (Seawater) هو محلول صلب في سائل.'},
+    {n:53, cat:'solutions', q:'Which of the following is a non-electrolyte?', opts:['NaCl','HCl','Sugar (sucrose)','HF'], c:2, exp:'السكر (Sucrose) هو غير إلكتروليت (Non-electrolyte).'},
+    {n:54, cat:'solutions', q:'Strong electrolytes:', opts:['Do not conduct electricity','Partially dissociate','Completely (100%) dissociate into ions','Are only gases'], c:2, exp:'الإلكتروليتات القوية تتأين كلياً (100%).'},
+    {n:55, cat:'solutions', q:'The process in which a molecule splits into ions is called:', opts:['Ionization only','Dissociation','Both dissociation and ionization','Neither'], c:2, exp:'عملية انشطار الجزيء إلى أيونات تسمى تأين (Ionization) أو تفكك (Dissociation).'},
+    {n:56, cat:'solutions', q:'HF is an example of:', opts:['Strong electrolyte','Non-electrolyte','Weak electrolyte','Solid solution'], c:2, exp:'HF هو إلكتروليت ضعيف (Weak electrolyte).'},
+    {n:57, cat:'solutions', q:'Which statement about water is correct?', opts:['It is non-polar','It has positive and negative regions (polar)','It never dissolves ionic compounds','It is electrically charged'], c:1, exp:'الماء جزيء قطبي (Polar) له مناطق موجبة وسالبة.'},
+    {n:58, cat:'acids', q:'Acids taste:', opts:['Bitter','Sour','Sweet','Salty'], c:1, exp:'الأحماض طعمها حامض (Sour).'},
+    {n:59, cat:'acids', q:'Acids change litmus paper from:', opts:['Red to blue','Blue to red','Green to yellow','No change'], c:1, exp:'الأحماض تحول ورق عباد الشمس من الأزرق إلى الأحمر.'},
+    {n:60, cat:'acids', q:'Bases feel:', opts:['Dry','Slippery','Rough','Sticky'], c:1, exp:'القواعد ملمسها زلق (Slippery).'},
+    {n:61, cat:'acids', q:'According to Arrhenius, a base produces:', opts:['H+ ions','OH- ions','Na+ ions','Cl- ions'], c:1, exp:'أرهينيوس: القاعدة تنتج أيونات OH-.'},
+    {n:62, cat:'acids', q:'According to Brønsted-Lowry, an acid is a:', opts:['Proton acceptor','Proton donor','Electron donor','Electron acceptor'], c:1, exp:'برونستد-لوري: الحمض هو مانح بروتون (Proton donor).'},
+    {n:63, cat:'acids', q:'H3O+ is called:', opts:['Hydroxide ion','Hydronium ion (hydrated proton)','Chloride ion','Ammonium ion'], c:1, exp:'H3O+ يسمى أيون الهيدرونيوم.'},
+    {n:64, cat:'acids', q:'pH is defined as:', opts:['-log[OH-]','-log[H+]','log[H+]','log[OH-]'], c:1, exp:'pH = -log[H+].'},
+    {n:65, cat:'acids', q:'As [H+] increases, pH:', opts:['Increases','Decreases','Stays the same','Becomes zero'], c:1, exp:'عند زيادة [H+]، يقل pH.'},
+    {n:66, cat:'acids', q:'A strong acid has:', opts:['Small Ka','Large Ka','No Ka','Zero Ka'], c:1, exp:'الحمض القوي له Ka كبير.'},
+    {n:67, cat:'acids', q:'HCl is:', opts:['Weak acid','Strong acid','Weak base','Non-electrolyte'], c:1, exp:'HCl هو حمض قوي (Strong acid).'},
+    {n:68, cat:'acids', q:'CH3COOH is:', opts:['Strong acid','Weak acid','Strong base','None of the above'], c:1, exp:'CH3COOH هو حمض ضعيف (Weak acid).'},
+    {n:69, cat:'acids', q:'NaOH is:', opts:['Weak base','Strong base','Weak acid','Non-electrolyte'], c:1, exp:'NaOH هو قاعدة قوية (Strong base).'},
+    {n:70, cat:'acids', q:'pOH + pH =:', opts:['7','14 (at 25°C)','0','1'], c:1, exp:'عند 25°C، pOH + pH = 14.'},
+    {n:71, cat:'acids', q:'A neutralization reaction produces:', opts:['Only salt','Salt + water','Only water','Acid + base'], c:1, exp:'تفاعل التعادل ينتج ملح وماء.'},
+    {n:72, cat:'acids', q:'In HCl + NaOH → NaCl + H2O, the net ionic equation is:', opts:['H+ + Cl- → HCl','H+ + OH- → H2O','Na+ + Cl- → NaCl','NaOH + HCl → NaCl'], c:1, exp:'المعادلة الأيونية الصافية: H+ + OH- → H2O.'},
+    {n:73, cat:'acids', q:'Which is NOT a property of bases?', opts:['Bitter taste','Change litmus red to blue','Sour taste','Slippery feel'], c:2, exp:'الطعم الحامض (Sour taste) ليس من خصائص القواعد.'},
+    {n:74, cat:'acids', q:'Household ammonia is:', opts:['Strong acid','Weak base','Strong electrolyte only','Non-electrolyte'], c:1, exp:'الأمونيا المنزلية هي قاعدة ضعيفة (Weak base).'},
+    {n:75, cat:'acids', q:'Vinegar is an example of:', opts:['Strong acid solution','Weak acid solution','Strong base','Gas solution'], c:1, exp:'الخل هو محلول حمض ضعيف (Weak acid solution).'},
+    {n:76, cat:'acids', q:'Which acid is listed as strong?', opts:['HF','CH3COOH','HNO3','H3PO4'], c:2, exp:'HNO3 هو حمض قوي.'},
+    {n:77, cat:'acids', q:'Which base is listed as strong?', opts:['NH3','NaOH','HF','H2O'], c:1, exp:'NaOH هو قاعدة قوية.'},
+
+    // ========== CALCULATIONS ==========
+    {n:78, cat:'calculations', q:'Molarity (M) is defined as moles of solute per:', opts:['Liter of solution','Kilogram of solvent','Liter of solvent','Gram of solution'], c:0, exp:'المولارية (M) = مولات المذاب / لتر المحلول.'},
+    {n:79, cat:'calculations', q:'The formula for molarity is M = n/V where V is in:', opts:['mL','L','g','kg'], c:1, exp:'M = n/V حيث V باللتر (L).'},
+    {n:80, cat:'calculations', q:'Moles of solute = M × V (volume in liters).', opts:['True','False'], c:0, exp:'مولات المذاب = M × V (بصحيح).'},
+    {n:81, cat:'calculations', q:'Molality (m) is moles of solute per:', opts:['Liter of solution','Kilogram of solvent','Liter of solvent','Gram of solution'], c:1, exp:'المولالية (m) = مولات المذاب / كجم المذيب.'},
+    {n:82, cat:'calculations', q:'Molar mass of NaCl (Na=23, Cl=35.5) is:', opts:['58.5 g/mol','54.5 g/mol','48.5 g/mol','68.5 g/mol'], c:0, exp:'الكتلة المولية لـ NaCl = 23 + 35.5 = 58.5 g/mol.'},
+    {n:83, cat:'calculations', q:'For water (H2O), molar mass is:', opts:['16 g/mol','18 g/mol','20 g/mol','22 g/mol'], c:1, exp:'الكتلة المولية للماء = 2×1 + 16 = 18 g/mol.'},
+    {n:84, cat:'calculations', q:'Molality formula is m = n / kg of solvent.', opts:['True','False'], c:0, exp:'المولالية = مولات المذاب / كجم المذيب (صحيح).'},
+    {n:85, cat:'calculations', q:'Molarity changes with temperature because volume changes.', opts:['True','False'], c:0, exp:'المولارية تتغير مع درجة الحرارة لأن الحجم يتغير (صحيح).'},
+
+    // ========== TRUE/FALSE ==========
+    {n:86, cat:'tf', q:'58.5 g of NaCl dissolved in 0.5 L solution gives 2 M.', opts:['True','False'], c:0, exp:'58.5g NaCl = 1 mol، في 0.5L يعطي 2M (صحيح).'},
+    {n:87, cat:'tf', q:'To calculate moles, use n = m / M (mass / molar mass).', opts:['True','False'], c:0, exp:'عدد المولات = الكتلة / الكتلة المولية (صحيح).'},
+    {n:88, cat:'tf', q:'18g of H2O contains 1 mole.', opts:['True','False'], c:0, exp:'18g ماء = 1 مول (صحيح).'},
+    {n:89, cat:'tf', q:'24g of carbon (atomic mass 12 g/mol) contains 2 moles.', opts:['True','False'], c:0, exp:'24g كربون / 12 = 2 مول (صحيح).'},
+    {n:90, cat:'tf', q:'Molality is independent of temperature while molarity is not.', opts:['True','False'], c:0, exp:'المولالية مستقلة عن درجة الحرارة بينما المولارية ليست كذلك (صحيح).'},
+    {n:91, cat:'tf', q:'The unit of molality is mol/kg.', opts:['True','False'], c:0, exp:'وحدة المولالية هي mol/kg (صحيح).'},
+    {n:92, cat:'tf', q:'Atomic mass of C is 12 g/mol (used for mole calculation).', opts:['True','False'], c:0, exp:'الكتلة الذرية للكربون = 12 g/mol (صحيح).'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') {
+            filtered = QUESTIONS;
+        } else if (currentCategory === 'tf') {
+            filtered = QUESTIONS.filter(q => q.cat === 'tf');
+        } else {
+            filtered = QUESTIONS.filter(q => q.cat === currentCategory);
+        }
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') {
+        currentQuestions = [...QUESTIONS];
+    } else if (currentCategory === 'tf') {
+        currentQuestions = QUESTIONS.filter(q => q.cat === 'tf');
+    } else {
+        currentQuestions = QUESTIONS.filter(q => q.cat === currentCategory);
+    }
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        periodic: '📊 Periodic Table',
+        nomenclature: '📝 Nomenclature',
+        solutions: '🧪 Solutions',
+        acids: '🧬 Acids & Bases',
+        calculations: '📐 Calculations',
+        tf: '✅ True / False'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const isTF = q.ans !== undefined;
+        const catLabel = isTF ? '✅ True / False' : (catNames[q.cat] || q.cat);
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="true" onclick="selectTFAnswer(${idx}, true)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="false" onclick="selectTFAnswer(${idx}, false)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectMCQAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectMCQAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${q.opts[q.c]}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function selectTFAnswer(qIdx, selected) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = selected === q.ans;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        const optVal = opt.dataset.opt === 'true' ? true : false;
+        if (optVal === q.ans) {
+            opt.classList.add('correct');
+        } else if (optVal === selected && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const correctText = q.ans ? 'True' : 'False';
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${correctText}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function showFeedback(qIdx, isCorrect, message) {
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${message}` : `❌ Wrong! ${message}`;
+}
+
+function updateCounts(isCorrect) {
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Chemistry!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            const isTF = q.ans !== undefined;
+            const correctAns = isTF ? (q.ans ? 'True' : 'False') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctAns}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>

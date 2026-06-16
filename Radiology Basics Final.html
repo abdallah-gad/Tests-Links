@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Radiology Basics Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Radiology Basics Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>☢️ A.D.Gad | Radiology Basics Final</h1>
+        <p class="sub">📚 Final Exam MCQ Bank</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="physics">⚡ Physics</button>
+            <button data-cat="upper">🦴 Upper Limb</button>
+            <button data-cat="lower">🦴 Lower Limb</button>
+            <button data-cat="spine">💀 Spine</button>
+            <button data-cat="chest">🫁 Chest</button>
+            <button data-cat="anatomy">📐 Anatomy</button>
+            <button data-cat="tf">✅ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// All questions from Radiology file
+const QUESTIONS = [
+    // Physics & Basics
+    {n:1, cat:'physics', q:'What year was X-Ray discovered?', opts:['1885-86','1895-96','1995-96','1905-06'], c:1, exp:'تم اكتشاف الأشعة السينية في عام 1895-1896 بواسطة رونتجن.'},
+    {n:2, cat:'physics', q:'Which of the following is a component of an X-Ray machine?', opts:['Control unit','Generator','Tube','All of the above'], c:3, exp:'جهاز الأشعة السينية يتكون من وحدة التحكم، المولد، والأنبوبة.'},
+    {n:3, cat:'physics', q:'In an X-Ray tube electrons move from:', opts:['Cathode to anode','Anode to cathode','Cathode to patient','Anode to patient'], c:0, exp:'الإلكترونات تتحرك من الكاثود (المهبط) إلى الأنود (المصعد).'},
+    {n:4, cat:'physics', q:'Which of the following is not used in an X-Ray machine cooling system?', opts:['Cool air','Water','Ice','Oil'], c:2, exp:'الثلج (Ice) لا يستخدم في نظام تبريد جهاز الأشعة.'},
+
+    // Chest
+    {n:5, cat:'chest', q:'The main view for chest x-ray is:', opts:['AP view','PA view','Lateral view','Oblique view'], c:1, exp:'الوضعية الرئيسية للصدر هي PA view (خلفي-أمامي).'},
+    {n:6, cat:'chest', q:'During a normal chest X-ray, patient is advised to:', opts:['Hold inspiration','Hold expiration','Lower his chin','Lie down in supine position'], c:0, exp:'يطلب من المريض حبس النفس بعد الشهيق (Hold inspiration).'},
+    {n:7, cat:'chest', q:'During a chest X-Ray, any fluid or blood accumulating in the lungs (Pleural space) will be seen in the:', opts:['Trachea','Aorta','Costophrenic Angle','None of the above'], c:2, exp:'السوائل تتراكم في الزاوية الضلعية الحجابية (Costophrenic Angle).'},
+    {n:89, cat:'chest', q:'Chest AP view can be used for patients in the ICU & children.', opts:['True','False'], c:0, exp:'AP view تستخدم لمرضى العناية المركزة والأطفال (صحيح).'},
+    {n:90, cat:'chest', q:'During chest x-ray a normal trachea is seen either on the right or left.', opts:['True','False'], c:1, exp:'الرغامى الطبيعي في المنتصف وليس على اليمين أو اليسار (خطأ).'},
+
+    // Upper Limb
+    {n:8, cat:'upper', q:'Image A shows x-ray of:', opts:['Right Shoulder AP view','Right Shoulder PA view','Right Arm AP view','Right Arm PA view'], c:0, exp:'صورة A تظهر الكتف الأيمن بوضعية AP.'},
+    {n:9, cat:'upper', q:'Main parts of the scanned humerus are:', opts:['Head, glenoid, clavicle','Head, neck, shaft','Head, scapula, clavicle','Head, acromion, clavicle'], c:1, exp:'أجزاء عظم العضد: الرأس، الرقبة، والجسم (Head, neck, shaft).'},
+    {n:10, cat:'upper', q:'Glenoid is part of the:', opts:['Scapula','Humerus','Clavicle','Chest'], c:0, exp:'التجويف الحقاني (Glenoid) جزء من عظم الكتف (Scapula).'},
+    {n:11, cat:'upper', q:'Arrow No.1 marks:', opts:['Humerus','Scapula','Clavicle','Ribs'], c:2, exp:'السهم رقم 1 يشير إلى عظم الترقوة (Clavicle).'},
+    {n:12, cat:'upper', q:'Arrow No.2 marks:', opts:['Clavicle','Humerus','Ribs','Scapula'], c:3, exp:'السهم رقم 2 يشير إلى عظم الكتف (Scapula).'},
+    {n:13, cat:'upper', q:'During X-Ray Arm, it is important to show:', opts:['Shoulder joint','Elbow joint','Shoulder & elbow joints','Elbow & wrist joints'], c:2, exp:'في صورة الذراع، يجب إظهار مفصل الكتف والمرفق.'},
+    {n:14, cat:'upper', q:'Number of hand phalanges:', opts:['15','14','8','5'], c:1, exp:'عدد سلاميات اليد = 14 (كل إصبع 3 عدا الإبهام 2).'},
+    {n:15, cat:'upper', q:'Number of carpal bones:', opts:['15','14','8','5'], c:2, exp:'عدد عظام الرسغ = 8.'},
+    {n:16, cat:'upper', q:'Main view(s) for X-Ray hand are:', opts:['PA','PA & Lateral','PA & Oblique','Lateral & Oblique'], c:2, exp:'صور اليد: PA و Oblique.'},
+    {n:17, cat:'upper', q:'Arrow number 1 in image B points to:', opts:['Fracture neck humerus','Fracture elbow','Fracture shaft humerus','Shoulder Dislocation'], c:2, exp:'السهم 1 يشير إلى كسر في جسم عظم العضد.'},
+    {n:18, cat:'upper', q:'Arrow number 2 in image B points to:', opts:['Humerus neck','Radius','Ulna','Medial epicondyle'], c:3, exp:'السهم 2 يشير إلى اللقيمة الإنسية (Medial epicondyle).'},
+    {n:37, cat:'upper', q:'Humerus articulates with all of the following except:', opts:['Carpal bones','Ulna','Radius','Scapula'], c:0, exp:'العضد لا يتصل بعظام الرسغ (Carpal bones).'},
+    {n:38, cat:'upper', q:'Ulna articulates with which of the following?', opts:['Carpal bones','Scapula','Clavicle','Tarsal bones'], c:0, exp:'الزند يتصل بعظام الرسغ.'},
+    {n:39, cat:'upper', q:'Radius articulates with which of the following?', opts:['Scapula','Humerus','Tarsal bones','Tibia'], c:1, exp:'الكعبرة تتصل بعظم العضد.'},
+    {n:40, cat:'upper', q:'Olecranon is part of the:', opts:['Humerus','Radius','Ulna','Femur'], c:2, exp:'الناتئ المرفقي (Olecranon) جزء من عظم الزند (Ulna).'},
+    {n:42, cat:'upper', q:'Medial epicondyle is part of the:', opts:['Femur','Humerus','Radius','Ulna'], c:1, exp:'اللقيمة الإنسية (Medial epicondyle) جزء من عظم العضد.'},
+    {n:47, cat:'upper', q:'In the forearm, ulna is seen in which position in relation to the radius?', opts:['Anterior','Posterior','Medial','Lateral'], c:2, exp:'الزند يقع في وضعية إنسية (Medial) بالنسبة للكعبرة.'},
+    {n:52, cat:'upper', q:'All these bones can have heads except:', opts:['Ulna','Radius','Humerus','Femur'], c:0, exp:'الزند (Ulna) ليس له رأس (له ناتئ مرفقي).'},
+    {n:61, cat:'upper', q:'The most distal part of the ulna is called the:', opts:['Lateral malleolus','Medial malleolus','Olecranon','Styloid process'], c:3, exp:'الجزء الأقصى من الزند يسمى الناتئ الإبري (Styloid process).'},
+    {n:62, cat:'upper', q:'Normal human skeleton has:', opts:['16 carpal bones & 16 tarsal bones','14 carpal bones & 14 tarsal bones','16 carpal bones & 14 tarsal bones','14 carpal bones & 16 tarsal bones'], c:2, exp:'16 عظمة رسغ و 14 عظمة رصغ.'},
+    {n:63, cat:'upper', q:'Normal human hand has:', opts:['4 metacarpal bones','5 metacarpal bones','6 metacarpal bones','7 metacarpal bones'], c:1, exp:'اليد الطبيعية بها 5 عظام مشط.'},
+    {n:64, cat:'upper', q:'Normal human hand and foot each has:', opts:['12 phalanges','13 phalanges','14 phalanges','15 phalanges'], c:2, exp:'اليد والقدم كل منهما به 14 سلامية.'},
+    {n:65, cat:'upper', q:'Normal human foot has:', opts:['4 metatarsal bones','5 metatarsal bones','6 metatarsal bones','7 metatarsal bones'], c:1, exp:'القدم الطبيعية بها 5 عظام مشط.'},
+
+    // Lower Limb
+    {n:23, cat:'lower', q:'Which is an example of ball & socket joint?', opts:['Elbow joint','Shoulder joint','Hip joint','B & C'], c:3, exp:'مفصل الكتف والورك (Shoulder & Hip) من نوع كرة وحق.'},
+    {n:24, cat:'lower', q:'Head of femur articulates with the:', opts:['Acetabulum','Glenoid','Radius','Tibia & fibula'], c:0, exp:'رأس عظم الفخذ يتصل بالحُق (Acetabulum).'},
+    {n:25, cat:'lower', q:'Arrow 1 in image C points to:', opts:['Fracture Shaft femur','Fracture neck femur','Fracture greater trochanter','Fracture Iliac bone'], c:1, exp:'السهم 1 يشير إلى كسر عنق الفخذ.'},
+    {n:26, cat:'lower', q:'Arrow 2 in image C points to:', opts:['Femur head','Femur greater trochanter','Femur neck','Femur shaft'], c:2, exp:'السهم 2 يشير إلى عنق الفخذ (Femur neck).'},
+    {n:27, cat:'lower', q:'Example of hinge joint is:', opts:['Elbow joint','Knee joint','Sacro-iliac joint','A & B'], c:3, exp:'مفاصل المرفق والركبة من نوع مفصلي (Hinge joint).'},
+    {n:28, cat:'lower', q:'Main views for ankle x-ray are:', opts:['AP & Lateral','AP & Oblique','Lateral & Oblique','None of the above'], c:0, exp:'صور الكاحل: AP و Lateral.'},
+    {n:29, cat:'lower', q:'Arrow 1 in image D points to:', opts:['Calcaneal fracture','Calcaneal spur','Metatarsal bone fracture','Talus fracture'], c:1, exp:'السهم 1 يشير إلى نتوء عظم العقب (Calcaneal spur).'},
+    {n:30, cat:'lower', q:'Arrow 2 in image D points to which bones?', opts:['Tibia & Fibula','Femur','Tarsal Bone','Phalanges'], c:0, exp:'السهم 2 يشير إلى عظمي الساق (Tibia & Fibula).'},
+    {n:33, cat:'lower', q:'Parts of the upper limb include all except:', opts:['Humerus','Radius','Femur','Ulna'], c:2, exp:'عظم الفخذ (Femur) جزء من الطرف السفلي وليس العلوي.'},
+    {n:34, cat:'lower', q:'Parts of the lower limb include all except:', opts:['Femur','Scapula','Tibia','Fibula'], c:1, exp:'عظم الكتف (Scapula) جزء من الطرف العلوي وليس السفلي.'},
+    {n:35, cat:'lower', q:'Hip bone is made of all except:', opts:['Iliac bone','Patella','Ischium','Pubis'], c:1, exp:'عظم الرضفة (Patella) ليس جزءًا من عظم الورك.'},
+    {n:41, cat:'lower', q:'Greater trochanter is part of the:', opts:['Femur','Humerus','Radius','Ulna'], c:0, exp:'المدور الكبير (Greater trochanter) جزء من عظم الفخذ.'},
+    {n:43, cat:'lower', q:'Femur articulates with all of the following except:', opts:['Tarsal bones','Patella','Tibia','Hip bone'], c:0, exp:'الفخذ لا يتصل بعظام الرصغ (Tarsal bones).'},
+    {n:44, cat:'lower', q:'Patella is part of the:', opts:['Hip joint','Knee joint','Sacro-iliac joint','Elbow joint'], c:1, exp:'الرضفة (Patella) جزء من مفصل الركبة.'},
+    {n:45, cat:'lower', q:'Patella is seen at which part of the joint?', opts:['Medial','Lateral','Anterior','Posterior'], c:2, exp:'الرضفة تظهر في الجزء الأمامي (Anterior) من المفصل.'},
+    {n:46, cat:'lower', q:'In the leg, fibula is seen in which position in relation to the tibia?', opts:['Medial','Lateral','Anterior','Posterior'], c:1, exp:'الشظية تقع في وضعية جانبية (Lateral) بالنسبة للظنبوب.'},
+    {n:48, cat:'lower', q:'Which is more distal?', opts:['Hip bone','Femur','Tibia','Tarsal bones'], c:3, exp:'عظام الرصغ (Tarsal bones) هي الأكثر بعدًا (Distal).'},
+    {n:49, cat:'lower', q:'Which is more proximal?', opts:['Hip bone','Femur','Tibia','Tarsal bones'], c:0, exp:'عظم الورك (Hip bone) هو الأكثر قربًا (Proximal).'},
+    {n:53, cat:'lower', q:'The largest bone in the foot is called:', opts:['Talus','Calcaneus','Metatarsal bone','Big toe'], c:1, exp:'أكبر عظم في القدم هو عظم العقب (Calcaneus).'},
+    {n:54, cat:'lower', q:'The most distal part of the tibia is called the:', opts:['Lateral malleolus','Medial malleolus','Olecranon','Styloid process'], c:1, exp:'الجزء الأقصى من الظنبوب يسمى النابذة الإنسية (Medial malleolus).'},
+    {n:55, cat:'lower', q:'The most distal part of the fibula is called the:', opts:['Lateral malleolus','Medial malleolus','Olecranon','Styloid process'], c:0, exp:'الجزء الأقصى من الشظية يسمى النابذة الوحشية (Lateral malleolus).'},
+    {n:56, cat:'lower', q:'In the leg, tibia is seen in which position in relation to the fibula?', opts:['Medial','Lateral','Anterior','Posterior'], c:0, exp:'الظنبوب يقع في وضعية إنسية (Medial) بالنسبة للشظية.'},
+    {n:59, cat:'lower', q:'Hip replacement / prosthesis involves:', opts:['The tibia','The fibula','The femoral condyles','The femoral head and neck'], c:3, exp:'استبدال مفصل الورك يشمل رأس وعنق الفخذ.'},
+    {n:60, cat:'lower', q:'Greater trochanter fracture occurs in the:', opts:['Tibia','Fibula','Femur','Patella'], c:2, exp:'كسر المدور الكبير يحدث في عظم الفخذ (Femur).'},
+    {n:66, cat:'lower', q:'The sacrum articulates with:', opts:['Femur','Tibia','Iliac bone','Tibia'], c:2, exp:'العجز (Sacrum) يتصل بعظم الحرقفة (Iliac bone).'},
+    {n:67, cat:'lower', q:'The Hip bone articulates with:', opts:['Femur and tibia','Sacrum and tibia','Tibia and fibula','Femur and sacrum'], c:3, exp:'عظم الورك يتصل بعظم الفخذ والعجز.'},
+    {n:68, cat:'lower', q:'Patella is anterior to the:', opts:['Tibia','Fibula','Humerus','Femur'], c:3, exp:'الرضفة تقع أمام عظم الفخذ (Femur).'},
+    {n:69, cat:'lower', q:'Olecranon articulates with:', opts:['Tibia','Fibula','Humerus','Scapula'], c:2, exp:'الناتئ المرفقي يتصل بعظم العضد (Humerus).'},
+    {n:70, cat:'lower', q:'Scapula articulates with:', opts:['Humerus and ulna','Humerus and fibula','Humerus and clavicle','Fibula and ulna'], c:2, exp:'عظم الكتف يتصل بالعضد والترقوة.'},
+    {n:95, cat:'lower', q:'Best view for calcaneal spur is lateral.', opts:['True','False'], c:0, exp:'أفضل وضعية لرؤية نتوء عظم العقب هي Lateral (صحيح).'},
+    {n:97, cat:'lower', q:'The greater trochanter is seen in the tibia.', opts:['True','False'], c:1, exp:'المدور الكبير في عظم الفخذ وليس الظنبوب (خطأ).'},
+
+    // Spine
+    {n:19, cat:'spine', q:'Number of ribs are:', opts:['18','12','16','24'], c:3, exp:'عدد الأضلاع = 24 (12 زوج).'},
+    {n:20, cat:'spine', q:'Which vertebrae are fused?', opts:['Cervical','Thoracic','Lumbar','Sacral'], c:3, exp:'الفقرات العجزية (Sacral) ملتحمة معًا.'},
+    {n:21, cat:'spine', q:'Which part of the spine shows lordosis?', opts:['Cervical','Thoracic','Lumbar','Both A & C'], c:3, exp:'القعس (Lordosis) يحدث في الفقرات العنقية والقطنية.'},
+    {n:22, cat:'spine', q:'Number of Cervical, thoracic & lumbar vertebrae are:', opts:['7-10-5','8-12-6','7-12-5','8-12-5'], c:2, exp:'عدد الفقرات: عنقية 7، صدرية 12، قطنية 5.'},
+    {n:31, cat:'spine', q:'Normal curve for lumbar spine is:', opts:['Scoliosis','Kyphosis','Lordosis','None of the above'], c:2, exp:'الانحناء الطبيعي للفقرات القطنية هو القعس (Lordosis).'},
+    {n:32, cat:'spine', q:'Normally the sacrum joins with:', opts:['L2','L3','L4','L5'], c:3, exp:'العجز يتصل بالفقرات القطنية L5.'},
+    {n:58, cat:'spine', q:'Kyphosis is seen in:', opts:['Cervical','Dorsal / thoracic','Lumbar','Cervical and lumbar'], c:1, exp:'الحداب (Kyphosis) يحدث في الفقرات الظهرية/الصدرية.'},
+    {n:74, cat:'spine', q:'The first rib starts at the last cervical vertebra.', opts:['True','False'], c:1, exp:'الضلع الأول يبدأ من الفقرة الصدرية الأولى وليس العنقية (خطأ).'},
+    {n:75, cat:'spine', q:'In degenerative changes of the spine, disc spaces are narrow.', opts:['True','False'], c:0, exp:'في التغيرات التنكسية، تضيق الفراغات بين الفقرات (صحيح).'},
+    {n:86, cat:'spine', q:'The last part of the spine is called the sacrum.', opts:['True','False'], c:1, exp:'الجزء الأخير من العمود الفقري هو العصعص (Coccyx) وليس العجز (خطأ).'},
+    {n:99, cat:'spine', q:'Narrowed disc spaces are more common in the lumbar spine than the dorsal spine.', opts:['True','False'], c:0, exp:'تضيق الفراغات بين الفقرات أكثر شيوعًا في الفقرات القطنية (صحيح).'},
+
+    // Anatomy
+    {n:36, cat:'anatomy', q:'Clavicle articulates with the:', opts:['Humerus','Ulna','Radius','Scapula'], c:3, exp:'الترقوة تتصل بعظم الكتف (Scapula).'},
+    {n:50, cat:'anatomy', q:'Which is more distal?', opts:['Humerus','Carpal bones','Metacarpal bones','Phalanges'], c:3, exp:'السلاميات (Phalanges) هي الأكثر بعدًا.'},
+    {n:51, cat:'anatomy', q:'Which is more proximal?', opts:['Head of humerus','Neck of humerus','Shaft of humerus','Medial epicondyle of humerus'], c:0, exp:'رأس العضد (Head of humerus) هو الأكثر قربًا.'},
+    {n:57, cat:'anatomy', q:'The clavicle articulates with the:', opts:['Humerus','Acromion process of the scapula','Glenoid process of the scapula','Radius'], c:1, exp:'الترقوة تتصل بالناتئ الأخرمي (Acromion process) لعظم الكتف.'},
+    {n:71, cat:'anatomy', q:'X-ray finger needs a higher kV than x-ray hip.', opts:['True','False'], c:1, exp:'صورة الإصبع تحتاج kV أقل وليس أعلى من الورك (خطأ).'},
+    {n:72, cat:'anatomy', q:'All x-rays should be done with a cassette & bucky.', opts:['True','False'], c:1, exp:'ليس كل الصور تحتاج إلى كاسيت وباكي (خطأ).'},
+    {n:73, cat:'anatomy', q:'Scoliosis is an abnormal spine curve.', opts:['True','False'], c:0, exp:'الجنف (Scoliosis) هو انحناء غير طبيعي للعمود الفقري (صحيح).'},
+    {n:76, cat:'anatomy', q:'In shoulder dislocation, there are no bone fractures in the scapula or humerus.', opts:['True','False'], c:0, exp:'في خلع الكتف، لا توجد كسور في عظم الكتف أو العضد (صحيح).'},
+    {n:77, cat:'anatomy', q:'Flat foot & calcaneal spur can be seen on AP view.', opts:['True','False'], c:1, exp:'القدم المسطحة ونتوء عظم العقب يريان في Lateral view وليس AP (خطأ).'},
+    {n:78, cat:'anatomy', q:'The site and exact number of a fractured metacarpal bone can always be seen on lateral view.', opts:['True','False'], c:1, exp:'كسر عظم المشط لا يرى دائمًا في Lateral view (خطأ).'},
+    {n:79, cat:'anatomy', q:'Olecranon process is seen in proximal radius.', opts:['True','False'], c:1, exp:'الناتئ المرفقي في الزند وليس الكعبرة (خطأ).'},
+    {n:80, cat:'anatomy', q:'Skyline view is used for imaging of the patella.', opts:['True','False'], c:0, exp:'Skyline view تستخدم لتصوير الرضفة (صحيح).'},
+    {n:81, cat:'anatomy', q:'Hip bone is made up of 2 bones.', opts:['True','False'], c:1, exp:'عظم الورك يتكون من 3 عظام: الحرقفة، الإسك، والعانة (خطأ).'},
+    {n:82, cat:'anatomy', q:'X-ray hand PA view is used for determining bone age.', opts:['True','False'], c:0, exp:'PA view لليد تستخدم لتحديد العمر العظمي (صحيح).'},
+    {n:83, cat:'anatomy', q:'The big toe has 3 phalanges.', opts:['True','False'], c:1, exp:'إصبع القدم الكبير له سلاميتان وليس 3 (خطأ).'},
+    {n:84, cat:'anatomy', q:'The number of carpal bones and tarsal bones are the same.', opts:['True','False'], c:1, exp:'عظام الرسغ 16 والرصغ 14 وليسا متساويين (خطأ).'},
+    {n:85, cat:'anatomy', q:'Frog lateral view is used for the hip joint.', opts:['True','False'], c:0, exp:'Frog lateral view تستخدم لمفصل الورك (صحيح).'},
+    {n:87, cat:'anatomy', q:'Cervical rib is a normal finding.', opts:['True','False'], c:1, exp:'الضلع العنقي ليس طبيعيًا (خطأ).'},
+    {n:88, cat:'anatomy', q:'A nurse should always be present with the technical radiologist during examination of children & female patients.', opts:['True','False'], c:0, exp:'يجب وجود ممرضة أثناء فحص الأطفال والمرضى الإناث (صحيح).'},
+    {n:91, cat:'anatomy', q:'Number of phalanges are the same in the hand and foot.', opts:['True','False'], c:0, exp:'عدد السلاميات متساوي في اليد والقدم (14 لكل منهما) (صحيح).'},
+    {n:92, cat:'anatomy', q:'All fingers have the same number of phalanges.', opts:['True','False'], c:1, exp:'الإبهام له سلاميتان بينما الأصابع الأخرى لها 3 (خطأ).'},
+    {n:93, cat:'anatomy', q:'The longest bone in the lower limb is the femur.', opts:['True','False'], c:0, exp:'أطول عظم في الطرف السفلي هو عظم الفخذ (صحيح).'},
+    {n:94, cat:'anatomy', q:'The big toe is seen on the lateral side of the foot.', opts:['True','False'], c:1, exp:'إصبع القدم الكبير في الجانب الإنسي وليس الوحشي (خطأ).'},
+    {n:96, cat:'anatomy', q:'The medial malleolus is seen in fibula.', opts:['True','False'], c:1, exp:'النابذة الإنسية في الظنبوب وليس الشظية (خطأ).'},
+    {n:98, cat:'anatomy', q:'Acetabulum is part of the scapula.', opts:['True','False'], c:1, exp:'الحُق (Acetabulum) جزء من عظم الورك وليس الكتف (خطأ).'},
+    {n:100, cat:'anatomy', q:'The tibia is larger than the fibula.', opts:['True','False'], c:0, exp:'الظنبوب أكبر من الشظية (صحيح).'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') {
+            filtered = QUESTIONS;
+        } else if (currentCategory === 'tf') {
+            filtered = QUESTIONS.filter(q => q.cat === 'tf' || (q.opts.length === 2 && q.opts[0] === 'True' && q.opts[1] === 'False'));
+        } else {
+            filtered = QUESTIONS.filter(q => q.cat === currentCategory);
+        }
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') {
+        currentQuestions = [...QUESTIONS];
+    } else if (currentCategory === 'tf') {
+        currentQuestions = QUESTIONS.filter(q => q.cat === 'tf' || (q.opts.length === 2 && q.opts[0] === 'True' && q.opts[1] === 'False'));
+    } else {
+        currentQuestions = QUESTIONS.filter(q => q.cat === currentCategory);
+    }
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        physics: '⚡ Physics & Basics',
+        chest: '🫁 Chest',
+        upper: '🦴 Upper Limb',
+        lower: '🦴 Lower Limb',
+        spine: '💀 Spine',
+        anatomy: '📐 Anatomy',
+        tf: '✅ True / False'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const isTF = q.opts && q.opts.length === 2 && q.opts[0] === 'True' && q.opts[1] === 'False';
+        const catLabel = isTF ? '✅ True / False' : (catNames[q.cat] || q.cat);
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="0" onclick="selectAnswer(${idx}, 0)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="1" onclick="selectAnswer(${idx}, 1)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Radiology!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${q.opts[q.c]}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
