@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A.D.Gad | First Aid & Emergency Quiz</title>
+<title>A.D.Gad | Research Methods Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -686,7 +686,7 @@ body {
     <div class="nav-container">
         <div class="logo-area">
             <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
-            <span class="brand">A.D.Gad | First Aid</span>
+            <span class="brand">A.D.Gad | Research Methods mid-term</span>
         </div>
         <div class="progress-stats">
             <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
@@ -703,16 +703,15 @@ body {
 <div class="start-screen" id="startScreen">
     <div class="start-card">
         <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
-        <h1>🚑 First Aid & Emergency</h1>
-        <p class="sub">📚 MCQ Bank for Review — Dr. Mohammad al-Imam</p>
+        <h1>📊 A.D.Gad | Research Methods mid-term</h1>
+        <p class="sub">📚 Mid Term MCQ Bank — Dr. Mayada Al-Mutawalli</p>
         <div class="filter-btns" id="filterBtns">
             <button class="active" data-cat="all">📚 All</button>
-            <button data-cat="bleeding">🩸 Bleeding</button>
-            <button data-cat="burns">🔥 Burns</button>
-            <button data-cat="cpr">❤️ CPR</button>
-            <button data-cat="fracture">🦴 Fracture</button>
-            <button data-cat="shock">⚡ Shock</button>
-            <button data-cat="general">📋 General</button>
+            <button data-cat="definitions">📖 Definitions</button>
+            <button data-cat="studies">🔬 Study Designs</button>
+            <button data-cat="statistics">📈 Statistics</button>
+            <button data-cat="sampling">🎯 Sampling</button>
+            <button data-cat="spss">💻 SPSS</button>
         </div>
         <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
         <button class="btn-start" id="startBtn">▶ Start Quiz</button>
@@ -754,87 +753,33 @@ body {
 <script>
 const L = ['A', 'B', 'C', 'D'];
 
-// All questions from First Aid file - English questions with Arabic explanation
+// All questions from Research Methods file
 const QUESTIONS = [
-    // Bleeding
-    {n:2, cat:'bleeding', q:'A victim of a car accident has just vomited and now appears to be coughing up blood. He is breathing very quickly and his pulse is weak and fast. What is most likely wrong?', opts:['He is having a seizure.','He has internal bleeding.','He is having a heart attack.','He is having a diabetic emergency.'], c:1, exp:'النزيف الداخلي يسبب ضعف النبض وسرعة التنفس والسعال الدموي.'},
-    {n:4, cat:'bleeding', q:'A victim has lost a lot of blood through a deep cut in his leg. He is breathing fast and seems pale and restless. He is probably....', opts:['Having a stroke.','Having a heart attack.','In shock.','Choking.'], c:2, exp:'فقدان كمية كبيرة من الدم يؤدي إلى الصدمة (Shock).'},
-    {n:9, cat:'bleeding', q:'A victim has a large piece of glass sticking out of her leg. You should....', opts:['Leave the glass in her leg and control the bleeding.','Call your local emergency phone number.','Remove the glass and then control the bleeding.','Both A and B'], c:3, exp:'لا تزيل الجسم الغريب واستدعِ الطوارئ مع التحكم بالنزيف.'},
-    {n:13, cat:'bleeding', q:'Which should be part of your care for a severely bleeding open wound?', opts:['Allow the wound to bleed in order to minimize infection.','Apply direct pressure and elevate the injured area (if no broken bones).','Use a tourniquet to stop all blood flow.','Both B and C'], c:1, exp:'الضغط المباشر ورفع المنطقة هو الخطوة الأساسية للتحكم بالنزيف.'},
-    {n:14, cat:'bleeding', q:'What should you do if you think a victim has serious internal bleeding?', opts:['Apply heat to the injured area.','Call your local emergency phone number for help.','Place the victim in a sitting position.','Give fluids to replace blood loss.'], c:1, exp:'النزيف الداخلي خطير ويتطلب الاتصال الفوري بالطوارئ.'},
-    {n:15, cat:'bleeding', q:'Which is the first step when caring for bleeding wounds?', opts:['Apply direct pressure with a clean or sterile dressing.','Apply pressure at the pressure point.','Add bulky dressings to reinforce blood-soaked bandages.','Elevate the wound.'], c:0, exp:'الخطوة الأولى هي الضغط المباشر على الجرح.'},
-    {n:16, cat:'bleeding', q:'How can you reduce the risk of disease transmission when caring for open, bleeding wounds?', opts:['Wash your hands immediately after giving care.','Avoid direct contact with blood.','Use protective barriers such as gloves or plastic wrap.','All of the above.'], c:3, exp:'جميع الإجراءات المذكورة تقلل من خطر انتقال الأمراض.'},
-    {n:18, cat:'bleeding', q:'When giving care for external bleeding, what should you do first?', opts:['Elevate the injury.','Apply direct pressure.','Apply a loose dressing.','Apply a tourniquet.'], c:1, exp:'الضغط المباشر هو الخطوة الأولى للتحكم بالنزيف الخارجي.'},
-    {n:21, cat:'bleeding', q:'Which symptoms would indicate internal bleeding?', opts:['Rapid weak pulse, Excessive thirst.','Skin that feels cool or moist, or looks pale or bluish.','Tender, swollen, bruised, or hard areas of his body, such as the abdomen.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى نزيف داخلي.'},
-    {n:65, cat:'bleeding', q:'Which symptoms would indicate internal bleeding?', opts:['Rapid weak pulse, Excessive thirst.','Skin that feels cool or moist or looks pale or bluish.','Tender, swollen, bruised, or hard areas of his body, such as the abdomen.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى نزيف داخلي.'},
+    // Definitions
+    {n:1, cat:'definitions', q:'Which of the following is the definition of sample?', opts:['Results of research','Selected number of individual cases or research subjects drawn from a larger population for a specific study','Outcome of research','Equal motivation'], c:1, exp:'العينة هي عدد مختار من الحالات الفردية أو موضوعات البحث المسحوبة من مجتمع أكبر.'},
+    {n:4, cat:'definitions', q:'......is the list of sources of information.', opts:['Operative list','Reference list','Waiting list','Search list'], c:1, exp:'قائمة المراجع (Reference list) هي قائمة مصادر المعلومات.'},
+    {n:12, cat:'definitions', q:'_______ is a selected number of individual cases or research subjects drawn from larger population for a specific study?', opts:['Cross sectional study','SPSS','Sample','Analysis'], c:2, exp:'العينة (Sample) هي عدد مختار من الحالات الفردية المسحوبة من مجتمع أكبر.'},
+    {n:13, cat:'definitions', q:'_______ defined as well defined group of individuals who share common characteristic or experience.', opts:['Cohort study','Cross sectional study','Descriptive study','Analytical study'], c:0, exp:'دراسة الأتراب (Cohort study) هي مجموعة محددة من الأفراد يشتركون في خاصية أو تجربة مشتركة.'},
 
-    // Burns
-    {n:1, cat:'burns', q:'Your check of the scene suggests that a victim has suffered an electrical shock. The first thing to do is....', opts:['Cover all burns with a dry loose dressing.','Ask a bystander to help you move the victim.','Place the victim on one side with the head down.','Make sure the power is turned off'], c:3, exp:'يجب التأكد أولاً من إطفاء التيار الكهربائي لتجنب المخاطر.'},
-    {n:3, cat:'burns', q:'You are caring for a victim with a burned hand. Put the hand in cool water if....', opts:['The burns are very deep.','There are burns with open blisters.','The burns are minor with no open blisters.','You should put the hand in cool water for all of the above.'], c:2, exp:'يوضع الحرق البسيط في ماء بارد لتخفيف الألم ومنع تفاقمه.'},
-    {n:5, cat:'burns', q:'For which of the following burn victims should you immediately call your local emergency phone number?', opts:['A 40-year-old man who has burned his hand with hot coffee.','A 68-year-old woman who has a blistered grease burn on her hands and arms.','A 26-year-old woman who has a sunburn on her shoulders.','All of the above.'], c:1, exp:'الحروق الدهنية العميقة مع البثور تتطلب عناية طبية فورية.'},
-    {n:6, cat:'burns', q:'A 15-year-old boy has just splashed a chemical on his face. After sending someone to call for an ambulance, you would...', opts:['Cover the burned area.','Have the victim stay calm until ambulance arrives.','Flush the burned area with large amounts of water until the ambulance arrives.','Immediately drive the victim to the hospital.'], c:2, exp:'غسل المنطقة بالماء بكميات كبيرة يخفف من تأثير المادة الكيميائية.'},
-    {n:7, cat:'burns', q:'Why should you cover burns with a clean or sterile dressing?', opts:['To prevent infection.','To cool burned area.','To keep the burned area warm.','Both A and C'], c:0, exp:'الغرض الأساسي هو منع العدوى.'},
-    {n:10, cat:'burns', q:'What should be your first concern at the scene where a person has been seriously burned?', opts:['Checking the scene for safety.','Checking the victims breathing and pulse.','Calling your local emergency phone number.','Cooling the burned area.'], c:0, exp:'السلامة أولاً قبل تقديم أي إسعافات.'},
-    {n:23, cat:'burns', q:'A first-degree burn....', opts:['Involves only the top layer of skin.','Is red and blistered.','Destroys all layers of skin.','Is the most serious of burns.'], c:0, exp:'حرق الدرجة الأولى يشمل فقط الطبقة العليا من الجلد.'},
-    {n:24, cat:'burns', q:'When caring for someone who has suffered an electrical burn, you would not....', opts:['Check breathing and pulse.','Check for possible fractures.','Cool the burned area.','Treat for shock.'], c:2, exp:'لا تبرد المنطقة المحروقة في الحروق الكهربائية.'},
-    {n:30, cat:'burns', q:'What do you do for a chemical burn?', opts:['Flush with water, dry, and cover.','Flush with large amounts of water and cover.','Flush with large amounts of warm water until help arrives.','Flush with large amounts of cool water until help arrives.'], c:3, exp:'غسل المنطقة بالماء البارد بكميات كبيرة حتى وصول المساعدة.'},
-    {n:94, cat:'burns', q:'Second-degree burn....', opts:['Involves only the top layer of skin.','Is red and blistered.','Destroys all layers of skin.','Is the most serious of burns.'], c:1, exp:'حرق الدرجة الثانية يكون أحمر اللون مع بثور.'},
+    // Study Designs
+    {n:2, cat:'studies', q:'As regard longitudinal study which of the following is correct?', opts:['Cannot be applied','Equal cross sectional study','Snap shot study','Study the specific population at different points of time'], c:3, exp:'الدراسة الطولية (Longitudinal study) تدرس نفس السكان في نقاط زمنية مختلفة.'},
+    {n:5, cat:'studies', q:'Which is correct for snap shot study?', opts:['Cross sectional study','Longitudinal study','Cohort study','Appropriate for rare cases'], c:0, exp:'الدراسة المقطعية (Cross sectional study) هي دراسة لقطة (Snap shot).'},
+    {n:8, cat:'studies', q:'When conduct a cross sectional study?', opts:['To estimate the prevalence of health condition','To estimate the behavior and risk factor of the disease','To learn about the characteristic of attitude of individuals','All of the above'], c:3, exp:'الدراسة المقطعية تستخدم لتقدير الانتشار والسلوك وعوامل الخطر وخصائص الأفراد.'},
 
-    // CPR
-    {n:49, cat:'cpr', q:'A person, who is unconscious, not breathing, has no pulse, needs....', opts:['CPR','Abdominal thrust maneuver.','Rescue breathing.','Back blows and chest thrusts.'], c:0, exp:'في حالة عدم وجود نبض وتنفس، يتم البدء بالـ CPR.'},
-    {n:53, cat:'cpr', q:'When performing adult CPR, you give....', opts:['2 slow breaths and 30 chest compressions.','1 slow breath and 10 chest compressions.','5 slow breaths and 10 chest compressions.','3 slow breaths and 15 chest compressions.'], c:0, exp:'نسبة الإنعاش للبالغين هي 30 ضغطة إلى نفختين.'},
-    {n:54, cat:'cpr', q:'When performing CPR on a child you give....', opts:['4 slow breaths and 20 chest compressions.','1 slow breath and 5 chest compressions.','2 slow breaths and 30 chest compressions.','2 slow breaths and 15 chest compressions.'], c:2, exp:'نسبة الإنعاش للأطفال هي 30 ضغطة إلى نفختين (أو 15:2 مع منقذين).'},
-    {n:55, cat:'cpr', q:'When caring for a choking infant, what position is the infant held in?', opts:['Upside down by the ankles and shoulders.','Face up on a flat surface.','Face down on your forearm with head lower than the body.','Face down on your knee, with head lower than the body.'], c:2, exp:'يوضع الرضيع على وجهه لأسفل على ساعدك مع رأس أقل من الجسم.'},
-    {n:57, cat:'cpr', q:'A man is having a heart attack, he has medication with him, what should You do?', opts:['Give the medicine to him placing it under the tongue, Call 123.','Assist him with the medicine, call 123, and reassure him until help arrives.','Call 123, place medicine in mouth and begin CPR.','Have the victim lay down, Call 123.'], c:1, exp:'ساعده في تناول دوائه، اتصل بالطوارئ، وطمئنه حتى وصول المساعدة.'},
-    {n:58, cat:'cpr', q:'A girl is not breathing but has a pulse, what would be the best course of action?', opts:['Call 123 and begin CPR immediately.','Call 123 and begin rescue breathing.','Call 123, check for blocked airway, begin CPR.','Call 123, and wait for professional medical help to arrive'], c:1, exp:'في حالة وجود نبض وعدم وجود تنفس، يتم البدء بالتنفس الإنقاذي.'},
-    {n:60, cat:'cpr', q:'The goal of CPR is to oxygenated blood to vital organs like the ______ and ______.', opts:['Spleen, pancreas','Stomach, kidney','Heart, brain','Foot and hand'], c:2, exp:'الهدف الأساسي هو الحفاظ على تدفق الدم إلى القلب والدماغ.'},
-    {n:61, cat:'cpr', q:'When performing CPR on an adult, how deep should the chest compressions be?', opts:['1-2 cm','3-4 cm','2-3 cm','5-6 cm'], c:3, exp:'عمق الضغطات للبالغين هو 5-6 سم (2-2.4 بوصة).'},
-    {n:68, cat:'cpr', q:'The recommended rate of compression for an adult is:', opts:['80-100 per minute.','100-120 per minute.','120-140 per minute.','140-160 per minute.'], c:1, exp:'معدل الضغطات الموصى به هو 100-120 ضغطة في الدقيقة.'},
-    {n:70, cat:'cpr', q:'You are a lone first aider and have an unconscious non-breathing adult, what should you do first?', opts:['Start CPR with 30 chest compressions.','Give five initial rescue breaths.','Call 123 requesting AED (defibrillator) and ambulance.','Give two initial rescue breaths'], c:0, exp:'يبدأ المنقذ الوحيد بـ 30 ضغطة صدر ثم النفخات.'},
-    {n:75, cat:'cpr', q:'When you try to give an unresponsive adult a rescue breath and the chest does not appear to rise, what would you do next?', opts:['Perform abdominal thrusts.','Begin CPR.','Go call 123.','Repeat the head tilt/chin lift maneuver and attempt the breath again.'], c:3, exp:'أعد وضعية الرأس وحاول التنفس مرة أخرى.'},
-    {n:76, cat:'cpr', q:'While dining out in a restaurant you hear a mother cry out that her six-month-old child is gagging. His mouth area is turning blue and he\'s unable to take a breath or cry out. What would you do first in this scenario?', opts:['Begin CPR','Attempt rescue breaths then compressions','Deliver back blows and chest thrusts','Blind finger Sweep.'], c:2, exp:'للرضع، استخدم ضربات على الظهر وضغطات على الصدر.'},
-    {n:80, cat:'cpr', q:'The complete medical terminology for CPR is...', opts:['cardiac pulse restart','cardiopulmonary resuscitation','complex pulmonary radiation','cardiac pulmonary rebound'], c:1, exp:'CPR = Cardiopulmonary Resuscitation (إنعاش قلبي رئوي).'},
-    {n:82, cat:'cpr', q:'While performing CPR on an infant, another rescuer appears on the scene, what do you do next?', opts:['Immediately transport the patient','Wait until exhausted then switch','Second rescuer help with CPR','Have second rescuer begin ventilation ratio 30:2'], c:2, exp:'يتناوب المنقذون على أداء CPR للحفاظ على الجودة.'},
-    {n:88, cat:'cpr', q:'When you start CPR and you will check pulse', opts:['Not more than 5 seconds','Not more than 3 seconds','Not more than 10 seconds','Not more than 15 seconds'], c:2, exp:'يتم التحقق من النبض لمدة لا تزيد عن 10 ثوان.'},
+    // Quantitative vs Qualitative
+    {n:3, cat:'statistics', q:'Which of the following is considered correct for quantitative data collection?', opts:['Numerical data collection','Cannot be counted','Answers of open ended question','Non numerical data collection'], c:0, exp:'جمع البيانات الكمية (Quantitative) هو جمع البيانات الرقمية.'},
+    {n:7, cat:'statistics', q:'Quantitative study design measure which of the following?', opts:['Believes','Attitude','Outcome of research','Magnitude of the problem'], c:3, exp:'التصميم الكمي يقيس حجم المشكلة (Magnitude of the problem).'},
+    {n:10, cat:'statistics', q:'Which of the following is correct for content analysis?', opts:['It is a quantitative research method to analyze the content','It is a qualitative method','Quantitative and qualitative','Analysis the messages in random manner'], c:2, exp:'تحليل المحتوى (Content analysis) يمكن أن يكون كميًا ونوعيًا.'},
 
-    // Fracture
-    {n:8, cat:'fracture', q:'You find a person at the bottom of the stairs. He appears to have fallen and seems badly hurt. After sending someone for help, you would...', opts:['Roll the victim onto his stomach keeping the head and back in a straight line.','Roll the victim onto one side.','Position victim onto one side.','Attempt to keep the victim from moving.'], c:3, exp:'يجب منع المصاب من الحركة لتجنب تفاقم الإصابات.'},
-    {n:33, cat:'fracture', q:'In general, a splint should be....', opts:['Loose, so that the victim can still move the injured limb.','Not so tight that it slows circulation.','Tied with cravats over the injured area.','None of the above.'], c:1, exp:'يجب ألا تكون الجبيرة ضيقة لتجنب إعاقة الدورة الدموية.'},
-    {n:34, cat:'fracture', q:'Splint an injury to a muscle, bone, or joint only when....', opts:['You have to move or transport the victim.','You can do so without hurting the victim.','You have splinting materials available.','Both A and B'], c:3, exp:'يجب التجبير فقط عند الحاجة للنقل ودون إيذاء المصاب.'},
-    {n:36, cat:'fracture', q:'When caring for a victim with a bloody nose you would not....', opts:['Apply an ice pack to the bridge of the nose.','Apply pressure to upper lip just beneath nose.','Have the victim sit with head tilted slightly backward while pinching the nostrils together.','Have the victim sit with head tilted slightly forward while pinching the nostrils together.'], c:2, exp:'لا تميل الرأس للخلف لأن الدم قد يصل إلى المجرى التنفسي.'},
-    {n:44, cat:'fracture', q:'What is an open fracture?', opts:['A fracture in which the bone ends can move around.','A fracture in which the bone is exposed as the skin is broken.','A fracture which causes complications such as a punctured lung.','A fracture in which the bone has bent and split.'], c:1, exp:'الكسر المفتوح هو الذي يبرز فيه العظم عبر الجلد.'},
-    {n:48, cat:'fracture', q:'Which of the following is NOT a benefit of placing ice on a fracture?', opts:['Decreased healing','Reduced pain','Decreased swelling','Reduced bleeding'], c:0, exp:'الثلج لا يقلل من الشفاء بل يساعد في تقليل الألم والتورم.'},
+    // Sampling
+    {n:11, cat:'sampling', q:'Which of the following is correct for representative samples?', opts:['Samples which include cases or individuals from all subgroups of the targeted population','Samples which include cases from the same subgroups','Not generalizable to the population','Equal non representative sample'], c:0, exp:'العينات التمثيلية (Representative samples) تشمل حالات من جميع المجموعات الفرعية للسكان المستهدفين.'},
+    {n:6, cat:'statistics', q:'Which of the following is correct for Response rate?', opts:['Number of response','Percentage of the sample that returned the completed surveys','Number of outcomes','Number of results'], c:1, exp:'معدل الاستجابة (Response rate) هو نسبة العينة التي أعادت الاستبيانات المكتملة.'},
 
-    // Shock
-    {n:22, cat:'shock', q:'Which is not a symptom of shock....', opts:['Strong thirst, nausea, or vomiting.','Abdominal colic.','Restless or irritability.','Rapid breathing or rapid pulse.'], c:1, exp:'المغص البطني ليس عرضاً نموذجياً للصدمة.'},
-    {n:28, cat:'shock', q:'What would you do for a victim who has internal bleeding?', opts:['Keep the victim quiet and lying down.','Bend knees to make them comfortable.','Both A and B','None of the above.'], c:2, exp:'أبقِ المصاب مستلقياً وهادئاً مع ثني الركبتين قليلاً.'},
-    {n:32, cat:'shock', q:'Shock is a condition where:', opts:['The respiratory system fails to deliver air to the lungs.','The cardiovascular system fails to deliver blood to the heart.','The circulatory system fails to deliver blood to all parts of the body.','All of the above.'], c:2, exp:'الصدمة هي فشل الجهاز الدوراني في توصيل الدم لأجزاء الجسم.'},
-    {n:45, cat:'shock', q:'Which medical condition will develop from severe blood loss?', opts:['Shock.','Hypoglycemia.','Anaphylaxis.','Hypothermia'], c:0, exp:'فقدان الدم الشديد يؤدي إلى الصدمة.'},
-    {n:69, cat:'shock', q:'What would you do for a victim who has internal bleeding?', opts:['Keep the victim quiet and lying down.','Bend knees to make them comfortable.','Both A and B','None of the above.'], c:2, exp:'أبقِ المصاب مستلقياً وهادئاً مع ثني الركبتين قليلاً.'},
+    // SPSS
+    {n:14, cat:'spss', q:'As regard SPSS (Statistical Package of Social Science) which of the following is correct?', opts:['Computer software','Paper document','Archive paper documents','Voice documents'], c:0, exp:'SPSS هو برنامج حاسوبي (Computer software) للحزم الإحصائية للعلوم الاجتماعية.'},
 
-    // General
-    {n:11, cat:'general', q:'A woman has fallen and burned her ankle. She says she heard something snap. She looks pale and is sweating. What should you do?', opts:['Have the victim walk on the injured ankle.','Care for the injury as if it were serious.','Apply heat and elevate the injury.','Apply a dressing and loosely bandage.'], c:1, exp:'عند الشك في كسر، تعامل مع الإصابة على أنها خطيرة.'},
-    {n:12, cat:'general', q:'Which of the following should be done for a person experiencing a heat related illness?', opts:['Keep the victim warm.','Force the victim to drink fluids.','Apply cool wet cloths.','Place the victim in warm water.'], c:2, exp:'استخدام المناشف المبللة الباردة يساعد في خفض الحرارة.'},
-    {n:25, cat:'general', q:'When caring for a student who is suffering from heat cramps:', opts:['Apply cold packs','Give cool water or sports drink.','Have student keep walking slowly to work the cramp out.','Massage the muscle vigorously to increase circulation.'], c:1, exp:'إعطاء السوائل الباردة يساعد في علاج التشنجات الحرارية.'},
-    {n:26, cat:'general', q:'What symptoms are associated with heat exhaustion?', opts:['Cool, moist, pale, or flushed skin.','Rapid weak pulse.','Rapid, shallow breathing.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى الإجهاد الحراري.'},
-    {n:27, cat:'general', q:'Heat stroke....', opts:['Causes very high body temperature.','Hot red or dry skin.','Rapid weak pulse, shallow breathing.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى ضربة الشمس.'},
-    {n:31, cat:'general', q:'What is more serious?', opts:['Heat Stroke','Heat Exhaustion','Heat Cramps','Heat Rash'], c:0, exp:'ضربة الشمس هي الأكثر خطورة وتهدد الحياة.'},
-    {n:37, cat:'general', q:'Wounds that would require stitches are....', opts:['Over an inch long.','Operation wound.','Bleeding from an artery or uncontrolled bleeding.','All of the above.'], c:3, exp:'جميع الحالات المذكورة تتطلب غرزاً.'},
-    {n:38, cat:'general', q:'Hypothermia....', opts:['Is not life threatening.','Victims must be heated up as fast as possible.','Is caused by exposure to temperatures below freezing','Can be caused by swimming in waters below 70 degrees'], c:3, exp:'انخفاض الحرارة يمكن أن يحدث في الماء البارد تحت 21°م.'},
-    {n:40, cat:'general', q:'A boy is shot with an arrow through the chest and out the back, what would be the best course of action?', opts:['Remove the arrow and apply sterile gauze to the wound.','Do not remove the arrow, place several dressings around the arrow to keep it from moving.','Do not remove the arrow; break off the part out the back.','Remove the arrow, wash the area, and bandage with sterile gauze.'], c:1, exp:'لا تزيل الجسم الغريب، ثبت الضمادات حوله لمنع حركته.'},
-    {n:46, cat:'general', q:'What names are given to the three different depths of burns?', opts:['Small, medium and large.','First, second and third degree.','Minor, medium and severe.','Superficial, partial thickness, full thickness.'], c:1, exp:'تصنف الحروق إلى أولى وثانية وثالثة درجة.'},
-    {n:50, cat:'general', q:'A victim of a car accident has just vomited and now appears to be coughing up blood. He is breathing very quickly, and his pulse is weak and fast. What is most likely wrong?', opts:['He is having a seizure.','He has internal bleeding.','He is having a heart attack.','He is having a diabetic emergency.'], c:1, exp:'النزيف الداخلي هو السبب الأكثر احتمالاً لهذه الأعراض.'},
-    {n:51, cat:'general', q:'A victim has lost a lot of blood through a deep cut in his leg. He is breathing fast and seems pale and restless. He is probably....', opts:['Having a stroke.','Having a heart attack.','In shock.','Choking.'], c:2, exp:'فقدان الدم الشديد يؤدي إلى الصدمة.'},
-    {n:52, cat:'general', q:'Which is not a symptom of heart attack?', opts:['Chest pain.','Red, hot, or dry skin.','Pale or bluish in color.','Profuse sweating'], c:1, exp:'الجلد الأحمر الساخن الجاف ليس عرضاً للنوبة القلبية بل لضربة الشمس.'},
-    {n:66, cat:'general', q:'A stroke consists of which following signs?', opts:['Chest pain','Sweaty','Weakness','Nausea'], c:2, exp:'الضعف المفاجئ في الوجه أو الذراع أو الساق هو علامة على السكتة الدماغية.'},
-    {n:67, cat:'general', q:'Which of the following can cause a stroke?', opts:['A blood clot in an artery in the brain.','A blood clot in an artery in the heart.','A blood clot in an artery in the leg.','A blood clot in an artery in the lungs.'], c:0, exp:'السكتة الدماغية تحدث بسبب جلطة في شريان الدماغ.'},
-    {n:72, cat:'general', q:'Symptoms of a Stroke can be:', opts:['Poisoning, burns, and/or blood loss.','Droopy face, arm, and/or speech.','Lack of oxygen, wheezing, and/or sweating.','Shoulder pain.'], c:1, exp:'الأعراض الكلاسيكية هي تدلي الوجه وضعف الذراع وصعوبة الكلام.'},
-    {n:85, cat:'general', q:'Which has the patient priorities in the right order?', opts:['Bone trauma, Burn, Breathing','Breathing, Bleeding, Burn, Bone trauma','Bleeding, Breathing, Bone, Burn','Burn, Breathing, Bone, Bleeding'], c:1, exp:'أولوية المريض: التنفس ← النزيف ← الحرق ← الصدمة العظمية.'},
-    {n:86, cat:'general', q:'What is the first action when examining patient?', opts:['Breathing','Pulse','Speak to the victim and shake shoulder','External bleeding'], c:2, exp:'أولاً تحدث مع المصاب وهزه بلطف لتقييم الوعي.'},
-    {n:89, cat:'general', q:'The Egyptian ambulance service telephone number is', opts:['112','123','111','122'], c:1, exp:'رقم الإسعاف في مصر هو 123.'},
-    {n:90, cat:'general', q:'What would you give to someone who seems to have a heart attack?', opts:['Massage','Aspirin','Water','CPR'], c:1, exp:'الأسبرين يساعد في تقليل تجلط الدم أثناء النوبة القلبية.'},
-    {n:91, cat:'general', q:'Which of the following is not type of head injuries?', opts:['Concussion','Brain contusion','Skull fracture','Vomiting blood'], c:3, exp:'تقيؤ الدم ليس نوعاً من إصابات الرأس بل عرض.'},
-    {n:92, cat:'general', q:'Brief or partial loss of conscious level and loss of memory of events at the time of, or immediately preceding the injury is symptoms of:', opts:['Concussion','Skull fracture','Brain contusion','Brain tumor'], c:0, exp:'الارتجاج يسبب فقدان الذاكرة المؤقت وفقدان الوعي.'}
+    // Median
+    {n:9, cat:'statistics', q:'Which is correct for the median?', opts:['The average','The mean','Is the median of a set value','All of the above'], c:2, exp:'الوسيط (Median) هو القيمة الوسطى لمجموعة من القيم.'}
 ];
 
 let currentCategory = 'all';
@@ -891,12 +836,11 @@ function renderQuestions() {
     container.innerHTML = '';
 
     const catNames = {
-        bleeding: '🩸 Bleeding',
-        burns: '🔥 Burns',
-        cpr: '❤️ CPR',
-        fracture: '🦴 Fracture',
-        shock: '⚡ Shock',
-        general: '📋 General'
+        definitions: '📖 Definitions',
+        studies: '🔬 Study Designs',
+        statistics: '📈 Statistics & Data',
+        sampling: '🎯 Sampling',
+        spss: '💻 SPSS'
     };
 
     let lastCat = '';
@@ -998,7 +942,7 @@ function showResults() {
     document.getElementById('scoreFill').style.strokeDashoffset = offset;
 
     let msg = '';
-    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in First Aid!';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Research Methods!';
     else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
     else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
     else msg = '📚 Needs more revision — You can do better!';

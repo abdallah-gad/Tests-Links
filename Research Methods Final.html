@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Research Methods Final Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Research Methods Final</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>📊 A.D.Gad | Research Methods Final</h1>
+        <p class="sub">📚 Final Exam MCQ Bank — Dr. Mayada Al-Mutawalli</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="definitions">📖 Definitions</button>
+            <button data-cat="studies">🔬 Study Designs</button>
+            <button data-cat="statistics">📈 Statistics</button>
+            <button data-cat="sampling">🎯 Sampling</button>
+            <button data-cat="tf">✅ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D'];
+
+// Multiple Choice Questions
+const MCQ = [
+    // Definitions
+    {n:1, cat:'definitions', q:'As regard criteria of research questions include which of the following?', opts:['Non specific','Not reasonable','Questions should fulfill criteria of PICO and FINER criteria','Difficult to answer'], c:2, exp:'أسئلة البحث يجب أن تستوفي معايير PICO و FINER.'},
+    {n:2, cat:'definitions', q:'Which of the following is the definition of sample?', opts:['Result of research','Selected number of individual cases or selected subjects drawn from larger population','Outcome of research','Analyze the messages in random manner'], c:1, exp:'العينة هي عدد مختار من الحالات الفردية المسحوبة من مجتمع أكبر.'},
+    {n:3, cat:'definitions', q:'Research carried out to discover something for the sake of knowledge and improve understanding of the world?', opts:['Basic research','Applied research','The conclusion of it is statistically weaker than single study','Of no importance'], c:0, exp:'البحث الأساسي (Basic research) يهدف إلى اكتشاف المعرفة وتحسين فهم العالم.'},
+    {n:4, cat:'definitions', q:'_______ is defined as the study which collect data from the same population at different points of time.', opts:['Cross sectional study','Quantitative study','Longitudinal study','Data collection'], c:2, exp:'الدراسة الطولية (Longitudinal study) تجمع البيانات من نفس السكان في نقاط زمنية مختلفة.'},
+    {n:7, cat:'definitions', q:'Which of the following is correct for references?', opts:['List of studies','List of all sources of information used in writing up the research','List of survey','List of samples'], c:1, exp:'المراجع (References) هي قائمة بجميع مصادر المعلومات المستخدمة في كتابة البحث.'},
+    {n:22, cat:'definitions', q:'Which of the following is correct for case control study?', opts:['Compare between cases only','Compare between controls','Do not compare between cases and controls','Compare between those having the disease (cases) and those who do not have the disease (controls)'], c:3, exp:'دراسة الحالات والشواهد (Case control study) تقارن بين المصابين بالمرض وغير المصابين.'},
+    {n:27, cat:'definitions', q:'All of the following are specific purposes of nursing research except?', opts:['Design problem','Prediction','Controls','Answer question and solve problems'], c:0, exp:'تصميم المشكلة (Design problem) ليس غرضًا محددًا للبحث التمريضي.'},
+    {n:35, cat:'definitions', q:'Which of the following is correct for validity?', opts:['Cannot measure what is supposed to measure','A vague measure','A weak measure','A valid measurement is one which measures what is supposed to measure'], c:3, exp:'الصدق (Validity) يعني أن القياس يقيس ما يفترض أن يقيسه.'},
+    {n:36, cat:'definitions', q:'_______ is the percentage of the sample that returned the completed surveys?', opts:['References','Response rate','Randomization','Risk factor'], c:1, exp:'معدل الاستجابة (Response rate) هو نسبة العينة التي أعادت الاستبيانات المكتملة.'},
+    {n:37, cat:'definitions', q:'_______ is a sample made up of readily available subjects used in a research study.', opts:['Methods','Study','Convenience sample','Average'], c:2, exp:'العينة الملائمة (Convenience sample) هي عينة من الموضوعات المتاحة بسهولة.'},
+    {n:38, cat:'definitions', q:'Which of the following is correct for sampling frame?', opts:['A complete list of all members of the target population','Some populations','Equal reference list','Snow ball sample'], c:0, exp:'إطار المعاينة (Sampling frame) هو قائمة كاملة بجميع أفراد المجتمع المستهدف.'},
+    {n:45, cat:'definitions', q:'_______ is the list of sources of information.', opts:['Operative list','Reference list','Waiting list','Search list'], c:1, exp:'قائمة المراجع (Reference list) هي قائمة مصادر المعلومات.'},
+    {n:61, cat:'definitions', q:'SPSS is...?', opts:['Qualitative data collection','Quantitative data analysis','Answer question with how','Quantitative and qualitative data collection'], c:1, exp:'SPSS هو برنامج لتحليل البيانات الكمية (Quantitative data analysis).'},
+
+    // Study Designs
+    {n:5, cat:'studies', q:'Which of the following is correct for the median?', opts:['Average of set value','The half of set values','The summation of set values','The quarter of set values'], c:1, exp:'الوسيط (Median) هو قيمة المنتصف لمجموعة من القيم المرتبة.'},
+    {n:6, cat:'studies', q:'Which is the following is correct for methods of research?', opts:['Data collection','Data analysis','Studies','Different data collection and analysis techniques and practices followed in research'], c:3, exp:'طرق البحث تشمل تقنيات وممارسات مختلفة لجمع البيانات وتحليلها.'},
+    {n:8, cat:'studies', q:'Which of the following is correct for representative samples?', opts:['Samples which include cases or individuals from all subgroups of the targeted population','Samples which include cases from the same subgroups','Not generalizable to the population','Equal non representative sample'], c:0, exp:'العينات التمثيلية تشمل حالات من جميع المجموعات الفرعية للسكان المستهدفين.'},
+    {n:9, cat:'studies', q:'Which is the characteristic of qualitative data collection?', opts:['Numerical data','Can be counted','Non numerical','Close ended questions'], c:2, exp:'جمع البيانات النوعي (Qualitative) هو بيانات غير رقمية.'},
+    {n:10, cat:'studies', q:'_______ is data which is numerical and can be counted?', opts:['Qualitative data collection','Cohort study','Survey','Quantitative data collection'], c:3, exp:'جمع البيانات الكمي (Quantitative) هو بيانات رقمية يمكن عدها.'},
+    {n:13, cat:'studies', q:'_______ defined as well defined group of individuals who share common characteristic or experience.', opts:['Cohort study','Cross sectional study','Descriptive study','Analytical study'], c:0, exp:'دراسة الأتراب (Cohort study) هي مجموعة محددة من الأفراد يشتركون في خاصية مشتركة.'},
+    {n:14, cat:'studies', q:'Quantitative study design measure which of the following?', opts:['Believes','Attitudes','Magnitude of the problem and number','Situation'], c:2, exp:'التصميم الكمي يقيس حجم المشكلة والأعداد (Magnitude of the problem).'},
+    {n:15, cat:'studies', q:'When conduct a cross sectional study?', opts:['To estimate the prevalence of health condition','To estimate the behavior and risk factor of disease','To learn about the characteristic of attitude of individuals','All of the above'], c:3, exp:'الدراسة المقطعية تستخدم لتقدير الانتشار والسلوك وعوامل الخطر وخصائص الأفراد.'},
+    {n:16, cat:'studies', q:'Which of the following is measured by cross sectional study?', opts:['Average of population','Number of existing cases / size of population','The median of population','SPSS'], c:1, exp:'الدراسة المقطعية تقيس نسبة الحالات الموجودة إلى حجم السكان (الانتشار).'},
+    {n:17, cat:'studies', q:'Which of the following belongs to case report?', opts:['Based on one patient','Based on collection of different cases','Similar to cross sectional study','Similar to descriptive study'], c:0, exp:'تقرير الحالة (Case report) يعتمد على مريض واحد.'},
+    {n:18, cat:'studies', q:'Which of the following is correct for case control study?', opts:['Focus on the present exposure','Analytical epidemiologic study design to focus on past exposure','Focus on past and present exposure','Intermediate methods'], c:1, exp:'دراسة الحالات والشواهد تركز على التعرض السابق (Past exposure).'},
+    {n:19, cat:'studies', q:'Relative Risk (RR) in cohort study includes which of the following?', opts:['Incidence of disease among exposed / incidence of disease among non-exposed','Average of the disease','The median of disease among population','Incidence of disease among exposed only'], c:0, exp:'الخطر النسبي (RR) = معدل الإصابة بين المعرضين / معدل الإصابة بين غير المعرضين.'},
+    {n:20, cat:'studies', q:'When we conduct case control study?', opts:['When single exposure lead to multiple outcomes','Common disease','To study rare disease, when multiple exposure may lead to single outcome','When there are cases only no controls'], c:2, exp:'دراسة الحالات والشواهد تستخدم لدراسة الأمراض النادرة عندما تؤدي عدة تعرضات إلى نتيجة واحدة.'},
+    {n:21, cat:'studies', q:'Analysis of data collected by someone else is the definition of which of the following?', opts:['Primary study','Secondary study','Analytic study','Cohort study'], c:1, exp:'الدراسة الثانوية (Secondary study) هي تحليل البيانات التي جمعها شخص آخر.'},
+    {n:23, cat:'studies', q:'As regards In-depth interview which is correct?', opts:['Has outline of topics to serve as a guide for information needed','Called structured interview','Called focus group discussion','Has no importance'], c:0, exp:'المقابلة المتعمقة (In-depth interview) لها مخطط للموضوعات لتوجيه المعلومات المطلوبة.'},
+    {n:24, cat:'studies', q:'Characteristics of self-administered questionnaire of data collection include which of the following?', opts:['Always pretest questionnaire','Start with easier questions','Be specific about the purpose of pretest','All of the above'], c:3, exp:'خصائص الاستبيان الذاتي: اختبار مسبق، بدء بأسئلة سهلة، وتحديد الغرض من الاختبار المسبق.'},
+    {n:25, cat:'studies', q:'As regard techniques of data collection which of the following is correct?', opts:['Using sheet','Using agendas','Using records','Using available data'], c:3, exp:'تقنيات جمع البيانات تشمل استخدام البيانات المتاحة (Available data).'},
+    {n:26, cat:'studies', q:'Which of the following are disadvantages of interview study?', opts:['Need short times','Not expensive','Take long time and expensive','Easy'], c:2, exp:'عيوب المقابلات: تستغرق وقتًا طويلاً ومكلفة.'},
+    {n:28, cat:'studies', q:'Which of the following are classifications of studies design?', opts:['Primary and secondary studies','Old and new studies','Experimental and non-experimental','Analytical and non-analytical'], c:2, exp:'تصنيفات تصميمات الدراسات: تجريبية وغير تجريبية.'},
+    {n:29, cat:'studies', q:'As regard the case series which is correct?', opts:['Depend on one patient','Depend on collection of different case reports and depend on more than one patients','Equal case report','Equal cross sectional study'], c:1, exp:'سلسلة الحالات (Case series) تعتمد على مجموعة من تقارير الحالات المختلفة وأكثر من مريض واحد.'},
+    {n:30, cat:'studies', q:'_______ is the study when the investigator is no longer observing the subjects but is actually carrying out an experiment on them?', opts:['Observational study','Cohort study','Experimental study','Cross sectional study'], c:2, exp:'الدراسة التجريبية (Experimental study) هي عندما يقوم الباحث بتجربة على الموضوعات بدلاً من مراقبتها فقط.'},
+    {n:31, cat:'studies', q:'Which of the following is correct for selection of cases in clinical trials?', opts:['Selection according to gender only','Selection according to age','Selection according to disease status','Inclusion criteria and exclusion criteria'], c:3, exp:'اختيار الحالات في التجارب السريرية يعتمد على معايير الإدراج والاستبعاد.'},
+    {n:32, cat:'studies', q:'Which of the following is considered an advantage of randomized clinical trials?', opts:['Impossible to be evaluated in Egypt','Has no effect on health','Provide weak effect on health','Provide strong evidence of effect of intervention on health status'], c:3, exp:'التجارب السريرية العشوائية توفر أدلة قوية على تأثير التدخل على الحالة الصحية.'},
+    {n:33, cat:'studies', q:'Which of the following is correct for cohort study?', opts:['Individuals born in the same year','Individuals have the same disease','Individuals have the same inclusion criteria','All of the above'], c:3, exp:'دراسة الأتراب: أفراد ولدوا في نفس العام، لديهم نفس المرض، أو نفس معايير الإدراج.'},
+    {n:34, cat:'studies', q:'Which of the following is correct for cohort study?', opts:['Prospective and retrospective study','Cross sectional study','Difficult study to perform','Not suitable in Master degree'], c:0, exp:'دراسة الأتراب يمكن أن تكون مستقبلية (Prospective) أو بأثر رجعي (Retrospective).'},
+    {n:39, cat:'studies', q:'Which of the following are the main types of sampling methods?', opts:['Random sample and non-random sample','Not classified to sub groups','Cannot be identified','Non named groups'], c:0, exp:'الأنواع الرئيسية لطرق العينات: عشوائية وغير عشوائية.'},
+    {n:41, cat:'studies', q:'_______ is to study rare disease when multiple exposure may lead to single outcome?', opts:['Case series','Cohort study','Case control study','Cross sectional study'], c:2, exp:'دراسة الحالات والشواهد تستخدم لدراسة الأمراض النادرة عندما تؤدي عدة تعرضات إلى نتيجة واحدة.'},
+    {n:43, cat:'studies', q:'As regard the type of samples, which of the following is correct?', opts:['Representative samples only','Non representative samples only','Repressive samples and non representative samples','Cannot be classified'], c:2, exp:'أنواع العينات: تمثيلية وغير تمثيلية.'},
+    {n:44, cat:'studies', q:'As regard longitudinal study which of the following is correct?', opts:['Cannot be applied','Equal cross sectional study','Snap shot study','Study the specific population at different points of time'], c:3, exp:'الدراسة الطولية تدرس نفس السكان في نقاط زمنية مختلفة.'},
+    {n:46, cat:'studies', q:'Which of the following is correct for content analysis?', opts:['Is a quantitative method of research','Qualitative method of research','Quantitative method and qualitative','Analysis of messages in random method'], c:2, exp:'تحليل المحتوى (Content analysis) يمكن أن يكون كميًا ونوعيًا.'},
+    {n:47, cat:'studies', q:'Which of the following is considered correct for quantitative data collection?', opts:['Numerical data collection','Cannot be counted','Answers of open ended question','Non numerical data collection'], c:0, exp:'جمع البيانات الكمية هو جمع البيانات الرقمية.'},
+    {n:48, cat:'studies', q:'Which is correct for snap shot study?', opts:['Cross sectional study','Longitudinal study','Cohort study','Appropriate for rare cases'], c:0, exp:'الدراسة المقطعية هي دراسة لقطة (Snap shot).'},
+    {n:49, cat:'studies', q:'Which of the following is correct for in-depth interviews?', opts:['Method of quantitative data collection','Method of qualitative data collection','Non qualitative method of data collection','Non quantitative data collection'], c:1, exp:'المقابلات المتعمقة هي طريقة لجمع البيانات النوعية.'},
+    {n:50, cat:'studies', q:'Which of the following is correct for Response rate?', opts:['Number of response','Percentage of the sample that returned the completed surveys','Number of outcomes','Number of results'], c:1, exp:'معدل الاستجابة هو نسبة العينة التي أعادت الاستبيانات المكتملة.'},
+    {n:51, cat:'studies', q:'Quantitative study design measure which of the following?', opts:['Believes','Attitude','Outcomes of research','Magnitude of the problem'], c:3, exp:'التصميم الكمي يقيس حجم المشكلة.'},
+    {n:52, cat:'studies', q:'When conduct a cross sectional study?', opts:['To estimate the prevalence of health condition','To estimate the behavior and risk factor of the disease','To learn about the characteristic of attitude of individuals','All of the above'], c:3, exp:'الدراسة المقطعية تستخدم لتقدير الانتشار والسلوك وعوامل الخطر وخصائص الأفراد.'},
+    {n:53, cat:'studies', q:'As regard longitudinal study which of the following is correct?', opts:['Cannot be applied','Equal cross sectional study','Snap shot study','Cohort study'], c:3, exp:'الدراسة الطولية هي دراسة الأتراب (Cohort study).'},
+    {n:54, cat:'studies', q:'Which is correct for the median?', opts:['The average','The mean','Is the median of a set value','All of the above'], c:2, exp:'الوسيط هو القيمة الوسطى لمجموعة من القيم.'},
+    {n:55, cat:'studies', q:'Which is correct for snap shot study?', opts:['Cross sectional study','Longitudinal study','Cohort study','Data analysis'], c:0, exp:'الدراسة المقطعية هي دراسة لقطة.'},
+    {n:56, cat:'studies', q:'Research carried out to discover something for the sake of knowledge and improve understanding of the world?', opts:['Basic research','Applied research','The conclusion of it is statistically weaker than single study','Of no importance'], c:0, exp:'البحث الأساسي يهدف إلى اكتشاف المعرفة وتحسين فهم العالم.'},
+    {n:57, cat:'studies', q:'_______ is defined as the study which collect data from the same population at different points of time.', opts:['Primary study','Cohort study','Qualitative study','Secondary study'], c:1, exp:'الدراسة الطولية هي دراسة الأتراب التي تجمع البيانات من نفس السكان في نقاط زمنية مختلفة.'},
+    {n:58, cat:'studies', q:'Which of the following is correct for the median?', opts:['The average of set values','The half of set values','The summation of set values','The quarter of set values'], c:1, exp:'الوسيط هو قيمة المنتصف لمجموعة من القيم المرتبة.'},
+    {n:59, cat:'studies', q:'Which of the following is correct for non-representative sample?', opts:['Not include cases of all subgroups','Not include individual of all subgroups','Results are not generalizable','All the above'], c:3, exp:'العينة غير التمثيلية لا تشمل حالات من جميع المجموعات الفرعية، ونتائجها غير قابلة للتعميم.'},
+    {n:60, cat:'studies', q:'Which of the following is correct for random sampling?', opts:['Specific population','Each subject in the population has an equal chance of being selected for the study','Each subject in population has unequal chance of being selected','List of samples'], c:1, exp:'العينة العشوائية: كل فرد في المجتمع لديه فرصة متساوية للاختيار.'},
+    {n:62, cat:'studies', q:'Which of the following is the definition of reliability?', opts:['Numerical data','Nearly equal result','Measure is one which when repeated gives a similar result on each occasion','Non similar result'], c:2, exp:'الثبات (Reliability) هو أن القياس يعطي نتائج متشابهة في كل مرة.'},
+    {n:63, cat:'studies', q:'_______ is a selected number of individual cases or research subjects drawn from larger population for a specific study?', opts:['Cross sectional study','SPSS','Sample','Analysis'], c:2, exp:'العينة هي عدد مختار من الحالات الفردية المسحوبة من مجتمع أكبر.'},
+    {n:64, cat:'studies', q:'_______ is the statistical package for the social sciences and computer software commonly used?', opts:['SPSS','PDF','PPT','Word 2013'], c:0, exp:'SPSS هو برنامج إحصائي للعلوم الاجتماعية يستخدم على الكمبيوتر.'},
+    {n:65, cat:'studies', q:'_______ defined as well defined group of individuals who share common characteristic or experience.', opts:['Cohort study','Cross sectional study','Descriptive study','Analytical study'], c:0, exp:'دراسة الأتراب هي مجموعة محددة من الأفراد يشتركون في خاصية مشتركة.'},
+    {n:66, cat:'studies', q:'Quantitative study design measure which of the following?', opts:['Believes','Attitudes','Risk of the problems','Situation'], c:2, exp:'التصميم الكمي يقيس حجم المشكلة والعدد.'},
+    {n:67, cat:'studies', q:'When conduct a cross sectional study?', opts:['To estimate the prevalence of health condition','To estimate the behavior and risk factor of diseases','1+2','To diagnose common diseases'], c:2, exp:'الدراسة المقطعية تستخدم لتقدير الانتشار والسلوك وعوامل الخطر.'},
+    {n:68, cat:'studies', q:'Which of the following equal number of existing cases / size of population?', opts:['Cohort study','Cross sectional study','Primary study','Secondary study'], c:1, exp:'نسبة الحالات الموجودة إلى حجم السكان هي مقياس الانتشار في الدراسة المقطعية.'},
+    {n:69, cat:'studies', q:'Which of the following belongs to case series?', opts:['Based on one patient','Based on more than one patient','Similar to cross sectional study','Similar to descriptive study'], c:1, exp:'سلسلة الحالات تعتمد على أكثر من مريض واحد.'},
+    {n:70, cat:'studies', q:'Analytical epidemiological study design to focus on past exposure refers to...', opts:['Case control study','Case series','Case report','Cross sectional study'], c:0, exp:'دراسة الحالات والشواهد تركز على التعرض السابق.'},
+    {n:71, cat:'studies', q:'Incidence of disease among exposed / incidence of disease among non-exposed', opts:['Relative Risk','Reliability rate','Probability rate','Median'], c:0, exp:'الخطر النسبي (RR) = معدل الإصابة بين المعرضين / معدل الإصابة بين غير المعرضين.'},
+    {n:72, cat:'studies', q:'When we conduct case control study?', opts:['Study rare disease','Common disease','When multiple exposure may lead to single outcome','1+3'], c:3, exp:'دراسة الحالات والشواهد تستخدم لدراسة الأمراض النادرة وعندما تؤدي عدة تعرضات إلى نتيجة واحدة.'},
+    {n:73, cat:'studies', q:'Secondary study is', opts:['Analysis of data collected by someone else','Equal primary study','Equal experimental study','Equal observational study'], c:0, exp:'الدراسة الثانوية هي تحليل البيانات التي جمعها شخص آخر.'},
+    {n:74, cat:'studies', q:'Study which compare between those having the disease (cases) and those who do not have the disease (control) refers to which of the following?', opts:['Case control','Case report','Case series','Cohort study'], c:0, exp:'دراسة الحالات والشواهد تقارن بين المصابين بالمرض وغير المصابين.'},
+    {n:75, cat:'studies', q:'Research question should be:', opts:['Reasonable','Specific enough to be answerable','Question should fulfill PICO and FINER criteria','All the above'], c:3, exp:'يجب أن يكون سؤال البحث معقولاً ومحددًا وقابلاً للإجابة ويستوفي معايير PICO و FINER.'},
+    {n:76, cat:'studies', q:'Which is correct for general purpose of research?', opts:['Solve problems','Make problems','Design problem','Magnify problems'], c:0, exp:'الغرض العام للبحث هو حل المشكلات.'},
+    {n:77, cat:'studies', q:'Which is correct for specific purposes of research?', opts:['Identification','Description','Explanation and control','All of the above'], c:3, exp:'الأغراض المحددة للبحث: التحديد، الوصف، التفسير والتحكم.'},
+    {n:78, cat:'studies', q:'As regard FINER criteria which is correct?', opts:['Question should be Novel, Ethical, Relevant','Question should be non-ethical','Question should be difficult','Cannot be answerable'], c:0, exp:'معايير FINER: السؤال يجب أن يكون جديدًا (Novel)، أخلاقيًا (Ethical)، وذا صلة (Relevant).'},
+    {n:79, cat:'studies', q:'Which of the following are correct for cross sectional study?', opts:['Design is non-comparison groups','Design is comparison groups','Population are all members of small groups','1+3'], c:3, exp:'الدراسة المقطعية: تصميمها بدون مجموعات مقارنة، والسكان هم جميع أفراد المجموعات الصغيرة.'},
+    {n:80, cat:'studies', q:'All of the following are specific purposes of nursing research except?', opts:['Design problem','Prediction','Controls','Answer question and solve problems'], c:0, exp:'تصميم المشكلة ليس غرضًا محددًا للبحث التمريضي.'},
+    {n:81, cat:'studies', q:'Which of the following are classifications of research study?', opts:['Cohort study','Case control study','Cross sectional study','All the above'], c:3, exp:'تصنيفات الدراسات البحثية تشمل دراسة الأتراب، الحالات والشواهد، والدراسة المقطعية.'},
+    {n:82, cat:'studies', q:'As regard the case series which is correct?', opts:['Depend on one patient','Depend on collection of different case reports and depend on more than one patients','Equal case report','Equal cross sectional study'], c:1, exp:'سلسلة الحالات تعتمد على مجموعة من تقارير الحالات المختلفة وأكثر من مريض واحد.'},
+    {n:83, cat:'studies', q:'Experimental study is', opts:['The study when the investigator is no longer observing the subjects but actually carrying out experiments on them','Cross sectional study','Cohort case control study','Case report'], c:0, exp:'الدراسة التجريبية هي عندما يقوم الباحث بتجربة على الموضوعات بدلاً من مراقبتها فقط.'},
+    {n:84, cat:'studies', q:'Which of the following is correct for selection of cases in clinical trials?', opts:['Selection according to gender only','Selection according to age','Selection according to disease status','Inclusion criteria and exclusion criteria'], c:3, exp:'اختيار الحالات في التجارب السريرية يعتمد على معايير الإدراج والاستبعاد.'},
+    {n:85, cat:'studies', q:'Which of the following is considered an advantage of randomized clinical trials?', opts:['Has no effect on health','Experimental study','Provide strong evidence of effect of intervention on health status','2+3'], c:3, exp:'التجارب السريرية العشوائية هي دراسات تجريبية توفر أدلة قوية على تأثير التدخل.'},
+    {n:86, cat:'studies', q:'Which of the following is correct for cohort study?', opts:['Individuals born in the same year','Individuals have the same disease','Individuals have the same inclusion criteria','All of the above'], c:3, exp:'دراسة الأتراب: أفراد ولدوا في نفس العام، لديهم نفس المرض، أو نفس معايير الإدراج.'},
+    {n:87, cat:'studies', q:'Which of the following is correct for cohort study?', opts:['Appropriate for individuals born in the same year, having the same disease','Cross sectional study','Difficult study to perform','Not suitable in Master degree'], c:0, exp:'دراسة الأتراب مناسبة للأفراد الذين ولدوا في نفس العام أو لديهم نفس المرض.'},
+    {n:88, cat:'studies', q:'_______ is the percentage of the sample that returned the completed surveys?', opts:['References','Response rate','Randomization','Risk factor'], c:1, exp:'معدل الاستجابة هو نسبة العينة التي أعادت الاستبيانات المكتملة.'},
+    {n:89, cat:'studies', q:'_______ is a sample made up of readily available subjects used in a research study.', opts:['Representative sample','Non representative sample','Convenience sample','Random sample'], c:2, exp:'العينة الملائمة هي عينة من الموضوعات المتاحة بسهولة.'},
+    {n:90, cat:'studies', q:'Which of the following is correct for sampling frame?', opts:['A complete list of all members of the target population','Random selection','Equal reference list','Non random selection'], c:0, exp:'إطار المعاينة هو قائمة كاملة بجميع أفراد المجتمع المستهدف.'},
+    {n:91, cat:'studies', q:'Which of the following are the main types of sampling methods?', opts:['Random sample','Non random sample','Not classified to sub groups','1+2'], c:3, exp:'الأنواع الرئيسية لطرق العينات: عشوائية وغير عشوائية.'},
+    {n:92, cat:'studies', q:'Which of the following is correct for mean?', opts:['The average of set values','The half of set values','The summation of set values','The quarter of set values'], c:0, exp:'المتوسط (Mean) هو معدل القيم.'},
+    {n:93, cat:'studies', q:'_______ is to study rare disease when multiple exposure may lead to single outcome?', opts:['Case series','Cohort study','Case report','Cross sectional study'], c:0, exp:'سلسلة الحالات تستخدم لدراسة الأمراض النادرة عند وجود عدة تعرضات.'},
+    {n:94, cat:'studies', q:'As regard longitudinal study which of the following is correct?', opts:['Cannot be applied','Equal cross sectional study','Snap shot study','Equal cohort study'], c:3, exp:'الدراسة الطولية تساوي دراسة الأتراب.'},
+    {n:95, cat:'studies', q:'_______ is the list of sources of information.', opts:['Operative list','Reference list','Waiting list','Search list'], c:1, exp:'قائمة المراجع هي قائمة مصادر المعلومات.'},
+    {n:96, cat:'studies', q:'Which is correct for snap shot study?', opts:['Cross sectional study','Longitudinal study','Case report','Case series'], c:0, exp:'الدراسة المقطعية هي دراسة لقطة.'},
+    {n:97, cat:'studies', q:'When conduct a cross sectional study?', opts:['To estimate the prevalence of health condition','To estimate the behavior and risk factor of the disease','To learn about the characteristic of attitude of individuals','All of the above'], c:3, exp:'الدراسة المقطعية تستخدم لتقدير الانتشار والسلوك وعوامل الخطر.'},
+    {n:98, cat:'studies', q:'As regard longitudinal study which of the following is correct?', opts:['Cannot be applied','Equal cross sectional study','Snap shot study','Cohort study'], c:3, exp:'الدراسة الطولية هي دراسة الأتراب.'},
+    {n:99, cat:'studies', q:'Which is correct for the median?', opts:['The average','The mean','Is the median of a set value','Quarter of the value'], c:2, exp:'الوسيط هو القيمة الوسطى لمجموعة من القيم.'},
+    {n:100, cat:'studies', q:'_______ research carried out for practical applications and problem solving function.', opts:['Applied research','Daily research','Interview','Basic research'], c:0, exp:'البحث التطبيقي (Applied research) يُجرى للتطبيقات العملية وحل المشكلات.'},
+    {n:101, cat:'studies', q:'_______ research carried out for practical applications and problem solving function.', opts:['Applied research','Daily research','Interview','Basic research'], c:0, exp:'البحث التطبيقي يُجرى للتطبيقات العملية وحل المشكلات.'}
+];
+
+// True/False Questions
+const TF = [
+    {n:1, q:'Systematic review is qualitative evidence synthesis.', ans:true, exp:'المراجعة المنهجية هي توليف للأدلة النوعية.'},
+    {n:2, q:'Disadvantages of intervention study are expensive, take long time and may be complex.', ans:true, exp:'عيوب الدراسة التداخلية: مكلفة، تستغرق وقتًا طويلاً، وقد تكون معقدة.'},
+    {n:3, q:'Cohort study is considered as a longitudinal study.', ans:true, exp:'دراسة الأتراب تعتبر دراسة طولية.'},
+    {n:4, q:'In-depth interview is a method of qualitative data collection used when cannot be directly observed or measured.', ans:true, exp:'المقابلة المتعمقة هي طريقة لجمع البيانات النوعية عندما لا يمكن ملاحظة أو قياس الظاهرة مباشرة.'},
+    {n:5, q:'Applied research carried out to discover something simply for the sake of knowledge to improve our understanding of the world.', ans:false, exp:'البحث التطبيقي ليس للاكتشاف من أجل المعرفة فقط (هذا البحث الأساسي).'},
+    {n:6, q:'As regard random sample, subjects are selected according to the probability laws.', ans:false, exp:'العينة العشوائية تختار وفقًا لقوانين الاحتمال (هذه العبارة صحيحة وليست خاطئة - ولكن الإجابة في الملف False).'},
+    {n:7, q:'We do sampling to obtain representative sample of population.', ans:true, exp:'نقوم بأخذ العينات للحصول على عينة تمثيلية من السكان.'},
+    {n:8, q:'Response rate is the percentage of the sample which returned the complete survey.', ans:true, exp:'معدل الاستجابة هو نسبة العينة التي أعادت الاستبيان الكامل.'},
+    {n:9, q:'SPSS is used for computer in quantitative data collection.', ans:true, exp:'SPSS يستخدم في جمع البيانات الكمية باستخدام الكمبيوتر.'},
+    {n:10, q:'References is a list of all sources of information used in writing up the research, within the body of the publications.', ans:true, exp:'المراجع هي قائمة بجميع مصادر المعلومات المستخدمة في كتابة البحث.'},
+    {n:11, q:'Cohort study is a cross sectional study.', ans:false, exp:'دراسة الأتراب ليست دراسة مقطعية.'},
+    {n:12, q:'SPSS is computer software.', ans:true, exp:'SPSS هو برنامج حاسوبي.'},
+    {n:13, q:'Cross sectional study is snap shot study.', ans:true, exp:'الدراسة المقطعية هي دراسة لقطة.'},
+    {n:14, q:'Relative risk is not percentage.', ans:false, exp:'الخطر النسبي ليس نسبة مئوية (هو نسبة وليست نسبة مئوية).'},
+    {n:15, q:'Randomized study is equal to non-randomized study.', ans:false, exp:'الدراسة العشوائية لا تساوي الدراسة غير العشوائية.'},
+    {n:16, q:'Cohort study is cross sectional study.', ans:false, exp:'دراسة الأتراب ليست دراسة مقطعية.'}
+];
+
+// Combine all questions
+const ALL_QUESTIONS = [...MCQ, ...TF];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// Random particles
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') filtered = ALL_QUESTIONS;
+        else if (currentCategory === 'tf') filtered = TF;
+        else filtered = MCQ.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// Load initial count
+document.getElementById('totalQ').textContent = ALL_QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') {
+        currentQuestions = [...ALL_QUESTIONS];
+    } else if (currentCategory === 'tf') {
+        currentQuestions = [...TF];
+    } else {
+        currentQuestions = MCQ.filter(q => q.cat === currentCategory);
+    }
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    const catNames = {
+        definitions: '📖 Definitions',
+        studies: '🔬 Study Designs',
+        statistics: '📈 Statistics & Data',
+        sampling: '🎯 Sampling'
+    };
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        const isTF = q.ans !== undefined;
+        const catLabel = isTF ? '✅ True / False' : (catNames[q.cat] || '📖 General');
+
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="true" onclick="selectTFAnswer(${idx}, true)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="false" onclick="selectTFAnswer(${idx}, false)">❌ False</div>
+                </div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectMCQAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectMCQAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${q.opts[q.c]}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function selectTFAnswer(qIdx, selected) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = selected === q.ans;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        const optVal = opt.dataset.opt === 'true' ? true : false;
+        if (optVal === q.ans) {
+            opt.classList.add('correct');
+        } else if (optVal === selected && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const correctText = q.ans ? 'True' : 'False';
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `The correct answer is: ${correctText}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function showFeedback(qIdx, isCorrect, message) {
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ Correct! ${message}` : `❌ Wrong! ${message}`;
+}
+
+function updateCounts(isCorrect) {
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Research Methods!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            const isTF = q.ans !== undefined;
+            const correctAns = isTF ? (q.ans ? 'True' : 'False') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctAns}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>

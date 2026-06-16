@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A.D.Gad | First Aid & Emergency Quiz</title>
+<title>A.D.Gad | Physiology Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -686,7 +686,7 @@ body {
     <div class="nav-container">
         <div class="logo-area">
             <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
-            <span class="brand">A.D.Gad | First Aid</span>
+            <span class="brand">A.D.Gad | Physiology final</span>
         </div>
         <div class="progress-stats">
             <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
@@ -703,16 +703,16 @@ body {
 <div class="start-screen" id="startScreen">
     <div class="start-card">
         <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
-        <h1>🚑 First Aid & Emergency</h1>
+        <h1>🧬 A.D.Gad | Physiology final</h1>
         <p class="sub">📚 MCQ Bank for Review — Dr. Mohammad al-Imam</p>
         <div class="filter-btns" id="filterBtns">
             <button class="active" data-cat="all">📚 All</button>
-            <button data-cat="bleeding">🩸 Bleeding</button>
-            <button data-cat="burns">🔥 Burns</button>
-            <button data-cat="cpr">❤️ CPR</button>
-            <button data-cat="fracture">🦴 Fracture</button>
-            <button data-cat="shock">⚡ Shock</button>
-            <button data-cat="general">📋 General</button>
+            <button data-cat="cell">🧫 Cell</button>
+            <button data-cat="blood">🩸 Blood</button>
+            <button data-cat="nervous">🧠 Nervous</button>
+            <button data-cat="cardiac">❤️ Cardiac</button>
+            <button data-cat="digestive">🫃 Digestive</button>
+            <button data-cat="vision">👁️ Vision</button>
         </div>
         <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
         <button class="btn-start" id="startBtn">▶ Start Quiz</button>
@@ -754,87 +754,75 @@ body {
 <script>
 const L = ['A', 'B', 'C', 'D'];
 
-// All questions from First Aid file - English questions with Arabic explanation
+// All questions from Physiology file
 const QUESTIONS = [
-    // Bleeding
-    {n:2, cat:'bleeding', q:'A victim of a car accident has just vomited and now appears to be coughing up blood. He is breathing very quickly and his pulse is weak and fast. What is most likely wrong?', opts:['He is having a seizure.','He has internal bleeding.','He is having a heart attack.','He is having a diabetic emergency.'], c:1, exp:'النزيف الداخلي يسبب ضعف النبض وسرعة التنفس والسعال الدموي.'},
-    {n:4, cat:'bleeding', q:'A victim has lost a lot of blood through a deep cut in his leg. He is breathing fast and seems pale and restless. He is probably....', opts:['Having a stroke.','Having a heart attack.','In shock.','Choking.'], c:2, exp:'فقدان كمية كبيرة من الدم يؤدي إلى الصدمة (Shock).'},
-    {n:9, cat:'bleeding', q:'A victim has a large piece of glass sticking out of her leg. You should....', opts:['Leave the glass in her leg and control the bleeding.','Call your local emergency phone number.','Remove the glass and then control the bleeding.','Both A and B'], c:3, exp:'لا تزيل الجسم الغريب واستدعِ الطوارئ مع التحكم بالنزيف.'},
-    {n:13, cat:'bleeding', q:'Which should be part of your care for a severely bleeding open wound?', opts:['Allow the wound to bleed in order to minimize infection.','Apply direct pressure and elevate the injured area (if no broken bones).','Use a tourniquet to stop all blood flow.','Both B and C'], c:1, exp:'الضغط المباشر ورفع المنطقة هو الخطوة الأساسية للتحكم بالنزيف.'},
-    {n:14, cat:'bleeding', q:'What should you do if you think a victim has serious internal bleeding?', opts:['Apply heat to the injured area.','Call your local emergency phone number for help.','Place the victim in a sitting position.','Give fluids to replace blood loss.'], c:1, exp:'النزيف الداخلي خطير ويتطلب الاتصال الفوري بالطوارئ.'},
-    {n:15, cat:'bleeding', q:'Which is the first step when caring for bleeding wounds?', opts:['Apply direct pressure with a clean or sterile dressing.','Apply pressure at the pressure point.','Add bulky dressings to reinforce blood-soaked bandages.','Elevate the wound.'], c:0, exp:'الخطوة الأولى هي الضغط المباشر على الجرح.'},
-    {n:16, cat:'bleeding', q:'How can you reduce the risk of disease transmission when caring for open, bleeding wounds?', opts:['Wash your hands immediately after giving care.','Avoid direct contact with blood.','Use protective barriers such as gloves or plastic wrap.','All of the above.'], c:3, exp:'جميع الإجراءات المذكورة تقلل من خطر انتقال الأمراض.'},
-    {n:18, cat:'bleeding', q:'When giving care for external bleeding, what should you do first?', opts:['Elevate the injury.','Apply direct pressure.','Apply a loose dressing.','Apply a tourniquet.'], c:1, exp:'الضغط المباشر هو الخطوة الأولى للتحكم بالنزيف الخارجي.'},
-    {n:21, cat:'bleeding', q:'Which symptoms would indicate internal bleeding?', opts:['Rapid weak pulse, Excessive thirst.','Skin that feels cool or moist, or looks pale or bluish.','Tender, swollen, bruised, or hard areas of his body, such as the abdomen.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى نزيف داخلي.'},
-    {n:65, cat:'bleeding', q:'Which symptoms would indicate internal bleeding?', opts:['Rapid weak pulse, Excessive thirst.','Skin that feels cool or moist or looks pale or bluish.','Tender, swollen, bruised, or hard areas of his body, such as the abdomen.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى نزيف داخلي.'},
+    // Cell
+    {n:1, cat:'cell', q:'The function of nucleus of the cell is:', opts:['Contains digestive enzymes','Controls cell activities and cell division','Generation of energy','Site of protein synthesis'], c:1, exp:'نواة الخلية تتحكم في أنشطة الخلية وانقسامها.'},
+    {n:2, cat:'cell', q:'Which of the following can dissolve through cell membrane:', opts:['Na','Cl','O2','None of the above'], c:2, exp:'الأكسجين (O2) يمكن أن يذوب عبر الغشاء الخلوي.'},
+    {n:3, cat:'cell', q:'In facilitated diffusion:', opts:['Passive (needs no energy)','From high concentration to low concentration','Needs carrier','All of the above'], c:3, exp:'الانتشار الميسر هو عملية سلبية، من التركيز المرتفع للمنخفض، وتحتاج إلى ناقل.'},
+    {n:4, cat:'cell', q:'In active transport:', opts:['Occurs against concentration gradient','Needs carrier','Energy (ATP) is used','ALL of the above'], c:3, exp:'النقل النشط يحدث عكس تدرج التركيز، يحتاج ناقل، ويستخدم طاقة (ATP).'},
+    {n:5, cat:'cell', q:'Most abundant plasma protein is:', opts:['Albumin','Globulin','Fibrinogen','None of the above'], c:0, exp:'الألبومين هو أكثر بروتينات البلازما وفرة.'},
 
-    // Burns
-    {n:1, cat:'burns', q:'Your check of the scene suggests that a victim has suffered an electrical shock. The first thing to do is....', opts:['Cover all burns with a dry loose dressing.','Ask a bystander to help you move the victim.','Place the victim on one side with the head down.','Make sure the power is turned off'], c:3, exp:'يجب التأكد أولاً من إطفاء التيار الكهربائي لتجنب المخاطر.'},
-    {n:3, cat:'burns', q:'You are caring for a victim with a burned hand. Put the hand in cool water if....', opts:['The burns are very deep.','There are burns with open blisters.','The burns are minor with no open blisters.','You should put the hand in cool water for all of the above.'], c:2, exp:'يوضع الحرق البسيط في ماء بارد لتخفيف الألم ومنع تفاقمه.'},
-    {n:5, cat:'burns', q:'For which of the following burn victims should you immediately call your local emergency phone number?', opts:['A 40-year-old man who has burned his hand with hot coffee.','A 68-year-old woman who has a blistered grease burn on her hands and arms.','A 26-year-old woman who has a sunburn on her shoulders.','All of the above.'], c:1, exp:'الحروق الدهنية العميقة مع البثور تتطلب عناية طبية فورية.'},
-    {n:6, cat:'burns', q:'A 15-year-old boy has just splashed a chemical on his face. After sending someone to call for an ambulance, you would...', opts:['Cover the burned area.','Have the victim stay calm until ambulance arrives.','Flush the burned area with large amounts of water until the ambulance arrives.','Immediately drive the victim to the hospital.'], c:2, exp:'غسل المنطقة بالماء بكميات كبيرة يخفف من تأثير المادة الكيميائية.'},
-    {n:7, cat:'burns', q:'Why should you cover burns with a clean or sterile dressing?', opts:['To prevent infection.','To cool burned area.','To keep the burned area warm.','Both A and C'], c:0, exp:'الغرض الأساسي هو منع العدوى.'},
-    {n:10, cat:'burns', q:'What should be your first concern at the scene where a person has been seriously burned?', opts:['Checking the scene for safety.','Checking the victims breathing and pulse.','Calling your local emergency phone number.','Cooling the burned area.'], c:0, exp:'السلامة أولاً قبل تقديم أي إسعافات.'},
-    {n:23, cat:'burns', q:'A first-degree burn....', opts:['Involves only the top layer of skin.','Is red and blistered.','Destroys all layers of skin.','Is the most serious of burns.'], c:0, exp:'حرق الدرجة الأولى يشمل فقط الطبقة العليا من الجلد.'},
-    {n:24, cat:'burns', q:'When caring for someone who has suffered an electrical burn, you would not....', opts:['Check breathing and pulse.','Check for possible fractures.','Cool the burned area.','Treat for shock.'], c:2, exp:'لا تبرد المنطقة المحروقة في الحروق الكهربائية.'},
-    {n:30, cat:'burns', q:'What do you do for a chemical burn?', opts:['Flush with water, dry, and cover.','Flush with large amounts of water and cover.','Flush with large amounts of warm water until help arrives.','Flush with large amounts of cool water until help arrives.'], c:3, exp:'غسل المنطقة بالماء البارد بكميات كبيرة حتى وصول المساعدة.'},
-    {n:94, cat:'burns', q:'Second-degree burn....', opts:['Involves only the top layer of skin.','Is red and blistered.','Destroys all layers of skin.','Is the most serious of burns.'], c:1, exp:'حرق الدرجة الثانية يكون أحمر اللون مع بثور.'},
+    // Blood
+    {n:6, cat:'blood', q:'Life span of RBC is:', opts:['90 days','40 days','120 days','60 days'], c:2, exp:'عمر كريات الدم الحمراء هو 120 يومًا.'},
+    {n:7, cat:'blood', q:'The hormone erythropoietin stimulates red blood cell production. Where is it produced?', opts:['Spleen','Liver','Kidney','Thyroid'], c:2, exp:'الإريثروبويتين ينتج في الكلى.'},
+    {n:8, cat:'blood', q:'Which statement about erythrocytes is correct?', opts:['They fight infection','Non-nucleated','Produced in spleen','Clot formation'], c:1, exp:'كريات الدم الحمراء لا تحتوي على نواة (Non-nucleated).'},
+    {n:9, cat:'blood', q:'The formation of a blood clot is known as:', opts:['Coagulation','Chemotaxis','Leucopoiesis','Erythropoiesis'], c:0, exp:'تكوين الجلطة الدموية يسمى تخثر (Coagulation).'},
+    {n:10, cat:'blood', q:'Which is the function of white blood cells?', opts:['Transport oxygen','Maintain homeostasis','Produce hemoglobin','Defend against infection'], c:3, exp:'كريات الدم البيضاء تدافع ضد العدوى.'},
+    {n:11, cat:'blood', q:'Vitamin B12:', opts:['Essential for DNA synthesis & cell maturation','Helps formation of myelin sheath','Deficiency gives neurological manifestation','All of the above'], c:3, exp:'فيتامين B12 ضروري لتخليق DNA، تكوين غلاف الميالين، ونقصه يسبب أعراضًا عصبية.'},
+    {n:12, cat:'blood', q:'What happens when a person has anemia?', opts:['The body produces too much iron','The blood does not have enough red blood cells','The blood becomes thick','Too many white blood cells are produced'], c:1, exp:'الأنيميا تعني نقص في عدد كريات الدم الحمراء.'},
+    {n:13, cat:'blood', q:'What is the most common cause of anemia?', opts:['Too little sleep','Too much sugar','Too little iron in the blood','Exposure to X-ray radiation'], c:2, exp:'السبب الأكثر شيوعًا للأنيميا هو نقص الحديد في الدم.'},
+    {n:14, cat:'blood', q:'Which group is the most likely to have anemia?', opts:['Men','Women','Teenagers','Older adults'], c:1, exp:'النساء أكثر عرضة للإصابة بالأنيميا.'},
+    {n:15, cat:'blood', q:'How does anemia affect the body?', opts:["The blood doesn't deliver enough oxygen to the body",'Blood becomes thin','Tissues retain fluids','None of the above'], c:0, exp:'الأنيميا تؤدي إلى عدم وصول كمية كافية من الأكسجين للجسم.'},
+    {n:16, cat:'blood', q:'A lack of which will result in abnormally large red blood cells (megaloblastic anemia)?', opts:['Oxygen','Vitamin C','Vitamin B-12 and folic acid','Carbon dioxide'], c:2, exp:'نقص فيتامين B12 وحمض الفوليك يؤدي إلى فقر الدم الضخم الأرومات (megaloblastic anemia).'},
+    {n:17, cat:'blood', q:'Which of these are signs of anemia?', opts:['Pale gums','Dark circles under the eyes','Bleeding','All of the above'], c:3, exp:'جميع الأعراض المذكورة قد تكون علامات للأنيميا.'},
+    {n:18, cat:'blood', q:'How does iron-deficiency anemia affect teenagers?', opts:['More trouble with written expression',"Can't concentrate",'Aggravates hyperactivity','A and B'], c:3, exp:'أنيميا نقص الحديد لدى المراهقين تؤدي إلى صعوبة في التعبير الكتابي وضعف التركيز.'},
+    {n:19, cat:'blood', q:'Term polycythemia means abnormal increase in:', opts:['Red blood cells','White blood cells','Platelet','None of the above'], c:0, exp:'Polycythemia تعني زيادة غير طبيعية في كريات الدم الحمراء.'},
 
-    // CPR
-    {n:49, cat:'cpr', q:'A person, who is unconscious, not breathing, has no pulse, needs....', opts:['CPR','Abdominal thrust maneuver.','Rescue breathing.','Back blows and chest thrusts.'], c:0, exp:'في حالة عدم وجود نبض وتنفس، يتم البدء بالـ CPR.'},
-    {n:53, cat:'cpr', q:'When performing adult CPR, you give....', opts:['2 slow breaths and 30 chest compressions.','1 slow breath and 10 chest compressions.','5 slow breaths and 10 chest compressions.','3 slow breaths and 15 chest compressions.'], c:0, exp:'نسبة الإنعاش للبالغين هي 30 ضغطة إلى نفختين.'},
-    {n:54, cat:'cpr', q:'When performing CPR on a child you give....', opts:['4 slow breaths and 20 chest compressions.','1 slow breath and 5 chest compressions.','2 slow breaths and 30 chest compressions.','2 slow breaths and 15 chest compressions.'], c:2, exp:'نسبة الإنعاش للأطفال هي 30 ضغطة إلى نفختين (أو 15:2 مع منقذين).'},
-    {n:55, cat:'cpr', q:'When caring for a choking infant, what position is the infant held in?', opts:['Upside down by the ankles and shoulders.','Face up on a flat surface.','Face down on your forearm with head lower than the body.','Face down on your knee, with head lower than the body.'], c:2, exp:'يوضع الرضيع على وجهه لأسفل على ساعدك مع رأس أقل من الجسم.'},
-    {n:57, cat:'cpr', q:'A man is having a heart attack, he has medication with him, what should You do?', opts:['Give the medicine to him placing it under the tongue, Call 123.','Assist him with the medicine, call 123, and reassure him until help arrives.','Call 123, place medicine in mouth and begin CPR.','Have the victim lay down, Call 123.'], c:1, exp:'ساعده في تناول دوائه، اتصل بالطوارئ، وطمئنه حتى وصول المساعدة.'},
-    {n:58, cat:'cpr', q:'A girl is not breathing but has a pulse, what would be the best course of action?', opts:['Call 123 and begin CPR immediately.','Call 123 and begin rescue breathing.','Call 123, check for blocked airway, begin CPR.','Call 123, and wait for professional medical help to arrive'], c:1, exp:'في حالة وجود نبض وعدم وجود تنفس، يتم البدء بالتنفس الإنقاذي.'},
-    {n:60, cat:'cpr', q:'The goal of CPR is to oxygenated blood to vital organs like the ______ and ______.', opts:['Spleen, pancreas','Stomach, kidney','Heart, brain','Foot and hand'], c:2, exp:'الهدف الأساسي هو الحفاظ على تدفق الدم إلى القلب والدماغ.'},
-    {n:61, cat:'cpr', q:'When performing CPR on an adult, how deep should the chest compressions be?', opts:['1-2 cm','3-4 cm','2-3 cm','5-6 cm'], c:3, exp:'عمق الضغطات للبالغين هو 5-6 سم (2-2.4 بوصة).'},
-    {n:68, cat:'cpr', q:'The recommended rate of compression for an adult is:', opts:['80-100 per minute.','100-120 per minute.','120-140 per minute.','140-160 per minute.'], c:1, exp:'معدل الضغطات الموصى به هو 100-120 ضغطة في الدقيقة.'},
-    {n:70, cat:'cpr', q:'You are a lone first aider and have an unconscious non-breathing adult, what should you do first?', opts:['Start CPR with 30 chest compressions.','Give five initial rescue breaths.','Call 123 requesting AED (defibrillator) and ambulance.','Give two initial rescue breaths'], c:0, exp:'يبدأ المنقذ الوحيد بـ 30 ضغطة صدر ثم النفخات.'},
-    {n:75, cat:'cpr', q:'When you try to give an unresponsive adult a rescue breath and the chest does not appear to rise, what would you do next?', opts:['Perform abdominal thrusts.','Begin CPR.','Go call 123.','Repeat the head tilt/chin lift maneuver and attempt the breath again.'], c:3, exp:'أعد وضعية الرأس وحاول التنفس مرة أخرى.'},
-    {n:76, cat:'cpr', q:'While dining out in a restaurant you hear a mother cry out that her six-month-old child is gagging. His mouth area is turning blue and he\'s unable to take a breath or cry out. What would you do first in this scenario?', opts:['Begin CPR','Attempt rescue breaths then compressions','Deliver back blows and chest thrusts','Blind finger Sweep.'], c:2, exp:'للرضع، استخدم ضربات على الظهر وضغطات على الصدر.'},
-    {n:80, cat:'cpr', q:'The complete medical terminology for CPR is...', opts:['cardiac pulse restart','cardiopulmonary resuscitation','complex pulmonary radiation','cardiac pulmonary rebound'], c:1, exp:'CPR = Cardiopulmonary Resuscitation (إنعاش قلبي رئوي).'},
-    {n:82, cat:'cpr', q:'While performing CPR on an infant, another rescuer appears on the scene, what do you do next?', opts:['Immediately transport the patient','Wait until exhausted then switch','Second rescuer help with CPR','Have second rescuer begin ventilation ratio 30:2'], c:2, exp:'يتناوب المنقذون على أداء CPR للحفاظ على الجودة.'},
-    {n:88, cat:'cpr', q:'When you start CPR and you will check pulse', opts:['Not more than 5 seconds','Not more than 3 seconds','Not more than 10 seconds','Not more than 15 seconds'], c:2, exp:'يتم التحقق من النبض لمدة لا تزيد عن 10 ثوان.'},
+    // Nervous
+    {n:20, cat:'nervous', q:'________ are the neurons carrying impulses away from the central nervous system:', opts:['Efferent nerves','Afferent nerves','Extensors','Sensory nerves'], c:0, exp:'الألياف العصبية الصادرة (Efferent) تحمل النبضات بعيدًا عن الجهاز العصبي المركزي.'},
+    {n:21, cat:'nervous', q:'What is the basic unit of the nervous system?', opts:['Glial cell','Meninges','Neuron','Cerebrospinal fluid'], c:2, exp:'الخلية العصبية (Neuron) هي الوحدة الأساسية للجهاز العصبي.'},
+    {n:22, cat:'nervous', q:'The neuron cell is made up of which parts?', opts:['Axon','Dendrite','Nucleus','All of the Above'], c:3, exp:'الخلية العصبية تتكون من محور عصبي (Axon)، تغصنات (Dendrite)، ونواة (Nucleus).'},
+    {n:23, cat:'nervous', q:'How do neurons communicate with one another?', opts:['Electrically','Chemically','Through weak radio-wave-like impulses','A and B'], c:3, exp:'الخلايا العصبية تتواصل كهربائيًا وكيميائيًا.'},
+    {n:24, cat:'nervous', q:'Reflex arc formed of:', opts:['Brain, muscle, spinal cord','Receptor, spinal cord, brain, muscle, glands','Muscle, brain, spinal cord','Muscle, receptor, spinal cord'], c:1, exp:'القوس الانعكاسية تتكون من مستقبل، حبل شوكي، دماغ، عضلات وغدد.'},
+    {n:25, cat:'nervous', q:'The opening of voltage-gated potassium channels is responsible for which part of the action potential?', opts:['Depolarisation','Repolarisation','Contraction of muscle fibre','Signalling vesicular release'], c:1, exp:'فتح قنوات البوتاسيوم مسؤول عن إعادة الاستقطاب (Repolarisation).'},
+    {n:26, cat:'nervous', q:'What is responsible for the negative resting membrane potential (-70mV) in a neuron?', opts:['Schwann cells','Unequal distribution of ions (more Na+ outside, more K+ inside)','The action potential','None of above'], c:1, exp:'جهد الراحة السلبي ناتج عن التوزيع غير المتساوي للأيونات (Na+ خارج، K+ داخل).'},
+    {n:27, cat:'nervous', q:'Action potential phases:', opts:['Latent period','Depolarization phase','Repolarization phase','All of the above'], c:3, exp:'جهد الفعل له مراحل: كامن، إزالة استقطاب، وإعادة استقطاب.'},
+    {n:28, cat:'nervous', q:'During depolarization phase of action potential:', opts:['Na+ entry through voltage-gated Na+ channels','Inactivation of Na+ channels','Activation of K+ channels','None of the above'], c:0, exp:'خلال مرحلة إزالة الاستقطاب، يدخل Na+ عبر قنوات Na+ المعتمدة على الجهد.'},
+    {n:29, cat:'nervous', q:'Properties of Neuromuscular Transmission:', opts:['Unidirectional','Delay of about 0.5 msec','Easily fatigued','All of the above'], c:3, exp:'انتقال الإشارة العصبية العضلية له خصائص: أحادي الاتجاه، تأخير 0.5 ملي ثانية، وسهل الإرهاق.'},
+    {n:30, cat:'nervous', q:'The term Stereognosis means:', opts:['Localization of a point touched without looking','Differentiation between two points without looking','Ability to know an object from its shape/form/texture with closed eyes','Ability to know texture of materials with closed eyes'], c:2, exp:'Stereognosis هي القدرة على التعرف على الأشياء عن طريق اللمس مع إغلاق العينين.'},
+    {n:31, cat:'nervous', q:'Which is an extracranial cause of headache?', opts:['Meningitis','Meningeal trauma','Brain tumors','Otitis media'], c:3, exp:'التهاب الأذن الوسطى (Otitis media) هو سبب خارج الجمجمة للصداع.'},
+    {n:32, cat:'nervous', q:'Which is an intracranial cause of headache?', opts:['Meningitis','Sinusitis, Allergic rhinitis','Errors of eye refraction, Glaucoma','Dental abscess, Tooth ache'], c:0, exp:'التهاب السحايا (Meningitis) هو سبب داخل الجمجمة للصداع.'},
+    {n:33, cat:'nervous', q:'Which is a cause of mydriasis (pupil dilation)?', opts:['Light exposure','Sympathetic stimulation','Near vision during reading','Parasympathetic stimulation'], c:1, exp:'التنشيط الودي (Sympathetic stimulation) يسبب اتساع حدقة العين (Mydriasis).'},
+    {n:34, cat:'nervous', q:'In conductive deafness:', opts:['Lesion of cochlea','Lesion in auditory pathway','Obstruction of external ear or middle ear disease','None of above'], c:2, exp:'الصمم التوصيلي يحدث بسبب انسداد الأذن الخارجية أو أمراض الأذن الوسطى.'},
+    {n:35, cat:'nervous', q:'Ability to feel light moving things on the skin:', opts:['Pressure','Tickling and itching','Vibration','Touch'], c:1, exp:'الإحساس بالدغدغة والحكة (Tickling and itching) هو القدرة على الشعور بالأشياء الخفيفة المتحركة على الجلد.'},
+    {n:36, cat:'nervous', q:'Types of hypoxia:', opts:['Hypoxic','Stagnant','Anemic','All of the above'], c:3, exp:'أنواع نقص الأكسجين: نقص التأكسج، الراكد، وفقر الدم.'},
 
-    // Fracture
-    {n:8, cat:'fracture', q:'You find a person at the bottom of the stairs. He appears to have fallen and seems badly hurt. After sending someone for help, you would...', opts:['Roll the victim onto his stomach keeping the head and back in a straight line.','Roll the victim onto one side.','Position victim onto one side.','Attempt to keep the victim from moving.'], c:3, exp:'يجب منع المصاب من الحركة لتجنب تفاقم الإصابات.'},
-    {n:33, cat:'fracture', q:'In general, a splint should be....', opts:['Loose, so that the victim can still move the injured limb.','Not so tight that it slows circulation.','Tied with cravats over the injured area.','None of the above.'], c:1, exp:'يجب ألا تكون الجبيرة ضيقة لتجنب إعاقة الدورة الدموية.'},
-    {n:34, cat:'fracture', q:'Splint an injury to a muscle, bone, or joint only when....', opts:['You have to move or transport the victim.','You can do so without hurting the victim.','You have splinting materials available.','Both A and B'], c:3, exp:'يجب التجبير فقط عند الحاجة للنقل ودون إيذاء المصاب.'},
-    {n:36, cat:'fracture', q:'When caring for a victim with a bloody nose you would not....', opts:['Apply an ice pack to the bridge of the nose.','Apply pressure to upper lip just beneath nose.','Have the victim sit with head tilted slightly backward while pinching the nostrils together.','Have the victim sit with head tilted slightly forward while pinching the nostrils together.'], c:2, exp:'لا تميل الرأس للخلف لأن الدم قد يصل إلى المجرى التنفسي.'},
-    {n:44, cat:'fracture', q:'What is an open fracture?', opts:['A fracture in which the bone ends can move around.','A fracture in which the bone is exposed as the skin is broken.','A fracture which causes complications such as a punctured lung.','A fracture in which the bone has bent and split.'], c:1, exp:'الكسر المفتوح هو الذي يبرز فيه العظم عبر الجلد.'},
-    {n:48, cat:'fracture', q:'Which of the following is NOT a benefit of placing ice on a fracture?', opts:['Decreased healing','Reduced pain','Decreased swelling','Reduced bleeding'], c:0, exp:'الثلج لا يقلل من الشفاء بل يساعد في تقليل الألم والتورم.'},
+    // Cardiac
+    {n:37, cat:'cardiac', q:'Resting membrane potential in cardiac muscle is:', opts:['-70 mV','-90 mV','-60 mV','-20 mV'], c:1, exp:'جهد الراحة في العضلة القلبية هو -90 mV.'},
+    {n:38, cat:'cardiac', q:'The normal pacemaker in heart is:', opts:['SAN','Purkinje fibers','AVN','None of the above'], c:0, exp:'المنظم الطبيعي للقلب هو العقدة الجيبية الأذينية (SAN).'},
+    {n:39, cat:'cardiac', q:'Which have positive inotropic effect:', opts:['Parasympathetic or Acetylcholine','Calcium antagonists & anesthetics','Caffeine','Heart failure'], c:2, exp:'الكافيين (Caffeine) له تأثير إيجابي على التقلص العضلي (Positive inotropic effect).'},
+    {n:40, cat:'cardiac', q:"What's mean by pneumothorax?", opts:['Blood in pleural cavity','Lymph in pleural cavity','Air in pleural cavity','None of the above'], c:2, exp:'Pneumothorax يعني وجود هواء في التجويف الجنبي.'},
+    {n:41, cat:'cardiac', q:'Rapid control of blood pressure is done through:', opts:['Kidney and hormonal system','Nervous system','Capillary fluid shift','All of the above'], c:1, exp:'التحكم السريع في ضغط الدم يتم عبر الجهاز العصبي.'},
 
-    // Shock
-    {n:22, cat:'shock', q:'Which is not a symptom of shock....', opts:['Strong thirst, nausea, or vomiting.','Abdominal colic.','Restless or irritability.','Rapid breathing or rapid pulse.'], c:1, exp:'المغص البطني ليس عرضاً نموذجياً للصدمة.'},
-    {n:28, cat:'shock', q:'What would you do for a victim who has internal bleeding?', opts:['Keep the victim quiet and lying down.','Bend knees to make them comfortable.','Both A and B','None of the above.'], c:2, exp:'أبقِ المصاب مستلقياً وهادئاً مع ثني الركبتين قليلاً.'},
-    {n:32, cat:'shock', q:'Shock is a condition where:', opts:['The respiratory system fails to deliver air to the lungs.','The cardiovascular system fails to deliver blood to the heart.','The circulatory system fails to deliver blood to all parts of the body.','All of the above.'], c:2, exp:'الصدمة هي فشل الجهاز الدوراني في توصيل الدم لأجزاء الجسم.'},
-    {n:45, cat:'shock', q:'Which medical condition will develop from severe blood loss?', opts:['Shock.','Hypoglycemia.','Anaphylaxis.','Hypothermia'], c:0, exp:'فقدان الدم الشديد يؤدي إلى الصدمة.'},
-    {n:69, cat:'shock', q:'What would you do for a victim who has internal bleeding?', opts:['Keep the victim quiet and lying down.','Bend knees to make them comfortable.','Both A and B','None of the above.'], c:2, exp:'أبقِ المصاب مستلقياً وهادئاً مع ثني الركبتين قليلاً.'},
+    // Digestive
+    {n:42, cat:'digestive', q:'How does food move through your digestive tract?', opts:['By gravity','By wavelike muscle contractions (peristalsis)','By cilia','By chemical absorption'], c:1, exp:'الطعام يتحرك عبر الجهاز الهضمي بواسطة انقباضات عضلية تشبه الموجات (التمعج).'},
+    {n:43, cat:'digestive', q:'What does the liver do to help digestion?', opts:['Makes important enzymes','Neutralizes stomach acid','Produces bile','Regulates insulin'], c:2, exp:'الكبد ينتج الصفراء (Bile) للمساعدة في الهضم.'},
+    {n:44, cat:'digestive', q:'Which best maintains intestinal health?', opts:['Starches','Vitamins','Fiber','Fat'], c:2, exp:'الألياف (Fiber) هي الأفضل للحفاظ على صحة الأمعاء.'},
+    {n:45, cat:'digestive', q:'Which can cause heartburn?', opts:['Being overweight','Lying down soon after eating a large meal','Eating high-fat foods','All of the above'], c:3, exp:'جميع العوامل المذكورة تسبب حرقة المعدة (Heartburn).'},
+    {n:46, cat:'digestive', q:'What is the digestive system?', opts:["The body's breathing system","The body's system of nerves","The body's food-processing system","The body's blood-transporting system"], c:2, exp:'الجهاز الهضمي هو نظام معالجة الطعام في الجسم.'},
+    {n:47, cat:'digestive', q:'Bile juice is formed in the:', opts:['Kidney','Pancreas','Liver','Lung'], c:2, exp:'العصارة الصفراوية تتكون في الكبد (Liver).'},
+    {n:48, cat:'digestive', q:'Saliva helps in digestion of:', opts:['Protein','Fat','Starch','Fiber'], c:2, exp:'اللعاب يساعد في هضم النشا (Starch).'},
+    {n:49, cat:'digestive', q:'Digestion of protein begins in:', opts:['Liver','Stomach','Intestine','Pancreas'], c:1, exp:'هضم البروتين يبدأ في المعدة (Stomach).'},
+    {n:50, cat:'digestive', q:'Which types of cells are present in gastric glands?', opts:['Mucus neck cells, peptic/chief cells and parietal/oxyntic cells','Mucus cells only','Peptic cells only','Parietal cells only'], c:0, exp:'الغدد المعدية تحتوي على خلايا عنقية مخاطية، وخلايا رئيسية (peptic)، وخلايا جدارية (parietal).'},
+    {n:51, cat:'digestive', q:'Digestion of carbohydrates starts at:', opts:['Stomach','Small intestine','Large intestine','Buccal cavity'], c:3, exp:'هضم الكربوهيدرات يبدأ في تجويف الفم (Buccal cavity).'},
+    {n:52, cat:'digestive', q:'The part of the brain that regulates body temperature is:', opts:['Pituitary','Thalamus','Hypothalamus','Pons'], c:2, exp:'الوطاء (Hypothalamus) هو الجزء المسؤول عن تنظيم درجة حرارة الجسم.'},
 
-    // General
-    {n:11, cat:'general', q:'A woman has fallen and burned her ankle. She says she heard something snap. She looks pale and is sweating. What should you do?', opts:['Have the victim walk on the injured ankle.','Care for the injury as if it were serious.','Apply heat and elevate the injury.','Apply a dressing and loosely bandage.'], c:1, exp:'عند الشك في كسر، تعامل مع الإصابة على أنها خطيرة.'},
-    {n:12, cat:'general', q:'Which of the following should be done for a person experiencing a heat related illness?', opts:['Keep the victim warm.','Force the victim to drink fluids.','Apply cool wet cloths.','Place the victim in warm water.'], c:2, exp:'استخدام المناشف المبللة الباردة يساعد في خفض الحرارة.'},
-    {n:25, cat:'general', q:'When caring for a student who is suffering from heat cramps:', opts:['Apply cold packs','Give cool water or sports drink.','Have student keep walking slowly to work the cramp out.','Massage the muscle vigorously to increase circulation.'], c:1, exp:'إعطاء السوائل الباردة يساعد في علاج التشنجات الحرارية.'},
-    {n:26, cat:'general', q:'What symptoms are associated with heat exhaustion?', opts:['Cool, moist, pale, or flushed skin.','Rapid weak pulse.','Rapid, shallow breathing.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى الإجهاد الحراري.'},
-    {n:27, cat:'general', q:'Heat stroke....', opts:['Causes very high body temperature.','Hot red or dry skin.','Rapid weak pulse, shallow breathing.','All of the above.'], c:3, exp:'جميع الأعراض المذكورة تشير إلى ضربة الشمس.'},
-    {n:31, cat:'general', q:'What is more serious?', opts:['Heat Stroke','Heat Exhaustion','Heat Cramps','Heat Rash'], c:0, exp:'ضربة الشمس هي الأكثر خطورة وتهدد الحياة.'},
-    {n:37, cat:'general', q:'Wounds that would require stitches are....', opts:['Over an inch long.','Operation wound.','Bleeding from an artery or uncontrolled bleeding.','All of the above.'], c:3, exp:'جميع الحالات المذكورة تتطلب غرزاً.'},
-    {n:38, cat:'general', q:'Hypothermia....', opts:['Is not life threatening.','Victims must be heated up as fast as possible.','Is caused by exposure to temperatures below freezing','Can be caused by swimming in waters below 70 degrees'], c:3, exp:'انخفاض الحرارة يمكن أن يحدث في الماء البارد تحت 21°م.'},
-    {n:40, cat:'general', q:'A boy is shot with an arrow through the chest and out the back, what would be the best course of action?', opts:['Remove the arrow and apply sterile gauze to the wound.','Do not remove the arrow, place several dressings around the arrow to keep it from moving.','Do not remove the arrow; break off the part out the back.','Remove the arrow, wash the area, and bandage with sterile gauze.'], c:1, exp:'لا تزيل الجسم الغريب، ثبت الضمادات حوله لمنع حركته.'},
-    {n:46, cat:'general', q:'What names are given to the three different depths of burns?', opts:['Small, medium and large.','First, second and third degree.','Minor, medium and severe.','Superficial, partial thickness, full thickness.'], c:1, exp:'تصنف الحروق إلى أولى وثانية وثالثة درجة.'},
-    {n:50, cat:'general', q:'A victim of a car accident has just vomited and now appears to be coughing up blood. He is breathing very quickly, and his pulse is weak and fast. What is most likely wrong?', opts:['He is having a seizure.','He has internal bleeding.','He is having a heart attack.','He is having a diabetic emergency.'], c:1, exp:'النزيف الداخلي هو السبب الأكثر احتمالاً لهذه الأعراض.'},
-    {n:51, cat:'general', q:'A victim has lost a lot of blood through a deep cut in his leg. He is breathing fast and seems pale and restless. He is probably....', opts:['Having a stroke.','Having a heart attack.','In shock.','Choking.'], c:2, exp:'فقدان الدم الشديد يؤدي إلى الصدمة.'},
-    {n:52, cat:'general', q:'Which is not a symptom of heart attack?', opts:['Chest pain.','Red, hot, or dry skin.','Pale or bluish in color.','Profuse sweating'], c:1, exp:'الجلد الأحمر الساخن الجاف ليس عرضاً للنوبة القلبية بل لضربة الشمس.'},
-    {n:66, cat:'general', q:'A stroke consists of which following signs?', opts:['Chest pain','Sweaty','Weakness','Nausea'], c:2, exp:'الضعف المفاجئ في الوجه أو الذراع أو الساق هو علامة على السكتة الدماغية.'},
-    {n:67, cat:'general', q:'Which of the following can cause a stroke?', opts:['A blood clot in an artery in the brain.','A blood clot in an artery in the heart.','A blood clot in an artery in the leg.','A blood clot in an artery in the lungs.'], c:0, exp:'السكتة الدماغية تحدث بسبب جلطة في شريان الدماغ.'},
-    {n:72, cat:'general', q:'Symptoms of a Stroke can be:', opts:['Poisoning, burns, and/or blood loss.','Droopy face, arm, and/or speech.','Lack of oxygen, wheezing, and/or sweating.','Shoulder pain.'], c:1, exp:'الأعراض الكلاسيكية هي تدلي الوجه وضعف الذراع وصعوبة الكلام.'},
-    {n:85, cat:'general', q:'Which has the patient priorities in the right order?', opts:['Bone trauma, Burn, Breathing','Breathing, Bleeding, Burn, Bone trauma','Bleeding, Breathing, Bone, Burn','Burn, Breathing, Bone, Bleeding'], c:1, exp:'أولوية المريض: التنفس ← النزيف ← الحرق ← الصدمة العظمية.'},
-    {n:86, cat:'general', q:'What is the first action when examining patient?', opts:['Breathing','Pulse','Speak to the victim and shake shoulder','External bleeding'], c:2, exp:'أولاً تحدث مع المصاب وهزه بلطف لتقييم الوعي.'},
-    {n:89, cat:'general', q:'The Egyptian ambulance service telephone number is', opts:['112','123','111','122'], c:1, exp:'رقم الإسعاف في مصر هو 123.'},
-    {n:90, cat:'general', q:'What would you give to someone who seems to have a heart attack?', opts:['Massage','Aspirin','Water','CPR'], c:1, exp:'الأسبرين يساعد في تقليل تجلط الدم أثناء النوبة القلبية.'},
-    {n:91, cat:'general', q:'Which of the following is not type of head injuries?', opts:['Concussion','Brain contusion','Skull fracture','Vomiting blood'], c:3, exp:'تقيؤ الدم ليس نوعاً من إصابات الرأس بل عرض.'},
-    {n:92, cat:'general', q:'Brief or partial loss of conscious level and loss of memory of events at the time of, or immediately preceding the injury is symptoms of:', opts:['Concussion','Skull fracture','Brain contusion','Brain tumor'], c:0, exp:'الارتجاج يسبب فقدان الذاكرة المؤقت وفقدان الوعي.'}
+    // Vision
+    {n:53, cat:'vision', q:'Myopia means:', opts:['The eye sees better near than at a distance','The eye sees better at distance than at near','Irregular bending of light rays blurring vision at all distances','Normal condition of aging with loss of focus on near objects'], c:0, exp:'قصر النظر (Myopia) يعني أن العين ترى أفضل قريبًا أكثر من البعيد.'},
+    {n:54, cat:'vision', q:'Hypermetropia means:', opts:['The eye sees better near than at a distance','The eye sees better at distance than at near','Irregular bending of light rays blurring vision at all distances','Normal condition of aging with loss of focus on near objects'], c:1, exp:'طول النظر (Hypermetropia) يعني أن العين ترى أفضل بعيدًا أكثر من القريب.'},
+    {n:55, cat:'vision', q:'Astigmatism means:', opts:['The eye sees better near than at a distance','The eye sees better at distance than at near','Irregular bending of light rays blurring vision at all distances','Normal condition of aging with loss of focus on near objects'], c:2, exp:'اللابؤرية (Astigmatism) تعني انحناء غير منتظم للأشعة الضوئية يسبب عدم وضوح الرؤية على جميع المسافات.'},
+    {n:56, cat:'vision', q:'Presbyopia (aging eye) means:', opts:['Normal condition of aging with loss of ability to focus on near objects','The eye sees better near than at a distance','The eye sees better at distance than at near','Irregular bending of light rays blurring vision at all distances'], c:0, exp:'طول النظر الشيخوخي (Presbyopia) هو فقدان القدرة على التركيز على الأشياء القريبة مع التقدم في العمر.'}
 ];
 
 let currentCategory = 'all';
@@ -891,12 +879,12 @@ function renderQuestions() {
     container.innerHTML = '';
 
     const catNames = {
-        bleeding: '🩸 Bleeding',
-        burns: '🔥 Burns',
-        cpr: '❤️ CPR',
-        fracture: '🦴 Fracture',
-        shock: '⚡ Shock',
-        general: '📋 General'
+        cell: '🧫 Cell Biology',
+        blood: '🩸 Blood & Anemia',
+        nervous: '🧠 Nervous System',
+        cardiac: '❤️ Cardiac Physiology',
+        digestive: '🫃 Digestive System',
+        vision: '👁️ Vision & Eye'
     };
 
     let lastCat = '';
@@ -998,7 +986,7 @@ function showResults() {
     document.getElementById('scoreFill').style.strokeDashoffset = offset;
 
     let msg = '';
-    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in First Aid!';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Physiology!';
     else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
     else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
     else msg = '📚 Needs more revision — You can do better!';
