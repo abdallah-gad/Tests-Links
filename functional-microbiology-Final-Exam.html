@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Microbiology Practical Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --darker: #0d1818;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Microbiology</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>🧫 علم الأحياء الدقيقة</h1>
+        <p class="sub">📚 بنك أسئلة عملي للمراجعة — Dr. Adel Elhawary</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 الكل</button>
+            <button data-cat="general">🔬 عام</button>
+            <button data-cat="bacteria">🦠 بكتيريا</button>
+            <button data-cat="fungi">🍄 فطريات</button>
+            <button data-cat="virus">🧬 فيروسات</button>
+            <button data-cat="immunity">🛡️ مناعة</button>
+            <button data-cat="lab">🧪 معمل</button>
+        </div>
+        <div class="q-count">📋 عدد الأسئلة: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ ابدأ الاختبار</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 عرض النتيجة</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 اكتمل الاختبار!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">من <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ صحيح</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ خطأ</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 النسبة</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 إعادة الاختبار</button>
+    <button class="btn-home" onclick="goHome()">🏠 الرئيسية</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['أ', 'ب', 'ج', 'د'];
+const CATS = {
+    general: '🔬 عام',
+    bacteria: '🦠 بكتيريا',
+    fungi: '🍄 فطريات',
+    virus: '🧬 فيروسات',
+    immunity: '🛡️ مناعة',
+    lab: '🧪 معمل'
+};
+
+// جميع الأسئلة من الملف (عملي أحياء دقيقة)
+const ALL = [
+    // عام
+    {n:1, cat:'general', q:'يختص علم الأحياء الدقيقة بدراسة:', opts:['خلية الحيوان','خلية الإنسان','خية البكتيريا','خلية النباتات'], c:2, exp:'علم الأحياء الدقيقة يختص بدراسة الكائنات المجهرية مثل البكتيريا والفطريات والفيروسات.'},
+    {n:2, cat:'general', q:'قام العالم .................... بوصف البكتيريا وكانات أخرى باستخدام مجهر ذو عدسة واحدة عام 1665م:', opts:['روبرت كوخ','أنتوني فان ليفينهوك','أينشتاين','باستور'], c:1, exp:'أنتوني فان ليفينهوك هو أول من وصف البكتيريا باستخدام مجهر بسيط.'},
+    {n:3, cat:'general', q:'قام العالم .................... باكتشاف وتصميم عملية البسترة لقتل الكائنات الحية المجهرية التي توجد بالحليب:', opts:['روبرت كوخ','باستور','أينشتاين','ليفينهوك'], c:1, exp:'باستور هو مكتشف عملية البسترة.'},
+    {n:4, cat:'general', q:'اكتشف العالم .................... علاقة البكتيريا بالمرض وقام بعمل مزارع من البكتيريا:', opts:['روبرت كوخ','باستور','ليفينهوك','أينشتاين'], c:0, exp:'روبرت كوخ هو مكتشف علاقة البكتيريا بالأمراض.'},
+    {n:5, cat:'general', q:'من التراكيب الأساسية للخلية البكتيرية:', opts:['الكبسولة','الجدار الخلوي','البلازميد','النواه البدائية'], c:1, exp:'الجدار الخلوي من التراكيب الأساسية للخلية البكتيرية.'},
+    {n:6, cat:'general', q:'من التراكيب غير الأساسية للخلية البكتيرية:', opts:['النواه البدائية','السيتوبلازم','البلازميد','الجدار الخلوي'], c:2, exp:'البلازميد من التراكيب غير الأساسية للخلية البكتيرية.'},
+    {n:7, cat:'general', q:'هو الذي يعطي الخلية البكتيرية شكلها الثابت والمميز:', opts:['الجدار الخلوي','الغشاء البلازمي','البلازميد','السيتوبلازم'], c:0, exp:'الجدار الخلوي يعطي البكتيريا شكلها الثابت والمميز.'},
+    {n:8, cat:'general', q:'يحتوي جدار الخلية البكتيرية على مادة .................... التي تحدد نوع الصبغة التي تنقبلها:', opts:['الببتيدوجليكان','السيتوبلازم','متعددة السكريات','الكبسولة'], c:0, exp:'الببتيدوجليكان هو المادة الأساسية في جدار الخلية البكتيرية.'},
+    {n:9, cat:'general', q:'يتميز بالنفاذية الاختيارية ولذلك فهو مسؤول عن التغذية والتنفس والإخراج:', opts:['الجدار الخلوي','الغشاء البلازمي','السيتوبلازم','الكبسولة'], c:1, exp:'الغشاء البلازمي يتميز بالنفاذية الاختيارية.'},
+    {n:10, cat:'general', q:'توجد بعض الأجسام داخل السيتوبلازم تسمى .................... تساهم في إنتاج البروتين:', opts:['الريبوسومات','الغشاء البلازمي','النواه البدائية','البلازميد'], c:0, exp:'الريبوسومات هي المسؤولة عن إنتاج البروتين في الخلية.'},
+    {n:11, cat:'general', q:'تقوم بحماية البكتيريا من الالتهام بواسطة كرات الدم البيضاء ومن الإفرازات التي يفرزها الجسم لمقاومة هذه البكتيريا:', opts:['الكبسولة','الجدار الخلوي','البلازميد','السيتوبلازم'], c:0, exp:'الكبسولة تحمي البكتيريا من الالتهام بواسطة كرات الدم البيضاء.'},
+    {n:12, cat:'general', q:'هو عضو الحركة في البكتيريا ويمكن أن تحتوي البكتيريا على واحد أو أكثر:', opts:['البلازميد','الريبوسوم','السياط','الأهداب'], c:2, exp:'السياط هي عضو الحركة في البكتيريا.'},
+    {n:13, cat:'general', q:'نوع من البكتيريا محاطة بالسياط تسمى .................... وفيها تنتشر السياط من جميع الاتجاهات حول سطح الخلية البكتيرية:', opts:['Monotricus','Amphitricus','Peritricus','Lophotricus'], c:2, exp:'Peritricus تعني بكتيريا محاطة بالسياط من جميع الاتجاهات.'},
+    {n:14, cat:'general', q:'نوع من البكتيريا تسمى .................... وفيها تخرج حزمة سوطية من قطب واحد في الخلية البكتيرية:', opts:['Monotricus','Amphitricus','Peritricus','Lophotricus'], c:3, exp:'Lophotricus تعني بكتيريا تخرج منها حزمة سوطية من قطب واحد.'},
+    {n:15, cat:'general', q:'عبارة عن زوائد رفيعة جدا وتصير جدا تحيط الخلية من جميع جهاتها وتتواجد في البكتيريا المتحركة وغير المتحركة:', opts:['البلازميد','السياط','الأهداب','الريبوسوم'], c:2, exp:'الأهداب هي زوائد رفيعة جدا تحيط بالخلية من جميع جهاتها.'},
+    {n:16, cat:'general', q:'تسهل التصاق الخلية البكتيرية بخلايا المريض وانتقال البلازميد من خلية بكتيرية لأخرى:', opts:['الريبوسوم','الأهداب','السياط','البلازميد'], c:1, exp:'الأهداب تسهل التصاق البكتيريا بخلايا المريض.'},
+    {n:17, cat:'general', q:'بعض البكتيريا تكون .................... لمقاومة الظروف البيئية السيئة مثل الجفاف ودرجات الحرارة العالية:', opts:['الجراثيم الداخلية','الكبسولة','النواه البدائية','السياط'], c:0, exp:'الجراثيم الداخلية تساعد البكتيريا على مقاومة الظروف البيئية السيئة.'},
+    {n:18, cat:'general', q:'يمكن التخلص من جراثيم البكتيريا باستخدام:', opts:['المضادات الحيوية','المطهرات','التعقيم','الصابون الطبي'], c:2, exp:'التعقيم هو الطريقة الوحيدة للتخلص من جراثيم البكتيريا.'},
+    {n:19, cat:'general', q:'ويتكون من DNA ويحمل صفات هامة مثل مقاومة المضادات الحيوية وينتقل من خلية لأخرى:', opts:['الريبوسومات','البلازميد','النواه البدائية','الغشاء البلازمي'], c:1, exp:'البلازميد يحمل صفات هامة مثل مقاومة المضادات الحيوية.'},
+    {n:20, cat:'general', q:'يعتبر سبب من أسباب انتشار مقاومة المضادات الحيوية بين فصائل البكتيريا:', opts:['الريبوسومات','الغشاء البلازمي','البلازميد','النواه البدائية'], c:2, exp:'البلازميد هو سبب انتشار مقاومة المضادات الحيوية.'},
+
+    // بكتيريا
+    {n:21, cat:'bacteria', q:'هي نوع من البكتيريا تظهر في شكل عصيات تشبه الحروف الصينية:', opts:['الجمرة الخبيثة','الدفتيريا','المكورات العنقودية','النيموكوكس'], c:1, exp:'بكتيريا الدفتيريا تظهر على شكل عصيات تشبه الحروف الصينية.'},
+    {n:22, cat:'bacteria', q:'هي نوع من البكتيريا تظهر في شكل تجمعات كروية تشبه عنقود العنب:', opts:['الجمرة الخبيثة','الدفتيريا','المكورات العنقودية','النيموكوكس'], c:2, exp:'المكورات العنقودية تظهر على شكل تجمعات كروية تشبه عنقود العنب.'},
+    {n:23, cat:'bacteria', q:'البكتيريا الموجبة الجرام يكون لونها .................... إذا صبغت بصبغة جرام:', opts:['أحمر','أصفر','أزرق','بنفسجي'], c:3, exp:'البكتيريا الموجبة الجرام تصبغ باللون البنفسجي.'},
+    {n:24, cat:'bacteria', q:'البكتيريا التي تحتاج إلى جو خالي من الأكسجين لكي تنمو وتعيش ولا تستطيع العيش في وجود الأكسجين تسمى:', opts:['Obligate aerobe','Obligate anaerobe','Microaerophilic','Facultative anaerobe'], c:1, exp:'Obligate anaerobe هي بكتيريا لا تستطيع العيش في وجود الأكسجين.'},
+    {n:25, cat:'bacteria', q:'البكتيريا التي تستطيع العيش سواء في وجود أو غياب الأكسجين تسمى:', opts:['Obligate anaerobe','Obligate aerobe','Microaerophilic','Facultative anaerobe'], c:3, exp:'Facultative anaerobe تستطيع العيش في وجود أو غياب الأكسجين.'},
+    {n:26, cat:'bacteria', q:'البكتيريا التي لا توجد بشكل طبيعي في الجسم ووجودها يرتبط دائما بحدوث مرض تسمى:', opts:['pathogenic bacteria','nonpathogenic bacteria','Normal flora','Opportunistic bacteria'], c:0, exp:'pathogenic bacteria هي البكتيريا المسببة للمرض.'},
+    {n:27, cat:'bacteria', q:'البكتيريا التي لا تسبب المرض في الظروف الطبيعية ومن الممكن ان توجد داخل الجسم في صورة بكتيريا متعايشة ولكن تسبب المرض عند حدوث ضعف في الجهاز المناعي تسمى:', opts:['pathology bacteria','nonpathogenic bacteria','Normal flora','Opportunistic bacteria'], c:3, exp:'Opportunistic bacteria تسبب المرض عند ضعف المناعة.'},
+    {n:28, cat:'bacteria', q:'من عوامل الضراوة في البكتيريا .................... التي تساعد في تحلل الأنسجة وانتشار المرض:', opts:['البلازميد','المحفظة','الإنزيمات','السياط'], c:2, exp:'الإنزيمات تساعد في تحلل الأنسجة وانتشار المرض.'},
+    {n:29, cat:'bacteria', q:'.................... مكون من مكونات الجدار الخارجي لخلية البكتيريا السالبة لا يتحرر إلا بعد تحلل الخلية الميكروبية:', opts:['السموم الداخلية','السموم الخارجية','الإنزيمات','الببتيدوجليكان'], c:0, exp:'السموم الداخلية تتحرر بعد تحلل الخلية البكتيرية.'},
+    {n:30, cat:'bacteria', q:'سم الدفتيريا والتيتانوس يعتبر من .................... التي تتحول إلى صورة أنتجينية غير سامة بالفورمالين:', opts:['السموم الداخلية','السموم الخارجية','الإنزيمات','أنواع الجراثيم'], c:1, exp:'السموم الخارجية تتحول إلى صورة غير سامة بالفورمالين.'},
+    {n:31, cat:'bacteria', q:'.................... ثابتة نسبيا وتتحمل درجة حرارة 60م دون فقد سميتها ولا تحفز الجسم على تكوين مضاد التوكسين:', opts:['السموم الداخلية','السموم الخارجية','الإنزيمات','أنواع الجراثيم'], c:0, exp:'السموم الداخلية تتحمل درجة حرارة 60م.'},
+
+    // فطريات
+    {n:32, cat:'fungi', q:'.................... كائنات حقيقية النواة غير متحركة غير ذاتية التغذية تعيش في الظلام حيث الدفء والرطوبة:', opts:['الفيروسات','الفطريات','البكتيريا','النباتات'], c:1, exp:'الفطريات كائنات حقيقية النواة غير ذاتية التغذية.'},
+    {n:33, cat:'fungi', q:'.................... تأخذ شكل الخمائر عند درجة حرارة 73م وشكل فطريات خيطية في درجة حرارة الغرفة:', opts:['الفطريات ثنائية الشكل','الفطريات الخيطية','الغزل الفطري','الخمائر الفطرية'], c:0, exp:'الفطريات ثنائية الشكل تتغير شكلها حسب درجة الحرارة.'},
+    {n:34, cat:'fungi', q:'.................... هي فطريات وحيدة الخلية تتكاثر بالتبرعم الفطري:', opts:['الفطريات ثنائية الشكل','الفطريات الخيطية','الغزل الفطري','الخمائر الفطرية'], c:3, exp:'الخمائر الفطرية هي فطريات وحيدة الخلية تتكاثر بالتبرعم.'},
+    {n:35, cat:'fungi', q:'.................... هي فطريات عديدة الخلايا تنظم في خيوط تعرف بالخيط الفطري:', opts:['الفطريات ثنائية الشكل','الفطريات الخيطية','الغزل الفطري','الخمائر الفطرية'], c:1, exp:'الفطريات الخيطية تتكون من خيوط فطرية.'},
+    {n:36, cat:'fungi', q:'.................... تحتوي جدر الفطريات على:', opts:['الكيراتين','السليلوز والكيتين','حمض الميكوليك','الببتيدوجليكان'], c:1, exp:'جدر الفطريات تحتوي على السليلوز والكيتين.'},
+    {n:37, cat:'fungi', q:'.................... من الأمراض السطحية التي تصيبها الفطريات:', opts:['التينيا','الاسبيرجيللوس','التيفود','ميكوتوكسيكوزيس'], c:0, exp:'التينيا من الأمراض السطحية التي تسببها الفطريات.'},
+    {n:38, cat:'fungi', q:'.................... من الفطريات الانتهازية التي تصيب مرضى نقص المناعة مثل مرضى الإيدز:', opts:['التينيا','الكانديدا','التيفود','الأفلاتوكسين'], c:1, exp:'الكانديدا من الفطريات الانتهازية.'},
+    {n:39, cat:'fungi', q:'.................... من الممكن أن تؤدي الأفلاتوكسين إلى:', opts:['أمراض جلدية','تساقط الشعر','حساسية بالجهاز التنفسي','تسمم غذائي'], c:3, exp:'الأفلاتوكسين تسبب تسمم غذائي.'},
+    {n:40, cat:'fungi', q:'يتم زراعة عينات الفطريات على مستنبت يسمى:', opts:['Sabroud dextrose agar','Blood agar','Macconky agar','Nutrient agar'], c:0, exp:'Sabroud dextrose agar هو المستنبت المناسب لزراعة الفطريات.'},
+    {n:41, cat:'fungi', q:'تستخدم مجموعات .................... لعلاج الفطريات:', opts:['الستيرويدات','الأزولات','الجريزوفولفين','الأمفوتيريسين'], c:1, exp:'الأزولات تستخدم لعلاج الفطريات.'},
+
+    // فيروسات
+    {n:42, cat:'virus', q:'.................... تعتبر من أصغر الكائنات المسببة للأمراض تقاس بالنانومتر ولا يمكن رؤيتها بالمجهر العادي ولكن ترى بالميكروسكوب الإلكتروني:', opts:['البكتيريا','الفيروس','الفطريات','الطفيليات'], c:1, exp:'الفيروسات هي أصغر الكائنات المسببة للأمراض.'},
+    {n:43, cat:'virus', q:'يسمى الفيروس الذي يعدي البكتيريا ب:', opts:['البكتيريوفاج','الاسبيرجيللوس','فيروس كوفيد','فيروس نقص المناعة'], c:0, exp:'البكتيريوفاج هو فيروس يصيب البكتيريا.'},
+    {n:44, cat:'virus', q:'يسيطر .................... على الخلية المصابة ويوجهها لتصنيع ما يحتاجه الفيروس وعمل نسخ كثيرة:', opts:['الغلاف','الكابسيد','البلازميد','الحامض النووي'], c:3, exp:'الحامض النووي للفيروس يسيطر على الخلية المصابة.'},
+    {n:45, cat:'virus', q:'نستخدم مضادات الفيروسات مثل .................... في علاج الفيروسات:', opts:['المطهرات','السيكلوفير','الجريزوفولفين','الأمفوتيريسين'], c:1, exp:'السيكلوفير من مضادات الفيروسات.'},
+    {n:46, cat:'virus', q:'من فيروسات الحامض النووي RNA التي تصيب الإنسان كل ما يلي ماعدا:', opts:['فيروس الأنفلونزا','فيروس نقص المناعة','فيروس الورم الحليمي البشري','فيروس الحصبة'], c:2, exp:'فيروس الورم الحليمي البشري هو فيروس DNA وليس RNA.'},
+    {n:47, cat:'virus', q:'من فيروسات الحامض النووي DNA التي تصيب الإنسان كل ما يلي ماعدا:', opts:['فيروس الجدير المائي','فيروس التهاب الكبد ب','فيروس شلل الأطفال','فيروس الهربس البسيط'], c:2, exp:'فيروس شلل الأطفال هو فيروس RNA وليس DNA.'},
+
+    // بكتيريا مكملة
+    {n:48, cat:'bacteria', q:'فصيلة من فصائل البكتيريا متطلبة إجبارية داخل الخلايا مثل الفيروسات تسبب حمى التيفوس:', opts:['النيموكوكس','المكورات العنقودية','الاسبيرجيللوس','الكلاميديا والركتيسيا'], c:3, exp:'الكلاميديا والركتيسيا من البكتيريا الإجبارية داخل الخلايا.'},
+    {n:49, cat:'bacteria', q:'.................... تسبب أمراضا في حالة انتقالها من مكان معيشتها الطبيعية إلى مكان آخر داخل جسم الإنسان:', opts:['pathogenic bacteria','Commensal bacteria','Normal flora','none of them'], c:2, exp:'Normal flora تسبب أمراضا عند انتقالها من مكانها الطبيعي.'},
+    {n:50, cat:'bacteria', q:'.................... هو إنسان كان مريضا وشفى من المرض وهو في طور النقاهة ولكن لا يزال يفرز الميكروب:', opts:['حامل ميكروب مخالط','حامل ميكروب حاضن','حامل ميكروب مزمن','حامل ميكروب ناقل'], c:2, exp:'الحامل المزمن هو الذي يفرز الميكروب بعد الشفاء.'},
+    {n:51, cat:'bacteria', q:'.................... هي الأمراض التي تنتقل من الحيوان للإنسان:', opts:['الأمراض المعدية','الأمراض المشتركة','الالتهابات','عدوى المستشفيات'], c:1, exp:'الأمراض المشتركة تنتقل من الحيوان للإنسان.'},
+    {n:52, cat:'bacteria', q:'.................... تظل معلقة في الهواء ويمكن أن يحملها الهواء لمسافة طويلة:', opts:['النويات الذرية','الرذاذ','الالتهابات','بصاق المريض'], c:1, exp:'الرذاذ يظل معلقا في الهواء لفترة طويلة.'},
+
+    // معمل
+    {n:53, cat:'lab', q:'الشخص المصاب بمرض السيلان يخرج الميكروب في شكل إفرازات .................... من القضيب أو عنق الرحم:', opts:['قيحية','مصلية','دموية','مخاطية'], c:0, exp:'إفرازات السيلان تكون قيحية.'},
+    {n:54, cat:'lab', q:'يتم سحب عينة الدم في حالات الإشتباه في وجود ميكروب في الدم عن طريق:', opts:['الوريد','الشريان','الشعيرات الدموية','الأوردة العميقة'], c:0, exp:'يتم سحب عينة الدم عن طريق الوريد.'},
+    {n:55, cat:'lab', q:'يتم سحب عينة البول عن طريق:', opts:['القسطرة','التبول المباشر','الشفط','جميع ما سبق'], c:3, exp:'يمكن سحب عينة البول بطرق متعددة.'},
+    {n:56, cat:'lab', q:'من أنواع العينات السريرية:', opts:['الدم','البول','البلغم','جميع ما سبق'], c:3, exp:'جميعها أنواع من العينات السريرية.'},
+    {n:57, cat:'lab', q:'يتم نقل العينات السريرية إلى المعمل في:', opts:['أنابيب بلاستيكية','أكياس بلاستيكية','عبوات معقمة','أوعية زجاجية'], c:2, exp:'يتم نقل العينات في عبوات معقمة.'},
+    {n:58, cat:'lab', q:'يتم حفظ العينات في الثلاجة عند درجة حرارة:', opts:['2-8°م','10-15°م','20-25°م','30-35°م'], c:0, exp:'تحفظ العينات في الثلاجة عند 2-8°م.'},
+    {n:59, cat:'lab', q:'من الأوساط الزراعية المستخدمة في زراعة البكتيريا:', opts:['Blood agar','Nutrient agar','MacConkey agar','جميع ما سبق'], c:3, exp:'جميعها أوساط زراعية.'},
+    {n:60, cat:'lab', q:'يعتبر Blood agar من الأوساط:', opts:['البسيطة','المغذية','الانتقائية','المميزة'], c:1, exp:'Blood agar من الأوساط المغذية.'},
+    {n:61, cat:'lab', q:'يعتبر MacConkey agar من الأوساط:', opts:['البسيطة','المغذية','الانتقائية','المميزة'], c:2, exp:'MacConkey agar من الأوساط الانتقائية.'},
+    {n:62, cat:'lab', q:'يتم طلاء العينة على سطح المستنبت بواسطة:', opts:['الماصة','الملقاط','الملعقة','الحلقة البكتيرية'], c:3, exp:'الحلقة البكتيرية تستخدم لطلاء العينة.'},
+    {n:63, cat:'lab', q:'يتم وضع المستنبت في الحضانة عند درجة حرارة:', opts:['25°م','30°م','37°م','42°م'], c:2, exp:'تحضن البكتيريا عند 37°م.'},
+    {n:64, cat:'lab', q:'يتم قراءة نتائج زراعة البكتيريا بعد:', opts:['12 ساعة','18-24 ساعة','48 ساعة','72 ساعة'], c:1, exp:'تقرأ نتائج الزراعة بعد 18-24 ساعة.'},
+    {n:65, cat:'lab', q:'يتم عمل مزرعة دم في حالات:', opts:['الحمى','الإشتباه في تسمم الدم','الإشتباه في التهاب السحايا','جميع ما سبق'], c:3, exp:'جميعها حالات تستدعي عمل مزرعة دم.'},
+    {n:66, cat:'lab', q:'يتم سحب عينة من سائل النخاع الشوكي في حالات:', opts:['التهاب السحايا','التهاب الدماغ','التهاب النخاع','جميع ما سبق'], c:0, exp:'التهاب السحايا من أهم أسباب سحب عينة السائل النخاعي.'},
+    {n:67, cat:'lab', q:'يعتبر نوع بيتا من تكسير خلايا الدم عند نمو البكتيريا على المستنبت:', opts:['تكسير كامل','تكسير جزئي','عدو التكسير','غير ما سبق'], c:0, exp:'نوع بيتا يعني تكسير كامل لخلايا الدم.'},
+    {n:68, cat:'lab', q:'البكتيريا المخمرة لسكر اللاكتوز تعطي مستعمرات .................... على مستنبت ماكونكي:', opts:['ذهبية','وردية','باهتة','عديمة اللون'], c:1, exp:'المخمرات للاكتوز تعطي مستعمرات وردية.'},
+    {n:69, cat:'lab', q:'البكتيريا الغير مخمرة لسكر اللاكتوز تعطي مستعمرات .................... على مستنبت ماكونكي:', opts:['ذهبية','وردية','باهتة','عديمة اللون'], c:2, exp:'الغير مخمرات للاكتوز تعطي مستعمرات باهتة.'},
+    {n:70, cat:'lab', q:'في حالة النتيجة الإيجابية لاختبار إنزيم الكاتاليز:', opts:['تخرج فقاعات','يتحول اللون إلى الأزرق','يتحول اللون إلى البنفسجي','يحدث تخثر'], c:0, exp:'اختبار الكاتاليز الإيجابي يظهر بظهور فقاعات.'},
+    {n:71, cat:'lab', q:'في حالة النتيجة الإيجابية لاختبار إنزيم الأكسدة:', opts:['تخرج فقاعات','يتحول اللون إلى الأزرق','يتحول اللون إلى البنفسجي','يحدث تخثر'], c:1, exp:'اختبار الأكسدة الإيجابي يظهر بتغير اللون إلى الأزرق.'},
+    {n:72, cat:'lab', q:'في حالة النتيجة الإيجابية لاختبار إنزيم التجلط:', opts:['تخرج فقاعات','يتحول اللون إلى الأزرق','يتحول اللون إلى البنفسجي','يحدث تخثر'], c:3, exp:'اختبار التجلط الإيجابي يظهر بتخثر البلازما.'},
+    {n:73, cat:'lab', q:'.................... هو تفاعل يعتمد على تكبير المادة الوراثية للميكروب لتسهيل اكتشافه:', opts:['الاختبارات السيرولوجية','PCR','اختبار انزيم التخثر','اختبار الحساسية'], c:1, exp:'PCR هو تفاعل تكبير المادة الوراثية.'},
+    {n:74, cat:'lab', q:'يتم عمل .................... لمعرفة المضاد الحيوي الفعال ضد البكتيريا المسببة للمرض:', opts:['الاختبارات السيرولوجية','اختبار انزيم التخثر','اختبار الحساسية','PCR'], c:2, exp:'اختبار الحساسية يحدد المضاد الحيوي الفعال.'},
+    {n:75, cat:'lab', q:'كل ما يلي يعتبر عينات معقمة لا تحتوي على أي بكتيريا Normal flora ماعدا:', opts:['البراز','البول','الدم','السائل النخاعي'], c:0, exp:'البراز يحتوي على Normal flora.'},
+    {n:76, cat:'lab', q:'كل ما يلي يعتبر عينات غير معقمة أي تحتوي على بكتيريا Normal flora ماعدا:', opts:['البراز','اللعاب','البصاق','الدم'], c:3, exp:'الدم عينة معقمة لا تحتوي على Normal flora.'},
+    {n:77, cat:'lab', q:'تجمع العينات بعد إيقاف المضاد الحيوي ب .................... ساعة:', opts:['24','36','48','72'], c:2, exp:'تجمع العينات بعد 48 ساعة من إيقاف المضاد الحيوي.'},
+    {n:78, cat:'lab', q:'عند جمع عينة من سائل النخاع الشوكي يتم سحب العينة بين الفقرة القطنية .................... في العمود الفقري:', opts:['الرابعة والخامسة','الثالثة والرابعة','الخامسة والسادسة','الأولى والثانية'], c:0, exp:'يتم سحب العينة بين الفقرة الرابعة والخامسة.'},
+    {n:79, cat:'lab', q:'كمية الدم المطلوبة لعمل مزرعة دم في حالات الكبار تكون:', opts:['5-10 مل','10-15 مل','15-20 مل','20-25 مل'], c:0, exp:'كمية الدم المطلوبة للكبار 5-10 مل.'},
+    {n:80, cat:'lab', q:'يفضل أخذ عينة البول في الصباح:', opts:['بعد الأكل','قبل النوم','في المساء','في الصباح'], c:3, exp:'يفضل أخذ عينة البول في الصباح.'},
+    {n:81, cat:'lab', q:'يفضل أخذ عينة البلغم في:', opts:['بعد الأكل','في الصباح','قبل النوم','في المساء'], c:1, exp:'يفضل أخذ عينة البلغم في الصباح.'},
+    {n:82, cat:'lab', q:'يعتبر من الأوساط السائلة المستخدمة في مزارع الدم:', opts:['MacConkey agar','Nutrient broth','Sabroud dextrose agar','Nutrient agar'], c:1, exp:'Nutrient broth هو وسط سائل يستخدم في مزارع الدم.'},
+    {n:83, cat:'lab', q:'من أنواع الأوساط الزراعية في زراعة البكتيريا:', opts:['الأوساط البسيطة','الأوساط المغذية','الأوساط الانتخابية','جميع ما سبق'], c:3, exp:'جميعها أنواع من الأوساط الزراعية.'},
+    {n:84, cat:'lab', q:'من أنواع الأوساط الزراعية في زراعة البكتيريا:', opts:['الأوساط المميزة','الأوساط المغذية','الأوساط الانتخابية','جميع ما سبق'], c:3, exp:'جميعها أنواع من الأوساط الزراعية.'},
+    {n:85, cat:'lab', q:'يعتبر من الأوساط المميزة:', opts:['Blood agar','MacConkey agar','XLD agar','Muller Hinton agar'], c:1, exp:'MacConkey agar من الأوساط المميزة.'},
+    {n:86, cat:'lab', q:'يستخدم .................... في عمل اختبارات الحساسية للمضادات الحيوية:', opts:['MacConkey agar','Blood agar','Muller Hinton agar','XLD agar'], c:2, exp:'Muller Hinton agar يستخدم في اختبارات الحساسية.'},
+    {n:87, cat:'lab', q:'على حسب صبغة جرام يكون لون البكتيريا الموجبة:', opts:['وردي','أحمر','أزرق','بنفسجي'], c:3, exp:'الموجبة لصبغة جرام تكون بنفسجية.'},
+    {n:88, cat:'lab', q:'يتم صبغ بكتيريا الدرن بصبغة:', opts:['Gram stain','Z-N stain','Methylene blue','Iodine'], c:1, exp:'Z-N stain تستخدم لصبغ بكتيريا الدرن.'},
+    {n:89, cat:'lab', q:'يعتبر .................... من طرق التعقيم الفيزيائية:', opts:['التعقيم بالحرارة الجافة','التعقيم بالحرارة الرطبة','التعقيم بالترشيح','جميع ما سبق'], c:3, exp:'جميعها طرق تعقيم فيزيائية.'},
+    {n:90, cat:'lab', q:'يتم تعقيم الأدوات الجراحية ومستنبتات البكتيريا بطريقة:', opts:['التعقيم بالحرارة الرطبة','التعقيم بالحرارة الجافة','التعقيم بالإشعاع','التعقيم بالترشيح'], c:0, exp:'التعقيم بالحرارة الرطبة (الأوتوكلاف) هو الأكثر استخداما.'},
+    {n:91, cat:'lab', q:'تستخدم .................... لتعقيم غرف العمليات والمصانع الدوائية:', opts:['الأشعة فوق البنفسجية','الأشعة تحت الحمراء','الأشعة السينية','الأشعة الجاما'], c:0, exp:'الأشعة فوق البنفسجية تستخدم لتعقيم الغرف.'},
+    {n:92, cat:'lab', q:'تستخدم .................... لتعقيم الأدوات البلاستيكية والعدسات:', opts:['الحرارة الرطبة','الحرارة الجافة','الإشعاع','الترشيح'], c:3, exp:'الترشيح يستخدم لتعقيم الأدوات البلاستيكية.'},
+
+    // مناعة
+    {n:93, cat:'immunity', q:'يتم إفراز الأجسام المضادة من:', opts:['B-lymphocyte','T-lymphocyte','Basophils','Eosinophil'], c:0, exp:'B-lymphocyte هي المسؤولة عن إفراز الأجسام المضادة.'},
+    {n:94, cat:'immunity', q:'يعتبر من المناعة الطبيعية الفطرية التي تقتل الميكروبات:', opts:['الأجسام المضادة','إنزيمات البنكرياس','البلعمة','اللقاحات'], c:2, exp:'البلعمة من المناعة الطبيعية الفطرية.'},
+    {n:95, cat:'immunity', q:'يعتبر أكثر الأجسام المضادة وجودا في الدم:', opts:['IgM','IgG','IgA','IgE'], c:1, exp:'IgG هو أكثر الأجسام المضادة وجودا في الدم.'},
+    {n:96, cat:'immunity', q:'يعتبر أكثر الأجسام المضادة وجودا في الإفرازات المخاطية:', opts:['IgM','IgG','IgA','IgE'], c:2, exp:'IgA يوجد في الإفرازات المخاطية.'},
+    {n:97, cat:'immunity', q:'يعتبر المسؤول عن المناعة الأولية عند التعرض للمرض لأول مرة:', opts:['IgM','IgG','IgA','IgE'], c:0, exp:'IgM هو المسؤول عن المناعة الأولية.'},
+    {n:98, cat:'immunity', q:'يعتبر المسؤول عن المناعة ضد الطفيليات وله دور في الحساسية:', opts:['IgM','IgG','IgA','IgE'], c:3, exp:'IgE له دور في الحساسية ومقاومة الطفيليات.'}
+];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// جسيمات عشوائية
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// أزرار التصفية
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        const filtered = currentCategory === 'all' ? ALL : ALL.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// تحميل العدد الأولي
+document.getElementById('totalQ').textContent = ALL.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...ALL] : ALL.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        if (lastCat !== q.cat) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${CATS[q.cat] || q.cat}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = q.cat;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        const optsHtml = q.opts.map((opt, optIdx) =>
+            `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+        ).join('');
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${CATS[q.cat] || q.cat}</div>
+            </div>
+            <div class="q-text">${q.q}</div>
+            <div class="options" id="opts-${idx}">${optsHtml}</div>
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ صحيح! ${q.exp}` : `❌ خطأ! الإجابة الصحيحة: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 ممتاز! أداء رائع في الأحياء الدقيقة!';
+    else if (percent >= 75) msg = '👏 جيد جداً! استمر في المراجعة!';
+    else if (percent >= 60) msg = '👍 جيد! راجع الإجابات الخاطئة.';
+    else msg = '📚 تحتاج إلى مزيد من المراجعة — يمكنك التحسن!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 مراجعة الإجابات الخاطئة</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ سؤال ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ الإجابة الصحيحة:</strong> ${q.opts[q.c]}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 جميع الإجابات صحيحة! عمل ممتاز!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>

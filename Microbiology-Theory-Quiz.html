@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Microbiology Theory Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-dark: #1b4332;
+    --secondary: #1e7a7a;
+    --secondary-light: #3d9e9e;
+    --dark: #1a2a2a;
+    --card-bg: rgba(255,255,255,0.85);
+    --card-bg-hover: rgba(255,255,255,0.95);
+    --light: #e8f0ee;
+    --gray: #7a9a92;
+    --gray-light: #b5cdc5;
+    --white: #f5faf8;
+    --success: #52b788;
+    --success-light: #74c69d;
+    --error: #d97777;
+    --error-light: #e8a8a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%);
+    color: #1a2a2a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.05) 0%, rgba(200,220,215,0.95) 70%);
+    z-index: -1;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(45,106,79,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 25s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,122,122,0.12);
+    padding: 10px 24px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stat-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(45,106,79,0.10);
+    color: var(--dark);
+}
+
+.stat-answered { border-color: rgba(30,122,122,0.15); }
+.stat-correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
+.stat-wrong { background: rgba(217,119,119,0.06); border-color: var(--error); color: #8b5555; }
+.stat-percent { background: rgba(45,106,79,0.06); border-color: var(--primary); color: var(--primary); }
+
+.progress-bar-container {
+    width: 140px;
+    height: 4px;
+    background: rgba(45,106,79,0.10);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.start-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(45,106,79,0.10);
+    border-radius: 32px;
+    padding: 45px 35px;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+.start-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.main-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.15); }
+    50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); }
+}
+
+.start-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.start-card .sub {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.filter-btns button {
+    padding: 6px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(45,106,79,0.08);
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.filter-btns button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(45,106,79,0.04);
+}
+
+.filter-btns button.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: white;
+}
+
+.q-count {
+    margin: 15px 0;
+    color: var(--gray);
+}
+
+.q-count span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 13px 35px;
+    border-radius: 40px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.quiz-wrapper {
+    display: none;
+    padding: 95px 20px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.section-line.right {
+    background: linear-gradient(270deg, var(--primary), transparent);
+}
+
+.section-title {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: rgba(45,106,79,0.05);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(45,106,79,0.06);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.question-card:hover {
+    transform: translateX(-4px);
+    border-color: var(--secondary);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.question-card.correct {
+    border-right: 4px solid var(--success);
+    background: rgba(82,183,136,0.03);
+}
+
+.question-card.wrong {
+    border-right: 4px solid var(--error);
+    background: rgba(217,119,119,0.03);
+}
+
+.q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.q-num {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.q-cat {
+    background: rgba(30,122,122,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.q-text {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #1a2a2a;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a2a;
+}
+
+.option::before {
+    content: attr(data-letter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+.option:hover:not(:disabled) {
+    background: rgba(45,106,79,0.03);
+    border-color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.option.correct {
+    background: rgba(82,183,136,0.06);
+    border-color: var(--success);
+    color: var(--primary);
+}
+
+.option.correct::before {
+    background: var(--success);
+    color: white;
+}
+
+.option.wrong {
+    background: rgba(217,119,119,0.06);
+    border-color: var(--error);
+    color: #8b5555;
+}
+
+.option.wrong::before {
+    background: var(--error);
+    color: white;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+    background: rgba(82,183,136,0.04);
+    border-right: 3px solid var(--success);
+    color: var(--primary);
+}
+
+.feedback.wrong {
+    background: rgba(217,119,119,0.04);
+    border-right: 3px solid var(--error);
+    color: #8b5555;
+}
+
+.submit-area {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 12px 45px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45,106,79,0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.results-screen {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 35px;
+    background: rgba(255,255,255,0.90);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid rgba(45,106,79,0.08);
+    text-align: center;
+    display: none;
+    animation: zoomIn 0.5s ease;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.03);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.results-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    margin-bottom: 15px;
+}
+
+.results-screen h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.score-svg {
+    transform: rotate(-90deg);
+}
+
+.score-bg {
+    fill: none;
+    stroke: rgba(45,106,79,0.06);
+    stroke-width: 10;
+}
+
+.score-fill {
+    fill: none;
+    stroke: url(#scoreGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-big {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.result-msg {
+    color: var(--gray);
+    margin: 12px 0;
+}
+
+.results-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-stat {
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.result-stat.c { background: rgba(82,183,136,0.04); border: 1px solid var(--success); }
+.result-stat.w { background: rgba(217,119,119,0.04); border: 1px solid var(--error); }
+.result-stat.p { background: rgba(30,122,122,0.04); border: 1px solid var(--secondary); }
+
+.result-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.result-stat.c .num { color: var(--primary); }
+.result-stat.w .num { color: #8b5555; }
+.result-stat.p .num { color: var(--secondary); }
+
+.result-stat .label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-home {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(45,106,79,0.10);
+    padding: 10px 28px;
+    border-radius: 40px;
+    color: var(--gray);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-restart:hover, .btn-home:hover {
+    transform: translateY(-2px);
+}
+
+.btn-home:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.review-area {
+    text-align: right;
+    margin-top: 25px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.review-area h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.review-item {
+    background: rgba(217,119,119,0.03);
+    border-right: 3px solid var(--error);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.true-false-section {
+    margin-top: 10px;
+    padding: 15px;
+    background: rgba(30,122,122,0.03);
+    border-radius: 16px;
+    border: 1px dashed var(--secondary);
+}
+
+.true-false-section h4 {
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.tf-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+.tf-item .num {
+    color: var(--gray);
+    font-weight: 600;
+    min-width: 30px;
+}
+
+.tf-item .text {
+    flex: 1;
+}
+
+.tf-item .status {
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+}
+
+.tf-item.correct-tf { background: rgba(82,183,136,0.04); }
+.tf-item.wrong-tf { background: rgba(217,119,119,0.04); }
+.tf-item .status.correct { color: var(--success); }
+.tf-item .status.wrong { color: var(--error); }
+
+@media (max-width: 768px) {
+    .start-card { padding: 25px 18px; margin: 0 12px; }
+    .start-card h1 { font-size: 1.3rem; }
+    .question-card { padding: 16px; }
+    .results-screen { padding: 20px; margin: 80px 12px 25px; }
+    .results-stats { gap: 6px; }
+    .result-stat .num { font-size: 1.2rem; }
+    .stat-badge { font-size: 0.6rem; padding: 2px 8px; }
+    .progress-bar-container { width: 80px; }
+    .q-text { font-size: 0.9rem; }
+    .option { font-size: 0.85rem; padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/36?text=AD'">
+            <span class="brand">A.D.Gad | Microbiology Theory</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/90?text=AD'">
+        <h1>🧬 علم الأحياء الدقيقة</h1>
+        <p class="sub">📚 بنك أسئلة نظري للمراجعة — Dr. Adel Elhawary</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 الكل</button>
+            <button data-cat="mcq">🔬 اختيار من متعدد</button>
+            <button data-cat="tf">✅ صح/خطأ</button>
+        </div>
+        <div class="q-count">📋 عدد الأسئلة: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ ابدأ الاختبار</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 عرض النتيجة</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/70?text=AD'">
+    <h2>🏆 اكتمل الاختبار!</h2>
+    <div class="score-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="65" cy="65" r="52"/>
+            <circle class="score-fill" id="scoreFill" cx="65" cy="65" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.65rem;">من <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ صحيح</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ خطأ</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 النسبة</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 إعادة الاختبار</button>
+    <button class="btn-home" onclick="goHome()">🏠 الرئيسية</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['أ', 'ب', 'ج', 'د'];
+
+// أسئلة الاختيار من متعدد (MCQ)
+const MCQ = [
+    {n:1, q:'All of the following are essential structures of bacteria except:', opts:['Cell wall','Cytoplasm','Spores','DNA'], c:2, exp:'الجراثيم (Spores) ليست تركيباً أساسياً للبكتيريا، بل تتكون في الظروف غير المناسبة.'},
+    {n:2, q:'The function of cytoplasmic membrane is:', opts:['Shape of bacteria','Motility','Selective permeability','Resist dryness'], c:2, exp:'الغشاء السيتوبلازمي يتميز بالنفاذية الاختيارية.'},
+    {n:3, q:'The structure that is formed under unfavorable condition is:', opts:['Pili','Capsule','Spores','Flagella'], c:2, exp:'الجراثيم (Spores) تتكون في الظروف غير المناسبة.'},
+    {n:4, q:'The outer layer of spore consists of:', opts:['Cytoplasmic membrane','Keratin coated protein','Normal peptidoglycan','less cross linked peptidoglycan'], c:1, exp:'الطبقة الخارجية للجرثومة تتكون من بروتين مغطى بالكيراتين.'},
+    {n:5, q:'The function of flagella is:', opts:['Respiration','Movement','Reproduction','Fermentation'], c:1, exp:'السياط مسؤولة عن الحركة.'},
+    {n:6, q:'Bacteria have very small size measured by:', opts:['Microns','Nanometers','Millimeter','None of above'], c:0, exp:'حجم البكتيريا يقاس بالميكرون (Microns).'},
+    {n:7, q:'The structure that is responsible for the shape of bacteria is:', opts:['Cell wall','Spores','Cytoplasm','Capsule'], c:0, exp:'الجدار الخلوي مسؤول عن شكل البكتيريا.'},
+    {n:8, q:'Bacteria need all of the following for their growth except:', opts:['Nutrition','Gases','Light','Moisture'], c:2, exp:'البكتيريا لا تحتاج للضوء للنمو.'},
+    {n:9, q:'Antibodies are secreted by:', opts:['T helper lymphocytes','Plasma cells','B lymphocytes','Macrophages'], c:1, exp:'الأجسام المضادة تفرز من خلايا البلازما (Plasma cells).'},
+    {n:10, q:'Optimum temperature for most of the pathogenic bacteria is:', opts:['47°C','37°C','27°C','none of these'], c:1, exp:'درجة الحرارة المثلى للبكتيريا الممرضة هي 37°C.'},
+    {n:11, q:'Bacteria which can grow in absence of oxygen are known as:', opts:['strict aerobes','anaerobes','microaerophilic','none of these'], c:1, exp:'اللاهوائيات (anaerobes) تنمو في غياب الأكسجين.'},
+    {n:12, q:'Which of the following bacteria is coma shaped:', opts:['Streptococci','Vibrio Cholera','Diphtheria','none of these'], c:1, exp:'بكتيريا Vibrio Cholera تكون على شكل فاصلة.'},
+    {n:13, q:'Pasteurization is done at:', opts:['63°C for 30 minutes','72°C for 15-20 seconds','both of these','none of these'], c:2, exp:'البسترة تتم بدرجة 63°C لمدة 30 دقيقة أو 72°C لمدة 15-20 ثانية.'},
+    {n:14, q:'Bacteriostatic agent means:', opts:['kills bacteria','Inhibit growth of bacteria','stimulate growth of bacteria','none of these'], c:1, exp:'المواد المثبطة للبكتيريا تمنع نموها.'},
+    {n:15, q:'Bacteriocidal agent means:', opts:['inhibit growth of bacteria','stimulate growth of bacteria','kills bacteria','all of these'], c:2, exp:'المواد القاتلة للبكتيريا تقتلها.'},
+    {n:16, q:'.................... is one of essential component that decides the ability of bacteria to be stained by bacterial stains:', opts:['Cytoplasmic Membrane','Capsule','Fimbria','Cell wall'], c:3, exp:'الجدار الخلوي يحدد قدرة البكتيريا على التصبغ.'},
+    {n:17, q:'The optimum pH of most bacteria is between:', opts:['6.5 and 7.5','6.0 to 7.2','7.0 and 7.2','6.0 or below'], c:0, exp:'الأس الهيدروجيني المثالي للبكتيريا بين 6.5 و 7.5.'},
+    {n:18, q:'Clostridia considered as:', opts:['Facultative anaerobes','Obligatory Anaerobes','Obligatory Aerobes','Microaerophilic'], c:1, exp:'بكتيريا المطثية هي لاهوائية إجبارية.'},
+    {n:19, q:'.................... help bacteria to be Resistance to antibodies by production of B-lactamases:', opts:['Flagella','Pilli','Ribosomes','Plasmid'], c:3, exp:'البلازميد يساعد البكتيريا على مقاومة المضادات الحيوية.'},
+    {n:20, q:'The gram +ve bacteria appear .................... in color by gram stain:', opts:['brownish','Violet','Red','Greenish'], c:1, exp:'البكتيريا الموجبة لجرام تصبغ باللون البنفسجي.'},
+    {n:21, q:'The DNA of Prokaryotes are .................... in shape:', opts:['circular','Linear','Helical','None of the above'], c:0, exp:'DNA بدائيات النواة يكون دائري الشكل.'},
+    {n:22, q:'The capsule considered as .................... structure of bacteria:', opts:['External','Internal','cytoplasmic','Nuclear'], c:0, exp:'الكبسولة تعتبر تركيباً خارجياً للبكتيريا.'},
+    {n:23, q:'.................... help in protection of the bacterial cell when it engulfed by other organisms:', opts:['Flagella','Pilli','Ribosomes','Capsule'], c:3, exp:'الكبسولة تحمي الخلية البكتيرية من الالتهام.'},
+    {n:24, q:'The sudden stable heritable change in nucleotide sequence in DNA is called:', opts:['Binary vision','Conjugation','Mutation','Transcription'], c:2, exp:'الطفرة (Mutation) هي تغير مفاجئ ووراثي في تسلسل النيوكليوتيدات.'},
+    {n:25, q:'Psychrophilic bacteria can grow in temperature:', opts:['20-40°C','35-37°C','0-20°C','higher than 40°C'], c:2, exp:'البكتيريا المحبة للبرودة تنمو في 0-20°C.'},
+    {n:26, q:'All of the following are essential structures EXCEPT:', opts:['Capsule','Cell wall','Cytoplasm','DNA'], c:0, exp:'الكبسولة ليست تركيباً أساسياً للبكتيريا.'},
+    {n:27, q:'All of the following may be the shape of bacteria EXCEPT:', opts:['Cocci','Bacilli','Spiral','Square','Vibrio'], c:3, exp:'المربع ليس شكلاً من أشكال البكتيريا.'},
+    {n:28, q:'.................... is essential structure responsible for motility:', opts:['Pili','Spores','Flagella','Cell wall','Capsule'], c:2, exp:'السياط مسؤولة عن الحركة.'},
+    {n:29, q:'Which structure is responsible for resistance to heat and radiation in spores?', opts:['Keratin coat','Cytoplasmic membrane','Cell wall','Ribosomes','Bacterial DNA'], c:0, exp:'طبقة الكيراتين مسؤولة عن مقاومة الجراثيم للحرارة والإشعاع.'},
+    {n:30, q:'The viruses possess:', opts:['Only one type of nucleic acid DNA or RNA','Both DNA and RNA','Plasmid','capsid only'], c:0, exp:'الفيروسات تحتوي على نوع واحد فقط من الحمض النووي (DNA أو RNA).'},
+    {n:31, q:'The Chromosome in Prokaryotes is ....................:', opts:['Rode shape','Coma shape','Haploid','Diploid'], c:2, exp:'الكروموسوم في بدائيات النواة يكون أحادي الصيغة الصبغية (Haploid).'},
+    {n:32, q:'.................... decides the ability of bacteria to be stained by bacterial stains:', opts:['Pilli','Capsule','Cell wall','Cytoplasm'], c:2, exp:'الجدار الخلوي يحدد قابلية البكتيريا للتصبغ.'},
+    {n:33, q:'.................... is a gel-like substance contains enzymes, salts, cell components such as nucleic body, plasmids and ribosomes:', opts:['Nucleoid','Cytoplasmic membrane','Cell wall','Cytoplasm'], c:3, exp:'السيتوبلازم مادة هلامية تحتوي على الإنزيمات والأملاح والريبوسومات.'},
+    {n:34, q:'.................... is cell structures responsible for protein synthesis from mRNA:', opts:['Nucleoid','Ribosomes','Cell wall','Cytoplasm'], c:1, exp:'الريبوسومات مسؤولة عن تخليق البروتين من mRNA.'},
+    {n:35, q:'.................... is inactive form of the bacteria that called dormant cell and resist bactericidal agents:', opts:['Nucleoid','Ribosomes','Endospore','Capsule'], c:2, exp:'الجرثومة الداخلية (Endospore) هي شكل خامل من البكتيريا.'},
+    {n:36, q:'Spore resist adverse environmental conditions which is not suitable for the bacteria due to presence of:', opts:['Hydrochloric acid','Acetoacetic acid','Diphliconic acid','Dihydrochloric acid'], c:2, exp:'حامض الديبيكولينيك مسؤول عن مقاومة الجراثيم للظروف البيئية السيئة.'},
+    {n:37, q:'The Rod shape bacteria mean the bacteria are:', opts:['Cocci shape','Bacilli shape','Spiral shape','Cluster shape'], c:1, exp:'البكتيريا العصوية (Bacilli) تكون على شكل قضيب.'},
+    {n:38, q:'Mistakes or errors that occur during DNA replication is called:', opts:['Spontaneous mutation','Conjugation','Induced mutation','Transformation'], c:0, exp:'الطفرات التلقائية تحدث أثناء تضاعف DNA.'},
+    {n:39, q:'.................... is a mechanism by which DNA from two bacteria may come together in one cell by the help of bacteriophages:', opts:['Transduction','Conjugation','Transformation','Induced mutation'], c:0, exp:'التحوّل (Transduction) يتم بمساعدة البكتيريوفاج.'},
+    {n:40, q:'In .................... the recipient cell uptake of free DNA released into the environment when another bacterial cell dies:', opts:['Transduction','Conjugation','Transformation','Induced mutation'], c:2, exp:'التحول (Transformation) هو امتصاص الخلية للـ DNA الحر من البيئة.'},
+    {n:41, q:'Acidophilic bacteria Prefer environmental PH of:', opts:['6.8 - 7.3','7 - 7.2','6.5 - 7.5','6.0 or below'], c:3, exp:'البكتيريا المحبة للحموضة تفضل pH 6.0 أو أقل.'},
+    {n:42, q:'.................... is a process that uses chemical agents or heat to eliminate all pathogenic microorganisms with the exception of bacterial spores:', opts:['Disinfection','Sterilization','Antimicrobial','Antibodies'], c:0, exp:'التطهير (Disinfection) يزيل الميكروبات الممرضة باستثناء الجراثيم.'},
+    {n:43, q:'Transient presence of bacteria in the bloodstream called:', opts:['Disinfection','Bacteremia','Septicemia','Antibodies'], c:1, exp:'تجرثم الدم (Bacteremia) هو وجود مؤقت للبكتيريا في الدم.'}
+];
+
+// أسئلة صح/خطأ
+const TF = [
+    {n:1, q:'Bacteria are unicellular organisms.', ans:true, exp:'البكتيريا كائنات وحيدة الخلية.'},
+    {n:2, q:'Suitable temperature for bacterial growth is 37°C.', ans:true, exp:'درجة الحرارة المناسبة لنمو البكتيريا هي 37°C.'},
+    {n:3, q:'Bacteria are easily seen by naked eye.', ans:false, exp:'البكتيريا لا ترى بالعين المجردة.'},
+    {n:4, q:'The DNA of Prokaryotes is linear.', ans:false, exp:'DNA بدائيات النواة دائري وليس خطي.'},
+    {n:5, q:'The Eukaryotes contain 80s ribosomes.', ans:true, exp:'حقيقيات النواة تحتوي على ريبوسومات 80s.'},
+    {n:6, q:'Plant, Animal & Human cells are Prokaryotes.', ans:false, exp:'خلايا النبات والحيوان والإنسان هي حقيقيات النواة.'},
+    {n:7, q:'Acidity or alkalinity is suitable for bacterial growth.', ans:false, exp:'الحموضة أو القلوية ليست مناسبة لنمو البكتيريا.'},
+    {n:8, q:'Some bacteria have capsule.', ans:true, exp:'بعض البكتيريا لها كبسولة.'},
+    {n:9, q:'All the bacteria can form spores.', ans:false, exp:'ليست كل البكتيريا يمكنها تكوين جراثيم.'},
+    {n:10, q:'Viruses can replicate inside the living and non-living cells.', ans:false, exp:'الفيروسات تتكاثر داخل الخلايا الحية فقط.'},
+    {n:11, q:'The viruses possess only one type of nucleic acid.', ans:true, exp:'الفيروسات تحتوي على نوع واحد فقط من الحمض النووي.'},
+    {n:12, q:'Bacteria possess only one type of nucleic acid.', ans:false, exp:'البكتيريا تحتوي على DNA و RNA معاً.'},
+    {n:13, q:'Viruses are ultramicroscopic, measured by nanometer (nm).', ans:true, exp:'الفيروسات فائقة الصغر وتقاس بالنانومتر.'},
+    {n:14, q:'The Polymerase Chain Reaction are important in typing of bacteria.', ans:true, exp:'PCR مهم في تصنيف البكتيريا.'},
+    {n:15, q:'The Eukaryotes contain 70s ribosome while Prokaryotes contain 80s ribosomes.', ans:false, exp:'حقيقيات النواة تحتوي على 80s وبدائيات النواة على 70s.'},
+    {n:16, q:'Plasmid are small circular DNA structures present inside the nuclear body and not involved in Reproduction.', ans:false, exp:'البلازميد يشارك في التكاثر ونقل المقاومة.'},
+    {n:17, q:'The sudden stable heritable change in nucleotide sequence in DNA is called Conjugation.', ans:false, exp:'التغير المفاجئ في DNA يسمى طفرة (Mutation) وليس اقتران (Conjugation).'},
+    {n:18, q:'Bacterial spores are highly resistant structures metabolically active, formed in response to unfavorable conditions.', ans:false, exp:'الجراثيم غير نشطة أيضياً (ميتابوليكياً).'},
+    {n:19, q:'The size of bacteria is measured in nanometers while the size of viruses is measured in microns.', ans:false, exp:'البكتيريا تقاس بالميكرون والفيروسات بالنانومتر.'},
+    {n:20, q:'Gram positive bacteria cell wall contains only 5-10% peptidoglycan.', ans:false, exp:'البكتيريا الموجبة لجرام تحتوي على 60-90% ببتيدوجليكان.'},
+    {n:21, q:'Obligate anaerobes can live in the presence of oxygen.', ans:false, exp:'اللاهوائيات الإجبارية لا تعيش في وجود الأكسجين.'},
+    {n:22, q:'Clostridium tetani are spore forming bacilli.', ans:true, exp:'المطثية الكزازية هي عصيات مكونة للجراثيم.'},
+    {n:23, q:'Viruses are considered living organisms.', ans:false, exp:'الفيروسات لا تعتبر كائنات حية لأنها لا تمتلك استقلاباً ذاتياً.'},
+    {n:24, q:'The nucleus in eukaryotes not bounded by membrane.', ans:false, exp:'نواة حقيقيات النواة محاطة بغشاء.'},
+    {n:25, q:'Bacteria grow in number not in size.', ans:true, exp:'البكتيريا تتكاثر في العدد وليس في الحجم.'},
+    {n:26, q:'Most bacteria multiply by Mitosis.', ans:true, exp:'معظم البكتيريا تتكاثر بالانشطار الثنائي.'},
+    {n:27, q:'Spore resist adverse environmental conditions which is not suitable for the bacteria.', ans:true, exp:'الجراثيم تقاوم الظروف البيئية السيئة.'},
+    {n:28, q:'Conjugation is a process that occurs between one living bacterial cell and other one dead.', ans:false, exp:'الاقتران يحدث بين خليتين حيتين.'},
+    {n:29, q:'Mycobacterium tuberculosis (TB) is obligatory anaerobes.', ans:false, exp:'المتفطرة السلية هوائية إجبارية.'},
+    {n:30, q:'Thermophilic Bacteria can tolerate temperatures 45°C.', ans:true, exp:'البكتيريا المحبة للحرارة تتحمل 45°C.'},
+    {n:31, q:'PO4 enter in nucleic acids, nucleotides, phospholipids structure of bacterial cell.', ans:true, exp:'الفوسفات يدخل في تركيب الأحماض النووية والدهون الفوسفاتية.'},
+    {n:32, q:'During PCR test, the denaturation of nucleic acid is done at temperature 92°C.', ans:false, exp:'تتم عملية التثبيط عند 94-96°C.'}
+];
+
+const ALL_QUESTIONS = [...MCQ, ...TF];
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// جسيمات عشوائية
+for(let i = 0; i < 35; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 4 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 18 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// أزرار التصفية
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        let filtered = [];
+        if (currentCategory === 'all') filtered = ALL_QUESTIONS;
+        else if (currentCategory === 'mcq') filtered = MCQ;
+        else if (currentCategory === 'tf') filtered = TF;
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+// تحميل العدد الأولي
+document.getElementById('totalQ').textContent = ALL_QUESTIONS.length;
+
+function startQuiz() {
+    if (currentCategory === 'all') currentQuestions = [...ALL_QUESTIONS];
+    else if (currentCategory === 'mcq') currentQuestions = [...MCQ];
+    else if (currentCategory === 'tf') currentQuestions = [...TF];
+    
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+
+    updateStats();
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        // تحديد النوع
+        const isTF = q.ans !== undefined;
+        const catLabel = isTF ? '✅ صح/خطأ' : '🔬 اختيار من متعدد';
+        
+        if (lastCat !== catLabel) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${catLabel}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = catLabel;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (isTF) {
+            // سؤال صح/خطأ
+            optsHtml = `
+                <div class="options" id="opts-${idx}">
+                    <div class="option" data-letter="ص" data-opt="true" onclick="selectTFAnswer(${idx}, true)">✅ True</div>
+                    <div class="option" data-letter="خ" data-opt="false" onclick="selectTFAnswer(${idx}, false)">❌ False</div>
+                </div>
+            `;
+        } else {
+            // سؤال اختيار من متعدد
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectMCQAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+            optsHtml = `<div class="options" id="opts-${idx}">${optsHtml}</div>`;
+        }
+
+        const qText = isTF ? q.q : q.q;
+
+        card.innerHTML = `
+            <div class="q-header">
+                <div class="q-num">${q.n}</div>
+                <div class="q-cat">${catLabel}</div>
+            </div>
+            <div class="q-text">${qText}</div>
+            ${optsHtml}
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectMCQAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) {
+            opt.classList.add('correct');
+        } else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `الإجابة الصحيحة: ${q.opts[q.c]}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function selectTFAnswer(qIdx, selected) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+
+    const isCorrect = selected === q.ans;
+    const allOpts = optsDiv.querySelectorAll('.option');
+
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        const optVal = opt.dataset.opt === 'true' ? true : false;
+        if (optVal === q.ans) {
+            opt.classList.add('correct');
+        } else if (optVal === selected && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const correctText = q.ans ? '✅ صحيح' : '❌ خطأ';
+    showFeedback(qIdx, isCorrect, isCorrect ? q.exp : `الإجابة الصحيحة: ${correctText}<br>📖 ${q.exp}`);
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+
+    updateCounts(isCorrect);
+}
+
+function showFeedback(qIdx, isCorrect, message) {
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    fb.innerHTML = isCorrect ? `✅ صحيح! ${message}` : `❌ خطأ! ${message}`;
+}
+
+function updateCounts(isCorrect) {
+    if (isCorrect) correctCount++;
+    else wrongCount++;
+    answeredCount++;
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+
+    const circumference = 326.7;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+
+    let msg = '';
+    if (percent >= 90) msg = '🌟 ممتاز! أداء رائع في الأحياء الدقيقة!';
+    else if (percent >= 75) msg = '👏 جيد جداً! استمر في المراجعة!';
+    else if (percent >= 60) msg = '👍 جيد! راجع الإجابات الخاطئة.';
+    else msg = '📚 تحتاج إلى مزيد من المراجعة — يمكنك التحسن!';
+    document.getElementById('resultMessage').innerHTML = msg;
+
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 مراجعة الإجابات الخاطئة</h3>';
+    let hasWrong = false;
+
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            const isTF = q.ans !== undefined;
+            const correctAns = isTF ? (q.ans ? '✅ صحيح' : '❌ خطأ') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ سؤال ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ الإجابة الصحيحة:</strong> ${correctAns}<br>
+                    <span style="font-size:0.75rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!hasWrong) {
+        reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 جميع الإجابات صحيحة! عمل ممتاز!</div>';
+    }
+
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
