@@ -3,120 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A.D.Gad | Pathology Final Exam Quiz</title>
+<title>A.D.Gad | Pathology, Lab & Parasitology Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-    --primary: #2d6a4f; --primary-light: #52b788; --primary-dark: #1b4332;
-    --secondary: #1e7a7a; --secondary-light: #3d9e9e; --tertiary: #a8d5ba;
-    --dark: #1a2a2a; --darker: #0d1818;
-    --card-bg: rgba(255,255,255,0.08); --card-bg-hover: rgba(255,255,255,0.14);
-    --light: #e8f0ee; --gray: #9ab0aa; --gray-light: #c5d9d3; --white: #f5faf8;
-    --success: #52b788; --success-light: #74c69d;
-    --error: #d97777; --error-light: #e8a8a8; --warning: #b8a07c;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Cairo', sans-serif; background: linear-gradient(145deg, #e8f0ee 0%, #d4e4df 40%, #c5d9d3 100%); color: #1a2a2a; min-height: 100vh; overflow-x: hidden; }
-.hero-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 30% 40%, rgba(45,106,79,0.06) 0%, rgba(200,220,215,0.95) 70%); z-index: -1; }
-.particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
-.particle { position: absolute; background: rgba(45,106,79,0.08); border-radius: 50%; pointer-events: none; animation: floatParticle 25s infinite linear; }
-@keyframes floatParticle { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.2; } 90% { opacity: 0.2; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
-.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(30,122,122,0.15); padding: 12px 24px; box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
-.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-.logo-area { display: flex; align-items: center; gap: 12px; }
-.logo-small { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); }
-.brand { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
-.progress-stats { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.stat-badge { padding: 4px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(45,106,79,0.06); border: 1px solid rgba(45,106,79,0.12); color: var(--dark); }
-.stat-answered { background: rgba(30,122,122,0.06); border-color: rgba(30,122,122,0.15); }
-.stat-correct { background: rgba(82,183,136,0.10); border-color: var(--success); color: var(--primary); }
-.stat-wrong { background: rgba(217,119,119,0.08); border-color: var(--error); color: #8b5555; }
-.stat-percent { background: rgba(45,106,79,0.08); border-color: var(--primary); color: var(--primary); }
-.progress-bar-container { width: 160px; height: 5px; background: rgba(45,106,79,0.12); border-radius: 3px; overflow: hidden; }
-.progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 3px; transition: width 0.3s; }
-.start-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px; }
-.start-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(15px); border: 1px solid rgba(45,106,79,0.12); border-radius: 32px; padding: 50px 40px; max-width: 640px; width: 100%; text-align: center; transition: all 0.3s; box-shadow: 0 8px 40px rgba(0,0,0,0.04); }
-.start-card:hover { transform: translateY(-5px); border-color: var(--secondary); background: rgba(255,255,255,0.92); box-shadow: 0 12px 50px rgba(0,0,0,0.06); }
-.main-logo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); margin-bottom: 20px; animation: pulse 2s infinite; }
-@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,122,122,0.2); } 50% { box-shadow: 0 0 0 15px rgba(30,122,122,0); } }
-.start-card h1 { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
-.start-card .sub { color: var(--gray); margin-bottom: 25px; }
-.filter-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 25px 0; }
-.filter-btns button { padding: 8px 18px; border-radius: 30px; background: rgba(255,255,255,0.6); border: 1px solid rgba(45,106,79,0.10); color: var(--gray); cursor: pointer; font-family: 'Cairo', sans-serif; transition: all 0.2s; font-weight: 500; font-size: 0.85rem; }
-.filter-btns button:hover { border-color: var(--primary); color: var(--primary); background: rgba(45,106,79,0.05); }
-.filter-btns button.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-color: var(--primary); color: white; }
-.q-count { margin: 20px 0; color: var(--gray); }
-.q-count span { color: var(--primary); font-weight: 700; font-size: 1.3rem; }
-.btn-start { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; padding: 14px 40px; border-radius: 40px; color: white; font-size: 1.1rem; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: all 0.3s; width: 100%; }
-.btn-start:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(45,106,79,0.25); }
-.quiz-wrapper { display: none; padding: 100px 20px 60px; max-width: 900px; margin: 0 auto; }
-.section-header { display: flex; align-items: center; gap: 12px; margin: 30px 0 20px; }
-.section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--primary), transparent); }
-.section-line.right { background: linear-gradient(270deg, var(--primary), transparent); }
-.section-title { color: var(--primary); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; background: rgba(45,106,79,0.06); padding: 5px 15px; border-radius: 20px; }
-.question-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); border-radius: 24px; padding: 28px; margin-bottom: 20px; border: 1px solid rgba(45,106,79,0.08); transition: all 0.3s; box-shadow: 0 2px 15px rgba(0,0,0,0.02); }
-.question-card:hover { transform: translateX(-5px); border-color: var(--secondary); background: rgba(255,255,255,0.92); box-shadow: 0 4px 25px rgba(0,0,0,0.04); }
-.question-card.correct { border-right: 4px solid var(--success); background: rgba(82,183,136,0.04); }
-.question-card.wrong { border-right: 4px solid var(--error); background: rgba(217,119,119,0.04); }
-.q-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-.q-num { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; }
-.q-cat { background: rgba(30,122,122,0.08); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; color: var(--secondary); }
-.q-text { font-size: 1.05rem; font-weight: 500; line-height: 1.6; margin-bottom: 20px; color: #1a2a2a; }
-.options { display: flex; flex-direction: column; gap: 10px; }
-.option { padding: 12px 18px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,106,79,0.08); border-radius: 14px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; font-family: 'Cairo', sans-serif; font-size: 0.95rem; color: #1a2a2a; }
-.option::before { content: attr(data-letter); width: 30px; height: 30px; border-radius: 50%; background: rgba(45,106,79,0.06); display: flex; align-items: center; justify-content: center; font-weight: 700; transition: all 0.2s; color: var(--primary); }
-.option:hover:not(:disabled) { background: rgba(45,106,79,0.04); border-color: var(--primary); transform: translateX(-5px); }
-.option.correct { background: rgba(82,183,136,0.08); border-color: var(--success); color: var(--primary); }
-.option.correct::before { background: var(--success); color: white; }
-.option.wrong { background: rgba(217,119,119,0.08); border-color: var(--error); color: #8b5555; }
-.option.wrong::before { background: var(--error); color: white; }
-.option:disabled { cursor: default; }
-.feedback { margin-top: 16px; padding: 12px 16px; border-radius: 12px; font-size: 0.85rem; display: none; animation: slideDown 0.3s ease; }
-@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-.feedback.correct { background: rgba(82,183,136,0.06); border-right: 3px solid var(--success); color: var(--primary); }
-.feedback.wrong { background: rgba(217,119,119,0.06); border-right: 3px solid var(--error); color: #8b5555; }
-.submit-area { text-align: center; margin: 30px 0; }
-.btn-submit { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; padding: 14px 50px; border-radius: 40px; color: white; font-size: 1rem; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: all 0.3s; }
-.btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(45,106,79,0.25); }
-.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
-.results-screen { max-width: 800px; margin: 100px auto 50px; padding: 40px; background: rgba(255,255,255,0.90); backdrop-filter: blur(15px); border-radius: 32px; border: 1px solid rgba(45,106,79,0.10); text-align: center; display: none; animation: zoomIn 0.5s ease; box-shadow: 0 8px 40px rgba(0,0,0,0.04); }
-@keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-.results-logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); margin-bottom: 20px; }
-.results-screen h2 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
-.score-circle { width: 150px; height: 150px; margin: 25px auto; position: relative; }
-.score-svg { transform: rotate(-90deg); }
-.score-bg { fill: none; stroke: rgba(45,106,79,0.08); stroke-width: 10; }
-.score-fill { fill: none; stroke: url(#scoreGrad); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
-.score-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
-.score-big { font-size: 2rem; font-weight: 800; color: var(--primary); }
-.result-msg { color: var(--gray); margin: 15px 0; }
-.results-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 25px 0; }
-.result-stat { padding: 15px; border-radius: 16px; }
-.result-stat.c { background: rgba(82,183,136,0.06); border: 1px solid var(--success); }
-.result-stat.w { background: rgba(217,119,119,0.06); border: 1px solid var(--error); }
-.result-stat.p { background: rgba(30,122,122,0.06); border: 1px solid var(--secondary); }
-.result-stat .num { font-size: 1.8rem; font-weight: 800; }
-.result-stat.c .num { color: var(--primary); }
-.result-stat.w .num { color: #8b5555; }
-.result-stat.p .num { color: var(--secondary); }
-.result-stat .label { font-size: 0.85rem; color: var(--gray); }
-.btn-restart { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; padding: 12px 30px; border-radius: 40px; color: white; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; margin: 10px 5px; transition: all 0.3s; }
-.btn-home { background: rgba(255,255,255,0.5); border: 1px solid rgba(45,106,79,0.12); padding: 12px 30px; border-radius: 40px; color: var(--gray); font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; margin: 10px 5px; transition: all 0.3s; }
-.btn-restart:hover, .btn-home:hover { transform: translateY(-2px); }
-.btn-home:hover { border-color: var(--primary); color: var(--primary); }
-.review-area { text-align: right; margin-top: 30px; max-height: 300px; overflow-y: auto; }
-.review-area h3 { color: var(--primary); margin-bottom: 15px; }
-.review-item { background: rgba(217,119,119,0.04); border-right: 3px solid var(--error); padding: 12px; border-radius: 12px; margin-bottom: 10px; text-align: right; font-size: 0.85rem; }
-@media (max-width: 768px) {
-    .start-card { padding: 30px 20px; margin: 0 15px; }
-    .start-card h1 { font-size: 1.5rem; }
-    .question-card { padding: 18px; }
-    .results-screen { padding: 25px; margin: 80px 15px 30px; }
-    .results-stats { gap: 8px; }
-    .result-stat .num { font-size: 1.3rem; }
-    .stat-badge { font-size: 0.7rem; padding: 3px 8px; }
-    .progress-bar-container { width: 100px; }
-}
+:root { --primary:#2d6a4f;--primary-light:#52b788;--primary-dark:#1b4332;--secondary:#1e7a7a;--secondary-light:#3d9e9e;--tertiary:#a8d5ba;--dark:#1a2a2a;--darker:#0d1818;--card-bg:rgba(255,255,255,0.08);--card-bg-hover:rgba(255,255,255,0.14);--light:#e8f0ee;--gray:#9ab0aa;--gray-light:#c5d9d3;--white:#f5faf8;--success:#52b788;--success-light:#74c69d;--error:#d97777;--error-light:#e8a8a8;--warning:#b8a07c; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(145deg,#e8f0ee 0%,#d4e4df 40%,#c5d9d3 100%);color:#1a2a2a;min-height:100vh;overflow-x:hidden;}
+.hero-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 40%,rgba(45,106,79,0.06) 0%,rgba(200,220,215,0.95) 70%);z-index:-1;}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1;}
+.particle{position:absolute;background:rgba(45,106,79,0.08);border-radius:50%;pointer-events:none;animation:floatParticle 25s infinite linear;}
+@keyframes floatParticle{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.2;}90%{opacity:0.2;}100%{transform:translateY(-100vh) rotate(720deg);opacity:0;}}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,122,122,0.15);padding:12px 24px;box-shadow:0 2px 20px rgba(0,0,0,0.04);}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-small{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);}
+.brand{font-size:1.1rem;font-weight:700;color:var(--primary);}
+.progress-stats{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.stat-badge{padding:4px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;background:rgba(45,106,79,0.06);border:1px solid rgba(45,106,79,0.12);color:var(--dark);}
+.stat-answered{background:rgba(30,122,122,0.06);border-color:rgba(30,122,122,0.15);}
+.stat-correct{background:rgba(82,183,136,0.10);border-color:var(--success);color:var(--primary);}
+.stat-wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.stat-percent{background:rgba(45,106,79,0.08);border-color:var(--primary);color:var(--primary);}
+.progress-bar-container{width:160px;height:5px;background:rgba(45,106,79,0.12);border-radius:3px;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:3px;transition:width 0.3s;}
+.start-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px;}
+.start-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border:1px solid rgba(45,106,79,0.12);border-radius:32px;padding:50px 40px;max-width:640px;width:100%;text-align:center;transition:all 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+.start-card:hover{transform:translateY(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 12px 50px rgba(0,0,0,0.06);}
+.main-logo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(30,122,122,0.2);}50%{box-shadow:0 0 0 15px rgba(30,122,122,0);}}
+.start-card h1{font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:10px;}
+.start-card .sub{color:var(--gray);margin-bottom:25px;}
+.filter-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:25px 0;}
+.filter-btns button{padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.6);border:1px solid rgba(45,106,79,0.10);color:var(--gray);cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.2s;font-weight:500;font-size:0.85rem;}
+.filter-btns button:hover{border-color:var(--primary);color:var(--primary);background:rgba(45,106,79,0.05);}
+.filter-btns button.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:var(--primary);color:white;}
+.q-count{margin:20px 0;color:var(--gray);}
+.q-count span{color:var(--primary);font-weight:700;font-size:1.3rem;}
+.btn-start{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 40px;border-radius:40px;color:white;font-size:1.1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;width:100%;}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.quiz-wrapper{display:none;padding:100px 20px 60px;max-width:900px;margin:0 auto;}
+.section-header{display:flex;align-items:center;gap:12px;margin:30px 0 20px;}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--primary),transparent);}
+.section-line.right{background:linear-gradient(270deg,var(--primary),transparent);}
+.section-title{color:var(--primary);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;background:rgba(45,106,79,0.06);padding:5px 15px;border-radius:20px;}
+.question-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:24px;padding:28px;margin-bottom:20px;border:1px solid rgba(45,106,79,0.08);transition:all 0.3s;box-shadow:0 2px 15px rgba(0,0,0,0.02);}
+.question-card:hover{transform:translateX(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 4px 25px rgba(0,0,0,0.04);}
+.question-card.correct{border-right:4px solid var(--success);background:rgba(82,183,136,0.04);}
+.question-card.wrong{border-right:4px solid var(--error);background:rgba(217,119,119,0.04);}
+.q-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.q-num{background:linear-gradient(135deg,var(--primary),var(--primary-dark));width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;}
+.q-cat{background:rgba(30,122,122,0.08);padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:600;color:var(--secondary);}
+.q-text{font-size:1.05rem;font-weight:500;line-height:1.6;margin-bottom:20px;color:#1a2a2a;}
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{padding:12px 18px;background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.08);border-radius:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-size:0.95rem;color:#1a2a2a;}
+.option::before{content:attr(data-letter);width:30px;height:30px;border-radius:50%;background:rgba(45,106,79,0.06);display:flex;align-items:center;justify-content:center;font-weight:700;transition:all 0.2s;color:var(--primary);}
+.option:hover:not(:disabled){background:rgba(45,106,79,0.04);border-color:var(--primary);transform:translateX(-5px);}
+.option.correct{background:rgba(82,183,136,0.08);border-color:var(--success);color:var(--primary);}
+.option.correct::before{background:var(--success);color:white;}
+.option.wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.option.wrong::before{background:var(--error);color:white;}
+.option:disabled{cursor:default;}
+.feedback{margin-top:16px;padding:12px 16px;border-radius:12px;font-size:0.85rem;display:none;animation:slideDown 0.3s ease;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.feedback.correct{background:rgba(82,183,136,0.06);border-right:3px solid var(--success);color:var(--primary);}
+.feedback.wrong{background:rgba(217,119,119,0.06);border-right:3px solid var(--error);color:#8b5555;}
+.submit-area{text-align:center;margin:30px 0;}
+.btn-submit{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 50px;border-radius:40px;color:white;font-size:1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;}
+.btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;}
+.results-screen{max-width:800px;margin:100px auto 50px;padding:40px;background:rgba(255,255,255,0.90);backdrop-filter:blur(15px);border-radius:32px;border:1px solid rgba(45,106,79,0.10);text-align:center;display:none;animation:zoomIn 0.5s ease;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+@keyframes zoomIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+.results-logo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;}
+.results-screen h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
+.score-circle{width:150px;height:150px;margin:25px auto;position:relative;}
+.score-svg{transform:rotate(-90deg);}
+.score-bg{fill:none;stroke:rgba(45,106,79,0.08);stroke-width:10;}
+.score-fill{fill:none;stroke:url(#scoreGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+.score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.score-big{font-size:2rem;font-weight:800;color:var(--primary);}
+.result-msg{color:var(--gray);margin:15px 0;}
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:25px 0;}
+.result-stat{padding:15px;border-radius:16px;}
+.result-stat.c{background:rgba(82,183,136,0.06);border:1px solid var(--success);}
+.result-stat.w{background:rgba(217,119,119,0.06);border:1px solid var(--error);}
+.result-stat.p{background:rgba(30,122,122,0.06);border:1px solid var(--secondary);}
+.result-stat .num{font-size:1.8rem;font-weight:800;}
+.result-stat.c .num{color:var(--primary);}
+.result-stat.w .num{color:#8b5555;}
+.result-stat.p .num{color:var(--secondary);}
+.result-stat .label{font-size:0.85rem;color:var(--gray);}
+.btn-restart{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:12px 30px;border-radius:40px;color:white;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-home{background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.12);padding:12px 30px;border-radius:40px;color:var(--gray);font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-restart:hover,.btn-home:hover{transform:translateY(-2px);}
+.btn-home:hover{border-color:var(--primary);color:var(--primary);}
+.review-area{text-align:right;margin-top:30px;max-height:300px;overflow-y:auto;}
+.review-area h3{color:var(--primary);margin-bottom:15px;}
+.review-item{background:rgba(217,119,119,0.04);border-right:3px solid var(--error);padding:12px;border-radius:12px;margin-bottom:10px;text-align:right;font-size:0.85rem;}
+
+/* ===== T/F Styles ===== */
+.tf-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tf-opt{justify-content:center;font-size:1rem;font-weight:700;padding:18px;}
+.tf-opt[data-letter="T"]::before{background:rgba(82,183,136,0.18);color:var(--success);}
+.tf-opt[data-letter="F"]::before{background:rgba(217,119,119,0.18);color:var(--error);}
+
+@media (max-width:768px){.start-card{padding:30px 20px;margin:0 15px;}.start-card h1{font-size:1.5rem;}.question-card{padding:18px;}.results-screen{padding:25px;margin:80px 15px 30px;}.results-stats{gap:8px;}.result-stat .num{font-size:1.3rem;}.stat-badge{font-size:0.7rem;padding:3px 8px;}.progress-bar-container{width:100px;}}
+@media (max-width:480px){.tf-options{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -143,8 +134,8 @@ body { font-family: 'Cairo', sans-serif; background: linear-gradient(145deg, #e8
 <div class="start-screen" id="startScreen">
     <div class="start-card">
         <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/100?text=ADGad'">
-        <h1>A.D.Gad | Pathology Exam</h1>
-        <p class="sub">📚 Pathology MCQ Bank </p>
+        <h1>A.D.Gad | Medical Exam</h1>
+        <p class="sub">📚 Pathology + Lab + Parasitology — Dr. Adel Elhawary</p>
         <div class="filter-btns" id="filterBtns">
             <button class="active" data-cat="all">📚 All</button>
             <button data-cat="cellinjury">🦠 Cell Injury</button>
@@ -154,8 +145,16 @@ body { font-family: 'Cairo', sans-serif; background: linear-gradient(145deg, #e8
             <button data-cat="chronic">🩸 Chronic Inflammation</button>
             <button data-cat="suppuration">💊 Suppuration</button>
             <button data-cat="systemic">🧪 Systemic</button>
+            <button data-cat="phlebotomy">🩸 Phlebotomy</button>
+            <button data-cat="tubes">🧴 Tubes</button>
+            <button data-cat="solutions">🧮 Solutions</button>
+            <button data-cat="parasitology">🔬 Parasitology</button>
+            <button data-cat="protozoa">🦠 Protozoa Intro</button>
+            <button data-cat="freeliving">🧫 Free Living Amoeba</button>
+            <button data-cat="entamoeba">💧 E. histolytica</button>
+            <button data-cat="truefalse">✔️ True/False</button>
         </div>
-        <div class="q-count">📋 Number of MCQ: <span id="totalQ">0</span></div>
+        <div class="q-count">📋 Number of Questions: <span id="totalQ">0</span></div>
         <button class="btn-start" id="startBtn">▶ Start Quiz</button>
     </div>
 </div>
@@ -201,11 +200,19 @@ const CATS = {
     acute: '🔥 Acute Inflammation',
     chronic: '🩸 Chronic Inflammation',
     suppuration: '💊 Suppuration & Abscess',
-    systemic: '🧪 Systemic Effects'
+    systemic: '🧪 Systemic Effects',
+    phlebotomy: '🩸 Phlebotomy & Collection',
+    tubes: '🧴 Tubes & Additives',
+    solutions: '🧮 Solutions & Calculations',
+    parasitology: '🔬 General Parasitology',
+    protozoa: '🦠 Introduction to Protozoa',
+    freeliving: '🧫 Free Living Amoeba',
+    entamoeba: '💧 Entamoeba histolytica',
+    truefalse: '✔️ True / False'
 };
 
 const ALL = [
-    // ===== CELL INJURY & ADAPTATION (1-15) =====
+    // ===== PATHOLOGY MCQ (1-210) =====
     {n:1,cat:'cellinjury',q:"Any deviation from the normal structure/function of any part, organ or system of the body which may be clinical (have symptoms) or subclinical is called:",opts:["Disease","Necrosis","Gangrene","Metaplasia"],c:0,exp:"المرض هو أي انحراف عن البنية أو الوظيفة الطبيعية."},
     {n:2,cat:'cellinjury',q:"Mechanism/s by which the lesions are produced is called:",opts:["Aetiology","Pathogenesis","Pathology","Symptoms"],c:1,exp:"الباثوجينيسيس = آلية تكوّن الآفات."},
     {n:3,cat:'cellinjury',q:"When the injury is severe or persistent, cell death may occur and the type of cell injury is called:",opts:["Reversible","Irreversible","Atrophy","Hyperplasia"],c:1,exp:"الإصابة الشديدة/المستمرة تؤدي إلى إصابة غير قابلة للرجوع."},
@@ -221,8 +228,6 @@ const ALL = [
     {n:13,cat:'cellinjury',q:"Non-neoplastic microscopic change of cells characterized by pleomorphism usually induced by prolonged cell irritation is called:",opts:["Aplasia","Dysplasia","Hypertrophy","Metaplasia"],c:1,exp:"Dysplasia = تغير خلوي مع pleomorphism."},
     {n:14,cat:'cellinjury',q:"Hypersensitivity reactions and autoimmune diseases are a cause of:",opts:["Cell injury","Atrophy","Hypertrophy","Metaplasia"],c:0,exp:"فرط الحساسية وأمراض المناعة الذاتية تسبب إصابة خلوية."},
     {n:15,cat:'cellinjury',q:"The mechanisms of cell injury include:",opts:["Depletion of ATP","Membrane damage","Accumulation of free radicals","All of them"],c:3,exp:"كل هذه الآليات تسبب إصابة خلوية."},
-
-    // ===== CELL DEATH / NECROSIS (16-33) =====
     {n:16,cat:'necrosis',q:"Accumulation of water within the cytoplasm of the cell is called:",opts:["Hydropic change","Hyaline change","Mucoid change","Fatty change"],c:0,exp:"Hydropic change = تجمع الماء داخل السيتوبلازم."},
     {n:17,cat:'necrosis',q:"Excess mucin seen in catarrhal inflammation of mucous membranes is one type of:",opts:["Hydropic change","Hyaline change","Mucoid change","Fatty change"],c:2,exp:"Mucoid change = زيادة المخاط."},
     {n:18,cat:'necrosis',q:"Cell swelling due to accumulation of fat is called:",opts:["Hydropic change","Hyaline change","Mucoid change","Steatosis"],c:3,exp:"Steatosis = تراكم الدهون داخل الخلايا."},
@@ -241,10 +246,8 @@ const ALL = [
     {n:31,cat:'necrosis',q:"Regression of lactating breast after withdrawal of breast-feeding is one type of:",opts:["Physiologic apoptosis","Atrophy","Aplasia","Pathologic apoptosis"],c:0,exp:"Apoptosis فسيولوجي."},
     {n:32,cat:'necrosis',q:"The cell membrane may show convolutions or projections in:",opts:["Necrosis","Apoptosis","Atrophy","Aplasia"],c:1,exp:"في apoptosis يتشكل blebs على الغشاء."},
     {n:33,cat:'necrosis',q:"The morphological changes in apoptosis include:",opts:["Cytoplasmic blebs","Cell shrinkage","Chromatin condensation","All of them"],c:3,exp:"كل هذه تغيرات مميزة للـ apoptosis."},
-
-    // ===== PIGMENTS & CALCIFICATION =====
     {n:34,cat:'pigments',q:"Dry gangrene begins in:",opts:["Distal part of limbs","Forearms","Bed sores","Head and neck"],c:0,exp:"الغرغرينا الجافة تبدأ في الأطراف البعيدة."},
-    {n:35,cat:'pigments',q:"High sugar content in the necrotic tissue may be a predisposing factor for:",opts:["Wet gangrene","Dry gangrene","Liquefactive necrosis","Atrophy"],c:0,exp:"السكر العالي يهيئ للغرغرينا الرطبة (مثل قدم السكري)."},
+    {n:35,cat:'pigments',q:"High sugar content in the necrotic tissue may be a predisposing factor for:",opts:["Wet gangrene","Dry gangrene","Liquefactive necrosis","Atrophy"],c:0,exp:"السكر العالي يهيئ للغرغرينا الرطبة."},
     {n:36,cat:'pigments',q:"Bed sores are one type of:",opts:["Liquefactive necrosis","Dry gangrene","Wet gangrene","Mucoid change"],c:0,exp:"قرح الفراش = liquefactive necrosis."},
     {n:37,cat:'pigments',q:"Liver is enlarged, soft, tense glistening capsule, rounded margins, cut surface bulges, pale yellow, greasy to touch. This gross picture is of:",opts:["Hydropic change","Hyaline change","Mucoid change","Fatty change"],c:3,exp:"الوصف الكلاسيكي للكبد الدهني."},
     {n:38,cat:'pigments',q:"Generalized (systemic) haemosiderosis occurs whenever there is:",opts:["Repeated blood transfusion","Inborn error of metabolism","Clostridia infection","Development of moist gangrene"],c:0,exp:"نقل الدم المتكرر سبب رئيسي لـ hemosiderosis."},
@@ -252,187 +255,280 @@ const ALL = [
     {n:40,cat:'pigments',q:"Hemolytic anemia is a predisposing factor of:",opts:["Leukodermia","Primary hemochromatosis","Hypercalcemia","Secondary hemochromatosis"],c:3,exp:"فقر الدم الانحلالي يسبب hemosiderosis ثانوي."},
     {n:41,cat:'pigments',q:"Metastatic calcification is characterized by:",opts:["Occurs in normal tissues","Abnormal calcium metabolism","Hypercalcemia","All of them"],c:3,exp:"Metastatic calcification = أنسجة طبيعية + فرط كالسيوم + خلل استقلاب."},
     {n:42,cat:'pigments',q:"The intracellular accumulation of protein is called:",opts:["Hyaline change","Mucoid degeneration","Steatosis","Hemosiderosis"],c:0,exp:"Hyaline change = تراكم بروتيني داخل الخلايا."},
-
-    // ===== ACUTE INFLAMMATION =====
     {n:43,cat:'acute',q:"The aim of inflammation is to:",opts:["Dilute or neutralize causative agents","Destroy harmful causative agents","Eliminate the necrotic cells","All of them"],c:3,exp:"كل هذه أهداف الالتهاب."},
     {n:44,cat:'acute',q:"The predominant leukocyte during acute inflammation is:",opts:["Neutrophil","Lymphocyte","Macrophage","All of them"],c:0,exp:"العدلات هي الخلية السائدة في الالتهاب الحاد."},
-    {n:45,cat:'acute',q:"The cardinal signs of acute inflammation include:",opts:["Redness","Hotness","Pain","All of them"],c:3,exp:"العلامات الكلاسيكية: حرارة، حمرة، تورم، ألم، فقدان وظيفة."},
+    {n:45,cat:'acute',q:"The cardinal signs of acute inflammation include:",opts:["Redness","Hotness","Pain","All of them"],c:3,exp:"العلامات الكلاسيكية: حرارة، حمرة، تورم، ألم."},
     {n:46,cat:'acute',q:"The redness and hotness during acute inflammation is due to:",opts:["Thrombosis","Ischemia","Hypoxia","Increase blood flow"],c:3,exp:"فرط التروية يسبب الحمرة والحرارة."},
-    {n:47,cat:'acute',q:"The immediate vascular response during acute inflammation is:",opts:["Thrombosis","Ischemia","Vasoconstriction","Vasodilatation"],c:2,exp:"أول استجابة وعائية = vasoconstriction عابر ثم vasodilation."},
-    {n:48,cat:'acute',q:"The fluid of little protein that moves from capillaries due to elevated local intravascular hydrostatic pressure is called:",opts:["Exudate","Transudate","Pus","Serum"],c:1,exp:"Transudate = قليل البروتين، فرط الضغط الهيدروستاتيكي."},
-    {n:49,cat:'acute',q:"Margination is the process of accumulation along the vascular endothelial surface of:",opts:["Neutrophil","Lymphocyte","Macrophage","All of them"],c:0,exp:"Margination للعدلات في الالتهاب الحاد."},
-    {n:50,cat:'acute',q:"Endothelial cell contraction occurs under the effect of:",opts:["Histamine","Bradykinin","Leukotrienes","All of them"],c:3,exp:"كل هذه الوسائط تسبب انقباض البطانة."},
+    {n:47,cat:'acute',q:"The immediate vascular response during acute inflammation is:",opts:["Thrombosis","Ischemia","Vasoconstriction","Vasodilatation"],c:2,exp:"vasoconstriction عابر ثم vasodilation."},
+    {n:48,cat:'acute',q:"The fluid of little protein that moves from capillaries due to elevated local intravascular hydrostatic pressure is called:",opts:["Exudate","Transudate","Pus","Serum"],c:1,exp:"Transudate = قليل البروتين."},
+    {n:49,cat:'acute',q:"Margination is the process of accumulation along the vascular endothelial surface of:",opts:["Neutrophil","Lymphocyte","Macrophage","All of them"],c:0,exp:"Margination للعدلات."},
+    {n:50,cat:'acute',q:"Endothelial cell contraction occurs under the effect of:",opts:["Histamine","Bradykinin","Leukotrienes","All of them"],c:3,exp:"كل هذه الوسائط."},
     {n:51,cat:'acute',q:"The firm adhesion of neutrophils to endothelial surfaces is mediated under the effect of:",opts:["Histamine","Bradykinin","Leukotrienes","Integrin"],c:3,exp:"Integrins مسؤولة عن الالتصاق القوي."},
-    {n:52,cat:'acute',q:"The movement of leucocytes through the vessel wall is called:",opts:["Diapedesis","Margination","Phagocytosis","None of them"],c:0,exp:"Diapedesis = عبور الكريات البيضاء لجدار الوعاء."},
-    {n:53,cat:'acute',q:"The substances that destroy phagocytosed microbes and remove dead tissues are:",opts:["Lysosomal enzymes","Reactive oxygen","Nitrogen species","All of them"],c:3,exp:"كل هذه آليات قتل الميكروبات داخل البلاعم."},
-    {n:54,cat:'acute',q:"One of the mediators that amplify the inflammatory reaction is:",opts:["Platelet aggregation factor","Arachidonic acid","Vit K","Factor V"],c:0,exp:"PAF وسيط قوي للالتهاب."},
-    {n:55,cat:'acute',q:"The process by which neutrophils and macrophages ingest bacteria and foreign particles is called:",opts:["Diapedesis","Margination","Phagocytosis","None of them"],c:2,exp:"Phagocytosis = البلعمة."},
-    {n:56,cat:'acute',q:"A specific surface receptor which recognizes components of micro-organisms and dead cells or host proteins is called:",opts:["Opsonins","Bradykinin","Leukotrienes","Integrin"],c:0,exp:"Opsonins تساعد في التعرف على الأهداف."},
-    {n:57,cat:'acute',q:"The Ag binds to which region of antibody to mediate opsonization:",opts:["IgG","FC","Fab","IgM"],c:2,exp:"Fab هو منطقة ارتباط الجسم المضاد بالمولد الضد."},
-    {n:58,cat:'acute',q:"The region of antibody that binds FC receptors on the plasma membrane of phagocytes to start phagocytosis:",opts:["IgG","FC","Fab","IgM"],c:1,exp:"FC region تربط مستقبلات FC على البلعميات."},
-    {n:59,cat:'acute',q:"The composition of inflammatory exudate includes:",opts:["Fibrinogen","Macrophages","Neutrophils","All of them"],c:3,exp:"Exudate يحتوي كل هذه المكونات."},
-    {n:60,cat:'acute',q:"The macrophages that are present in inflammatory exudate are derived from blood:",opts:["Fibroblast","Eosinophils","Neutrophils","Monocyte"],c:3,exp:"البالعات الكبيرة تنشأ من monocytes."},
+    {n:52,cat:'acute',q:"The movement of leucocytes through the vessel wall is called:",opts:["Diapedesis","Margination","Phagocytosis","None of them"],c:0,exp:"Diapedesis."},
+    {n:53,cat:'acute',q:"The substances that destroy phagocytosed microbes and remove dead tissues are:",opts:["Lysosomal enzymes","Reactive oxygen","Nitrogen species","All of them"],c:3,exp:"كل هذه آليات قتل الميكروبات."},
+    {n:54,cat:'acute',q:"One of the mediators that amplify the inflammatory reaction is:",opts:["Platelet aggregation factor","Arachidonic acid","Vit K","Factor V"],c:0,exp:"PAF وسيط قوي."},
+    {n:55,cat:'acute',q:"The process by which neutrophils and macrophages ingest bacteria and foreign particles is called:",opts:["Diapedesis","Margination","Phagocytosis","None of them"],c:2,exp:"Phagocytosis."},
+    {n:56,cat:'acute',q:"A specific surface receptor which recognizes components of micro-organisms and dead cells or host proteins is called:",opts:["Opsonins","Bradykinin","Leukotrienes","Integrin"],c:0,exp:"Opsonins."},
+    {n:57,cat:'acute',q:"The Ag binds to which region of antibody to mediate opsonization:",opts:["IgG","FC","Fab","IgM"],c:2,exp:"Fab."},
+    {n:58,cat:'acute',q:"The region of antibody that binds FC receptors on the plasma membrane of phagocytes to start phagocytosis:",opts:["IgG","FC","Fab","IgM"],c:1,exp:"FC region."},
+    {n:59,cat:'acute',q:"The composition of inflammatory exudate includes:",opts:["Fibrinogen","Macrophages","Neutrophils","All of them"],c:3,exp:"كل هذه المكونات."},
+    {n:60,cat:'acute',q:"The macrophages that are present in inflammatory exudate are derived from blood:",opts:["Fibroblast","Eosinophils","Neutrophils","Monocyte"],c:3,exp:"Monocytes."},
     {n:61,cat:'acute',q:"The antibodies present in inflammatory exudate at area of inflammation are:",opts:["Bacteriolysins","Agglutinins","Opsonins","All of them"],c:3,exp:"كل هذه أنواع من الأجسام المضادة."},
-    {n:62,cat:'acute',q:"Neutrophils present in inflammatory exudate, when they die, they are changed into:",opts:["Pus","Eosinophils","Neutrophils","Monocytes"],c:0,exp:"العدلات الميتة تتحول إلى pus cells."},
-    {n:63,cat:'acute',q:"The arachidonic acid metabolites include:",opts:["Bacteriolysins","Agglutinins","Prostaglandins","All of them"],c:2,exp:"البروستاجلاندينات من مستقلبات حمض الأراكيدونيك."},
-    {n:64,cat:'acute',q:"The plasma-protein-derived mediators include:",opts:["Bacteriolysins","Agglutinins","Prostaglandins","Bradykinin"],c:3,exp:"Bradykinin من وسائط البلازما (نظام الكينين)."},
-    {n:65,cat:'acute',q:"Histamine acts as what during the inflammatory process:",opts:["Vasodilator","Vasoconstrictor","Pain killer","Chemotactic"],c:0,exp:"الهيستامين موسع للأوعية."},
-    {n:66,cat:'acute',q:"The vascular permeability during inflammation is increased under the effect of:",opts:["Histamine","Serotonin","Bradykinin","All of them"],c:3,exp:"كل هذه الوسائط تزيد النفاذية الوعائية."},
-    {n:67,cat:'acute',q:"Leucocyte recruitment and activation during inflammation occur under the effect of:",opts:["Histamine","Serotonin","Leukotriene","Platelet activating factor"],c:2,exp:"الليوكوترينات تجذب وتنشط الكريات البيضاء."},
-    {n:68,cat:'acute',q:"Responsible for fever production during inflammation:",opts:["IL-1","TNF","Prostaglandins","All of them"],c:3,exp:"كل هذه تسبب الحمى (PGs تعيد ضبط مركز الحرارة)."},
-    {n:69,cat:'acute',q:"The morphology of acute inflammation depends upon:",opts:["Its specific cause","Tissue involved","Severity of the inflammatory response","All of them"],c:3,exp:"كل هذه عوامل تحدد الشكل."},
-    {n:70,cat:'acute',q:"The herpes simplex virus can cause:",opts:["Serous inflammation","Fibrinous inflammation","Catarrhal inflammation","None of them"],c:0,exp:"فيروس الهربس يسبب التهاباً مصلياً (بثور)."},
-    {n:71,cat:'acute',q:"In fibrinous inflammation, the serous membranes appear opaque and rough due to fibrin precipitation giving what appearance:",opts:["Dark black","Yellowish-white","Bread and butter","Cheesy"],c:2,exp:"مظهر \"الخبز والزبدة\" مميز للـ fibrinous inflammation."},
-    {n:72,cat:'acute',q:"In late fibrinous inflammation, the restoration phase occurs by the action of:",opts:["Macrophages","Eosinophils","Neutrophils","Monocytes"],c:0,exp:"البالعات الكبيرة تزيل الفيبرين."},
-    {n:73,cat:'acute',q:"In fibrinous inflammation, failure to completely remove fibrin in restoration phase results in:",opts:["Ulcer","Organization and scarring","Wet gangrene","Calcification"],c:1,exp:"بقاء الفيبرين يؤدي إلى تنظيم وتليف."},
-    {n:74,cat:'acute',q:"The catarrhal inflammation is characterized by excessive secretion of:",opts:["Fibrin","Mucus","Pus","Fat globule"],c:1,exp:"Catarrhal = إفراز مخاطي مفرط."},
-    {n:75,cat:'acute',q:"In pseudomembranous fibrinous inflammation, the pseudomembrane consists of:",opts:["Causative organism","Necrotic mucosa","Fibrin threads","All of them"],c:3,exp:"الغشاء الكاذب يحتوي كل هذه المكونات."},
-    {n:76,cat:'acute',q:"Bronchial asthma is one form of:",opts:["Serous inflammation","Fibrinous inflammation","Catarrhal inflammation","Allergic inflammation"],c:3,exp:"الربو = التهاب تحسسي."},
-    {n:77,cat:'acute',q:"The type of inflammation in Vincent's angina is:",opts:["Necrotizing inflammation","Fibrinous inflammation","Catarrhal inflammation","Allergic inflammation"],c:0,exp:"Vincent's angina = التهاب ناخر."},
-    {n:78,cat:'acute',q:"An acute inflammation characterized by pus formation is called:",opts:["Necrotizing inflammation","Fibrinous inflammation","Catarrhal inflammation","Suppurative inflammation"],c:3,exp:"Suppurative = قيحي."},
-    {n:79,cat:'acute',q:"The causative microorganism of suppurative inflammation is:",opts:["Clostridium","Staphylococcus aureus","E. coli","Streptococci"],c:1,exp:"المكورات العنقودية الذهبية سبب رئيسي للقيح."},
-    {n:80,cat:'acute',q:"The vascular phenomena result in forming a pyogenic membrane which is composed of:",opts:["Dilated congested capillaries","Neutrophils","Organisms","All of them"],c:3,exp:"كل هذه مكونات الغشاء القيحي."},
+    {n:62,cat:'acute',q:"Neutrophils present in inflammatory exudate, when they die, they are changed into:",opts:["Pus","Eosinophils","Neutrophils","Monocytes"],c:0,exp:"Pus cells."},
+    {n:63,cat:'acute',q:"The arachidonic acid metabolites include:",opts:["Bacteriolysins","Agglutinins","Prostaglandins","All of them"],c:2,exp:"Prostaglandins."},
+    {n:64,cat:'acute',q:"The plasma-protein-derived mediators include:",opts:["Bacteriolysins","Agglutinins","Prostaglandins","Bradykinin"],c:3,exp:"Bradykinin."},
+    {n:65,cat:'acute',q:"Histamine acts as what during the inflammatory process:",opts:["Vasodilator","Vasoconstrictor","Pain killer","Chemotactic"],c:0,exp:"موسع للأوعية."},
+    {n:66,cat:'acute',q:"The vascular permeability during inflammation is increased under the effect of:",opts:["Histamine","Serotonin","Bradykinin","All of them"],c:3,exp:"كل هذه تزيد النفاذية."},
+    {n:67,cat:'acute',q:"Leucocyte recruitment and activation during inflammation occur under the effect of:",opts:["Histamine","Serotonin","Leukotriene","Platelet activating factor"],c:2,exp:"Leukotriene."},
+    {n:68,cat:'acute',q:"Responsible for fever production during inflammation:",opts:["IL-1","TNF","Prostaglandins","All of them"],c:3,exp:"كل هذه تسبب الحمى."},
+    {n:69,cat:'acute',q:"The morphology of acute inflammation depends upon:",opts:["Its specific cause","Tissue involved","Severity of the inflammatory response","All of them"],c:3,exp:"كل هذه عوامل."},
+    {n:70,cat:'acute',q:"The herpes simplex virus can cause:",opts:["Serous inflammation","Fibrinous inflammation","Catarrhal inflammation","None of them"],c:0,exp:"Serous."},
+    {n:71,cat:'acute',q:"In fibrinous inflammation, the serous membranes appear opaque and rough due to fibrin precipitation giving what appearance:",opts:["Dark black","Yellowish-white","Bread and butter","Cheesy"],c:2,exp:"Bread and butter."},
+    {n:72,cat:'acute',q:"In late fibrinous inflammation, the restoration phase occurs by the action of:",opts:["Macrophages","Eosinophils","Neutrophils","Monocytes"],c:0,exp:"Macrophages."},
+    {n:73,cat:'acute',q:"In fibrinous inflammation, failure to completely remove fibrin in restoration phase results in:",opts:["Ulcer","Organization and scarring","Wet gangrene","Calcification"],c:1,exp:"Organization and scarring."},
+    {n:74,cat:'acute',q:"The catarrhal inflammation is characterized by excessive secretion of:",opts:["Fibrin","Mucus","Pus","Fat globule"],c:1,exp:"Mucus."},
+    {n:75,cat:'acute',q:"In pseudomembranous fibrinous inflammation, the pseudomembrane consists of:",opts:["Causative organism","Necrotic mucosa","Fibrin threads","All of them"],c:3,exp:"كل هذه المكونات."},
+    {n:76,cat:'acute',q:"Bronchial asthma is one form of:",opts:["Serous inflammation","Fibrinous inflammation","Catarrhal inflammation","Allergic inflammation"],c:3,exp:"Allergic."},
+    {n:77,cat:'acute',q:"The type of inflammation in Vincent's angina is:",opts:["Necrotizing inflammation","Fibrinous inflammation","Catarrhal inflammation","Allergic inflammation"],c:0,exp:"Necrotizing."},
+    {n:78,cat:'acute',q:"An acute inflammation characterized by pus formation is called:",opts:["Necrotizing inflammation","Fibrinous inflammation","Catarrhal inflammation","Suppurative inflammation"],c:3,exp:"Suppurative."},
+    {n:79,cat:'acute',q:"The causative microorganism of suppurative inflammation is:",opts:["Clostridium","Staphylococcus aureus","E. coli","Streptococci"],c:1,exp:"Staph aureus."},
+    {n:80,cat:'acute',q:"The vascular phenomena result in forming a pyogenic membrane which is composed of:",opts:["Dilated congested capillaries","Neutrophils","Organisms","All of them"],c:3,exp:"كل هذه المكونات."},
+    {n:81,cat:'suppuration',q:"Staph produces which enzyme that helps localize suppuration by transforming fibrinogen into fibrin:",opts:["Lysosomal enzymes","Coagulase","Protease","Catalase"],c:1,exp:"Coagulase."},
+    {n:82,cat:'suppuration',q:"The mid zone of an abscess contains:",opts:["Causative organism","Pus","Fibrin thread","Pyogenic membrane"],c:1,exp:"Pus."},
+    {n:83,cat:'suppuration',q:"The peripheral zone of an abscess contains:",opts:["Causative organism","Pus","Fibrin thread","Pyogenic membrane"],c:3,exp:"Pyogenic membrane."},
+    {n:84,cat:'suppuration',q:"A small abscess related to a hair follicle or sebaceous gland is called:",opts:["Furuncle","Carbuncle","Ulcer","Phlegmon"],c:0,exp:"Furuncle."},
+    {n:85,cat:'suppuration',q:"Carbuncle is a localized suppurative inflammation in the subcutaneous tissue open on the surface by:",opts:["One orifice","Multiple openings","Forming ulcer","Lysosomal enzymes"],c:1,exp:"Multiple openings."},
+    {n:86,cat:'suppuration',q:"A local defect of skin or mucosal surface leading to sloughing or shedding of inflammatory necrotic tissue is called:",opts:["Furuncle","Carbuncle","Ulcer","Cellulitis"],c:2,exp:"Ulcer."},
+    {n:87,cat:'suppuration',q:"An abnormal tract connecting two cavities or between a hollow viscera and the surface is called:",opts:["Furuncle","Carbuncle","Sinus","Fistula"],c:3,exp:"Fistula."},
+    {n:88,cat:'suppuration',q:"Types of fistula are:",opts:["Inflammatory","Congenital","Fibrinoid","A & B"],c:3,exp:"Inflammatory و Congenital."},
+    {n:89,cat:'suppuration',q:"A diffuse suppurative inflammation of subcutaneous tissue is called:",opts:["Phlegmon","Phlebitis","Enteritis","Cellulitis"],c:3,exp:"Cellulitis."},
+    {n:90,cat:'suppuration',q:"The causative organism of diffuse suppurative inflammation is:",opts:["Clostridium","Staphylococcus aureus","E. coli","Streptococci"],c:3,exp:"Streptococci."},
+    {n:91,cat:'suppuration',q:"In diffuse suppurative inflammation, spread of infection occurs by dissolving the mucopolysaccharide matrix under the effect of:",opts:["Lysosomal enzymes","Coagulase","Protease","None of them"],c:0,exp:"Lysosomal enzymes."},
+    {n:92,cat:'suppuration',q:"During abscess formation, when pus is mixed with blood it becomes:",opts:["Thrombosed","Ischemic","Hemorrhagic","Sanguineous"],c:3,exp:"Sanguineous."},
+    {n:93,cat:'systemic',q:"Bacterial products called exogenous pyrogens stimulate leucocytes to release endogenous pyrogens such as:",opts:["TNF-α","Coagulase","Protease","None of them"],c:0,exp:"TNF-α."},
+    {n:94,cat:'systemic',q:"During bacterial infections, the induced leucocytosis is mainly due to:",opts:["Eosinophilia","Neutrophilia","Lymphocytosis","Basophilia"],c:1,exp:"Neutrophilia."},
+    {n:95,cat:'systemic',q:"Accelerate the release of cells from the bone marrow reserve pool:",opts:["TNF-α","IL-1","PG","A & B"],c:3,exp:"TNF-α و IL-1."},
+    {n:96,cat:'systemic',q:"Allergic reactions and parasitic infestations are associated with:",opts:["Eosinophilia","Neutrophilia","Lymphocytosis","Basophilia"],c:0,exp:"Eosinophilia."},
+    {n:97,cat:'systemic',q:"Typhoid fever and rickettsiae are associated with:",opts:["Basophilia","Neutrophilia","Lymphocytosis","Leucopenia"],c:3,exp:"Leucopenia."},
+    {n:98,cat:'systemic',q:"Decreased number of circulating white cells associated with typhoid fever infection is likely due to:",opts:["Sequestration of lymphocytes in lymph nodes","Bone marrow depression","Vasoconstriction","Ischemia"],c:1,exp:"Bone marrow depression."},
+    {n:99,cat:'systemic',q:"Acute-phase proteins synthesized in the liver whose concentrations increase in response to inflammatory stimuli include:",opts:["Serum amyloid A","CRP","Leukotriene","A & B"],c:3,exp:"SAA و CRP."},
+    {n:100,cat:'systemic',q:"Binds to erythrocytes and causes them to form stacks (rouleaux) that sediment more rapidly:",opts:["TNF-α","Fibrinogen","Leukotriene","A & B"],c:1,exp:"Fibrinogen."},
+    {n:101,cat:'systemic',q:"Shock is one form of acute phase reaction due to production of numerous quantities of:",opts:["TNF-α","Fibrinogen","Leukotriene","PG"],c:0,exp:"TNF-α."},
+    {n:102,cat:'systemic',q:"Shock results from profuse systemic vasodilatation with increased vascular permeability, which leads to:",opts:["Hypertension","Hypotension","Necrosis","None of them"],c:1,exp:"Hypotension."},
+    {n:103,cat:'systemic',q:"In acute-phase response of inflammation, the actions of cytokines on brain cells result in:",opts:["Anorexia","Drowsiness","Malaise","All of them"],c:3,exp:"كل هذه الأعراض."},
+    {n:104,cat:'systemic',q:"Termination of the acute inflammatory response involves:",opts:["Neutralization","Enzymatic degradation","Normalization of vascular permeability","All of them"],c:3,exp:"كل هذه الآليات."},
+    {n:105,cat:'systemic',q:"Cessation of leucocyte emigration with subsequent death of extravasated neutrophils indicates:",opts:["Hypotension","Vasoconstriction","Termination of the acute inflammatory response","Infarction"],c:2,exp:"Termination."},
+    {n:106,cat:'chronic',q:"When inflammation occurs in tissues that cannot regenerate and the cause is removed, healing occurs by:",opts:["Furuncle","Carbuncle","Ulcer","Fibrosis"],c:3,exp:"Fibrosis."},
+    {n:107,cat:'chronic',q:"Occurs when the acute response cannot be resolved because of persistence of the injurious agent:",opts:["Serous inflammation","Fibrinous inflammation","Catarrhal inflammation","Chronic inflammation"],c:3,exp:"Chronic inflammation."},
+    {n:108,cat:'chronic',q:"The type of hypersensitivity in chronic inflammation is:",opts:["Type I hypersensitivity","Type II hypersensitivity","Type III hypersensitivity","Delayed-type hypersensitivity"],c:3,exp:"Delayed-type."},
+    {n:109,cat:'chronic',q:"Rheumatoid arthritis disease is one type of:",opts:["Autoimmune diseases","Chronic inflammation","Catarrhal inflammation","A & B"],c:3,exp:"Autoimmune + Chronic."},
+    {n:110,cat:'chronic',q:"In chronic inflammation, the common leukocytic infiltration includes:",opts:["Macrophages","Lymphocytes","Plasma cells","All of them"],c:3,exp:"كل هذه الخلايا."},
+    {n:111,cat:'chronic',q:"Angiogenesis is a common proliferative change of:",opts:["Serous inflammation","Acute inflammation","Catarrhal inflammation","Chronic inflammation"],c:3,exp:"Chronic inflammation."},
+    {n:112,cat:'chronic',q:"When stimuli or causative agent is eliminated and the inflammatory reaction subsides, macrophages eventually die or go to:",opts:["Interstitial tissue","Blood","Lymphatics","Chronic inflammation"],c:2,exp:"Lymphatics."},
+    {n:113,cat:'chronic',q:"Eosinophils are characteristically found in inflammatory sites around parasitic infections or as part of immune reactions of allergies. Which cell is this?",opts:["Macrophages","Lymphocytes","Neutrophils","Eosinophils"],c:3,exp:"Eosinophils."},
+    {n:114,cat:'chronic',q:"Chronic non-specific inflammation is called:",opts:["Serous inflammation","Acute inflammation","Catarrhal inflammation","Chronic abscess"],c:3,exp:"Chronic abscess."},
+    {n:115,cat:'chronic',q:"The presence of bacterial toxins in the blood is called:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:1,exp:"Toxemia."},
+    {n:116,cat:'chronic',q:"Presence of small number of bacteria in the blood which don't multiply significantly is called:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:2,exp:"Bacteremia."},
+    {n:117,cat:'chronic',q:"Presence of rapidly multiplying highly pathogenic bacteria in the blood is called:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:3,exp:"Septicemia."},
+    {n:118,cat:'chronic',q:"Petechial hemorrhages all over the body is a characteristic feature of:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:3,exp:"Septicemia."},
+    {n:119,cat:'chronic',q:"The dissemination of small septic thrombi in the blood, which cause abscess at the sites where they are lodged is called:",opts:["Pyemia","Toxemia","Bacteremia","Septicemia"],c:0,exp:"Pyemia."},
+    {n:120,cat:'chronic',q:"The function of fibrin present in exudate is:",opts:["Help localization of infection","Coagulation","Help attraction of leukocytes","Spread of infection"],c:0,exp:"Localization."},
+    {n:121,cat:'acute',q:"Fall of leukocytes out of the central column and begin to line the endothelium is called:",opts:["Phagocytosis","Margination","Opsonization","Pavementing"],c:3,exp:"Pavementing."},
+    {n:122,cat:'acute',q:"Microphages are derived mainly from:",opts:["Neutrophils","Basophils","B Lymphocytes","T Lymphocytes"],c:0,exp:"Neutrophils."},
+    {n:123,cat:'acute',q:"Microphages are mainly attracted to and engulf:",opts:["Bacilli","Cocci","Fungi","Virus"],c:1,exp:"Cocci."},
+    {n:124,cat:'acute',q:"Pus cells are derived from dead:",opts:["Neutrophils","Monocytes","Basophils","Lymphocytes"],c:0,exp:"Neutrophils."},
+    {n:125,cat:'chronic',q:"Macrophages are derived mainly from:",opts:["Neutrophils","Monocytes","Basophils","Lymphocytes"],c:1,exp:"Monocytes."},
+    {n:126,cat:'systemic',q:"Some infections like typhoid may cause instead of leukocytosis:",opts:["Neutrophilia","Leucopenia","Inflammatory edema","Erythrobiosis"],c:1,exp:"Leucopenia."},
+    {n:127,cat:'suppuration',q:"Which of the following are forms of localized suppurative inflammation?",opts:["Carbuncle","Appendicitis","Peritonitis","Cellulitis"],c:0,exp:"Carbuncle."},
+    {n:128,cat:'chronic',q:"Firm, rubbery lesions or fibrous nodules, and can vary from pink to the color of the person's skin are:",opts:["Keloid","Carbuncle","Fistula","Abscess"],c:0,exp:"Keloid."},
+    {n:129,cat:'acute',q:"Skin blister due to skin burns & epidermal vesicles due to herpes simplex viral infection are a type of:",opts:["Catarrhal inflammation","Fibrinous inflammation","Necrotizing inflammation","Serous inflammation"],c:3,exp:"Serous."},
+    {n:130,cat:'chronic',q:"For cervicovaginal inflammation or screening for detection of early malignant lesion, we can use in diagnosis of causative agent:",opts:["PAP smear","FNAB","Brush cytology","Lavage fluid"],c:0,exp:"PAP smear."},
+    {n:131,cat:'chronic',q:"The development of multiple small abscesses within one or more organs caused by circulation of septic emboli is:",opts:["Septicemia","Bacteremia","Toxemia","Pyemia"],c:3,exp:"Pyemia."},
+    {n:132,cat:'acute',q:"The predominant leukocytes in allergic inflammation are:",opts:["Neutrophils","Monocytes","Eosinophils","Lymphocytes"],c:2,exp:"Eosinophils."},
+    {n:133,cat:'chronic',q:"Which of the following is one of the chronic inflammatory cells?",opts:["Neutrophils","Monocytes","Eosinophils","B Lymphocyte"],c:3,exp:"B Lymphocyte."},
+    {n:134,cat:'acute',q:"Local increase of blood due to active vasodilatation of arteries, arterioles and capillaries as in inflammation is:",opts:["Hyperemia","Exudate","Venous congestion","Transudate"],c:0,exp:"Hyperemia."},
+    {n:135,cat:'acute',q:"The reduction of blood supply to a tissue is called:",opts:["Hyperemia","Ischemia","Venous congestion","Embolism"],c:1,exp:"Ischemia."},
+    {n:136,cat:'systemic',q:"Generalized edema due to heart failure or hypoproteinemia and nephrotic syndrome is:",opts:["Hyperemia","Ischemia","Venous congestion","Anasarca"],c:3,exp:"Anasarca."},
+    {n:137,cat:'acute',q:"Bleeding from rectum is passage of what undigested blood with stool?",opts:["Red","Brownish","Dark","Blue"],c:0,exp:"Red."},
 
-    // ===== SUPPURATION =====
-    {n:81,cat:'suppuration',q:"Staph produces which enzyme that helps localize suppuration by transforming fibrinogen into fibrin:",opts:["Lysosomal enzymes","Coagulase","Protease","Catalase"],c:1,exp:"Coagulase يحول الفيبرينوجين إلى فيبرين فيحاصر الالتهاب."},
-    {n:82,cat:'suppuration',q:"The mid zone of an abscess contains:",opts:["Causative organism","Pus","Fibrin thread","Pyogenic membrane"],c:1,exp:"المنطقة الوسطى = pus."},
-    {n:83,cat:'suppuration',q:"The peripheral zone of an abscess contains:",opts:["Causative organism","Pus","Fibrin thread","Pyogenic membrane"],c:3,exp:"المحيط = pyogenic membrane."},
-    {n:84,cat:'suppuration',q:"A small abscess related to a hair follicle or sebaceous gland is called:",opts:["Furuncle","Carbuncle","Ulcer","Phlegmon"],c:0,exp:"Furuncle = دمل صغير حول بصيلة شعر."},
-    {n:85,cat:'suppuration',q:"Carbuncle is a localized suppurative inflammation in the subcutaneous tissue open on the surface by:",opts:["One orifice","Multiple openings","Forming ulcer","Lysosomal enzymes"],c:1,exp:"Carbuncle = فتحات متعددة (multilocular)."},
-    {n:86,cat:'suppuration',q:"A local defect of skin or mucosal surface leading to sloughing or shedding of inflammatory necrotic tissue is called:",opts:["Furuncle","Carbuncle","Ulcer","Cellulitis"],c:2,exp:"Ulcer = قرحة."},
-    {n:87,cat:'suppuration',q:"An abnormal tract connecting two cavities or between a hollow viscera and the surface is called:",opts:["Furuncle","Carbuncle","Sinus","Fistula"],c:3,exp:"Fistula = ناسور مفتوح من الطرفين."},
-    {n:88,cat:'suppuration',q:"Types of fistula are:",opts:["Inflammatory","Congenital","Fibrinoid","A & B"],c:3,exp:"Fistula إما التهابي أو خلقي."},
-    {n:89,cat:'suppuration',q:"A diffuse suppurative inflammation of subcutaneous tissue is called:",opts:["Phlegmon","Phlebitis","Enteritis","Cellulitis"],c:3,exp:"Cellulitis = التهاب قيحي منتشر."},
-    {n:90,cat:'suppuration',q:"The causative organism of diffuse suppurative inflammation is:",opts:["Clostridium","Staphylococcus aureus","E. coli","Streptococci"],c:3,exp:"Streptococci تسبب cellulitis المنتشر."},
-    {n:91,cat:'suppuration',q:"In diffuse suppurative inflammation, spread of infection occurs by dissolving the mucopolysaccharide matrix under the effect of:",opts:["Lysosomal enzymes","Coagulase","Protease","None of them"],c:0,exp:"الإنزيمات الليزوزومية تحلل المصفوفة."},
-    {n:92,cat:'suppuration',q:"During abscess formation, when pus is mixed with blood it becomes:",opts:["Thrombosed","Ischemic","Hemorrhagic","Sanguineous"],c:3,exp:"Pus + blood = sanguineous (دموي)."},
+    // ===== LAB MCQ (211-220) =====
+    {n:211,cat:'phlebotomy',q:"Which vein is the most common and preferred site for performing a standard venipuncture?",opts:["Basilic vein","Cephalic vein","Median cubital vein","Metacarpal vein"],c:2,exp:"Median cubital."},
+    {n:212,cat:'phlebotomy',q:"What is the correct angle of needle penetration into the vein during venipuncture?",opts:["10° – 15°","30° – 40°","60° – 70°","90°"],c:1,exp:"30-40 درجة."},
+    {n:213,cat:'tubes',q:"Which blood collection tube contains EDTA and is used for CBC?",opts:["Red top","Lavender top","Light Blue top","Grey top"],c:1,exp:"Lavender."},
+    {n:214,cat:'tubes',q:"A light blue top tube containing 3.2% sodium citrate is designated for:",opts:["Glucose estimation","Coagulation studies (PT, APTT)","ESR","Blood cultures"],c:1,exp:"Coagulation."},
+    {n:215,cat:'tubes',q:"Which additive is present in a Grey-top tube used for accurate glucose estimation?",opts:["Heparin","Sodium citrate 3.8%","Sodium fluoride + Potassium oxalate","Gel separator only"],c:2,exp:"Fluoride + oxalate."},
+    {n:216,cat:'phlebotomy',q:"How should the venipuncture site be cleaned with spirit cotton?",opts:["From outside inward in circles","From center outward in circular motion","Up and down vigorously","Side to side"],c:1,exp:"من المركز للخارج."},
+    {n:217,cat:'phlebotomy',q:"What concentration of ethanol is used for site preparation in phlebotomy?",opts:["50%","70%","95%","100%"],c:1,exp:"70%."},
+    {n:218,cat:'solutions',q:"Which type of solution contains one gram molecular weight of a substance dissolved in 1 liter of solution?",opts:["Molal solution","Molar solution","Normal solution","Saturated solution"],c:1,exp:"Molar."},
+    {n:219,cat:'solutions',q:"How many grams of NaOH are required to prepare 1 Liter of 1 M NaOH solution? (Na=23, O=16, H=1)",opts:["20 grams","40 grams","58.5 grams","80 grams"],c:1,exp:"40 جرام."},
+    {n:220,cat:'solutions',q:"What is a solution called when a gram equivalent weight of a substance is dissolved in 1 liter of solution?",opts:["Percent solution","Molal solution","Normal solution (N)","Saturated solution"],c:2,exp:"Normal."},
 
-    // ===== SYSTEMIC EFFECTS =====
-    {n:93,cat:'systemic',q:"Bacterial products called exogenous pyrogens stimulate leucocytes to release endogenous pyrogens such as:",opts:["TNF-α","Coagulase","Protease","None of them"],c:0,exp:"TNF-α من البيروجينات الداخلية."},
-    {n:94,cat:'systemic',q:"During bacterial infections, the induced leucocytosis is mainly due to:",opts:["Eosinophilia","Neutrophilia","Lymphocytosis","Basophilia"],c:1,exp:"العدلات هي السائدة في العدوى البكتيرية."},
-    {n:95,cat:'systemic',q:"Accelerate the release of cells from the bone marrow reserve pool:",opts:["TNF-α","IL-1","PG","A & B"],c:3,exp:"TNF-α و IL-1 يحفزان إطلاق الخلايا من النخاع."},
-    {n:96,cat:'systemic',q:"Allergic reactions and parasitic infestations are associated with:",opts:["Eosinophilia","Neutrophilia","Lymphocytosis","Basophilia"],c:0,exp:"الحساسية والطفيليات ترفع الحمضات."},
-    {n:97,cat:'systemic',q:"Typhoid fever and rickettsiae are associated with:",opts:["Basophilia","Neutrophilia","Lymphocytosis","Leucopenia"],c:3,exp:"التيفويد والريكتسيا تسبب leucopenia."},
-    {n:98,cat:'systemic',q:"Decreased number of circulating white cells associated with typhoid fever infection is likely due to:",opts:["Sequestration of lymphocytes in lymph nodes","Bone marrow depression","Vasoconstriction","Ischemia"],c:1,exp:"تثبيط النخاع العظمي."},
-    {n:99,cat:'systemic',q:"Acute-phase proteins synthesized in the liver whose concentrations increase in response to inflammatory stimuli include:",opts:["Serum amyloid A","CRP","Leukotriene","A & B"],c:3,exp:"SAA و CRP من بروتينات الطور الحاد."},
-    {n:100,cat:'systemic',q:"Binds to erythrocytes and causes them to form stacks (rouleaux) that sediment more rapidly:",opts:["TNF-α","Fibrinogen","Leukotriene","A & B"],c:1,exp:"الفيبرينوجين يسبب rouleaux ويرفع ESR."},
-    {n:101,cat:'systemic',q:"Shock is one form of acute phase reaction due to production of numerous quantities of:",opts:["TNF-α","Fibrinogen","Leukotriene","PG"],c:0,exp:"TNF-α الزائد يسبب صدمة."},
-    {n:102,cat:'systemic',q:"Shock results from profuse systemic vasodilatation with increased vascular permeability, which leads to:",opts:["Hypertension","Hypotension","Necrosis","None of them"],c:1,exp:"توسع الأوعية المنتشر يسبب انخفاض ضغط الدم."},
-    {n:103,cat:'systemic',q:"In acute-phase response of inflammation, the actions of cytokines on brain cells result in:",opts:["Anorexia","Drowsiness","Malaise","All of them"],c:3,exp:"كل هذه أعراض عامة للالتهاب."},
-    {n:104,cat:'systemic',q:"Termination of the acute inflammatory response involves:",opts:["Neutralization","Enzymatic degradation","Normalization of vascular permeability","All of them"],c:3,exp:"كل هذه آليات إنهاء الالتهاب الحاد."},
-    {n:105,cat:'systemic',q:"Cessation of leucocyte emigration with subsequent death of extravasated neutrophils indicates:",opts:["Hypotension","Vasoconstriction","Termination of the acute inflammatory response","Infarction"],c:2,exp:"هذا من مؤشرات إنهاء الالتهاب الحاد."},
+    // ===== PARASITOLOGY: General Concepts (221-230) =====
+    {n:221,cat:'parasitology',q:"Which type of parasite capability allows it to produce disease specifically in an immunocompromised host?",opts:["Ectoparasite","Endoparasite","Opportunistic parasite","Permanent parasite"],c:2,exp:"Opportunistic parasite — مثل Toxoplasma gondii."},
+    {n:222,cat:'parasitology',q:"An organism in which a parasite reaches its sexual maturity (adult stage) is defined as the:",opts:["Intermediate host","Definitive host","Paratenic host","Reservoir host"],c:1,exp:"Definitive host = العائل النهائي."},
+    {n:223,cat:'parasitology',q:"Which mode of parasitic disease transmission occurs when a parasite is transferred transplacentally from mother to fetus?",opts:["Autoinfection","Contact transmission","Congenital transmission","Iatrogenic infection"],c:2,exp:"Congenital transmission."},
+    {n:224,cat:'parasitology',q:"Entamoeba histolytica causes tissue destruction through which of the following pathological mechanisms?",opts:["Physical obstruction","Lytic necrosis","Neoplasm","Allergic reaction"],c:1,exp:"Lytic necrosis بفعل إنزيماتها الحالة."},
+    {n:225,cat:'parasitology',q:"A host that harbors a parasite in an arrested state of development while keeping it viable and ready to infect a subsequent host is called a:",opts:["Dead-end host","Paratenic host","Reservoir host","Vector"],c:1,exp:"Paratenic host."},
+    {n:226,cat:'parasitology',q:"Which biological interaction describes an association where both organisms benefit, but neither is dependent on the other for survival?",opts:["Commensalism","Mutualism","Symbiosis","Parasitism"],c:1,exp:"Mutualism."},
+    {n:227,cat:'parasitology',q:"Infections naturally transmitted mainly in animals that may secondarily be acquired by humans are termed:",opts:["Anthroponosis","Zooanthroponosis","Anthropozoonosis","Saprozoonosis"],c:2,exp:"Anthropozoonosis."},
+    {n:228,cat:'parasitology',q:"Which parasite exhibits a facultative parasitic life cycle (able to live free-living or parasitic)?",opts:["Ascaris","Naegleria fowleri","Human louse","Toxoplasma gondii"],c:1,exp:"Naegleria fowleri."},
+    {n:229,cat:'parasitology',q:"Infection transmitted through non-animal environmental sites such as food, soil, water, or plants is classified as:",opts:["Direct zoonosis","Metazoonosis","Saprozoonosis","Sylvatic zoonosis"],c:2,exp:"Saprozoonosis."},
+    {n:230,cat:'parasitology',q:"Schistosoma haematobium infection is clinically associated with which type of pathological outcome?",opts:["Neoplasm (Malignancy)","Mechanical trauma","Lytic necrosis","Physical obstruction"],c:0,exp:"Neoplasm (bladder malignancy)."},
 
-    // ===== CHRONIC INFLAMMATION =====
-    {n:106,cat:'chronic',q:"When inflammation occurs in tissues that cannot regenerate and the cause is removed, healing occurs by:",opts:["Furuncle","Carbuncle","Ulcer","Fibrosis"],c:3,exp:"الأنسجة غير القابلة للتجدد تلتئم بالتليف."},
-    {n:107,cat:'chronic',q:"Occurs when the acute response cannot be resolved because of persistence of the injurious agent:",opts:["Serous inflammation","Fibrinous inflammation","Catarrhal inflammation","Chronic inflammation"],c:3,exp:"استمرار العامل المسبب = التهاب مزمن."},
-    {n:108,cat:'chronic',q:"The type of hypersensitivity in chronic inflammation is:",opts:["Type I hypersensitivity","Type II hypersensitivity","Type III hypersensitivity","Delayed-type hypersensitivity"],c:3,exp:"النوع الرابع (متأخر) هو المسؤول."},
-    {n:109,cat:'chronic',q:"Rheumatoid arthritis disease is one type of:",opts:["Autoimmune diseases","Chronic inflammation","Catarrhal inflammation","A & B"],c:3,exp:"الروماتويد = التهاب مزمن + مرض مناعي ذاتي."},
-    {n:110,cat:'chronic',q:"In chronic inflammation, the common leukocytic infiltration includes:",opts:["Macrophages","Lymphocytes","Plasma cells","All of them"],c:3,exp:"كل هذه خلايا الالتهاب المزمن."},
-    {n:111,cat:'chronic',q:"Angiogenesis is a common proliferative change of:",opts:["Serous inflammation","Acute inflammation","Catarrhal inflammation","Chronic inflammation"],c:3,exp:"تولد الأوعية سمة للالتهاب المزمن."},
-    {n:112,cat:'chronic',q:"When stimuli or causative agent is eliminated and the inflammatory reaction subsides, macrophages eventually die or go to:",opts:["Interstitial tissue","Blood","Lymphatics","Chronic inflammation"],c:2,exp:"البالعات الكبيرة تنتقل إلى الأوعية الليمفاوية."},
-    {n:113,cat:'chronic',q:"Eosinophils are characteristically found in inflammatory sites around parasitic infections or as part of immune reactions of allergies. Which cell is this?",opts:["Macrophages","Lymphocytes","Neutrophils","Eosinophils"],c:3,exp:"الحمضات (Eosinophils)."},
-    {n:114,cat:'chronic',q:"Chronic non-specific inflammation is called:",opts:["Serous inflammation","Acute inflammation","Catarrhal inflammation","Chronic abscess"],c:3,exp:"الخراج المزمن = التهاب مزمن غير نوعي."},
-    {n:115,cat:'chronic',q:"The presence of bacterial toxins in the blood is called:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:1,exp:"Toxemia = سموم بكتيرية في الدم."},
-    {n:116,cat:'chronic',q:"Presence of small number of bacteria in the blood which don't multiply significantly is called:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:2,exp:"Bacteremia = بكتيريا قليلة في الدم."},
-    {n:117,cat:'chronic',q:"Presence of rapidly multiplying highly pathogenic bacteria in the blood is called:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:3,exp:"Septicemia = بكتيريا تتكاثر بسرعة."},
-    {n:118,cat:'chronic',q:"Petechial hemorrhages all over the body is a characteristic feature of:",opts:["Inflammation","Toxemia","Bacteremia","Septicemia"],c:3,exp:"نزيف نقطي منتشر = سمة septicemia."},
-    {n:119,cat:'chronic',q:"The dissemination of small septic thrombi in the blood, which cause abscess at the sites where they are lodged is called:",opts:["Pyemia","Toxemia","Bacteremia","Septicemia"],c:0,exp:"Pyemia = خراجات متعددة من خثرات قيحية."},
-    {n:120,cat:'chronic',q:"The function of fibrin present in exudate is:",opts:["Help localization of infection","Coagulation","Help attraction of leukocytes","Spread of infection"],c:0,exp:"الفيبرين يحاصر الالتهاب."},
+    // ===== PARASITOLOGY: Introduction to Protozoa (231-240) =====
+    {n:231,cat:'protozoa',q:"Which of the following structures in a protozoan cell is mainly responsible for food ingestion, excretion, and respiration?",opts:["Endoplasm","Ectoplasm","Karyosome","Chromatoide bodies"],c:1,exp:"Ectoplasm مسؤول عن التغذية والإخراج والتنفس."},
+    {n:232,cat:'protozoa',q:"What is the typical size range of protozoa?",opts:["1 - 150 µm","10 - 500 µm","0.1 - 10 µm","1 - 15 mm"],c:0,exp:"1-150 ميكرومتر."},
+    {n:233,cat:'protozoa',q:"Which protozoan parasite lacks specialized organelles for locomotion?",opts:["Entamoeba","Balantidium","Giardia","Plasmodium"],c:3,exp:"Plasmodium لا يملك عضيات حركة متخصصة."},
+    {n:234,cat:'protozoa',q:"The inner, granular portion of the cytoplasm responsible for nutrition and reproduction is the:",opts:["Ectoplasm","Endoplasm","Cytostome","Cytopyge"],c:1,exp:"Endoplasm."},
+    {n:235,cat:'protozoa',q:"Which of the following belongs to the Subphylum Mastigophora?",opts:["Entamoeba histolytica","Giardia lamblia","Balantidium coli","Plasmodium falciparum"],c:1,exp:"Giardia = Mastigophora (flagellates)."},
+    {n:236,cat:'protozoa',q:"Multiple fission in protozoa, where the nucleus divides several times before cytoplasm division, is known as:",opts:["Binary fission","Schizogony (Merogony)","Gametogony","Syngamy"],c:1,exp:"Schizogony."},
+    {n:237,cat:'protozoa',q:"The central DNA-containing body located within the nucleus of a protozoan cell is called the:",opts:["Cytostome","Karyosome (Endosome)","Cytopyge","Chromatoide body"],c:1,exp:"Karyosome."},
+    {n:238,cat:'protozoa',q:"Undigested food particles in ciliated protozoa are extruded through a specific cell structure known as the:",opts:["Pseudopodium","Cytostome","Cytopyge","Karyosome"],c:2,exp:"Cytopyge."},
+    {n:239,cat:'protozoa',q:"In complex life cycles of protozoa, sexual reproduction (gametogony) typically occurs:",opts:["In all intermediate hosts simultaneously","In one host, while asexual reproduction occurs in another host","Exclusively outside any host environment","Without any nuclear division"],c:1,exp:"Sexual في عائل، asexual في عائل آخر."},
+    {n:240,cat:'protozoa',q:"Intestinal and luminal protozoa generally have a simple life cycle that requires:",opts:["Two arthropod vectors","Only one host","Both a vertebrate and invertebrate host","Snails as intermediate hosts"],c:1,exp:"عائل واحد فقط."},
 
-    // ===== Extra MCQ =====
-    {n:121,cat:'acute',q:"Fall of leukocytes out of the central column and begin to line the endothelium is called:",opts:["Phagocytosis","Margination","Opsonization","Pavementing"],c:3,exp:"Pavementing = اصطفاف الكريات على البطانة."},
-    {n:122,cat:'acute',q:"Microphages are derived mainly from:",opts:["Neutrophils","Basophils","B Lymphocytes","T Lymphocytes"],c:0,exp:"Microphages = العدلات."},
-    {n:123,cat:'acute',q:"Microphages are mainly attracted to and engulf:",opts:["Bacilli","Cocci","Fungi","Virus"],c:1,exp:"العدلات تشمل cocci عادة."},
-    {n:124,cat:'acute',q:"Pus cells are derived from dead:",opts:["Neutrophils","Monocytes","Basophils","Lymphocytes"],c:0,exp:"Pus cells = عدلات ميتة."},
-    {n:125,cat:'chronic',q:"Macrophages are derived mainly from:",opts:["Neutrophils","Monocytes","Basophils","Lymphocytes"],c:1,exp:"البالعات الكبيرة تنشأ من monocytes."},
-    {n:126,cat:'systemic',q:"Some infections like typhoid may cause instead of leukocytosis:",opts:["Neutrophilia","Leucopenia","Inflammatory edema","Erythrobiosis"],c:1,exp:"التيفويد يسبب نقص الكريات."},
-    {n:127,cat:'suppuration',q:"Which of the following are forms of localized suppurative inflammation?",opts:["Carbuncle","Appendicitis","Peritonitis","Cellulitis"],c:0,exp:"Carbuncle = التهاب قيحي موضعي."},
-    {n:128,cat:'chronic',q:"Firm, rubbery lesions or fibrous nodules, and can vary from pink to the color of the person's skin are:",opts:["Keloid","Carbuncle","Fistula","Abscess"],c:0,exp:"Keloid = نسيج ليفي متضخم."},
-    {n:129,cat:'acute',q:"Skin blister due to skin burns & epidermal vesicles due to herpes simplex viral infection are a type of:",opts:["Catarrhal inflammation","Fibrinous inflammation","Necrotizing inflammation","Serous inflammation"],c:3,exp:"الفقاعات المصلية = serous inflammation."},
-    {n:130,cat:'chronic',q:"For cervicovaginal inflammation or screening for detection of early malignant lesion, we can use in diagnosis of causative agent:",opts:["PAP smear","FNAB","Brush cytology","Lavage fluid"],c:0,exp:"PAP smear = مسحة عنق الرحم."},
-    {n:131,cat:'chronic',q:"The development of multiple small abscesses within one or more organs caused by circulation of septic emboli is:",opts:["Septicemia","Bacteremia","Toxemia","Pyemia"],c:3,exp:"Pyemia = خراجات متعددة."},
-    {n:132,cat:'acute',q:"The predominant leukocytes in allergic inflammation are:",opts:["Neutrophils","Monocytes","Eosinophils","Lymphocytes"],c:2,exp:"الحساسية = حمضات."},
-    {n:133,cat:'chronic',q:"Which of the following is one of the chronic inflammatory cells?",opts:["Neutrophils","Monocytes","Eosinophils","B Lymphocyte"],c:3,exp:"الخلايا الليمفاوية B من خلايا الالتهاب المزمن."},
-    {n:134,cat:'acute',q:"Local increase of blood due to active vasodilatation of arteries, arterioles and capillaries as in inflammation is:",opts:["Hyperemia","Exudate","Venous congestion","Transudate"],c:0,exp:"Hyperemia = فرط تروية نشط."},
-    {n:135,cat:'acute',q:"The reduction of blood supply to a tissue is called:",opts:["Hyperemia","Ischemia","Venous congestion","Embolism"],c:1,exp:"Ischemia = نقص التروية."},
-    {n:136,cat:'systemic',q:"Generalized edema due to heart failure or hypoproteinemia and nephrotic syndrome is:",opts:["Hyperemia","Ischemia","Venous congestion","Anasarca"],c:3,exp:"Anasarca = وذمة معممة."},
-    {n:137,cat:'acute',q:"Bleeding from rectum is passage of what undigested blood with stool?",opts:["Red","Brownish","Dark","Blue"],c:0,exp:"الدم الأحمر الفاتح في البراز = نزيف سفلي."},
+    // ===== PARASITOLOGY: Free Living Amoeba (241-250) =====
+    {n:241,cat:'freeliving',q:"The flagellated form of Naegleria fowleri has:",opts:["One long flagellum","2 long equal flagella","Multiple small flagella","No flagella"],c:1,exp:"سوطان طويلان متساويان."},
+    {n:242,cat:'freeliving',q:"Which stage of Naegleria fowleri is found ONLY in soil?",opts:["Amoeboid trophozoite","Flagellated form","Cyst","All of the above"],c:2,exp:"Cyst فقط في التربة."},
+    {n:243,cat:'freeliving',q:"Naegleria fowleri causes which of the following clinical conditions?",opts:["Granulomatous Amoebic Encephalitis (GAE)","Primary Amoebic Meningoencephalitis (PAM)","Amoebic keratitis","Cutaneous leishmaniasis"],c:1,exp:"PAM."},
+    {n:244,cat:'freeliving',q:"The mode of infection for Naegleria fowleri is mainly through:",opts:["Ingestion of contaminated food","Skin contact with soil","Nasal route during swimming or sniffing contaminated water","Insect vector bites"],c:2,exp:"الطريق الأنفي."},
+    {n:245,cat:'freeliving',q:"Which culture medium is used for culturing free-living amoebae like Naegleria and Acanthamoeba?",opts:["Blood agar","MacConkey agar","Non-nutrient agar (NNA) with E. coli","Chocolate agar"],c:2,exp:"NNA + E. coli."},
+    {n:246,cat:'freeliving',q:"The trophozoite stage of Acanthamoeba is characterized by having:",opts:["2 long flagella","Multiple small spiky pseudopodia (Acanthopodia)","A single polar flagellum","A cilia-covered outer surface"],c:1,exp:"Acanthopodia."},
+    {n:247,cat:'freeliving',q:"Which of the following is considered an infective stage of Acanthamoeba?",opts:["Trophozoite only","Cyst only","Both Trophozoite and Cyst","Flagellated form only"],c:2,exp:"كلاهما معدي."},
+    {n:248,cat:'freeliving',q:"Acanthamoeba can cause infection in the eye leading to:",opts:["Primary Amoebic Meningoencephalitis","Amoebic Keratitis","Conjunctivitis with purulent discharge","Cataracts"],c:1,exp:"Amoebic keratitis."},
+    {n:249,cat:'freeliving',q:"In humans, Acanthamoeba can inhabit all of the following EXCEPT:",opts:["Central Nervous System (CNS)","Eye","Lungs and Skin","Red Blood Cells (RBCs)"],c:3,exp:"لا تصيب كرات الدم الحمراء."},
+    {n:250,cat:'freeliving',q:"Photophobia, stiff neck, and seizures are symptoms associated with:",opts:["Stage I of Naegleria fowleri infection","Stage II of Naegleria fowleri infection","Mild skin irritation","Early stage of eye irritation"],c:1,exp:"المرحلة الثانية من عدوى Naegleria."},
 
-    // ===== TRUE/FALSE CONVERTED (138-210) =====
-    {n:138,cat:'cellinjury',q:"Which statement about pathology is CORRECT?",opts:["Pathology is the scientific study of the structure and function of the body in normal condition.","Pathology studies the structure and function of the body in disease condition.","Pathology is only about surgery.","Pathology ignores disease mechanisms."],c:1,exp:"علم الأمراض يدرس البنية والوظيفة في حالة المرض (وليس الطبيعي)."},
-    {n:139,cat:'cellinjury',q:"Which statement about General Pathology is CORRECT?",opts:["General Pathology studies diseases of specific organs.","General Pathology deals with the general principles of disease.","General Pathology is the same as clinical pathology.","General Pathology studies only tumors."],c:1,exp:"General Pathology = المبادئ العامة للأمراض."},
-    {n:140,cat:'cellinjury',q:"Which statement about Reversible cell injury is CORRECT?",opts:["The injured cell may recover when stress is mild to moderate.","It always leads to cell death.","It cannot be repaired.","It occurs only in the brain."],c:0,exp:"الإصابة القابلة للرجوع تسمح بالشفاء عند زوال السبب."},
-    {n:141,cat:'cellinjury',q:"Which statement about chemical poisons (cyanide, strong acids, insecticides, alcohol, drugs) is CORRECT?",opts:["They are genetic causes of cell injury.","They are acquired causes of cell injury.","They cause only apoptosis.","They are not harmful to cells."],c:1,exp:"السموم الكيميائية من الأسباب المكتسبة (وليس الوراثية)."},
-    {n:142,cat:'cellinjury',q:"Which statement about Physiologic adaptations is CORRECT?",opts:["They are responses to stress that allow cells to modulate their structure and function.","They are always pathological.","They occur only in disease.","They are irreversible."],c:0,exp:"التكيفات الفسيولوجية طبيعية وتسمح للخلايا بتعديل بنيتها ووظيفتها."},
-    {n:143,cat:'cellinjury',q:"Which statement about Aplasia vs Agenesis is CORRECT?",opts:["Aplasia is a complete absence of an organ; Agenesis is failure of development.","Aplasia and Agenesis are the same thing.","Aplasia means overgrowth.","Agenesis means atrophy."],c:0,exp:"Aplasia = غياب العضو. Agenesis = فشل تام في التطور."},
-    {n:144,cat:'cellinjury',q:"Which statement about atrophy is CORRECT?",opts:["The cells become smaller in size due to reduction in cell organelles.","Cells become larger in size.","Cells increase in number.","Cells change type."],c:0,exp:"الضمور = خلايا أصغر بسبب نقص العضيات."},
-    {n:145,cat:'cellinjury',q:"Which statement about ATP depletion is CORRECT?",opts:["ATP depletion can cause cellular adaptation only.","ATP depletion can cause cell injury.","ATP depletion has no effect on cells.","ATP depletion only affects the heart."],c:1,exp:"نقص ATP يسبب إصابة خلوية (وليس تكيفاً فقط)."},
-    {n:146,cat:'cellinjury',q:"Regeneration of the liver following partial hepatectomy is considered:",opts:["Pathological hyperplasia","Physiologic hyperplasia","Pathological hypertrophy","Atrophy"],c:1,exp:"تجديد الكبد = hyperplasia فسيولوجي (تعويضي)."},
-    {n:147,cat:'cellinjury',q:"Which statement about metaplasia is CORRECT?",opts:["Metaplasia crosses histogenetic boundaries.","Metaplasia does NOT cross histogenetic boundaries.","Metaplasia is always malignant.","Metaplasia is the same as dysplasia."],c:1,exp:"الـ metaplasia لا يعبر الحدود النسيجية (يبقى في نفس الخط)."},
-    {n:148,cat:'cellinjury',q:"Which statement about hypoxia is CORRECT?",opts:["Hypoxia is the most common cause of cell injury.","Hypoxia is a rare cause of cell injury.","Hypoxia only affects the brain.","Hypoxia always causes cancer."],c:0,exp:"نقص الأكسجين هو السبب الأكثر شيوعاً للإصابة الخلوية."},
-    {n:149,cat:'necrosis',q:"Which statement about Karyorrhexis and Karyolysis is CORRECT?",opts:["Karyorrhexis is nuclear dissolution; Karyolysis is fragmentation.","Karyorrhexis is nuclear fragmentation; Karyolysis is nuclear dissolution.","Both mean the same.","Both are types of apoptosis."],c:1,exp:"Karyorrhexis = تفتت النواة. Karyolysis = تحلل النواة."},
-    {n:150,cat:'necrosis',q:"Hydropic degeneration (ballooning degeneration) occurs due to accumulation of:",opts:["Large amount of glycogen","Large amount of water","Large amount of fat","Large amount of protein"],c:1,exp:"Hydropic change = تجمع الماء (وليس الجليكوجين)."},
-    {n:151,cat:'pigments',q:"\"Tabby cat\" appearance is a gross picture of fatty change in:",opts:["Kidney","Heart","Liver","Spleen"],c:1,exp:"مظهر \"القطة الطبسية\" = تغير دهني في القلب (وليس الكلية)."},
-    {n:152,cat:'cellinjury',q:"Which statement about tumor proliferation is CORRECT?",opts:["Tumor proliferation is controlled and follows normal cell growth rules.","Tumor proliferation is uncontrolled and does NOT follow normal cell growth rules.","Tumors never grow.","Tumors only grow in the brain."],c:1,exp:"تكاثر الأورام غير منضبط ولا يتبع قواعد النمو الطبيعي."},
-    {n:153,cat:'chronic',q:"Polyclonal neoplasm arises from:",opts:["One transformed cell","Many transformed cells","Normal cells","Dead cells"],c:1,exp:"الورم متعدد النسائل ينشأ من عدة خلايا متحولة."},
-    {n:154,cat:'necrosis',q:"Tumors exposed to chemotherapeutic agents are considered a type of:",opts:["Physiologic apoptosis","Pathologic apoptosis","Coagulative necrosis","Fat necrosis"],c:1,exp:"العلاج الكيميائي يحفز apoptosis مرضي في الخلايا الورمية."},
-    {n:155,cat:'cellinjury',q:"Which statement about ultrastructural changes in reversible cell injury is CORRECT?",opts:["Loss of microvilli and loosening of intercellular attachments are irreversible changes.","Loss of microvilli and loosening of intercellular attachments are reversible changes.","There are no ultrastructural changes.","Only the nucleus is affected."],c:1,exp:"هذه التغيرات دقيقة وقابلة للرجوع."},
-    {n:156,cat:'necrosis',q:"Which statement about necrosis is CORRECT?",opts:["Necrosis is not accompanied by inflammatory reaction.","Necrosis is accompanied by inflammatory reaction.","Necrosis only occurs in the brain.","Necrosis is the same as apoptosis."],c:1,exp:"النخر يصحبه التهاب (على عكس apoptosis)."},
-    {n:157,cat:'necrosis',q:"Which statement about fat necrosis is CORRECT?",opts:["Fat necrosis is common in acute hemorrhagic pancreatitis.","Fat necrosis only occurs in the brain.","Fat necrosis is a type of apoptosis.","Fat necrosis is a type of gangrene."],c:0,exp:"التهاب البنكرياس النزفي الحاد يسبب fat necrosis."},
-    {n:158,cat:'necrosis',q:"Which statement about liquefactive necrosis is CORRECT?",opts:["Liquefactive necrosis occurs in solid organs like the heart.","Liquefactive necrosis occurs in the CNS (brain) and in abscesses.","Liquefactive necrosis only occurs in the liver.","Liquefactive necrosis is a type of fat necrosis."],c:1,exp:"Liquefactive necrosis = الدماغ والخراجات."},
-    {n:159,cat:'necrosis',q:"Which statement about coagulative necrosis is CORRECT?",opts:["The general architecture of tissue and outlines of cells are retained.","The architecture is completely lost.","It only occurs in the brain.","It is a type of apoptosis."],c:0,exp:"Coagulative necrosis يحتفظ بالبنية العامة."},
-    {n:160,cat:'necrosis',q:"Tumors exposed to chemotherapeutic agents are considered a type of:",opts:["Physiologic apoptosis","Pathologic apoptosis","Necrosis","Metaplasia"],c:1,exp:"Apoptosis مرضي (نتيجة العلاج)."},
-    {n:161,cat:'necrosis',q:"Which statement about lysosomes in apoptosis is CORRECT?",opts:["Lysosomes and other organelles are intact in apoptosis.","Lysosomes rupture in apoptosis.","Lysosomes are absent in apoptosis.","Lysosomes are the cause of apoptosis."],c:0,exp:"في apoptosis تبقى العضيات سليمة (على عكس necrosis)."},
-    {n:162,cat:'pigments',q:"Which statement about dystrophic calcification is CORRECT?",opts:["Dystrophic calcification occurs in normal tissue despite normal calcium metabolism.","Dystrophic calcification occurs in dead tissue with normal serum calcium.","Dystrophic calcification requires hypercalcemia.","Dystrophic calcification only occurs in bones."],c:1,exp:"Dystrophic calcification = أنسجة ميتة + كالسيوم طبيعي في الدم."},
-    {n:163,cat:'pigments',q:"Which statement about gas gangrene is CORRECT?",opts:["The affected part is dry, shrunken and dark black.","The affected part is swollen, edematous, painful and crepitant due to gas bubbles.","Gas gangrene is a type of dry gangrene.","Gas gangrene is caused by fungi."],c:1,exp:"الغرغرينا الغازية = تورم ونفاخات غازية (Clostridium)."},
-    {n:164,cat:'pigments',q:"The line of demarcation is distinct between healthy and gangrenous parts in:",opts:["Wet gangrene","Dry gangrene","Gas gangrene","Bed sores"],c:1,exp:"الغرغرينا الجافة لها خط فصل واضح."},
-    {n:165,cat:'pigments',q:"\"Tigered effect\" appearing in myocardium of the heart is a common feature of:",opts:["Coagulative necrosis of the heart","Fatty change of the heart","Apoptosis","Hydropic change"],c:1,exp:"تأثير \"النمر\" = تغير دهني في القلب."},
-    {n:166,cat:'pigments',q:"Which statement about localized haemosiderosis is CORRECT?",opts:["It occurs whenever there is abnormal metabolism in the tissue.","It occurs whenever there is hemorrhage into the tissues.","It occurs only in the liver.","It is caused by excess iron in diet."],c:1,exp:"Haemosiderosis موضعي = نزيف في الأنسجة."},
-    {n:167,cat:'pigments',q:"Inhaled carbon is considered one type of:",opts:["Endogenous pigment","Exogenous pigment accumulation within cells","Fat accumulation","Calcification"],c:1,exp:"الكربون المستنشق = صبغة خارجية (anthracosis)."},
-    {n:168,cat:'pigments',q:"Which statement about dystrophic calcification is CORRECT?",opts:["Deposition of calcium salts in dead tissues accompanied by normal serum calcium.","Deposition of calcium salts accompanied by hypercalcemia.","It only occurs in kidneys.","It is a type of apoptosis."],c:0,exp:"Dystrophic = أنسجة ميتة + كالسيوم طبيعي."},
-    {n:169,cat:'pigments',q:"Vitamin D intoxication (Hypervitaminosis D) can cause calcification in:",opts:["Only bones","Kidneys, lungs and stomach","Only liver","Only brain"],c:1,exp:"فرط فيتامين د يسبب metastatic calcification في الكلى والرئتين والمعدة."},
-    {n:170,cat:'pigments',q:"Hyperparathyroidism is a predisposing factor of:",opts:["Dystrophic calcification","Metastatic calcification","Fat necrosis","Apoptosis"],c:1,exp:"فرط جارات الدرقية = فرط كالسيوم = metastatic calcification."},
-    {n:171,cat:'chronic',q:"Which statement about chronic inflammation is CORRECT?",opts:["It is rapid in onset and of short duration with neutrophilic accumulation.","It is of longer duration with lymphocytes and macrophages accumulation.","It only involves eosinophils.","It is identical to acute inflammation."],c:1,exp:"الالتهاب المزمن: طويل + خلايا ليمفاوية وبالعات."},
-    {n:172,cat:'pigments',q:"Addison's disease is characterized by:",opts:["Hypopigmentation","Hyperpigmentation","Fatty liver","Calcification"],c:1,exp:"مرض أديسون = فرط تصبغ (hyperpigmentation)."},
-    {n:173,cat:'acute',q:"Swelling during acute inflammation is due to:",opts:["Hydropic degeneration","Formation of the inflammatory exudate","Fat accumulation","Apoptosis"],c:1,exp:"التورم = تكوّن الـ exudate (وليس hydropic change)."},
-    {n:174,cat:'acute',q:"The alteration in the microvasculature in acute inflammation starts by:",opts:["Transient vasodilatation followed by progressive vasoconstriction","Transient vasoconstriction followed by progressive vasodilatation","Permanent vasoconstriction","No vascular change"],c:1,exp:"البداية vasoconstriction عابر ثم vasodilation تدريجي."},
-    {n:175,cat:'acute',q:"The increased vascular permeability allows the movement of protein-rich fluid called:",opts:["Transudate","Exudate","Serum","Pus"],c:1,exp:"السائل غني بالبروتين = exudate (وليس transudate)."},
-    {n:176,cat:'acute',q:"Margination is:",opts:["Movement of leukocytes toward sites of infection (chemotaxis)","Accumulation of leukocytes along the endothelial surface","Phagocytosis","Opsonization"],c:1,exp:"Margination = اصطفاف على البطانة. Chemotaxis = الهجرة."},
-    {n:177,cat:'acute',q:"Which is one of the major opsonins that target microorganisms for phagocytosis?",opts:["IgM","IgG","IgA","IgE"],c:1,exp:"IgG من أهم opsonins (وليس IgM)."},
-    {n:178,cat:'acute',q:"C3b is an important opsonin generated by activation of:",opts:["Coagulation pathway","Complement pathway","Fibrinolytic pathway","Kinin system"],c:1,exp:"C3b من تنشيط نظام المتمم."},
-    {n:179,cat:'acute',q:"Opsonins are:",opts:["Only present in the blood","Either present in the blood ready to coat microbes or produced in response to microbes","Only produced in the liver","Only present in the brain"],c:1,exp:"Opsonins قد تكون جاهزة أو تُنتج استجابة للميكروبات."},
-    {n:180,cat:'acute',q:"The most important microbicidal substances involved are:",opts:["ROS, RNS and lysosomal enzymes","Only ROS","Only RNS","Only lysosomal enzymes"],c:0,exp:"ROS + RNS + lysosomal enzymes = microbicidal."},
-    {n:181,cat:'acute',q:"The specific gravity of inflammatory exudate is above 1018 due to presence of:",opts:["Glucose","Fibrinogen","Fat","Water"],c:1,exp:"الفيبرينوجين يرفع الكثافة النوعية فوق 1018."},
-    {n:182,cat:'acute',q:"C3a, C3b and C5a are plasma-protein-derived mediators representing:",opts:["Fibrinolytic system","Complement system","Kinin system","Coagulation system"],c:1,exp:"هذه من نظام المتمم (وليس fibrinolytic)."},
-    {n:183,cat:'acute',q:"Serous inflammation is characterized by the outpouring of:",opts:["Watery relatively high protein fluid","Watery relatively low protein fluid","Pus","Fibrin"],c:1,exp:"Serous = سائل مائي قليل البروتين."},
-    {n:184,cat:'acute',q:"In fibrinous inflammation, severe injury results in greater vascular permeability that allows large molecules such as what to pass through:",opts:["Glucose","Fibrinogen","Fat","Water"],c:1,exp:"الفيبرينوجين يعبر (وليس الجلوكوز)."},
-    {n:185,cat:'acute',q:"In catarrhal inflammation, the mucosal epithelial cells are swollen and vacuolated due to:",opts:["Mucoid degeneration","Fatty change","Calcification","Apoptosis"],c:0,exp:"Mucoid degeneration = تضخم وتفجج الخلايا المخاطية."},
-    {n:186,cat:'acute',q:"The pseudomembrane is a characteristic feature of:",opts:["Fibrinous inflammation","Pseudomembranous inflammation","Serous inflammation","Catarrhal inflammation"],c:1,exp:"Pseudomembranous inflammation = غشاء كاذب."},
-    {n:187,cat:'acute',q:"Allergic inflammation is characterized by edema and increased what in tissue and blood?",opts:["Neutrophils","Eosinophils","Lymphocytes","Basophils"],c:1,exp:"الحساسية = حمضات (وليس عدلات)."},
-    {n:188,cat:'suppuration',q:"Pus is composed of:",opts:["Numerous dead neutrophils only","Dead and living neutrophils with inflammatory fluid exudate and micro-organisms","Only lymphocytes","Only red blood cells"],c:1,exp:"Pus = عدلات حية وميتة + exudate + ميكروبات."},
-    {n:189,cat:'suppuration',q:"An abscess is:",opts:["A diffuse suppurative inflammation","A localized suppurative inflammation","A type of gangrene","A type of apoptosis"],c:1,exp:"الخراج = التهاب قيحي موضعي (وليس منتشر)."},
-    {n:190,cat:'suppuration',q:"Abscesses develop by introducing causative organisms into the tissue causing marked necrosis and strong chemotaxis to:",opts:["Eosinophils","Neutrophils","Lymphocytes","Basophils"],c:1,exp:"الجذب الكيميائي للعدلات (وليس الحمضات)."},
-    {n:191,cat:'suppuration',q:"A boil (furuncle) is a small abscess related to:",opts:["Skin of the hand","Hair follicle","Sebaceous gland only","Nail bed"],c:1,exp:"الدمل = بصيلة شعر (وليس جلد اليد)."},
-    {n:192,cat:'suppuration',q:"Carbuncle is a localized suppurative inflammation in the subcutaneous tissue in which pus is found in:",opts:["A single cavity called sinus","Multiple loculi","A fistula","A cyst"],c:1,exp:"Carbuncle = عدة جيوب (multiple loculi)."},
-    {n:193,cat:'suppuration',q:"Fistula differs from sinus as it is:",opts:["Opened from one end only","Opened from both ends","Always congenital","Always malignant"],c:1,exp:"Fistula مفتوح من الطرفين. Sinus من طرف واحد."},
-    {n:194,cat:'suppuration',q:"In cellulitis, Streptococci secrete which enzymes leading to spread of infection?",opts:["Coagulase","Hyaluronidase, streptokinase and fibrinolysin","Catalase","Protease"],c:1,exp:"Streptococci تفرز hyaluronidase (وليس coagulase)."},
-    {n:195,cat:'systemic',q:"Which substance stimulates the production of neurotransmitters that reset the temperature set point at a higher level?",opts:["IL-1","PGs (Prostaglandins)","TNF","CRP"],c:1,exp:"البروستاجلاندينات تعيد ضبط نقطة الحرارة (وليس IL-1)."},
-    {n:196,cat:'systemic',q:"Increased leucocyte count during acute inflammation is usually up to:",opts:["5,000 cells/μL","15,000 or 20,000 cells/μL","50,000 cells/μL","100,000 cells/μL"],c:1,exp:"ارتفاع الكريات في الالتهاب الحاد = 15,000-20,000."},
-    {n:197,cat:'systemic',q:"Viral infections are associated with:",opts:["Eosinophilia","Lymphocytosis","Neutrophilia","Basophilia"],c:1,exp:"العدوى الفيروسية = lymphocytosis (وليس eosinophilia)."},
-    {n:198,cat:'systemic',q:"CRP and SAA proteins bind to microbial cell walls, and they may act as:",opts:["Hormones","Opsonins","Enzymes","Toxins"],c:1,exp:"CRP و SAA تعمل كـ opsonins."},
-    {n:199,cat:'systemic',q:"During inflammation, erythrocytes tend to:",opts:["Float more rapidly than individual erythrocytes","Sediment more rapidly than individual erythrocytes","Disappear","Multiply"],c:1,exp:"كرات الدم تترسب أسرع (rouleaux) = ESR مرتفع."},
-    {n:200,cat:'systemic',q:"The other manifestations of the acute-phase response include increased heart rate, blood pressure and:",opts:["Increased sweating","Decreased sweating","No change in sweating","Increased appetite"],c:1,exp:"في الطور الحاد: عرق أقل (وليس أكثر)."},
-    {n:201,cat:'chronic',q:"The complete restoration to normal histology and function occurs when the injury is:",opts:["Persistent","Limited or short-lived","Severe","Chronic"],c:1,exp:"الإصابة المحدودة قصيرة الأمد = شفاء كامل."},
-    {n:202,cat:'chronic',q:"Persistent or recurrent acute inflammation may progress to:",opts:["Metaplasia","Chronic inflammation","Apoptosis","Necrosis"],c:1,exp:"الالتهاب الحاد المستمر = التهاب مزمن (وليس metaplasia)."},
-    {n:203,cat:'chronic',q:"Chronic inflammation is inflammation of:",opts:["Short duration","Long duration","Rapid onset","Sudden onset"],c:1,exp:"الالتهاب المزمن = طويل الأمد."},
-    {n:204,cat:'chronic',q:"Persistent infections by micro-organisms that are difficult to eradicate stimulate which cell-mediated immune response?",opts:["Fibroblast-mediated","T lymphocyte-mediated","B lymphocyte-mediated","Neutrophil-mediated"],c:1,exp:"العدوى المستمرة تحفز مناعة خلوية بوساطة T (وليس fibroblast)."},
-    {n:205,cat:'chronic',q:"Silicosis is one type of what inflammatory response in the lungs caused by inhalation of silica?",opts:["Acute","Chronic","Allergic","Suppurative"],c:1,exp:"السيلكوز = التهاب مزمن (وليس حاد)."},
-    {n:206,cat:'chronic',q:"Giant cells are multinucleated cells formed by fusion of:",opts:["Neutrophils with lymphocytes","More than one macrophage","Red blood cells","Platelets"],c:1,exp:"الخلايا العملاقة = اندماج بالعات كبيرة (وليس عدلات مع ليمفاويات)."},
-    {n:207,cat:'chronic',q:"Plasma cells are developed from activated:",opts:["T lymphocytes","B lymphocytes","Neutrophils","Macrophages"],c:1,exp:"الخلايا البلازمية تنشأ من B lymphocytes (وليس T)."},
-    {n:208,cat:'chronic',q:"Chronic non-specific inflammation is characterized by:",opts:["Formation of granuloma","Absence of granuloma","Presence of caseation","Presence of Langhans cells"],c:1,exp:"Granuloma = التهاب مزمن نوعي (وليس غير نوعي)."},
-    {n:209,cat:'chronic',q:"ESR is elevated in:",opts:["Only acute inflammation","All cases of chronic inflammation","Only infections","Only tumors"],c:1,exp:"ESR مرتفع في جميع حالات الالتهاب المزمن."},
-    {n:210,cat:'systemic',q:"Chronic toxemia can lead to normocytic anemia due to:",opts:["Loss of appetite","Bone marrow depression","Iron deficiency","Bleeding"],c:1,exp:"تثبيط النخاع العظمي (وليس فقدان الشهية)."}
+    // ===== PARASITOLOGY: Entamoeba histolytica (251-260) =====
+    {n:251,cat:'entamoeba',q:"Which stage of Entamoeba histolytica is the infective stage?",opts:["Trophozoite","Precyst","Mature (quadrinucleated) cyst","Immature cyst"],c:2,exp:"الكيس الناضج (4 أنوية) هو المعدي."},
+    {n:252,cat:'entamoeba',q:"How many nuclei does the mature cyst of E. histolytica contain?",opts:["1","2","4","8"],c:2,exp:"4 أنوية."},
+    {n:253,cat:'entamoeba',q:"What is the average size of the E. histolytica trophozoite?",opts:["5 – 10 μ","15 μ","20 – 30 μ","50 – 60 μ"],c:2,exp:"20-30 ميكرومتر."},
+    {n:254,cat:'entamoeba',q:"Which of the following is a reservoir host of E. histolytica?",opts:["Cattle","Cats, dogs and rats","Mosquitoes","Birds"],c:1,exp:"القطط والكلاب والجرذان."},
+    {n:255,cat:'entamoeba',q:"Which stage is detected in FORMED stool?",opts:["Trophozoite","Cyst","Metacystic trophozoite","Precyst only"],c:1,exp:"الكيس في البراز المتشكل."},
+    {n:256,cat:'entamoeba',q:"The nucleus of the trophozoite is characterized by:",opts:["Multiple nuclei with no karyosome","Single, rounded, with a karyosome and peripheral chromatin granules","Two nuclei with a large central karyosome","No visible nucleus"],c:1,exp:"نواة واحدة مستديرة بكاريوسوم وحبيبات كروماتين محيطية."},
+    {n:257,cat:'entamoeba',q:"Which of the following is a feature of the ACUTE stage of intestinal amoebiasis?",opts:["Tenesmus","Hemoptysis","Tender hepatomegaly","Constipation alternating with light dysentery"],c:0,exp:"Tenesmus (الزحير)."},
+    {n:258,cat:'entamoeba',q:"Which of the following is a manifestation of pulmonary amoebiasis?",opts:["Tenesmus","Hemoptysis","Tender hepatomegaly","Bloody diarrhea"],c:1,exp:"Hemoptysis (نفث الدم)."},
+    {n:259,cat:'entamoeba',q:"Which of the following is an INDIRECT method of diagnosis?",opts:["Stool examination for cysts","Sputum examination","Detection of amoebic antibodies by ELISA","Examination of aspirated liver pus"],c:2,exp:"ELISA (طريقة غير مباشرة)."},
+    {n:260,cat:'entamoeba',q:"Raw vegetables should be treated with vinegar for how long before consumption?",opts:["5 minutes","10 minutes","30 minutes","2 hours"],c:2,exp:"30 دقيقة."},
+
+    // ===== TRUE / FALSE (261-333) =====
+    {n:261,cat:'truefalse',isTF:true,q:"Pathology is the scientific study of the structure and function of the body in normal condition.",c:1,exp:"خطأ — يدرس حالة المرض."},
+    {n:262,cat:'truefalse',isTF:true,q:"General Pathology is the branch that studies diseases of specific organs.",c:1,exp:"خطأ — يدرس المبادئ العامة."},
+    {n:263,cat:'truefalse',isTF:true,q:"Reversible cell injury means the injured cell may recover when stress is mild to moderate.",c:0,exp:"صح."},
+    {n:264,cat:'truefalse',isTF:true,q:"Chemical poisons are genetic causes of cell injury.",c:1,exp:"خطأ — أسباب مكتسبة."},
+    {n:265,cat:'truefalse',isTF:true,q:"Physiologic adaptations are responses to stress that allow cells to modulate their structure and function.",c:1,exp:"خطأ — الوصف ده لـ Pathologic."},
+    {n:266,cat:'truefalse',isTF:true,q:"Aplasia is a complete absence of an organ.",c:1,exp:"خطأ — ده Agenesis."},
+    {n:267,cat:'truefalse',isTF:true,q:"In atrophy, the cells become smaller in size due to reduction in cell organelles.",c:0,exp:"صح."},
+    {n:268,cat:'truefalse',isTF:true,q:"Depletion of ATP can cause cellular adaptation.",c:1,exp:"خطأ — يسبب cell injury."},
+    {n:269,cat:'truefalse',isTF:true,q:"Regeneration of the liver following partial hepatectomy is considered pathological hyperplasia.",c:1,exp:"خطأ — Physiologic."},
+    {n:270,cat:'truefalse',isTF:true,q:"The alteration in metaplasia crosses histogenetic boundaries.",c:1,exp:"خطأ — لا يعبر."},
+    {n:271,cat:'truefalse',isTF:true,q:"Hypoxia is the most common cause of cell injury.",c:0,exp:"صح."},
+    {n:272,cat:'truefalse',isTF:true,q:"Karyorrhexis is the process of nuclear dissolution.",c:1,exp:"خطأ — Karyorrhexis = تفتت."},
+    {n:273,cat:'truefalse',isTF:true,q:"Hydropic degeneration occurs due to accumulation of large amounts of glycogen in cells.",c:1,exp:"خطأ — ماء."},
+    {n:274,cat:'truefalse',isTF:true,q:"\"Tabby cat\" appearance is a gross picture of fatty change in the kidney.",c:1,exp:"خطأ — القلب."},
+    {n:275,cat:'truefalse',isTF:true,q:"Tumor proliferation is controlled and follows the rules of normal cell growth.",c:1,exp:"خطأ — غير منضبط."},
+    {n:276,cat:'truefalse',isTF:true,q:"Polyclonal neoplasm arises from many transformed cells.",c:0,exp:"صح."},
+    {n:277,cat:'truefalse',isTF:true,q:"Tumors exposed to chemotherapeutic agents are considered a type of pathologic apoptosis.",c:0,exp:"صح."},
+    {n:278,cat:'truefalse',isTF:true,q:"Loss of microvilli and loosening of intercellular attachments are ultrastructural changes of irreversible cell injury.",c:1,exp:"خطأ — reversible."},
+    {n:279,cat:'truefalse',isTF:true,q:"Necrosis is not accompanied by an inflammatory reaction.",c:1,exp:"خطأ — يصحبه التهاب."},
+    {n:280,cat:'truefalse',isTF:true,q:"Fat necrosis is common in acute hemorrhagic pancreatitis.",c:0,exp:"صح."},
+    {n:281,cat:'truefalse',isTF:true,q:"Liquefactive necrosis occurs in solid organs as CNS.",c:1,exp:"خطأ — الأعضاء الصلبة coagulative."},
+    {n:282,cat:'truefalse',isTF:true,q:"The general architecture of tissue and the outlines of cells are retained in coagulative necrosis.",c:0,exp:"صح."},
+    {n:283,cat:'truefalse',isTF:true,q:"The lysosome and other organelles are intact in apoptosis.",c:0,exp:"صح."},
+    {n:284,cat:'truefalse',isTF:true,q:"Dystrophic calcification occurs in normal tissue despite normal calcium metabolism.",c:1,exp:"خطأ — dead tissue."},
+    {n:285,cat:'truefalse',isTF:true,q:"In gas gangrene, the affected part is dry, shrunken and dark black.",c:1,exp:"خطأ — متورم ونفاخات غازية."},
+    {n:286,cat:'truefalse',isTF:true,q:"The line of demarcation is distinct between healthy and gangrenous parts in dry gangrene.",c:0,exp:"صح."},
+    {n:287,cat:'truefalse',isTF:true,q:"The tigered effect in myocardium is a common feature of coagulative necrosis of heart.",c:1,exp:"خطأ — fatty change."},
+    {n:288,cat:'truefalse',isTF:true,q:"Localized haemosiderosis occurs whenever there is abnormal metabolism in the tissue.",c:1,exp:"خطأ — hemorrhage."},
+    {n:289,cat:'truefalse',isTF:true,q:"Inhaled carbon is considered one type of exogenous pigment accumulation within cells.",c:0,exp:"صح."},
+    {n:290,cat:'truefalse',isTF:true,q:"In dystrophic calcification, deposition of calcium salts in dead tissues is accompanied by hypercalcemia.",c:1,exp:"خطأ — كالسيوم طبيعي."},
+    {n:291,cat:'truefalse',isTF:true,q:"Vitamin D intoxication can cause calcification in kidneys, lungs and stomach.",c:0,exp:"صح."},
+    {n:292,cat:'truefalse',isTF:true,q:"Hyperparathyroidism is a predisposing factor of dystrophic calcification.",c:1,exp:"خطأ — metastatic."},
+    {n:293,cat:'truefalse',isTF:true,q:"Chronic inflammation is characterized by rapid onset and short duration with neutrophilic accumulation.",c:1,exp:"خطأ — طويل + ليمفاويات."},
+    {n:294,cat:'truefalse',isTF:true,q:"Addison's disease is characterized by hyperpigmentation.",c:0,exp:"صح."},
+    {n:295,cat:'truefalse',isTF:true,q:"The swelling during acute inflammation is due to hydropic degeneration.",c:1,exp:"خطأ — exudate."},
+    {n:296,cat:'truefalse',isTF:true,q:"The alteration in microvasculature in acute inflammation starts by transient vasodilatation followed by progressive vasoconstriction.",c:1,exp:"خطأ — العكس."},
+    {n:297,cat:'truefalse',isTF:true,q:"The increased vascular permeability allows the movement of protein-rich fluid that is called transudate.",c:1,exp:"خطأ — exudate."},
+    {n:298,cat:'truefalse',isTF:true,q:"Margination is the movement of leukocytes toward sites of infection or injury.",c:1,exp:"خطأ — chemotaxis."},
+    {n:299,cat:'truefalse',isTF:true,q:"IgM is one of the major opsonins that target microorganisms for phagocytosis.",c:1,exp:"خطأ — IgG."},
+    {n:300,cat:'truefalse',isTF:true,q:"One of the most important opsonins is C3b generated by complement pathway activation.",c:0,exp:"صح."},
+    {n:301,cat:'truefalse',isTF:true,q:"Opsonins are either present in the blood ready to coat microbes or are produced in response to microbes.",c:0,exp:"صح."},
+    {n:302,cat:'truefalse',isTF:true,q:"The most important microbostatic substances involved are ROS, RNS and lysosomal enzymes.",c:1,exp:"خطأ — microbicidal."},
+    {n:303,cat:'truefalse',isTF:true,q:"The specific gravity of inflammatory exudate is above 1018 due to presence of fibrinogen.",c:0,exp:"صح."},
+    {n:304,cat:'truefalse',isTF:true,q:"C3a, C3b and C5a represent the fibrinolytic system.",c:1,exp:"خطأ — complement system."},
+    {n:305,cat:'truefalse',isTF:true,q:"Serous inflammation is characterized by the outpouring of a watery relatively high-protein fluid.",c:1,exp:"خطأ — low protein."},
+    {n:306,cat:'truefalse',isTF:true,q:"In fibrinous inflammation, severe injury allows large molecules such as glucose to pass through.",c:1,exp:"خطأ — fibrinogen."},
+    {n:307,cat:'truefalse',isTF:true,q:"In catarrhal inflammation, the mucosal epithelial cells are swollen and vacuolated due to mucoid degeneration.",c:0,exp:"صح."},
+    {n:308,cat:'truefalse',isTF:true,q:"The pseudomembrane is a characteristic feature of fibrinous inflammation.",c:1,exp:"خطأ — pseudomembranous."},
+    {n:309,cat:'truefalse',isTF:true,q:"Allergic inflammation is characterized by edema and increased neutrophils.",c:1,exp:"خطأ — eosinophils."},
+    {n:310,cat:'truefalse',isTF:true,q:"Pus is composed of numerous dead neutrophils only.",c:1,exp:"خطأ — dead and living."},
+    {n:311,cat:'truefalse',isTF:true,q:"Abscess is a diffuse suppurative inflammation.",c:1,exp:"خطأ — localized."},
+    {n:312,cat:'truefalse',isTF:true,q:"Abscesses cause strong chemotaxis to eosinophils.",c:1,exp:"خطأ — neutrophils."},
+    {n:313,cat:'truefalse',isTF:true,q:"Boil is a small abscess related to the skin of the hand.",c:1,exp:"خطأ — hair follicle."},
+    {n:314,cat:'truefalse',isTF:true,q:"Carbuncle has pus in a single cavity called sinus.",c:1,exp:"خطأ — multiple loculi."},
+    {n:315,cat:'truefalse',isTF:true,q:"Fistula differs from sinus as it is opened from both ends.",c:0,exp:"صح."},
+    {n:316,cat:'truefalse',isTF:true,q:"In cellulitis, Streptococci secrete streptokinase, fibrinolysin, and coagulase.",c:1,exp:"خطأ — hyaluronidase."},
+    {n:317,cat:'truefalse',isTF:true,q:"IL-1 stimulates neurotransmitters to reset the temperature set point at a higher level.",c:1,exp:"خطأ — PGs."},
+    {n:318,cat:'truefalse',isTF:true,q:"Increased leucocyte count during acute inflammation is usually up to 15,000 or 20,000 cells/μL.",c:0,exp:"صح."},
+    {n:319,cat:'truefalse',isTF:true,q:"Viral infections are associated with eosinophilia.",c:1,exp:"خطأ — lymphocytosis."},
+    {n:320,cat:'truefalse',isTF:true,q:"CRP and SAA proteins bind to microbial cell walls, and they may act as opsonins.",c:0,exp:"صح."},
+    {n:321,cat:'truefalse',isTF:true,q:"During inflammation, erythrocytes tend to float more rapidly than individual erythrocytes.",c:1,exp:"خطأ — sediment."},
+    {n:322,cat:'truefalse',isTF:true,q:"The other manifestations of acute-phase response are increased heart rate, blood pressure and sweating.",c:1,exp:"خطأ — decreased sweating."},
+    {n:323,cat:'truefalse',isTF:true,q:"The complete restoration to normal histology occurs when the injury is limited or short-lived.",c:0,exp:"صح."},
+    {n:324,cat:'truefalse',isTF:true,q:"Persistent or recurrent acute inflammation may progress to metaplasia.",c:1,exp:"خطأ — chronic inflammation."},
+    {n:325,cat:'truefalse',isTF:true,q:"Chronic inflammation is inflammation of short duration.",c:1,exp:"خطأ — long."},
+    {n:326,cat:'truefalse',isTF:true,q:"Persistent infections stimulate fibroblast-mediated immune response.",c:1,exp:"خطأ — T lymphocyte."},
+    {n:327,cat:'truefalse',isTF:true,q:"Silicosis is one type of acute inflammatory response in the lungs.",c:1,exp:"خطأ — chronic."},
+    {n:328,cat:'truefalse',isTF:true,q:"Giant cells are formed by fusion of neutrophils with lymphocytes.",c:1,exp:"خطأ — macrophages."},
+    {n:329,cat:'truefalse',isTF:true,q:"Plasma cells are developed from activated T lymphocytes.",c:1,exp:"خطأ — B lymphocytes."},
+    {n:330,cat:'truefalse',isTF:true,q:"Chronic non-specific inflammation is characterized by formation of granuloma.",c:1,exp:"خطأ — specific."},
+    {n:331,cat:'truefalse',isTF:true,q:"ESR is elevated in all cases of chronic inflammation.",c:0,exp:"صح."},
+    {n:332,cat:'truefalse',isTF:true,q:"Chronic toxemia can lead to normocytic anemia due to loss of appetite.",c:1,exp:"خطأ — bone marrow depression."},
+    {n:333,cat:'truefalse',isTF:true,q:"Protozoa are multicellular organisms that always live in large colonies.",c:1,exp:"خطأ — وحيدة الخلية (unicellular)."},
+    {n:334,cat:'truefalse',isTF:true,q:"The ectoplasm gives rise to locomotion structures such as pseudopodia, cilia, and flagella.",c:0,exp:"صح — الإكتوبلازم ينشأ منه أعضاء الحركة."},
+    {n:335,cat:'truefalse',isTF:true,q:"The male cell in sexual reproduction of protozoa is termed the macrogamete.",c:1,exp:"خطأ — الأنثى هي macrogamete، والذكر microgamete."},
+    {n:336,cat:'truefalse',isTF:true,q:"Protozoa can perform excretion through contractile vacuoles, diffusion, and osmotic pressure.",c:0,exp:"صح."},
+    {n:337,cat:'truefalse',isTF:true,q:"Balantidium moves by means of pseudopodia.",c:1,exp:"خطأ — cilia (أهداب)."},
+    {n:338,cat:'truefalse',isTF:true,q:"Simple binary fission can occur either longitudinally or transversely to form two organisms.",c:0,exp:"صح."},
+    {n:339,cat:'truefalse',isTF:true,q:"Protozoan cells are capable of secreting substances such as cyst walls, cytolysins, and digestive enzymes.",c:0,exp:"صح."},
+    {n:340,cat:'truefalse',isTF:true,q:"The subphylum Sarcodina includes organisms that move using flagella, such as Giardia.",c:1,exp:"خطأ — Sarcodina = أميبات. Mastigophora = سوطيات."},
+    {n:341,cat:'truefalse',isTF:true,q:"Protozoa respiration can occur via direct uptake of oxygen or using oxygen liberated from metabolic processes.",c:0,exp:"صح."},
+    {n:342,cat:'truefalse',isTF:true,q:"Contractile vacuoles and chromatoide bodies are typically located within the endoplasm.",c:0,exp:"صح."},
+    {n:343,cat:'truefalse',isTF:true,q:"Naegleria fowleri reproduces by simple binary fission.",c:0,exp:"صح."},
+    {n:344,cat:'truefalse',isTF:true,q:"The cyst stage of Naegleria fowleri can be found in the CNS and CSF of infected humans.",c:1,exp:"خطأ — Cyst في التربة فقط، وفي CSF فقط trophozoites/flagellated."},
+    {n:345,cat:'truefalse',isTF:true,q:"Acanthamoeba is classified as an opportunistic parasite.",c:0,exp:"صح."},
+    {n:346,cat:'truefalse',isTF:true,q:"Direct invasion through skin ulcers is one of the modes of transmission for Acanthamoeba.",c:0,exp:"صح."},
+    {n:347,cat:'truefalse',isTF:true,q:"Naegleria fowleri flagellated forms have an elongated shape with broad anterior and tapering posterior ends.",c:1,exp:"خطأ — ده وصف الـ amoeboid. الـ flagellated كمثرية (pear-shaped)."},
+    {n:348,cat:'truefalse',isTF:true,q:"Granulomatous Amoebic Encephalitis (GAE) is caused by Acanthamoeba.",c:0,exp:"صح."},
+    {n:349,cat:'truefalse',isTF:true,q:"Microscopic examination of CSF obtained by lumbar puncture is used in the diagnosis of Naegleria fowleri.",c:0,exp:"صح."},
+    {n:350,cat:'truefalse',isTF:true,q:"The cyst stage of Acanthamoeba has a single-layered wall.",c:1,exp:"خطأ — double wall (طبقتان)."},
+    {n:351,cat:'truefalse',isTF:true,q:"Proper care of contact lenses and using proper lens fluid helps prevent Acanthamoeba infection.",c:0,exp:"صح."},
+    {n:352,cat:'truefalse',isTF:true,q:"Adequate chlorination of swimming pools is a preventive measure against Naegleria fowleri.",c:0,exp:"صح."},
+    {n:353,cat:'truefalse',isTF:true,q:"The trophozoite is the active invasive form and feeds on starch and mucus in the colon lumen (E. histolytica).",c:0,exp:"صح."},
+    {n:354,cat:'truefalse',isTF:true,q:"The cyst of E. histolytica is rounded, thick-walled, with an average size of 15 μ.",c:0,exp:"صح."},
+    {n:355,cat:'truefalse',isTF:true,q:"The mature cyst of E. histolytica contains 8 nuclei.",c:1,exp:"خطأ — 4 أنوية."},
+    {n:356,cat:'truefalse',isTF:true,q:"The trophozoite of E. histolytica reproduces by binary fission.",c:0,exp:"صح."},
+    {n:357,cat:'truefalse',isTF:true,q:"Man is the definitive host of E. histolytica.",c:0,exp:"صح."},
+    {n:358,cat:'truefalse',isTF:true,q:"Cysts are detected in diarrheic (fluid) stool, while trophozoites are detected in formed stool.",c:1,exp:"خطأ — العكس: trophozoites في fluid، cysts في formed."},
+    {n:359,cat:'truefalse',isTF:true,q:"In asymptomatic infection, the parasite lives in the intestinal lumen as a commensal and cysts may be found in the stool.",c:0,exp:"صح."},
+    {n:360,cat:'truefalse',isTF:true,q:"Fever is a common feature of acute intestinal amoebiasis.",c:1,exp:"خطأ — Fever غير شائع في المرحلة الحادة المعوية."},
+    {n:361,cat:'truefalse',isTF:true,q:"Amoebic liver abscess presents with tender hepatomegaly, fever and pus.",c:0,exp:"صح."},
+    {n:362,cat:'truefalse',isTF:true,q:"The infective stage of E. histolytica is the trophozoite.",c:1,exp:"خطأ — mature cyst."},
+    {n:363,cat:'truefalse',isTF:true,q:"The diagnostic stage of a parasite is the stage capable of entering and infecting the human body.",c:1,exp:"خطأ — ده Infective stage. Diagnostic stage يخرج من العائل ليكتشف."},
+    {n:364,cat:'truefalse',isTF:true,q:"Lice are classified as ectoparasites and permanent parasites.",c:0,exp:"صح."},
+    {n:365,cat:'truefalse',isTF:true,q:"Mosquitoes act as temporary parasites because they visit the host from time to time for feeding.",c:0,exp:"صح."},
+    {n:366,cat:'truefalse',isTF:true,q:"A reservoir host is an animal host that harbors the same stages of the parasite as humans and serves as a source of infection.",c:0,exp:"صح."},
+    {n:367,cat:'truefalse',isTF:true,q:"In commensalism, both the parasite and the host derive mutual benefits from each other.",c:1,exp:"خطأ — فقط الطفيلي يستفيد."},
+    {n:368,cat:'truefalse',isTF:true,q:"Symbiosis is an association where both host and parasite are so interdependent that neither can survive without the other, and neither suffers harm.",c:0,exp:"صح."},
+    {n:369,cat:'truefalse',isTF:true,q:"Physical obstruction of luminal organs can be caused by a mass of collected Ascaris worms.",c:0,exp:"صح."},
+    {n:370,cat:'truefalse',isTF:true,q:"Iatrogenic parasitic transmission occurs through drinking contaminated water.",c:1,exp:"خطأ — عبر إجراءات طبية مثل نقل الدم."},
+    {n:371,cat:'truefalse',isTF:true,q:"Sylvatic zoonosis refers to zoonotic infections where the primary source of infection comes from man's own pet animals.",c:1,exp:"خطأ — wild animals (الحيوانات البرية)."},
+    {n:372,cat:'truefalse',isTF:true,q:"Metazoonosis requires invertebrate vectors (such as arthropods) for transmission to hosts.",c:0,exp:"صح."},
+    {n:373,cat:'truefalse',isTF:true,q:"Protozoa can perform excretion through contractile vacuoles only.",c:1,exp:"خطأ — أيضاً diffusion و osmotic pressure."}
 ];
+
+// إعادة ترقيم كل الأسئلة تلقائياً
+ALL.forEach((q, i) => { q.n = i + 1; });
 
 let currentCategory = 'all';
 let currentQuestions = [];
@@ -494,13 +590,23 @@ function renderQuestions() {
         card.className = 'question-card';
         card.id = `q-${idx}`;
         card.dataset.index = idx;
-        const optsHtml = q.opts.map((opt, optIdx) => 
-            `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
-        ).join('');
+
+        let optsHtml = '';
+        if (q.isTF) {
+            optsHtml = `
+                <div class="option tf-opt" data-letter="T" data-opt="0" onclick="selectAnswer(${idx}, 0)">True ✔️</div>
+                <div class="option tf-opt" data-letter="F" data-opt="1" onclick="selectAnswer(${idx}, 1)">False ✖️</div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+        }
+
         card.innerHTML = `
             <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
             <div class="q-text">${q.q}</div>
-            <div class="options" id="opts-${idx}">${optsHtml}</div>
+            <div class="options ${q.isTF ? 'tf-options' : ''}" id="opts-${idx}">${optsHtml}</div>
             <div class="feedback" id="fb-${idx}"></div>
         `;
         container.appendChild(card);
@@ -523,7 +629,12 @@ function selectAnswer(qIdx, optIdx) {
     const fb = document.getElementById(`fb-${qIdx}`);
     fb.style.display = 'block';
     fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
-    fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+    if (q.isTF) {
+        const correctLabel = q.c === 0 ? 'True ✔️' : 'False ✖️';
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer is: <b>${correctLabel}</b><br>📖 ${q.exp}`;
+    } else {
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+    }
     document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
     if (isCorrect) correctCount++; else wrongCount++;
     answeredCount++;
@@ -555,7 +666,7 @@ function showResults() {
     const offset = circumference - (percent / 100 * circumference);
     document.getElementById('scoreFill').style.strokeDashoffset = offset;
     let msg = '';
-    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance in Pathology!';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance!';
     else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
     else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
     else msg = '📚 Needs more revision — You can do better!';
@@ -567,10 +678,11 @@ function showResults() {
         const card = document.getElementById(`q-${idx}`);
         if (card && card.classList.contains('wrong')) {
             hasWrong = true;
+            let correctText = q.isTF ? (q.c === 0 ? 'True ✔️' : 'False ✖️') : q.opts[q.c];
             reviewDiv.innerHTML += `
                 <div class="review-item">
                     <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
-                    <strong>✅ Correct Answer:</strong> ${q.opts[q.c]}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctText}<br>
                     <span style="font-size:0.8rem; opacity:0.8;">📖 ${q.exp}</span>
                 </div>`;
         }
