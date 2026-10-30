@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Lab Principles & Acids/Bases Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --primary:#2d6a4f;--primary-light:#52b788;--primary-dark:#1b4332;--secondary:#1e7a7a;--secondary-light:#3d9e9e;--tertiary:#a8d5ba;--dark:#1a2a2a;--gray:#9ab0aa;--success:#52b788;--error:#d97777; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(145deg,#e8f0ee 0%,#d4e4df 40%,#c5d9d3 100%);color:#1a2a2a;min-height:100vh;overflow-x:hidden;}
+.hero-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 40%,rgba(45,106,79,0.06) 0%,rgba(200,220,215,0.95) 70%);z-index:-1;}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1;}
+.particle{position:absolute;background:rgba(45,106,79,0.08);border-radius:50%;pointer-events:none;animation:floatParticle 25s infinite linear;}
+@keyframes floatParticle{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.2;}90%{opacity:0.2;}100%{transform:translateY(-100vh) rotate(720deg);opacity:0;}}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,122,122,0.15);padding:12px 24px;box-shadow:0 2px 20px rgba(0,0,0,0.04);}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-small{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);}
+.brand{font-size:1.1rem;font-weight:700;color:var(--primary);}
+.progress-stats{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.stat-badge{padding:4px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;background:rgba(45,106,79,0.06);border:1px solid rgba(45,106,79,0.12);color:var(--dark);}
+.stat-answered{background:rgba(30,122,122,0.06);border-color:rgba(30,122,122,0.15);}
+.stat-correct{background:rgba(82,183,136,0.10);border-color:var(--success);color:var(--primary);}
+.stat-wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.stat-percent{background:rgba(45,106,79,0.08);border-color:var(--primary);color:var(--primary);}
+.progress-bar-container{width:160px;height:5px;background:rgba(45,106,79,0.12);border-radius:3px;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:3px;transition:width 0.3s;}
+.start-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px;}
+.start-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border:1px solid rgba(45,106,79,0.12);border-radius:32px;padding:50px 40px;max-width:640px;width:100%;text-align:center;transition:all 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+.start-card:hover{transform:translateY(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 12px 50px rgba(0,0,0,0.06);}
+.main-logo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(30,122,122,0.2);}50%{box-shadow:0 0 0 15px rgba(30,122,122,0);}}
+.start-card h1{font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:10px;}
+.start-card .sub{color:var(--gray);margin-bottom:25px;}
+.filter-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:25px 0;}
+.filter-btns button{padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.6);border:1px solid rgba(45,106,79,0.10);color:var(--gray);cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.2s;font-weight:500;font-size:0.85rem;}
+.filter-btns button:hover{border-color:var(--primary);color:var(--primary);background:rgba(45,106,79,0.05);}
+.filter-btns button.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:var(--primary);color:white;}
+.q-count{margin:20px 0;color:var(--gray);}
+.q-count span{color:var(--primary);font-weight:700;font-size:1.3rem;}
+.btn-start{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 40px;border-radius:40px;color:white;font-size:1.1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;width:100%;}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.quiz-wrapper{display:none;padding:100px 20px 60px;max-width:900px;margin:0 auto;}
+.section-header{display:flex;align-items:center;gap:12px;margin:30px 0 20px;}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--primary),transparent);}
+.section-line.right{background:linear-gradient(270deg,var(--primary),transparent);}
+.section-title{color:var(--primary);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;background:rgba(45,106,79,0.06);padding:5px 15px;border-radius:20px;}
+.question-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:24px;padding:28px;margin-bottom:20px;border:1px solid rgba(45,106,79,0.08);transition:all 0.3s;box-shadow:0 2px 15px rgba(0,0,0,0.02);}
+.question-card:hover{transform:translateX(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 4px 25px rgba(0,0,0,0.04);}
+.question-card.correct{border-right:4px solid var(--success);background:rgba(82,183,136,0.04);}
+.question-card.wrong{border-right:4px solid var(--error);background:rgba(217,119,119,0.04);}
+.q-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.q-num{background:linear-gradient(135deg,var(--primary),var(--primary-dark));width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;}
+.q-cat{background:rgba(30,122,122,0.08);padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:600;color:var(--secondary);}
+.q-text{font-size:1.05rem;font-weight:500;line-height:1.6;margin-bottom:20px;color:#1a2a2a;}
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{padding:12px 18px;background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.08);border-radius:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-size:0.95rem;color:#1a2a2a;}
+.option::before{content:attr(data-letter);width:30px;height:30px;border-radius:50%;background:rgba(45,106,79,0.06);display:flex;align-items:center;justify-content:center;font-weight:700;transition:all 0.2s;color:var(--primary);}
+.option:hover:not(:disabled){background:rgba(45,106,79,0.04);border-color:var(--primary);transform:translateX(-5px);}
+.option.correct{background:rgba(82,183,136,0.08);border-color:var(--success);color:var(--primary);}
+.option.correct::before{background:var(--success);color:white;}
+.option.wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.option.wrong::before{background:var(--error);color:white;}
+.option:disabled{cursor:default;}
+.feedback{margin-top:16px;padding:12px 16px;border-radius:12px;font-size:0.85rem;display:none;animation:slideDown 0.3s ease;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.feedback.correct{background:rgba(82,183,136,0.06);border-right:3px solid var(--success);color:var(--primary);}
+.feedback.wrong{background:rgba(217,119,119,0.06);border-right:3px solid var(--error);color:#8b5555;}
+.submit-area{text-align:center;margin:30px 0;}
+.btn-submit{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 50px;border-radius:40px;color:white;font-size:1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;}
+.btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;}
+.results-screen{max-width:800px;margin:100px auto 50px;padding:40px;background:rgba(255,255,255,0.90);backdrop-filter:blur(15px);border-radius:32px;border:1px solid rgba(45,106,79,0.10);text-align:center;display:none;animation:zoomIn 0.5s ease;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+@keyframes zoomIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+.results-logo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;}
+.results-screen h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
+.score-circle{width:150px;height:150px;margin:25px auto;position:relative;}
+.score-bg{fill:none;stroke:rgba(45,106,79,0.08);stroke-width:10;}
+.score-fill{fill:none;stroke:url(#scoreGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+.score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.score-big{font-size:2rem;font-weight:800;color:var(--primary);}
+.result-msg{color:var(--gray);margin:15px 0;}
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:25px 0;}
+.result-stat{padding:15px;border-radius:16px;}
+.result-stat.c{background:rgba(82,183,136,0.06);border:1px solid var(--success);}
+.result-stat.w{background:rgba(217,119,119,0.06);border:1px solid var(--error);}
+.result-stat.p{background:rgba(30,122,122,0.06);border:1px solid var(--secondary);}
+.result-stat .num{font-size:1.8rem;font-weight:800;}
+.result-stat.c .num{color:var(--primary);}
+.result-stat.w .num{color:#8b5555;}
+.result-stat.p .num{color:var(--secondary);}
+.result-stat .label{font-size:0.85rem;color:var(--gray);}
+.btn-restart{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:12px 30px;border-radius:40px;color:white;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-home{background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.12);padding:12px 30px;border-radius:40px;color:var(--gray);font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-restart:hover,.btn-home:hover{transform:translateY(-2px);}
+.btn-home:hover{border-color:var(--primary);color:var(--primary);}
+.review-area{text-align:right;margin-top:30px;max-height:300px;overflow-y:auto;}
+.review-area h3{color:var(--primary);margin-bottom:15px;}
+.review-item{background:rgba(217,119,119,0.04);border-right:3px solid var(--error);padding:12px;border-radius:12px;margin-bottom:10px;text-align:right;font-size:0.85rem;}
+.tf-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tf-opt{justify-content:center;font-size:1rem;font-weight:700;padding:18px;}
+.tf-opt[data-letter="T"]::before{background:rgba(82,183,136,0.18);color:var(--success);}
+.tf-opt[data-letter="F"]::before{background:rgba(217,119,119,0.18);color:var(--error);}
+@media (max-width:768px){.start-card{padding:30px 20px;margin:0 15px;}.start-card h1{font-size:1.5rem;}.question-card{padding:18px;}.results-screen{padding:25px;margin:80px 15px 30px;}.results-stats{gap:8px;}.result-stat .num{font-size:1.3rem;}.stat-badge{font-size:0.7rem;padding:3px 8px;}.progress-bar-container{width:100px;}}
+@media (max-width:480px){.tf-options{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/40?text=ADGad'">
+            <span class="brand">A.D.Gad</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container"><div class="progress-bar" id="progressFill" style="width: 0%"></div></div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/100?text=ADGad'">
+        <h1>A.D.Gad | Lab & Acids/Bases</h1>
+        <p class="sub">🧪 General Laboratory Principles + Acids & Bases</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="lab">🧪 Lab Principles</button>
+            <button data-cat="solutions">🧮 Solutions Problems</button>
+            <button data-cat="acids">⚗️ Acids & Bases Concepts</button>
+            <button data-cat="strength">📊 Strengths & Equilibria</button>
+            <button data-cat="truefalse">✔️ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of Questions: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/80?text=ADGad'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="75" cy="75" r="60"/>
+            <circle class="score-fill" id="scoreFill" cx="75" cy="75" r="60" stroke-dasharray="377" stroke-dashoffset="377"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.7rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D', 'E'];
+const CATS = {
+    lab: '🧪 General Laboratory Principles',
+    solutions: '🧮 Solutions Practice Problems',
+    acids: '⚗️ Acids & Bases Concepts',
+    strength: '📊 Strengths & Equilibria',
+    truefalse: '✔️ True / False'
+};
+
+const ALL = [
+    // ===== General Laboratory Principles (Part II) - MCQ =====
+    {cat:'lab',q:"Which vein is the most common and preferred site for performing a standard venipuncture?",opts:["Basilic vein","Cephalic vein","Median cubital vein","Metacarpal vein"],c:2,exp:"Median cubital vein is the preferred site."},
+    {cat:'lab',q:"What is the correct angle of needle penetration into the vein during venipuncture?",opts:["10° – 15°","30° – 40°","60° – 70°","90°"],c:1,exp:"30° – 40° is the correct angle."},
+    {cat:'lab',q:"Which blood collection tube contains EDTA and is used for Complete Blood Count (CBC)?",opts:["Red top","Lavender top","Light Blue top","Grey top"],c:1,exp:"Lavender top contains EDTA."},
+    {cat:'lab',q:"A light blue top tube containing 3.2% Sodium citrate is designated for which laboratory tests?",opts:["Glucose estimation","Coagulation studies (PT, APTT)","Erythrocyte Sedimentation Rate (ESR)","Blood cultures"],c:1,exp:"Light blue = coagulation studies."},
+    {cat:'lab',q:"Which additive is present in a Grey-top tube used for accurate glucose estimation?",opts:["Heparin","Sodium citrate 3.8%","Sodium fluoride + Potassium oxalate","Gel separator only"],c:2,exp:"Sodium fluoride + Potassium oxalate."},
+    {cat:'lab',q:"How should the venipuncture site be cleaned with spirit cotton prior to needle insertion?",opts:["From the outside moving inward in circles","In a circular motion from the center outward","Up and down vigorously","Side to side repeatedly"],c:1,exp:"From center outward in circular motion."},
+    {cat:'lab',q:"What concentration of ethanol (spirit) is used for site preparation in phlebotomy?",opts:["50%","70%","95%","100%"],c:1,exp:"70% ethanol."},
+    {cat:'lab',q:"Which type of solution is defined as containing one gram molecular weight of a substance dissolved in 1 liter of solution?",opts:["Molal solution","Molar solution","Normal solution","Saturated solution"],c:1,exp:"Molar solution."},
+    {cat:'lab',q:"How many grams of Sodium Hydroxide (NaOH) are required to prepare 1 Liter of 1 M NaOH solution? (Na=23, O=16, H=1)",opts:["20 grams","40 grams","58.5 grams","80 grams"],c:1,exp:"MW = 40 g/mol, so 40 grams."},
+    {cat:'lab',q:"What is a solution called when a gram equivalent weight of a substance is dissolved in 1 liter of solution?",opts:["Percent solution","Molal solution","Normal solution (N)","Saturated solution"],c:2,exp:"Normal solution (N)."},
+
+    // ===== General Laboratory Principles (Part II) - True/False =====
+    {cat:'truefalse',isTF:true,q:"Phlebotomy is defined as the technique of collecting blood samples from a peripheral vein.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Ankle or foot veins should be routinely attempted if forearm veins are difficult to find.",c:1,exp:"False — avoid foot/ankle."},
+    {cat:'truefalse',isTF:true,q:"A green-top tube contains Heparin and is used for troponin levels and chromosome studies.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"A black-top tube contains 3.8% Sodium citrate and is used for Erythrocyte Sedimentation Rate (ESR).",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The tourniquet should remain tightly tied around the arm while filling all collection tubes and removing the needle.",c:1,exp:"False — release tourniquet."},
+    {cat:'truefalse',isTF:true,q:"After transferring blood into additive-containing tubes, they should be mixed by vigorous shaking.",c:1,exp:"False — gentle inversion 5-6x."},
+    {cat:'truefalse',isTF:true,q:"A molal solution is prepared by dissolving 1 gram molecular weight of a substance in 1 kg of solvent.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"For fasting blood sample collection, the patient is permitted to drink tea or coffee right before the draw.",c:1,exp:"False — no tea/coffee for fasting."},
+    {cat:'truefalse',isTF:true,q:"A 0.9% NaCl solution (normal saline) is an example of a weight/volume (w/v) percent solution prepared by dissolving 0.9 g of NaCl in 100 ml of water.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"If a patient feels dizzy during or after blood collection, they should be asked to lie down flat.",c:0,exp:"True."},
+
+    // ===== Solutions Practice Problems =====
+    {cat:'solutions',q:"Calculate the mass of Potassium Hydroxide (KOH) required to prepare 2.5 liters of a 0.5 M solution. (K=39, O=16, H=1)",opts:["35 g","56 g","70 g","140 g"],c:2,exp:"MW KOH = 56 g/mol. Mass = 0.5 × 2.5 × 56 = 70 g."},
+    {cat:'solutions',q:"A laboratory technician dissolves 58.5 g of NaCl in water to make a total volume of 500 mL solution. What is the Molarity? (Na=23, Cl=35.5)",opts:["1 M","2 M","0.5 M","0.1 M"],c:1,exp:"MW NaCl = 58.5. Moles = 1. Molarity = 1 / 0.5 = 2 M."},
+    {cat:'solutions',q:"How many grams of Glucose (C6H12O6) are present in 750 mL of a 2 M glucose solution? (C=12, H=1, O=16)",opts:["90 g","180 g","270 g","360 g"],c:2,exp:"MW glucose = 180. Mass = 2 × 0.75 × 180 = 270 g."},
+    {cat:'solutions',q:"What is the molality of a solution prepared by dissolving 80 g of NaOH in 2 kg of pure water? (Na=23, O=16, H=1)",opts:["0.5 m","1 m","2 m","4 m"],c:1,exp:"MW NaOH = 40. Moles = 2. Molality = 2/2 = 1 m."},
+    {cat:'solutions',q:"Calculate the amount of Urea (CH4N2O, MW = 60 g/mol) needed to add to 500 g of water to produce a 0.4 molal solution.",opts:["6 g","12 g","24 g","60 g"],c:1,exp:"Moles = 0.4 × 0.5 = 0.2. Mass = 0.2 × 60 = 12 g."},
+    {cat:'solutions',q:"If 111 g of CaCl2 (MW = 111 g/mol) is dissolved in 2.5 kg of solvent, determine the molal concentration of the solution.",opts:["0.2 m","0.4 m","0.8 m","1 m"],c:1,exp:"Moles = 1. Molality = 1/2.5 = 0.4 m."},
+    {cat:'solutions',q:"Calculate the Normality (N) of a solution containing 49 g of Sulfuric Acid (H2SO4, MW = 98 g/mol, n = 2) dissolved in 500 mL of solution.",opts:["0.5 N","1 N","2 N","4 N"],c:2,exp:"Eq = 49/49 = 1. N = 1/0.5 = 2 N."},
+    {cat:'solutions',q:"How many grams of Sodium Carbonate (Na2CO3, MW = 106 g/mol, n = 2) are required to prepare 250 mL of a 0.1 N solution?",opts:["0.53 g","1.33 g","2.65 g","5.3 g"],c:1,exp:"Eq wt = 53. Mass = 0.1 × 0.25 × 53 = 1.325 ≈ 1.33 g."},
+    {cat:'solutions',q:"A 1000 mL solution contains 3.65 g of Hydrochloric Acid (HCl, MW = 36.5 g/mol, n = 1). Find its Normality.",opts:["0.01 N","0.1 N","1 N","10 N"],c:1,exp:"Eq = 3.65/36.5 = 0.1. N = 0.1/1 = 0.1 N."},
+
+    // ===== General Concepts of Acids and Bases - MCQ =====
+    {cat:'acids',q:"According to the Arrhenius concept, an acid is a substance that increases the concentration of which ion in water?",opts:["Hydroxide ion (OH⁻)","Hydronium ion (H₃O⁺)","Ammonium ion (NH₄⁺)","Carbonate ion (CO₃²⁻)"],c:1,exp:"Arrhenius acid increases H₃O⁺."},
+    {cat:'acids',q:"Which of the following is classified as a monoprotic acid?",opts:["Sulfuric acid (H₂SO₄)","Phosphoric acid (H₃PO₄)","Nitric acid (HNO₃)","Carbonic acid (H₂CO₃)"],c:2,exp:"Nitric acid has 1 ionizable H."},
+    {cat:'acids',q:"Why is Methane (CH₄) NOT considered an acid despite containing hydrogen atoms?",opts:["The C–H bonds are ionic.","The C–H bonds are highly polar.","The C–H bonds are weakly polar, so hydrogen ions are not released.","Methane releases OH⁻ ions in water."],c:2,exp:"C–H bonds are weakly polar."},
+    {cat:'acids',q:"How many ionizable hydrogen atoms does Ethanoic acid (CH₃COOH) have?",opts:["4","3","1","0"],c:2,exp:"Only 1 (on oxygen)."},
+    {cat:'acids',q:"Which base exhibits VERY LOW solubility in water according to the lecture slides?",opts:["Sodium hydroxide (NaOH)","Potassium hydroxide (KOH)","Calcium hydroxide (Ca(OH)₂)","Ammonia (NH₃)"],c:2,exp:"Ca(OH)₂ has very low solubility."},
+    {cat:'acids',q:"In the Brønsted-Lowry concept, an acid is defined as a:",opts:["Proton acceptor","Proton donor","Electron pair donor","Electron pair acceptor"],c:1,exp:"Acid = proton donor."},
+    {cat:'acids',q:"In the reaction: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻, what is the conjugate acid of NH₃?",opts:["H₂O","OH⁻","NH₄⁺","H₃O⁺"],c:2,exp:"NH₄⁺ is the conjugate acid."},
+    {cat:'acids',q:"A substance that can act as both an acid and a base (e.g., Amino acids) is termed:",opts:["Monoprotic","Amphoteric","Polyprotic","Caustic"],c:1,exp:"Amphoteric."},
+    {cat:'acids',q:"According to the Lewis concept, a base is an:",opts:["Electron pair donor","Electron pair acceptor","Proton donor","Proton acceptor"],c:0,exp:"Lewis base = electron pair donor."},
+        {cat:'acids',q:"In the reaction between Ammonia (NH₃) and Boron Trifluoride (BF₃), BF₃ acts as a Lewis acid because it:",opts:["Donates a proton","Accepts a proton","Donates an electron pair","Accepts an electron pair"],c:3,exp:"BF₃ accepts an electron pair from NH₃."},
+
+    // ===== General Concepts of Acids and Bases - True/False =====
+    {cat:'truefalse',isTF:true,q:"Free H⁺ ions exist abundantly as free protons in aqueous solution.",c:1,exp:"False — free H⁺ does not exist; it forms H₃O⁺."},
+    {cat:'truefalse',isTF:true,q:"Phosphoric acid (H₃PO₄) is classified as a polyprotic acid.",c:0,exp:"True — it has 3 ionizable hydrogens."},
+    {cat:'truefalse',isTF:true,q:"Hydrogen atoms attached to carbon in CH₃COOH can easily ionize in water.",c:1,exp:"False — C–H bonds are weakly polar and do not ionize."},
+    {cat:'truefalse',isTF:true,q:"Sodium hydroxide (NaOH) and Potassium hydroxide (KOH) have high solubility in water and are extremely caustic.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Magnesium hydroxide (Mg(OH)₂) has very high solubility in water.",c:1,exp:"False — Mg(OH)₂ has very low solubility."},
+    {cat:'truefalse',isTF:true,q:"A conjugate base is the species formed when a base gains a proton.",c:1,exp:"False — conjugate acid forms when a base gains a proton; conjugate base remains after an acid loses a proton."},
+    {cat:'truefalse',isTF:true,q:"In the reaction HCl + H₂O ⇌ H₃O⁺ + Cl⁻, the chloride ion (Cl⁻) is the conjugate base of HCl.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Amino acids are amphoteric because they contain both amine (basic) and carboxylic (acidic) groups.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The Lewis acid-base concept is restricted only to reactions that involve proton (H⁺) transfer.",c:1,exp:"False — Lewis concept broadened to include reactions without H⁺ transfer."},
+    {cat:'truefalse',isTF:true,q:"In the Lewis concept, the hydroxide ion (OH⁻) acts as a Lewis base because it has an unshared pair of electrons to donate.",c:0,exp:"True."},
+
+    // ===== Strengths and Equilibria of Acids and Bases - MCQ =====
+    {cat:'strength',q:"Which of the following correctly describes a strong acid in aqueous solution?",opts:["It ionizes only partially (<< 100%) in water.","It ionizes completely (100%) to yield H₃O⁺ and an anion.","It holds onto hydrogen ions more strongly than weak acids.","It exists in dynamic equilibrium represented by double arrows (⇌)."],c:1,exp:"Strong acid ionizes completely (100%)."},
+    {cat:'strength',q:"According to the Brønsted-Lowry concept, a stronger acid is one that:",opts:["Holds onto hydrogen ions more strongly.","Accepts protons more readily.","Loses its hydrogen ions more easily and donates protons quicker.","Forms a strong conjugate base in solution."],c:2,exp:"Stronger acid loses H⁺ more easily."},
+    {cat:'strength',q:"What is the relationship between the strength of an acid and the strength of its conjugate base?",opts:["The stronger the acid, the stronger its conjugate base.","The stronger the acid, the weaker its conjugate base.","Acid strength and conjugate base strength are completely independent.","A strong acid always forms a conjugate base with a very high Kb."],c:1,exp:"Stronger acid → weaker conjugate base."},
+    {cat:'strength',q:"Phosphoric acid (H₃PO₄) is classified as a triprotic acid. How many dissociation constants (Ka) does it have?",opts:["1","2","3","4"],c:2,exp:"Three ionizable H → three Ka values."},
+    {cat:'strength',q:"Which mathematical expression correctly defines pKa?",opts:["pKa = 10^(-Ka)","pKa = -log(Ka)","pKa = log(1 / Kb)","pKa = Ka × [H₂O]"],c:1,exp:"pKa = -log(Ka)."},
+    {cat:'strength',q:"An acid with a larger Ka value (or smaller pKa value) indicates:",opts:["A weaker acid.","A stronger acid.","A lower concentration of hydronium ions at equilibrium.","An acid that does not ionize in water."],c:1,exp:"Larger Ka / smaller pKa = stronger acid."},
+    {cat:'strength',q:"Given that Nitrous acid (HNO₂) has Ka = 4.4 × 10⁻⁴ and Acetic acid (CH₃COOH) has Ka = 1.8 × 10⁻⁵, which statement is TRUE?",opts:["Acetic acid is stronger than nitrous acid.","Nitrous acid is stronger than acetic acid.","Both acids are 100% ionized in water.","Acetic acid has a smaller pKa than nitrous acid."],c:1,exp:"4.4 × 10⁻⁴ > 1.8 × 10⁻⁵ → nitrous is stronger."},
+    {cat:'strength',q:"Why is the concentration of water [H₂O] omitted from the acid dissociation constant (Ka) expression?",opts:["Water does not participate in the reaction.","Water is a solid in aqueous solutions.","The concentration of water is essentially constant in dilute solutions and is incorporated into Kc to give Ka.","Water completely evaporates during ionization."],c:2,exp:"[H₂O] is constant and incorporated into Kc."},
+    {cat:'strength',q:"When ammonia (NH₃) dissolves in water at equilibrium, approximately what percentage is present as NH₄⁺?",opts:["100%","50%","About 1%","0.01%"],c:2,exp:"About 1% of NH₃ is present as NH₄⁺."},
+    {cat:'strength',q:"For a weak base dissociation represented by B(aq) + H₂O(l) ⇌ BH⁺(aq) + OH⁻(aq), the correct Kb expression is:",opts:["Kb = [B] / ([BH⁺][OH⁻])","Kb = [BH⁺][OH⁻] / [B]","Kb = [BH⁺][OH⁻] / ([B][H₂O])","Kb = [B][H₂O] / [OH⁻]"],c:1,exp:"Kb = [BH⁺][OH⁻] / [B]."}
+];
+
+// إعادة ترقيم كل الأسئلة تلقائياً
+ALL.forEach((q, i) => { q.n = i + 1; });
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// إنشاء الجزيئات المتحركة
+for(let i = 0; i < 40; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 5 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 20 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// فلترة الفئات
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        const filtered = currentCategory === 'all' ? ALL : ALL.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+document.getElementById('totalQ').textContent = ALL.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...ALL] : ALL.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+    updateStats();
+    renderQuestions();
+    window.scrollTo(0, 0);
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        if (lastCat !== q.cat) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${CATS[q.cat]}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = q.cat;
+        }
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (q.isTF) {
+            optsHtml = `
+                <div class="option tf-opt" data-letter="T" data-opt="0" onclick="selectAnswer(${idx}, 0)">True ✔️</div>
+                <div class="option tf-opt" data-letter="F" data-opt="1" onclick="selectAnswer(${idx}, 1)">False ✖️</div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+        }
+
+        card.innerHTML = `
+            <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
+            <div class="q-text">${q.q}</div>
+            <div class="options ${q.isTF ? 'tf-options' : ''}" id="opts-${idx}">${optsHtml}</div>
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) opt.classList.add('correct');
+        else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) opt.classList.add('wrong');
+    });
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    if (q.isTF) {
+        const correctLabel = q.c === 0 ? 'True ✔️' : 'False ✖️';
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer is: <b>${correctLabel}</b><br>📖 ${q.exp}`;
+    } else {
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+    }
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) correctCount++; else wrongCount++;
+    answeredCount++;
+    updateStats();
+    if (answeredCount === currentQuestions.length) document.getElementById('submitBtn').disabled = false;
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+    const circumference = 377;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            let correctText = q.isTF ? (q.c === 0 ? 'True ✔️' : 'False ✖️') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctText}<br>
+                    <span style="font-size:0.8rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>`;
+        }
+    });
+    if (!hasWrong) reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+    window.scrollTo(0, 0);
+}
+
+function restartQuiz() { startQuiz(); }
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
