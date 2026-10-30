@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Parasitology Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --primary:#2d6a4f;--primary-light:#52b788;--primary-dark:#1b4332;--secondary:#1e7a7a;--secondary-light:#3d9e9e;--tertiary:#a8d5ba;--dark:#1a2a2a;--gray:#9ab0aa;--success:#52b788;--error:#d97777; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(145deg,#e8f0ee 0%,#d4e4df 40%,#c5d9d3 100%);color:#1a2a2a;min-height:100vh;overflow-x:hidden;}
+.hero-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 40%,rgba(45,106,79,0.06) 0%,rgba(200,220,215,0.95) 70%);z-index:-1;}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1;}
+.particle{position:absolute;background:rgba(45,106,79,0.08);border-radius:50%;pointer-events:none;animation:floatParticle 25s infinite linear;}
+@keyframes floatParticle{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.2;}90%{opacity:0.2;}100%{transform:translateY(-100vh) rotate(720deg);opacity:0;}}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,122,122,0.15);padding:12px 24px;box-shadow:0 2px 20px rgba(0,0,0,0.04);}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-small{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);}
+.brand{font-size:1.1rem;font-weight:700;color:var(--primary);}
+.progress-stats{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.stat-badge{padding:4px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;background:rgba(45,106,79,0.06);border:1px solid rgba(45,106,79,0.12);color:var(--dark);}
+.stat-answered{background:rgba(30,122,122,0.06);border-color:rgba(30,122,122,0.15);}
+.stat-correct{background:rgba(82,183,136,0.10);border-color:var(--success);color:var(--primary);}
+.stat-wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.stat-percent{background:rgba(45,106,79,0.08);border-color:var(--primary);color:var(--primary);}
+.progress-bar-container{width:160px;height:5px;background:rgba(45,106,79,0.12);border-radius:3px;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:3px;transition:width 0.3s;}
+.start-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px;}
+.start-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border:1px solid rgba(45,106,79,0.12);border-radius:32px;padding:50px 40px;max-width:640px;width:100%;text-align:center;transition:all 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+.start-card:hover{transform:translateY(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 12px 50px rgba(0,0,0,0.06);}
+.main-logo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(30,122,122,0.2);}50%{box-shadow:0 0 0 15px rgba(30,122,122,0);}}
+.start-card h1{font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:10px;}
+.start-card .sub{color:var(--gray);margin-bottom:25px;}
+.filter-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:25px 0;}
+.filter-btns button{padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.6);border:1px solid rgba(45,106,79,0.10);color:var(--gray);cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.2s;font-weight:500;font-size:0.85rem;}
+.filter-btns button:hover{border-color:var(--primary);color:var(--primary);background:rgba(45,106,79,0.05);}
+.filter-btns button.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:var(--primary);color:white;}
+.q-count{margin:20px 0;color:var(--gray);}
+.q-count span{color:var(--primary);font-weight:700;font-size:1.3rem;}
+.btn-start{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 40px;border-radius:40px;color:white;font-size:1.1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;width:100%;}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.quiz-wrapper{display:none;padding:100px 20px 60px;max-width:900px;margin:0 auto;}
+.section-header{display:flex;align-items:center;gap:12px;margin:30px 0 20px;}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--primary),transparent);}
+.section-line.right{background:linear-gradient(270deg,var(--primary),transparent);}
+.section-title{color:var(--primary);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;background:rgba(45,106,79,0.06);padding:5px 15px;border-radius:20px;}
+.question-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:24px;padding:28px;margin-bottom:20px;border:1px solid rgba(45,106,79,0.08);transition:all 0.3s;box-shadow:0 2px 15px rgba(0,0,0,0.02);}
+.question-card:hover{transform:translateX(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 4px 25px rgba(0,0,0,0.04);}
+.question-card.correct{border-right:4px solid var(--success);background:rgba(82,183,136,0.04);}
+.question-card.wrong{border-right:4px solid var(--error);background:rgba(217,119,119,0.04);}
+.q-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.q-num{background:linear-gradient(135deg,var(--primary),var(--primary-dark));width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;}
+.q-cat{background:rgba(30,122,122,0.08);padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:600;color:var(--secondary);}
+.q-text{font-size:1.05rem;font-weight:500;line-height:1.6;margin-bottom:20px;color:#1a2a2a;}
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{padding:12px 18px;background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.08);border-radius:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-size:0.95rem;color:#1a2a2a;}
+.option::before{content:attr(data-letter);width:30px;height:30px;border-radius:50%;background:rgba(45,106,79,0.06);display:flex;align-items:center;justify-content:center;font-weight:700;transition:all 0.2s;color:var(--primary);}
+.option:hover:not(:disabled){background:rgba(45,106,79,0.04);border-color:var(--primary);transform:translateX(-5px);}
+.option.correct{background:rgba(82,183,136,0.08);border-color:var(--success);color:var(--primary);}
+.option.correct::before{background:var(--success);color:white;}
+.option.wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.option.wrong::before{background:var(--error);color:white;}
+.option:disabled{cursor:default;}
+.feedback{margin-top:16px;padding:12px 16px;border-radius:12px;font-size:0.85rem;display:none;animation:slideDown 0.3s ease;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.feedback.correct{background:rgba(82,183,136,0.06);border-right:3px solid var(--success);color:var(--primary);}
+.feedback.wrong{background:rgba(217,119,119,0.06);border-right:3px solid var(--error);color:#8b5555;}
+.submit-area{text-align:center;margin:30px 0;}
+.btn-submit{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 50px;border-radius:40px;color:white;font-size:1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;}
+.btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;}
+.results-screen{max-width:800px;margin:100px auto 50px;padding:40px;background:rgba(255,255,255,0.90);backdrop-filter:blur(15px);border-radius:32px;border:1px solid rgba(45,106,79,0.10);text-align:center;display:none;animation:zoomIn 0.5s ease;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+@keyframes zoomIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+.results-logo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;}
+.results-screen h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
+.score-circle{width:150px;height:150px;margin:25px auto;position:relative;}
+.score-bg{fill:none;stroke:rgba(45,106,79,0.08);stroke-width:10;}
+.score-fill{fill:none;stroke:url(#scoreGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+.score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.score-big{font-size:2rem;font-weight:800;color:var(--primary);}
+.result-msg{color:var(--gray);margin:15px 0;}
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:25px 0;}
+.result-stat{padding:15px;border-radius:16px;}
+.result-stat.c{background:rgba(82,183,136,0.06);border:1px solid var(--success);}
+.result-stat.w{background:rgba(217,119,119,0.06);border:1px solid var(--error);}
+.result-stat.p{background:rgba(30,122,122,0.06);border:1px solid var(--secondary);}
+.result-stat .num{font-size:1.8rem;font-weight:800;}
+.result-stat.c .num{color:var(--primary);}
+.result-stat.w .num{color:#8b5555;}
+.result-stat.p .num{color:var(--secondary);}
+.result-stat .label{font-size:0.85rem;color:var(--gray);}
+.btn-restart{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:12px 30px;border-radius:40px;color:white;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-home{background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.12);padding:12px 30px;border-radius:40px;color:var(--gray);font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-restart:hover,.btn-home:hover{transform:translateY(-2px);}
+.btn-home:hover{border-color:var(--primary);color:var(--primary);}
+.review-area{text-align:right;margin-top:30px;max-height:300px;overflow-y:auto;}
+.review-area h3{color:var(--primary);margin-bottom:15px;}
+.review-item{background:rgba(217,119,119,0.04);border-right:3px solid var(--error);padding:12px;border-radius:12px;margin-bottom:10px;text-align:right;font-size:0.85rem;}
+.tf-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tf-opt{justify-content:center;font-size:1rem;font-weight:700;padding:18px;}
+.tf-opt[data-letter="T"]::before{background:rgba(82,183,136,0.18);color:var(--success);}
+.tf-opt[data-letter="F"]::before{background:rgba(217,119,119,0.18);color:var(--error);}
+@media (max-width:768px){.start-card{padding:30px 20px;margin:0 15px;}.start-card h1{font-size:1.5rem;}.question-card{padding:18px;}.results-screen{padding:25px;margin:80px 15px 30px;}.results-stats{gap:8px;}.result-stat .num{font-size:1.3rem;}.stat-badge{font-size:0.7rem;padding:3px 8px;}.progress-bar-container{width:100px;}}
+@media (max-width:480px){.tf-options{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/40?text=ADGad'">
+            <span class="brand">A.D.Gad</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container"><div class="progress-bar" id="progressFill" style="width: 0%"></div></div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/100?text=ADGad'">
+        <h1>A.D.Gad | Parasitology</h1>
+        <p class="sub">🔬 General Concepts + Protozoa + Amoebae</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="general">🌍 General Concepts</button>
+            <button data-cat="protozoa">🦠 Introduction to Protozoa</button>
+            <button data-cat="freeliving">🧫 Free Living Amoeba</button>
+            <button data-cat="entamoeba">💧 E. histolytica</button>
+            <button data-cat="truefalse">✔️ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of Questions: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/80?text=ADGad'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="75" cy="75" r="60"/>
+            <circle class="score-fill" id="scoreFill" cx="75" cy="75" r="60" stroke-dasharray="377" stroke-dashoffset="377"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.7rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D', 'E'];
+const CATS = {
+    general: '🌍 General Concepts of Parasitology',
+    protozoa: '🦠 Introduction to Protozoa',
+    freeliving: '🧫 Free Living Amoeba',
+    entamoeba: '💧 Entamoeba histolytica',
+    truefalse: '✔️ True / False'
+};
+
+const ALL = [
+    // ===== General Concepts of Parasitology - MCQ =====
+    {cat:'general',q:"Which type of parasite capability allows it to produce disease specifically in an immunocompromised host?",opts:["Ectoparasite","Endoparasite","Opportunistic parasite","Permanent parasite"],c:2,exp:"Opportunistic parasite — e.g., Toxoplasma gondii."},
+    {cat:'general',q:"An organism in which a parasite reaches its sexual maturity (adult stage) is defined as the:",opts:["Intermediate host","Definitive host","Paratenic host","Reservoir host"],c:1,exp:"Definitive host = where sexual maturity occurs."},
+    {cat:'general',q:"Which mode of parasitic disease transmission occurs when a parasite is transferred transplacentally from mother to fetus?",opts:["Autoinfection","Contact transmission","Congenital transmission","Iatrogenic infection"],c:2,exp:"Congenital transmission."},
+    {cat:'general',q:"Entamoeba histolytica causes tissue destruction through which of the following pathological mechanisms?",opts:["Physical obstruction","Lytic necrosis","Neoplasm","Allergic reaction"],c:1,exp:"Lytic necrosis via lytic enzymes."},
+    {cat:'general',q:"A host that harbors a parasite in an arrested state of development while keeping it viable and ready to infect a subsequent host is called a:",opts:["Dead-end host","Paratenic host","Reservoir host","Vector"],c:1,exp:"Paratenic host."},
+    {cat:'general',q:"Which biological interaction describes an association where both organisms benefit, but neither is dependent on the other for survival?",opts:["Commensalism","Mutualism","Symbiosis","Parasitism"],c:1,exp:"Mutualism."},
+    {cat:'general',q:"Infections naturally transmitted mainly in animals that may secondarily be acquired by humans are termed:",opts:["Anthroponosis","Zooanthroponosis","Anthropozoonosis","Saprozoonosis"],c:2,exp:"Anthropozoonosis."},
+    {cat:'general',q:"Which parasite exhibits a facultative parasitic life cycle (able to live free-living or parasitic)?",opts:["Ascaris","Naegleria fowleri","Human louse","Toxoplasma gondii"],c:1,exp:"Naegleria fowleri."},
+    {cat:'general',q:"Infection transmitted through non-animal environmental sites such as food, soil, water, or plants is classified as:",opts:["Direct zoonosis","Metazoonosis","Saprozoonosis","Sylvatic zoonosis"],c:2,exp:"Saprozoonosis."},
+    {cat:'general',q:"Schistosoma haematobium infection is clinically associated with which type of pathological outcome?",opts:["Neoplasm (Malignancy)","Mechanical trauma","Lytic necrosis","Physical obstruction"],c:0,exp:"Bladder malignancy."},
+
+    // ===== Introduction to Protozoa - MCQ =====
+    {cat:'protozoa',q:"Which of the following structures in a protozoan cell is mainly responsible for food ingestion, excretion, and respiration?",opts:["Endoplasm","Ectoplasm","Karyosome","Chromatoide bodies"],c:1,exp:"Ectoplasm."},
+    {cat:'protozoa',q:"What is the typical size range of protozoa?",opts:["1 - 150 µm","10 - 500 µm","0.1 - 10 µm","1 - 15 mm"],c:0,exp:"1 - 150 µm."},
+    {cat:'protozoa',q:"Which protozoan parasite lacks specialized organelles for locomotion?",opts:["Entamoeba","Balantidium","Giardia","Plasmodium"],c:3,exp:"Plasmodium."},
+    {cat:'protozoa',q:"The inner, granular portion of the cytoplasm responsible for nutrition and reproduction is the:",opts:["Ectoplasm","Endoplasm","Cytostome","Cytopyge"],c:1,exp:"Endoplasm."},
+    {cat:'protozoa',q:"Which of the following belongs to the Subphylum Mastigophora?",opts:["Entamoeba histolytica","Giardia lamblia","Balantidium coli","Plasmodium falciparum"],c:1,exp:"Giardia = Mastigophora."},
+    {cat:'protozoa',q:"Multiple fission in protozoa, where the nucleus divides several times before cytoplasm division, is known as:",opts:["Binary fission","Schizogony (Merogony)","Gametogony","Syngamy"],c:1,exp:"Schizogony."},
+    {cat:'protozoa',q:"The central DNA-containing body located within the nucleus of a protozoan cell is called the:",opts:["Cytostome","Karyosome (Endosome)","Cytopyge","Chromatoide body"],c:1,exp:"Karyosome."},
+    {cat:'protozoa',q:"Undigested food particles in ciliated protozoa are extruded through a specific cell structure known as the:",opts:["Pseudopodium","Cytostome","Cytopyge","Karyosome"],c:2,exp:"Cytopyge."},
+    {cat:'protozoa',q:"In complex life cycles of protozoa, sexual reproduction (gametogony) typically occurs:",opts:["In all intermediate hosts simultaneously","In one host, while asexual reproduction occurs in another host","Exclusively outside any host environment","Without any nuclear division"],c:1,exp:"Sexual in one host, asexual in another."},
+    {cat:'protozoa',q:"Intestinal and luminal protozoa generally have a simple life cycle that requires:",opts:["Two arthropod vectors","Only one host","Both a vertebrate and invertebrate host","Snails as intermediate hosts"],c:1,exp:"Only one host."},
+
+    // ===== Free Living Amoeba - MCQ =====
+    {cat:'freeliving',q:"The flagellated form of Naegleria fowleri has:",opts:["One long flagellum","2 long equal flagella","Multiple small flagella","No flagella"],c:1,exp:"2 long equal flagella."},
+    {cat:'freeliving',q:"Which stage of Naegleria fowleri is found ONLY in soil?",opts:["Amoeboid trophozoite","Flagellated form","Cyst","All of the above"],c:2,exp:"Cyst only in soil."},
+    {cat:'freeliving',q:"Naegleria fowleri causes which of the following clinical conditions?",opts:["Granulomatous Amoebic Encephalitis (GAE)","Primary Amoebic Meningoencephalitis (PAM)","Amoebic keratitis","Cutaneous leishmaniasis"],c:1,exp:"PAM."},
+    {cat:'freeliving',q:"The mode of infection for Naegleria fowleri is mainly through:",opts:["Ingestion of contaminated food","Skin contact with soil","Nasal route during swimming or sniffing contaminated water","Insect vector bites"],c:2,exp:"Nasal route."},
+    {cat:'freeliving',q:"Which culture medium is used for culturing free-living amoebae like Naegleria and Acanthamoeba?",opts:["Blood agar","MacConkey agar","Non-nutrient agar (NNA) with E. coli","Chocolate agar"],c:2,exp:"NNA with E. coli."},
+    {cat:'freeliving',q:"The trophozoite stage of Acanthamoeba is characterized by having:",opts:["2 long flagella","Multiple small spiky pseudopodia (Acanthopodia)","A single polar flagellum","A cilia-covered outer surface"],c:1,exp:"Acanthopodia."},
+    {cat:'freeliving',q:"Which of the following is considered an infective stage of Acanthamoeba?",opts:["Trophozoite only","Cyst only","Both Trophozoite and Cyst","Flagellated form only"],c:2,exp:"Both Trophozoite and Cyst."},
+    {cat:'freeliving',q:"Acanthamoeba can cause infection in the eye leading to:",opts:["Primary Amoebic Meningoencephalitis","Amoebic Keratitis","Conjunctivitis with purulent discharge","Cataracts"],c:1,exp:"Amoebic keratitis."},
+    {cat:'freeliving',q:"In humans, Acanthamoeba can inhabit all of the following EXCEPT:",opts:["Central Nervous System (CNS)","Eye","Lungs and Skin","Red Blood Cells (RBCs)"],c:3,exp:"Does not infect RBCs."},
+    {cat:'freeliving',q:"Photophobia, stiff neck, and seizures are symptoms associated with:",opts:["Stage I of Naegleria fowleri infection","Stage II of Naegleria fowleri infection","Mild skin irritation","Early stage of eye irritation"],c:1,exp:"Stage II."},
+
+    // ===== Entamoeba histolytica - MCQ =====
+    {cat:'entamoeba',q:"Which stage of Entamoeba histolytica is the infective stage?",opts:["Trophozoite","Precyst","Mature (quadrinucleated) cyst","Immature cyst"],c:2,exp:"Mature (quadrinucleated) cyst."},
+    {cat:'entamoeba',q:"How many nuclei does the mature cyst of E. histolytica contain?",opts:["1","2","4","8"],c:2,exp:"4 nuclei."},
+    {cat:'entamoeba',q:"What is the average size of the E. histolytica trophozoite?",opts:["5 – 10 μ","15 μ","20 – 30 μ","50 – 60 μ"],c:2,exp:"20 – 30 μ."},
+    {cat:'entamoeba',q:"Which of the following is a reservoir host of E. histolytica?",opts:["Cattle","Cats, dogs and rats","Mosquitoes","Birds"],c:1,exp:"Cats, dogs and rats."},
+    {cat:'entamoeba',q:"Which stage is detected in FORMED stool?",opts:["Trophozoite","Cyst","Metacystic trophozoite","Precyst only"],c:1,exp:"Cyst."},
+    {cat:'entamoeba',q:"The nucleus of the trophozoite is characterized by:",opts:["Multiple nuclei with no karyosome","Single, rounded, with a karyosome and peripheral chromatin granules","Two nuclei with a large central karyosome","No visible nucleus"],c:1,exp:"Single rounded with karyosome and peripheral chromatin."},
+    {cat:'entamoeba',q:"Which of the following is a feature of the ACUTE stage of intestinal amoebiasis?",opts:["Tenesmus","Hemoptysis","Tender hepatomegaly","Constipation alternating with light dysentery"],c:0,exp:"Tenesmus."},
+    {cat:'entamoeba',q:"Which of the following is a manifestation of pulmonary amoebiasis?",opts:["Tenesmus","Hemoptysis","Tender hepatomegaly","Bloody diarrhea"],c:1,exp:"Hemoptysis."},
+    {cat:'entamoeba',q:"Which of the following is an INDIRECT method of diagnosis?",opts:["Stool examination for cysts","Sputum examination","Detection of amoebic antibodies by ELISA","Examination of aspirated liver pus"],c:2,exp:"ELISA (indirect)."},
+    {cat:'entamoeba',q:"Raw vegetables should be treated with vinegar for how long before consumption?",opts:["5 minutes","10 minutes","30 minutes","2 hours"],c:2,exp:"30 minutes."},
+
+    // ===== True / False - General Concepts =====
+    {cat:'truefalse',isTF:true,q:"The diagnostic stage of a parasite is the stage capable of entering and infecting the human body.",c:1,exp:"False — that is the infective stage."},
+    {cat:'truefalse',isTF:true,q:"Lice are classified as ectoparasites and permanent parasites.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Mosquitoes act as temporary parasites because they visit the host from time to time for feeding.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"A reservoir host is an animal host that harbors the same stages of the parasite as humans and serves as a source of infection.",c:0,exp:"True."},
+        {cat:'truefalse',isTF:true,q:"In commensalism, both the parasite and the host derive mutual benefits from each other.",c:1,exp:"False — only the parasite benefits."},
+    {cat:'truefalse',isTF:true,q:"Symbiosis is an association where both host and parasite are so interdependent that neither can survive without the other, and neither suffers harm.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Physical obstruction of luminal organs can be caused by a mass of collected Ascaris worms.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Iatrogenic parasitic transmission occurs through drinking contaminated water.",c:1,exp:"False — iatrogenic occurs via medical procedures like blood transfusion."},
+    {cat:'truefalse',isTF:true,q:"Sylvatic zoonosis refers to zoonotic infections where the primary source of infection comes from man's own pet animals.",c:1,exp:"False — sylvatic = wild animals; pets relate to domestic zoonosis."},
+    {cat:'truefalse',isTF:true,q:"Metazoonosis requires invertebrate vectors (such as arthropods) for transmission to hosts.",c:0,exp:"True."},
+
+    // ===== True / False - Introduction to Protozoa =====
+    {cat:'truefalse',isTF:true,q:"Protozoa are multicellular organisms that always live in large colonies.",c:1,exp:"False — protozoa are unicellular."},
+    {cat:'truefalse',isTF:true,q:"The ectoplasm gives rise to locomotion structures such as pseudopodia, cilia, and flagella.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The male cell in sexual reproduction of protozoa is termed the macrogamete.",c:1,exp:"False — male = microgamete; female = macrogamete."},
+    {cat:'truefalse',isTF:true,q:"Protozoa can perform excretion through contractile vacuoles, diffusion, and osmotic pressure.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Balantidium moves by means of pseudopodia.",c:1,exp:"False — Balantidium moves by cilia."},
+    {cat:'truefalse',isTF:true,q:"Simple binary fission can occur either longitudinally or transversely to form two organisms.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Protozoan cells are capable of secreting substances such as cyst walls, cytolysins, and digestive enzymes.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The subphylum Sarcodina includes organisms that move using flagella, such as Giardia.",c:1,exp:"False — Sarcodina = amoebae (pseudopodia); Mastigophora = flagellates."},
+    {cat:'truefalse',isTF:true,q:"Protozoa respiration can occur via direct uptake of oxygen or using oxygen liberated from metabolic processes.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Contractile vacuoles and chromatoide bodies are typically located within the endoplasm.",c:0,exp:"True."},
+
+    // ===== True / False - Free Living Amoeba =====
+    {cat:'truefalse',isTF:true,q:"Naegleria fowleri reproduces by simple binary fission.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The cyst stage of Naegleria fowleri can be found in the Central Nervous System (CNS) and CSF of infected humans.",c:1,exp:"False — cysts found only in soil; only trophozoites/flagellated forms in CSF/CNS."},
+    {cat:'truefalse',isTF:true,q:"Acanthamoeba is classified as an opportunistic parasite.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Direct invasion through skin ulcers is one of the modes of transmission for Acanthamoeba.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Naegleria fowleri flagellated forms have an elongated shape with broad anterior and tapering posterior ends.",c:1,exp:"False — that describes the amoeboid form; flagellated form is pear-shaped."},
+    {cat:'truefalse',isTF:true,q:"Granulomatous Amoebic Encephalitis (GAE) is caused by Acanthamoeba.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Microscopic examination of CSF obtained by lumbar puncture is used in the diagnosis of Naegleria fowleri.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The cyst stage of Acanthamoeba has a single-layered wall.",c:1,exp:"False — it has a double wall."},
+    {cat:'truefalse',isTF:true,q:"Proper care of contact lenses and using proper lens fluid helps prevent Acanthamoeba infection.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Adequate chlorination of swimming pools is a preventive measure against Naegleria fowleri.",c:0,exp:"True."},
+
+    // ===== True / False - Entamoeba histolytica =====
+    {cat:'truefalse',isTF:true,q:"The trophozoite is the active invasive form and feeds on starch and mucus in the colon lumen (E. histolytica).",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The cyst of E. histolytica is rounded, thick-walled, with an average size of 15 μ.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The mature cyst of E. histolytica contains 8 nuclei.",c:1,exp:"False — 4 nuclei."},
+    {cat:'truefalse',isTF:true,q:"The trophozoite of E. histolytica reproduces by binary fission.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Man is the definitive host of E. histolytica.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Cysts are detected in diarrheic (fluid) stool, while trophozoites are detected in formed stool.",c:1,exp:"False — reverse: trophozoites in fluid, cysts in formed."},
+    {cat:'truefalse',isTF:true,q:"In asymptomatic infection, the parasite lives in the intestinal lumen as a commensal and cysts may be found in the stool.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"Fever is a common feature of acute intestinal amoebiasis.",c:1,exp:"False — fever is uncommon in acute intestinal stage."},
+    {cat:'truefalse',isTF:true,q:"Amoebic liver abscess presents with tender hepatomegaly, fever and pus.",c:0,exp:"True."},
+    {cat:'truefalse',isTF:true,q:"The infective stage of E. histolytica is the trophozoite.",c:1,exp:"False — infective stage is the mature cyst."}
+];
+
+// إعادة ترقيم كل الأسئلة تلقائياً
+ALL.forEach((q, i) => { q.n = i + 1; });
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// إنشاء الجزيئات المتحركة
+for(let i = 0; i < 40; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 5 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 20 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// فلترة الفئات
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        const filtered = currentCategory === 'all' ? ALL : ALL.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+document.getElementById('totalQ').textContent = ALL.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...ALL] : ALL.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+    updateStats();
+    renderQuestions();
+    window.scrollTo(0, 0);
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        if (lastCat !== q.cat) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${CATS[q.cat]}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = q.cat;
+        }
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (q.isTF) {
+            optsHtml = `
+                <div class="option tf-opt" data-letter="T" data-opt="0" onclick="selectAnswer(${idx}, 0)">True ✔️</div>
+                <div class="option tf-opt" data-letter="F" data-opt="1" onclick="selectAnswer(${idx}, 1)">False ✖️</div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+        }
+
+        card.innerHTML = `
+            <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
+            <div class="q-text">${q.q}</div>
+            <div class="options ${q.isTF ? 'tf-options' : ''}" id="opts-${idx}">${optsHtml}</div>
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) opt.classList.add('correct');
+        else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) opt.classList.add('wrong');
+    });
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    if (q.isTF) {
+        const correctLabel = q.c === 0 ? 'True ✔️' : 'False ✖️';
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer is: <b>${correctLabel}</b><br>📖 ${q.exp}`;
+    } else {
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+    }
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) correctCount++; else wrongCount++;
+    answeredCount++;
+    updateStats();
+    if (answeredCount === currentQuestions.length) document.getElementById('submitBtn').disabled = false;
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+    const circumference = 377;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            let correctText = q.isTF ? (q.c === 0 ? 'True ✔️' : 'False ✖️') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctText}<br>
+                    <span style="font-size:0.8rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>`;
+        }
+    });
+    if (!hasWrong) reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+    window.scrollTo(0, 0);
+}
+
+function restartQuiz() { startQuiz(); }
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
