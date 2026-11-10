@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.D.Gad | Medical Equipment Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --primary:#2d6a4f;--primary-light:#52b788;--primary-dark:#1b4332;--secondary:#1e7a7a;--secondary-light:#3d9e9e;--tertiary:#a8d5ba;--dark:#1a2a2a;--gray:#9ab0aa;--success:#52b788;--error:#d97777; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(145deg,#e8f0ee 0%,#d4e4df 40%,#c5d9d3 100%);color:#1a2a2a;min-height:100vh;overflow-x:hidden;}
+.hero-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 40%,rgba(45,106,79,0.06) 0%,rgba(200,220,215,0.95) 70%);z-index:-1;}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1;}
+.particle{position:absolute;background:rgba(45,106,79,0.08);border-radius:50%;pointer-events:none;animation:floatParticle 25s infinite linear;}
+@keyframes floatParticle{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:0.2;}90%{opacity:0.2;}100%{transform:translateY(-100vh) rotate(720deg);opacity:0;}}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,122,122,0.15);padding:12px 24px;box-shadow:0 2px 20px rgba(0,0,0,0.04);}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-small{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);}
+.brand{font-size:1.1rem;font-weight:700;color:var(--primary);}
+.progress-stats{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.stat-badge{padding:4px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;background:rgba(45,106,79,0.06);border:1px solid rgba(45,106,79,0.12);color:var(--dark);}
+.stat-answered{background:rgba(30,122,122,0.06);border-color:rgba(30,122,122,0.15);}
+.stat-correct{background:rgba(82,183,136,0.10);border-color:var(--success);color:var(--primary);}
+.stat-wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.stat-percent{background:rgba(45,106,79,0.08);border-color:var(--primary);color:var(--primary);}
+.progress-bar-container{width:160px;height:5px;background:rgba(45,106,79,0.12);border-radius:3px;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:3px;transition:width 0.3s;}
+.start-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px;}
+.start-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border:1px solid rgba(45,106,79,0.12);border-radius:32px;padding:50px 40px;max-width:640px;width:100%;text-align:center;transition:all 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+.start-card:hover{transform:translateY(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 12px 50px rgba(0,0,0,0.06);}
+.main-logo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(30,122,122,0.2);}50%{box-shadow:0 0 0 15px rgba(30,122,122,0);}}
+.start-card h1{font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:10px;}
+.start-card .sub{color:var(--gray);margin-bottom:25px;}
+.filter-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:25px 0;}
+.filter-btns button{padding:8px 18px;border-radius:30px;background:rgba(255,255,255,0.6);border:1px solid rgba(45,106,79,0.10);color:var(--gray);cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.2s;font-weight:500;font-size:0.85rem;}
+.filter-btns button:hover{border-color:var(--primary);color:var(--primary);background:rgba(45,106,79,0.05);}
+.filter-btns button.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:var(--primary);color:white;}
+.q-count{margin:20px 0;color:var(--gray);}
+.q-count span{color:var(--primary);font-weight:700;font-size:1.3rem;}
+.btn-start{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 40px;border-radius:40px;color:white;font-size:1.1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;width:100%;}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.quiz-wrapper{display:none;padding:100px 20px 60px;max-width:900px;margin:0 auto;}
+.section-header{display:flex;align-items:center;gap:12px;margin:30px 0 20px;}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--primary),transparent);}
+.section-line.right{background:linear-gradient(270deg,var(--primary),transparent);}
+.section-title{color:var(--primary);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;background:rgba(45,106,79,0.06);padding:5px 15px;border-radius:20px;}
+.question-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:24px;padding:28px;margin-bottom:20px;border:1px solid rgba(45,106,79,0.08);transition:all 0.3s;box-shadow:0 2px 15px rgba(0,0,0,0.02);}
+.question-card:hover{transform:translateX(-5px);border-color:var(--secondary);background:rgba(255,255,255,0.92);box-shadow:0 4px 25px rgba(0,0,0,0.04);}
+.question-card.correct{border-right:4px solid var(--success);background:rgba(82,183,136,0.04);}
+.question-card.wrong{border-right:4px solid var(--error);background:rgba(217,119,119,0.04);}
+.q-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.q-num{background:linear-gradient(135deg,var(--primary),var(--primary-dark));width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;}
+.q-cat{background:rgba(30,122,122,0.08);padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:600;color:var(--secondary);}
+.q-text{font-size:1.05rem;font-weight:500;line-height:1.6;margin-bottom:20px;color:#1a2a2a;}
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{padding:12px 18px;background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.08);border-radius:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-size:0.95rem;color:#1a2a2a;}
+.option::before{content:attr(data-letter);width:30px;height:30px;border-radius:50%;background:rgba(45,106,79,0.06);display:flex;align-items:center;justify-content:center;font-weight:700;transition:all 0.2s;color:var(--primary);}
+.option:hover:not(:disabled){background:rgba(45,106,79,0.04);border-color:var(--primary);transform:translateX(-5px);}
+.option.correct{background:rgba(82,183,136,0.08);border-color:var(--success);color:var(--primary);}
+.option.correct::before{background:var(--success);color:white;}
+.option.wrong{background:rgba(217,119,119,0.08);border-color:var(--error);color:#8b5555;}
+.option.wrong::before{background:var(--error);color:white;}
+.option:disabled{cursor:default;}
+.feedback{margin-top:16px;padding:12px 16px;border-radius:12px;font-size:0.85rem;display:none;animation:slideDown 0.3s ease;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.feedback.correct{background:rgba(82,183,136,0.06);border-right:3px solid var(--success);color:var(--primary);}
+.feedback.wrong{background:rgba(217,119,119,0.06);border-right:3px solid var(--error);color:#8b5555;}
+.submit-area{text-align:center;margin:30px 0;}
+.btn-submit{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:14px 50px;border-radius:40px;color:white;font-size:1rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all 0.3s;}
+.btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 25px rgba(45,106,79,0.25);}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;}
+.results-screen{max-width:800px;margin:100px auto 50px;padding:40px;background:rgba(255,255,255,0.90);backdrop-filter:blur(15px);border-radius:32px;border:1px solid rgba(45,106,79,0.10);text-align:center;display:none;animation:zoomIn 0.5s ease;box-shadow:0 8px 40px rgba(0,0,0,0.04);}
+@keyframes zoomIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+.results-logo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--secondary);margin-bottom:20px;}
+.results-screen h2{color:var(--primary);font-size:2rem;margin-bottom:10px;}
+.score-circle{width:150px;height:150px;margin:25px auto;position:relative;}
+.score-bg{fill:none;stroke:rgba(45,106,79,0.08);stroke-width:10;}
+.score-fill{fill:none;stroke:url(#scoreGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+.score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.score-big{font-size:2rem;font-weight:800;color:var(--primary);}
+.result-msg{color:var(--gray);margin:15px 0;}
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:25px 0;}
+.result-stat{padding:15px;border-radius:16px;}
+.result-stat.c{background:rgba(82,183,136,0.06);border:1px solid var(--success);}
+.result-stat.w{background:rgba(217,119,119,0.06);border:1px solid var(--error);}
+.result-stat.p{background:rgba(30,122,122,0.06);border:1px solid var(--secondary);}
+.result-stat .num{font-size:1.8rem;font-weight:800;}
+.result-stat.c .num{color:var(--primary);}
+.result-stat.w .num{color:#8b5555;}
+.result-stat.p .num{color:var(--secondary);}
+.result-stat .label{font-size:0.85rem;color:var(--gray);}
+.btn-restart{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;padding:12px 30px;border-radius:40px;color:white;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-home{background:rgba(255,255,255,0.5);border:1px solid rgba(45,106,79,0.12);padding:12px 30px;border-radius:40px;color:var(--gray);font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;margin:10px 5px;transition:all 0.3s;}
+.btn-restart:hover,.btn-home:hover{transform:translateY(-2px);}
+.btn-home:hover{border-color:var(--primary);color:var(--primary);}
+.review-area{text-align:right;margin-top:30px;max-height:300px;overflow-y:auto;}
+.review-area h3{color:var(--primary);margin-bottom:15px;}
+.review-item{background:rgba(217,119,119,0.04);border-right:3px solid var(--error);padding:12px;border-radius:12px;margin-bottom:10px;text-align:right;font-size:0.85rem;}
+.tf-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tf-opt{justify-content:center;font-size:1rem;font-weight:700;padding:18px;}
+.tf-opt[data-letter="T"]::before{background:rgba(82,183,136,0.18);color:var(--success);}
+.tf-opt[data-letter="F"]::before{background:rgba(217,119,119,0.18);color:var(--error);}
+@media (max-width:768px){.start-card{padding:30px 20px;margin:0 15px;}.start-card h1{font-size:1.5rem;}.question-card{padding:18px;}.results-screen{padding:25px;margin:80px 15px 30px;}.results-stats{gap:8px;}.result-stat .num{font-size:1.3rem;}.stat-badge{font-size:0.7rem;padding:3px 8px;}.progress-bar-container{width:100px;}}
+@media (max-width:480px){.tf-options{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+<div class="particles" id="particles"></div>
+
+<nav class="navbar" id="navbar" style="display: none;">
+    <div class="nav-container">
+        <div class="logo-area">
+            <img src="images/logo.png" class="logo-small" onerror="this.src='https://via.placeholder.com/40?text=ADGad'">
+            <span class="brand">A.D.Gad</span>
+        </div>
+        <div class="progress-stats">
+            <span class="stat-badge stat-answered" id="statAnswered">0/0</span>
+            <span class="stat-badge stat-correct" id="statCorrect">✅ 0</span>
+            <span class="stat-badge stat-wrong" id="statWrong">❌ 0</span>
+            <span class="stat-badge stat-percent" id="statPercent">📊 0%</span>
+            <div class="progress-bar-container"><div class="progress-bar" id="progressFill" style="width: 0%"></div></div>
+        </div>
+    </div>
+</nav>
+
+<div class="start-screen" id="startScreen">
+    <div class="start-card">
+        <img src="images/logo.png" class="main-logo" onerror="this.src='https://via.placeholder.com/100?text=ADGad'">
+        <h1>A.D.Gad | Medical Equipment</h1>
+        <p class="sub">🩺 أجهزة طبية — MCQ + True/False</p>
+        <div class="filter-btns" id="filterBtns">
+            <button class="active" data-cat="all">📚 All</button>
+            <button data-cat="ecg">❤️ ECG & Electrodes</button>
+            <button data-cat="anesthesia">💨 Anesthesia Machine</button>
+            <button data-cat="equipment">🩺 Equipment Types</button>
+            <button data-cat="oximetry">🫁 Pulse Oximetry</button>
+            <button data-cat="truefalse">✔️ True/False</button>
+        </div>
+        <div class="q-count">📋 Number of Questions: <span id="totalQ">0</span></div>
+        <button class="btn-start" id="startBtn">▶ Start Quiz</button>
+    </div>
+</div>
+
+<div class="quiz-wrapper" id="quizWrapper">
+    <div id="questionsContainer"></div>
+    <div class="submit-area">
+        <button class="btn-submit" id="submitBtn" disabled>🎯 Show Results</button>
+    </div>
+</div>
+
+<div class="results-screen" id="resultsScreen">
+    <img src="images/logo.png" class="results-logo" onerror="this.src='https://via.placeholder.com/80?text=ADGad'">
+    <h2>🏆 Quiz Completed!</h2>
+    <div class="score-circle">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+            <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6a4f"/><stop offset="100%" stop-color="#1e7a7a"/></linearGradient></defs>
+            <circle class="score-bg" cx="75" cy="75" r="60"/>
+            <circle class="score-fill" id="scoreFill" cx="75" cy="75" r="60" stroke-dasharray="377" stroke-dashoffset="377"/>
+        </svg>
+        <div class="score-text">
+            <div class="score-big" id="finalScore">0</div>
+            <div style="font-size: 0.7rem;">out of <span id="finalTotal">0</span></div>
+        </div>
+    </div>
+    <div id="resultMessage" class="result-msg"></div>
+    <div class="results-stats">
+        <div class="result-stat c"><div class="num" id="resultCorrect">0</div><div class="label">✅ Correct</div></div>
+        <div class="result-stat w"><div class="num" id="resultWrong">0</div><div class="label">❌ Wrong</div></div>
+        <div class="result-stat p"><div class="num" id="resultPercent">0%</div><div class="label">📊 Percentage</div></div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+    <button class="btn-home" onclick="goHome()">🏠 Home</button>
+    <div class="review-area" id="reviewArea"></div>
+</div>
+
+<script>
+const L = ['A', 'B', 'C', 'D', 'E'];
+const CATS = {
+    ecg: '❤️ ECG & Electrodes',
+    anesthesia: '💨 Anesthesia Machine',
+    equipment: '🩺 Equipment Types',
+    oximetry: '🫁 Pulse Oximetry',
+    truefalse: '✔️ True / False'
+};
+
+const ALL = [
+    // ===== MCQ =====
+    {cat:'ecg',q:"Is the process of recording the electrical activity of the heart over a period of time using electrodes placed on the skin:",opts:["Electroencephalograph","Electromyograph","Electrotensinograph","Electrocardiograph"],c:3,exp:"Electrocardiograph (ECG)."},
+    {cat:'equipment',q:"ECG, EEG, X-ray machines, CT, MRI machines are types of Equipment:",opts:["Therapeutic","Diagnostics","None","Life support"],c:1,exp:"Diagnostics equipment."},
+    {cat:'oximetry',q:"Measures the amount of light that passes through the tissue as in a finger probe:",opts:["Reflectance","Transmittance"],c:1,exp:"Transmittance."},
+    {cat:'ecg',q:"The normal heart rate of a human being is ___ beats per minute:",opts:["72","200","1000","1"],c:0,exp:"72 bpm."},
+    {cat:'anesthesia',q:"All of the following medical gases are used in anesthesia machine except:",opts:["Oxygen","Nitrous oxide","Medical air","Carbon dioxide"],c:3,exp:"CO₂ is not used as a gas in anesthesia machine."},
+    {cat:'ecg',q:"The electrical signal passes between the atria and ventricles through a group of cells called the:",opts:["(SA) node","(AV) node","Heart fiber","Atria"],c:1,exp:"AV node."},
+    {cat:'anesthesia',q:"All of them are functions of Anesthesia Machine except:",opts:["Provides O2","Mixes anesthetic gases and vapors","Organize heart pump","Enables patient ventilation"],c:2,exp:"Anesthesia machine does not organize heart pump."},
+    {cat:'anesthesia',q:"Allows anesthetic to provide measured amount of oxygen to the patient:",opts:["Manometer","Pulse oximeter","Anesthesia","Flowmeter"],c:3,exp:"Flowmeter."},
+    {cat:'anesthesia',q:"This supplies O2 in an emergency directly from the high pressure circuit and it is pure O2:",opts:["Flowmeter","Vaporizer","O2 flush","All of them"],c:2,exp:"O2 flush."},
+    {cat:'ecg',q:"Is a conductive pad in contact with the body that makes an electrical circuit with the ECG:",opts:["Rubber","Earth","Electrode","Strap"],c:2,exp:"Electrode."},
+    {cat:'ecg',q:"The leads used in an ECG machine can be divided into all of the following except:",opts:["Limb leads","Augmented limb leads","Chest leads","Head lead"],c:3,exp:"There is no head lead."},
+    {cat:'anesthesia',q:"Vaporizer is the device which produces a vapor from a volatile liquid anesthetic. Halogenated anesthetics include:",opts:["Silver & silver chloride","Isoflurane and sevoflurane","Sulfate & phosphate","None"],c:1,exp:"Isoflurane and sevoflurane."},
+    {cat:'anesthesia',q:"In anesthesia machine excess gas is discharged through the:",opts:["Soda lime","Vaporizer","APL valve","O2 flowmeter"],c:2,exp:"APL valve."},
+    {cat:'anesthesia',q:"Deliver fresh gas from a compressed gas source during each inspiration, and discharge all exhaled gas into the room:",opts:["Anesthesia","Ventilators","Vaporizer","Oximetry"],c:1,exp:"Ventilators."},
+    {cat:'equipment',q:"All are types of laboratory equipment except:",opts:["Sample separation","Microscopy","Hematology","X-ray"],c:3,exp:"X-ray is imaging/diagnostic, not lab equipment."},
+    {cat:'anesthesia',q:"Absorption of carbon dioxide from the patient breathing circuit in anesthesia machine:",opts:["Soda lime","Vaporizer","APL","O2 flowmeter"],c:0,exp:"Soda lime."},
+    {cat:'oximetry',q:"Infrared light is in the wavelength:",opts:["660 nm","900-940 nm","200 nm","1200 nm"],c:1,exp:"900-940 nm (infrared)."},
+    {cat:'anesthesia',q:"Is/are the used mode of ventilation during general anesthesia:",opts:["VCV & PCV","SIMV","CPAP","IPAP"],c:0,exp:"VCV & PCV."},
+    {cat:'ecg',q:"ECG can be detected using ___ electrode(s):",opts:["3","5","10","All"],c:3,exp:"All of them (3, 5, 10)."},
+    {cat:'ecg',q:"In ECG electrode functions solely as a ground to prevent alternating-current interference:",opts:["RA","LA","RL","LL"],c:2,exp:"RL (Right Leg) = ground."},
+    {cat:'ecg',q:"The most common electrode used for an ECG machine is the ___ electrode because it is stable when exposed to biological tissue:",opts:["Fi FiCl","Na NaCl","Si SiCl","Ag AgCl"],c:3,exp:"Ag/AgCl."},
+    {cat:'equipment',q:"Endoscopes, machines are types of:",opts:["Therapeutic Equipment only","Diagnostics Equipment only","Diagnostics & Therapeutic Equipment","Life support Equipment"],c:2,exp:"Both diagnostic and therapeutic."},
+    {cat:'ecg',q:"Electrocardiographs record small voltages of about ___ that appear on the skin as a result of cardiac activity:",opts:["1 mV","1 V","1 kV","10 V"],c:0,exp:"About 1 mV."},
+    {cat:'anesthesia',q:"Cylinder sizes are designated according to letters, which one is common:",opts:["Size M","Size V","Size B","Size E"],c:3,exp:"Size E is common."},
+    {cat:'oximetry',q:"Is a noninvasive method for monitoring a person's oxygen saturation:",opts:["ESU","EEG","ECG","SPO2"],c:3,exp:"SPO2 (pulse oximetry)."},
+    {cat:'oximetry',q:"Oximetry probe placement at all of the following except:",opts:["Finger","Earlobe","Heel (neonates)","Head"],c:3,exp:"Head is not a typical site."},
+
+    // ===== True / False =====
+    {cat:'truefalse',isTF:true,q:"Having cold hands or poor circulation is one of the limitations for pulse oximetry.",c:0,exp:"True (I)."},
+    {cat:'truefalse',isTF:true,q:"The vaporizer is graduated in percent concentrations.",c:0,exp:"True (I)."},
+    {cat:'truefalse',isTF:true,q:"Pulse oximetry tells us SPO2, pulse rate and carbon dioxide concentration.",c:1,exp:"False (E) — it measures SPO2 and pulse rate only."},
+    {cat:'truefalse',isTF:true,q:"EEG diagnoses and assists in treating heart disease and arrhythmias.",c:1,exp:"False (E) — that's ECG, not EEG."},
+    {cat:'truefalse',isTF:true,q:"Direct coupling occurs when the active electrode touches another metal instrument.",c:0,exp:"True (I)."},
+    {cat:'truefalse',isTF:true,q:"The ESU converts electrical energy drawn from the mains supply to a high frequency current.",c:0,exp:"True (I)."},
+    {cat:'truefalse',isTF:true,q:"Electrocautery passes electrical current through tissue.",c:1,exp:"False (E)."},
+    {cat:'truefalse',isTF:true,q:"Transmittance sensor used in pulse oximetry measures the amount of light reflected back to the probe.",c:1,exp:"False (E) — that's the reflectance sensor."}
+];
+
+// إعادة ترقيم كل الأسئلة تلقائياً
+ALL.forEach((q, i) => { q.n = i + 1; });
+
+let currentCategory = 'all';
+let currentQuestions = [];
+let answeredCount = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let quizActive = false;
+
+// إنشاء الجزيئات المتحركة
+for(let i = 0; i < 40; i++) {
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 5 + 2 + 'px';
+    p.style.height = p.style.width;
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = Math.random() * 20 + 15 + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    document.getElementById('particles').appendChild(p);
+}
+
+// فلترة الفئات
+document.querySelectorAll('.filter-btns button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        const filtered = currentCategory === 'all' ? ALL : ALL.filter(q => q.cat === currentCategory);
+        document.getElementById('totalQ').textContent = filtered.length;
+    });
+});
+
+document.getElementById('totalQ').textContent = ALL.length;
+
+function startQuiz() {
+    currentQuestions = currentCategory === 'all' ? [...ALL] : ALL.filter(q => q.cat === currentCategory);
+    answeredCount = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    quizActive = true;
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizWrapper').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    document.getElementById('resultsScreen').style.display = 'none';
+    updateStats();
+    renderQuestions();
+    window.scrollTo(0, 0);
+}
+
+function renderQuestions() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    let lastCat = '';
+    currentQuestions.forEach((q, idx) => {
+        if (lastCat !== q.cat) {
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `<div class="section-line"></div><div class="section-title">${CATS[q.cat]}</div><div class="section-line right"></div>`;
+            container.appendChild(header);
+            lastCat = q.cat;
+        }
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-${idx}`;
+        card.dataset.index = idx;
+
+        let optsHtml = '';
+        if (q.isTF) {
+            optsHtml = `
+                <div class="option tf-opt" data-letter="T" data-opt="0" onclick="selectAnswer(${idx}, 0)">True ✔️</div>
+                <div class="option tf-opt" data-letter="F" data-opt="1" onclick="selectAnswer(${idx}, 1)">False ✖️</div>
+            `;
+        } else {
+            optsHtml = q.opts.map((opt, optIdx) =>
+                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+            ).join('');
+        }
+
+        card.innerHTML = `
+            <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
+            <div class="q-text">${q.q}</div>
+            <div class="options ${q.isTF ? 'tf-options' : ''}" id="opts-${idx}">${optsHtml}</div>
+            <div class="feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+    document.getElementById('submitBtn').disabled = true;
+}
+
+function selectAnswer(qIdx, optIdx) {
+    if (!quizActive) return;
+    const q = currentQuestions[qIdx];
+    const optsDiv = document.getElementById(`opts-${qIdx}`);
+    if (optsDiv.querySelector('.correct,.wrong')) return;
+    const isCorrect = optIdx === q.c;
+    const allOpts = optsDiv.querySelectorAll('.option');
+    allOpts.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        if (parseInt(opt.dataset.opt) === q.c) opt.classList.add('correct');
+        else if (parseInt(opt.dataset.opt) === optIdx && !isCorrect) opt.classList.add('wrong');
+    });
+    const fb = document.getElementById(`fb-${qIdx}`);
+    fb.style.display = 'block';
+    fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+    if (q.isTF) {
+        const correctLabel = q.c === 0 ? 'True ✔️' : 'False ✖️';
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer is: <b>${correctLabel}</b><br>📖 ${q.exp}`;
+    } else {
+        fb.innerHTML = isCorrect ? `✅ Correct! ${q.exp}` : `❌ Wrong! The correct answer: ${q.opts[q.c]}<br>📖 ${q.exp}`;
+    }
+    document.getElementById(`q-${qIdx}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) correctCount++; else wrongCount++;
+    answeredCount++;
+    updateStats();
+    if (answeredCount === currentQuestions.length) document.getElementById('submitBtn').disabled = false;
+}
+
+function updateStats() {
+    const total = currentQuestions.length;
+    const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
+    document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
+    document.getElementById('statPercent').textContent = `📊 ${percent}%`;
+    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function showResults() {
+    quizActive = false;
+    const total = currentQuestions.length;
+    const percent = Math.round(correctCount / total * 100);
+    document.getElementById('finalScore').textContent = correctCount;
+    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('resultCorrect').textContent = correctCount;
+    document.getElementById('resultWrong').textContent = wrongCount;
+    document.getElementById('resultPercent').textContent = `${percent}%`;
+    const circumference = 377;
+    const offset = circumference - (percent / 100 * circumference);
+    document.getElementById('scoreFill').style.strokeDashoffset = offset;
+    let msg = '';
+    if (percent >= 90) msg = '🌟 Excellent! Outstanding performance!';
+    else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
+    else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
+    else msg = '📚 Needs more revision — You can do better!';
+    document.getElementById('resultMessage').innerHTML = msg;
+    const reviewDiv = document.getElementById('reviewArea');
+    reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
+    let hasWrong = false;
+    currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-${idx}`);
+        if (card && card.classList.contains('wrong')) {
+            hasWrong = true;
+            let correctText = q.isTF ? (q.c === 0 ? 'True ✔️' : 'False ✖️') : q.opts[q.c];
+            reviewDiv.innerHTML += `
+                <div class="review-item">
+                    <strong>❌ Question ${q.n}:</strong> ${q.q}<br>
+                    <strong>✅ Correct Answer:</strong> ${correctText}<br>
+                    <span style="font-size:0.8rem; opacity:0.8;">📖 ${q.exp}</span>
+                </div>`;
+        }
+    });
+    if (!hasWrong) reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+    window.scrollTo(0, 0);
+}
+
+function restartQuiz() { startQuiz(); }
+
+function goHome() {
+    quizActive = false;
+    document.getElementById('quizWrapper').style.display = 'none';
+    document.getElementById('navbar').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+    window.scrollTo(0, 0);
+}
+
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+document.getElementById('submitBtn').addEventListener('click', showResults);
+</script>
+</body>
+</html>
