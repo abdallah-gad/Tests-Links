@@ -103,6 +103,21 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(145deg,#e8f0ee 0%
 .tf-opt{justify-content:center;font-size:1rem;font-weight:700;padding:18px;}
 .tf-opt[data-letter="T"]::before{background:rgba(82,183,136,0.18);color:var(--success);}
 .tf-opt[data-letter="F"]::before{background:rgba(217,119,119,0.18);color:var(--error);}
+
+/* ===== Compound Question Styles ===== */
+.sub-q-container{margin-top:15px; padding-top:15px; border-top:1px dashed rgba(45,106,79,0.15);}
+.sub-q{display:flex; flex-direction:column; gap:8px; margin-bottom:18px; background:rgba(255,255,255,0.4); padding:12px; border-radius:12px; border:1px solid rgba(45,106,79,0.05);}
+.sub-q-label{font-weight:700; font-size:0.95rem; color:var(--secondary);}
+.sub-q-text{font-size:0.9rem; color:#1a2a2a; margin-bottom:5px;}
+.match-select{width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(45,106,79,0.12);background:#fff;font-family:'Cairo',sans-serif;font-size:0.9rem;color:#1a2a2a;cursor:pointer;transition:all 0.2s;outline:none;}
+.match-select:hover{border-color:var(--secondary);}
+.match-select:disabled{cursor:default;background:#f4f8f7;opacity:1;}
+.match-select.correct{border-color:var(--success);background:rgba(82,183,136,0.06);color:var(--primary);font-weight:600;}
+.match-select.wrong{border-color:var(--error);background:rgba(217,119,119,0.06);color:#8b5555;}
+.sub-feedback{margin-top:8px;padding:8px 12px;border-radius:10px;font-size:0.8rem;display:none;}
+.sub-feedback.correct{background:rgba(82,183,136,0.06);border-right:3px solid var(--success);color:var(--primary);}
+.sub-feedback.wrong{background:rgba(217,119,119,0.06);border-right:3px solid var(--error);color:#8b5555;}
+
 @media (max-width:768px){.start-card{padding:30px 20px;margin:0 15px;}.start-card h1{font-size:1.5rem;}.question-card{padding:18px;}.results-screen{padding:25px;margin:80px 15px 30px;}.results-stats{gap:8px;}.result-stat .num{font-size:1.3rem;}.stat-badge{font-size:0.7rem;padding:3px 8px;}.progress-bar-container{width:100px;}}
 @media (max-width:480px){.tf-options{grid-template-columns:1fr;}}
 </style>
@@ -188,17 +203,26 @@ const CATS = {
     truefalse: '✔️ True / False'
 };
 
+// خيارات سؤال الصورة (Compound Question)
+const COMPOUND_OPTIONS = ["Foot switch", "Bipolar", "Electro surgery unit", "Patient return Electrode"];
+const COMPOUND_SUB_QUESTIONS = [
+    { label: "A", text: "Which Part designed to prevent Thermal effect called burn?", correct: 3, exp: "Patient return electrode is designed to safely return current and prevent thermal burns." },
+    { label: "B", text: "Hand free control pedal allow doctor To activate or deactivate", correct: 0, exp: "Foot switch allows the doctor to activate/deactivate the unit hands-free." },
+    { label: "C", text: "Passing high current through tissues", correct: 2, exp: "The Electro surgery unit is responsible for passing high current through tissues." },
+    { label: "D", text: "Which part make patient return Electrode is absent", correct: 1, exp: "In Bipolar electrosurgery, the patient return electrode is not needed because current flows between the two tips of the forceps." }
+];
+
 const ALL = [
     // ===== MCQ =====
     {cat:'anesthesia',q:"In anesthesia Machine excess gas is discharged through the:",opts:["Soda lime","Vaporizer","APL valve","O2 flowmeter"],c:2,exp:"APL valve."},
     {cat:'anesthesia',q:"Cylinder sizes are designated according to letters, which one is common:",opts:["Size M","Size V","Size B","Size E"],c:3,exp:"Size E is common."},
-    {cat:'surgery',q:"Producing deep heating directly to the tissues:",opts:["Electrocautery","Electrocardiograph","Electrosurgery","None"],c:2,exp:"Electrosurgery produces deep heating."},
+    {cat:'surgery',q:"Producing deep heating directly to the tissues:",opts:["Electrocautery","Electrocardiograph","Electrosurgery","None"],c:0,exp:"Electrocautery produces deep heating."},
     {cat:'anesthesia',q:"Is/are the used mode of ventilation during general anesthesia:",opts:["VCV & PCV","SIMV","CPAP","IPAP"],c:0,exp:"VCV & PCV."},
-    {cat:'ecg',q:"The normal heart frequency is about:",opts:["72 bpm","100 bpm","60 bpm","80 bpm"],c:0,exp:"About 72 bpm. (Based on standard normal resting heart rate)."},
-    {cat:'oximetry',q:"One of these is NOT a limitation for pulse oximetry:",opts:["Lipids","Nail polish","Poor circulation","Cut off limbs"],c:0,exp:"Lipids are not a standard limitation mentioned compared to the others. (Note: Nail polish, poor circulation, and cut off limbs are known limitations)."},
+    {cat:'ecg',q:"The normal heart frequency is about:",opts:["10 HZ","100 HZ","1000 HZ","1 HZ"],c:3,exp:"About 1 HZ. (Based on standard normal resting heart rate)."},
+    {cat:'oximetry',q:"One of these is NOT a limitation for pulse oximetry:",opts:["Lipids","Nail polish","Poor circulation","Cut off limbs"],c:3,exp:"Cut off limbs are not a standard limitation mentioned compared to the others. (Note: Nail polish, poor circulation, and cut off limbs are known limitations)."},
     {cat:'oximetry',q:"Red light is in the wavelength:",opts:["660 nm","900-940 nm","200 nm","1200 nm"],c:0,exp:"660 nm (red light)."},
     {cat:'ecg',q:"When your skeletal muscles undergo tremors, the ECG is bombarded with seemingly random activity:",opts:["AC interference","Muscle Tremor","Poor grounded","None"],c:1,exp:"Muscle Tremor (artifact)."},
-    {cat:'oximetry',q:"Pulse oximetry cannot tell you:",opts:["SPO2","Heart rate","Carbon dioxide levels","Pulse rate"],c:2,exp:"It cannot measure carbon dioxide levels (needs capnography)."},
+    {cat:'oximetry',q:"Pulse oximetry cannot tell you Except:",opts:["SPO2","Heart rate","Carbon dioxide levels","Pulse rate"],c:3,exp:"It cannot measure carbon dioxide levels (needs capnography)."},
     {cat:'ecg',q:"Delays and relays the impulse to ensure proper timing between atrial and ventricular contractions:",opts:["(SA) node","(AV) node","Heart fiber","Atria"],c:1,exp:"AV node."},
     {cat:'oximetry',q:"Sensor application is limited to peripheral parts:",opts:["Reflectance","Transmittance"],c:1,exp:"Transmittance sensor is limited to peripheral parts (like finger)."},
     {cat:'oximetry',q:"Pulse oximetry tells you:",opts:["ERG","EMG","SPO2","ECG"],c:2,exp:"SPO2."},
@@ -207,9 +231,17 @@ const ALL = [
     {cat:'anesthesia',q:"Absorption of carbon dioxide from the patient breathing circuit in anesthesia Machine:",opts:["Soda lime","Vaporizer","APL","O2 flowmeter"],c:0,exp:"Soda lime."},
     {cat:'surgery',q:"Endoscopes, machines are types of:",opts:["Therapeutic Equipment only","Diagnostics Equipment only","Diagnostics & Therapeutic Equipment","Life support Equipment"],c:2,exp:"Diagnostics & Therapeutic."},
     {cat:'oximetry',q:"Probe can be placed virtually in any place on the body:",opts:["Reflectance","Transmittance","Flowmeter","Manometer"],c:0,exp:"Reflectance probe can be placed almost anywhere."},
-    {cat:'anesthesia',q:"Vaporizer is the device which produces a vapor from a volatile liquid anesthetic. Halogenated anesthetics include:",opts:["Silver & silver chloride","Isoflurane and sevoflurane","Sulfate & phosphate","None"],c:1,exp:"Isoflurane and sevoflurane."},
-    {cat:'surgery',q:"For the figure below answer these questions: (Figure shows Foot switch, Bipolar Electrosurgery unit, Patient return Electrode)",opts:["Electrosurgery setup","ECG setup","Anesthesia setup","Pulse oximetry setup"],c:0,exp:"The figure illustrates an Electrosurgery setup. (Note: Image placeholder used in this code).", img:"images/diagram.png"},
-    {cat:'surgery',q:"According to the diagram shown, what are the components labeled in the electrosurgery setup?",opts:["Foot switch, Bipolar Electrosurgery unit, Patient return Electrode","ECG machine, Leads, Ground electrode","Vaporizer, Flowmeter, Soda lime","Pulse oximeter, Probe, Monitor"],c:0,exp:"The diagram labels the Foot switch, the Bipolar Electrosurgery unit, and the Patient return Electrode.", img:"images/diagram.png"},
+    {cat:'anesthesia',q:"Vaporizer is the device which produces a vapor from a volatile liquid anesthetic. Halogenated anesthetics include:",opts:["Silver & silver chloride","Sulfate & phosphate","Isoflurane and sevoflurane","None"],c:2,exp:"Isoflurane and sevoflurane."},
+
+    // ===== COMPOUND QUESTION (Q19) =====
+    {
+        cat:'surgery',
+        isCompound: true,
+        q: "For the figure below answer these questions:",
+        img: "images/diagram.png"
+    },
+
+    // ===== MCQ (Continue) =====
     {cat:'ecg',q:"In ECG, ___ electrode functions solely as a ground to prevent alternating-current interference:",opts:["RA","LA","RL","LL"],c:2,exp:"RL (Right Leg) acts as ground."},
     {cat:'ecg',q:"The most common electrode used for an ECG machine is the ___ electrode because it is stable when exposed to biological tissue:",opts:["Fi FiCl","Na NaCl","Si SiCl","Ag AgCl"],c:3,exp:"Ag/AgCl."},
     {cat:'surgery',q:"All are types of laboratory equipment except:",opts:["Sample separation","Microscopy","Hematology","X-ray"],c:3,exp:"X-ray is imaging, not lab equipment."},
@@ -299,35 +331,68 @@ function renderQuestions() {
         card.id = `q-${idx}`;
         card.dataset.index = idx;
 
-        let imgHtml = '';
-        if (q.img) {
-            imgHtml = `<img src="${q.img}" class="q-image" alt="Question Diagram" onerror="this.src='https://via.placeholder.com/400x200?text=Diagram+Image'">`;
-        }
+        // ===== رسم السؤال المركب (Compound Question) =====
+        if (q.isCompound) {
+            let subQsHtml = '<div class="sub-q-container">';
+            COMPOUND_SUB_QUESTIONS.forEach((sq, subIdx) => {
+                let optionsHtml = COMPOUND_OPTIONS.map((opt, i) => 
+                    `<option value="${i}">${opt}</option>`
+                ).join('');
 
-        let optsHtml = '';
-        if (q.isTF) {
-            optsHtml = `
-                <div class="option tf-opt" data-letter="T" data-opt="0" onclick="selectAnswer(${idx}, 0)">True ✔️</div>
-                <div class="option tf-opt" data-letter="F" data-opt="1" onclick="selectAnswer(${idx}, 1)">False ✖️</div>
+                subQsHtml += `
+                    <div class="sub-q" id="subq-${idx}-${subIdx}">
+                        <div class="sub-q-label">Question ${sq.label}</div>
+                        <div class="sub-q-text">${sq.text}</div>
+                        <select class="match-select" id="sel-${idx}-${subIdx}" onchange="checkSubAnswer(${idx}, ${subIdx}, this.value)">
+                            <option value="">— Select the correct part —</option>
+                            ${optionsHtml}
+                        </select>
+                        <div class="sub-feedback" id="subfb-${idx}-${subIdx}"></div>
+                    </div>
+                `;
+            });
+            subQsHtml += '</div>';
+
+            card.innerHTML = `
+                <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
+                <div class="q-text" style="font-weight:700;">${q.q}</div>
+                <img src="${q.img}" class="q-image" alt="Question Diagram" onerror="this.src='https://via.placeholder.com/400x200?text=Diagram+Image'">
+                ${subQsHtml}
             `;
-        } else {
-            optsHtml = q.opts.map((opt, optIdx) =>
-                `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
-            ).join('');
-        }
+        } 
+        // ===== رسم الأسئلة العادية (MCQ & TF) =====
+        else {
+            let imgHtml = '';
+            if (q.img) {
+                imgHtml = `<img src="${q.img}" class="q-image" alt="Question Diagram" onerror="this.src='https://via.placeholder.com/400x200?text=Diagram+Image'">`;
+            }
 
-        card.innerHTML = `
-            <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
-            <div class="q-text">${q.q}</div>
-            ${imgHtml}
-            <div class="options ${q.isTF ? 'tf-options' : ''}" id="opts-${idx}">${optsHtml}</div>
-            <div class="feedback" id="fb-${idx}"></div>
-        `;
+            let optsHtml = '';
+            if (q.isTF) {
+                optsHtml = `
+                    <div class="option tf-opt" data-letter="T" data-opt="0" onclick="selectAnswer(${idx}, 0)">True ✔️</div>
+                    <div class="option tf-opt" data-letter="F" data-opt="1" onclick="selectAnswer(${idx}, 1)">False ✖️</div>
+                `;
+            } else {
+                optsHtml = q.opts.map((opt, optIdx) =>
+                    `<div class="option" data-letter="${L[optIdx]}" data-opt="${optIdx}" onclick="selectAnswer(${idx}, ${optIdx})">${opt}</div>`
+                ).join('');
+            }
+
+            card.innerHTML = `
+                <div class="q-header"><div class="q-num">${q.n}</div><div class="q-cat">${CATS[q.cat]}</div></div>
+                <div class="q-text">${q.q}</div>
+                ${imgHtml}
+                <div class="options ${q.isTF ? 'tf-options' : ''}" id="opts-${idx}">${optsHtml}</div>
+                <div class="feedback" id="fb-${idx}"></div>
+            `;
+        }
         container.appendChild(card);
     });
     document.getElementById('submitBtn').disabled = true;
 }
 
+// دالة اختيار إجابة للأسئلة العادية
 function selectAnswer(qIdx, optIdx) {
     if (!quizActive) return;
     const q = currentQuestions[qIdx];
@@ -356,41 +421,111 @@ function selectAnswer(qIdx, optIdx) {
     if (answeredCount === currentQuestions.length) document.getElementById('submitBtn').disabled = false;
 }
 
+// دالة فحص إجابة الأسئلة الفرعية (Compound)
+function checkSubAnswer(qIdx, subIdx, val) {
+    if (!quizActive) return;
+    if (val === '') return;
+
+    const sq = COMPOUND_SUB_QUESTIONS[subIdx];
+    const sel = document.getElementById(`sel-${qIdx}-${subIdx}`);
+    const fb = document.getElementById(`subfb-${qIdx}-${subIdx}`);
+    const subQDiv = document.getElementById(`subq-${qIdx}-${subIdx}`);
+    
+    const chosenIdx = parseInt(val);
+    const isCorrect = chosenIdx === sq.correct;
+
+    sel.disabled = true;
+    sel.classList.add(isCorrect ? 'correct' : 'wrong');
+
+    fb.style.display = 'block';
+    fb.className = `sub-feedback ${isCorrect ? 'correct' : 'wrong'}`;
+
+    if (isCorrect) {
+        fb.innerHTML = `✅ Correct! <br>📖 ${sq.exp}`;
+        correctCount++;
+        subQDiv.style.borderRight = '4px solid var(--success)';
+    } else {
+        fb.innerHTML = `❌ Wrong! The correct answer is: <b>${COMPOUND_OPTIONS[sq.correct]}</b><br>📖 ${sq.exp}`;
+        wrongCount++;
+        subQDiv.style.borderRight = '4px solid var(--error)';
+    }
+
+    answeredCount++;
+    updateStats();
+
+    if (answeredCount === currentQuestions.length) {
+        document.getElementById('submitBtn').disabled = false;
+    }
+}
+
 function updateStats() {
-    const total = currentQuestions.length;
+    // حساب إجمالي الإجابات المتوقعة (الأسئلة العادية + 4 إجابات للسؤال المركب)
+    let totalAnswers = 0;
+    currentQuestions.forEach(q => {
+        if (q.isCompound) totalAnswers += 4;
+        else totalAnswers += 1;
+    });
+
     const percent = answeredCount > 0 ? Math.round(correctCount / answeredCount * 100) : 0;
-    document.getElementById('statAnswered').textContent = `${answeredCount}/${total}`;
+    
+    document.getElementById('statAnswered').textContent = `${answeredCount}/${totalAnswers}`;
     document.getElementById('statCorrect').textContent = `✅ ${correctCount}`;
     document.getElementById('statWrong').textContent = `❌ ${wrongCount}`;
     document.getElementById('statPercent').textContent = `📊 ${percent}%`;
-    const progress = total > 0 ? (answeredCount / total * 100) : 0;
+    
+    const progress = totalAnswers > 0 ? (answeredCount / totalAnswers * 100) : 0;
     document.getElementById('progressFill').style.width = `${progress}%`;
 }
 
 function showResults() {
     quizActive = false;
-    const total = currentQuestions.length;
-    const percent = Math.round(correctCount / total * 100);
+    
+    // حساب الإجمالي الصحيح
+    let totalAnswers = 0;
+    currentQuestions.forEach(q => {
+        if (q.isCompound) totalAnswers += 4;
+        else totalAnswers += 1;
+    });
+
+    const percent = Math.round(correctCount / totalAnswers * 100);
+    
     document.getElementById('finalScore').textContent = correctCount;
-    document.getElementById('finalTotal').textContent = total;
+    document.getElementById('finalTotal').textContent = totalAnswers; // هنا هيظهر 43
     document.getElementById('resultCorrect').textContent = correctCount;
     document.getElementById('resultWrong').textContent = wrongCount;
     document.getElementById('resultPercent').textContent = `${percent}%`;
+    
     const circumference = 377;
     const offset = circumference - (percent / 100 * circumference);
     document.getElementById('scoreFill').style.strokeDashoffset = offset;
+    
     let msg = '';
     if (percent >= 90) msg = '🌟 Excellent! Outstanding performance!';
     else if (percent >= 75) msg = '👏 Very Good! Keep up the great work!';
     else if (percent >= 60) msg = '👍 Good! Review the incorrect answers.';
     else msg = '📚 Needs more revision — You can do better!';
     document.getElementById('resultMessage').innerHTML = msg;
+    
     const reviewDiv = document.getElementById('reviewArea');
     reviewDiv.innerHTML = '<h3>📋 Review Incorrect Answers</h3>';
     let hasWrong = false;
+    
     currentQuestions.forEach((q, idx) => {
         const card = document.getElementById(`q-${idx}`);
-        if (card && card.classList.contains('wrong')) {
+        if (q.isCompound) {
+            COMPOUND_SUB_QUESTIONS.forEach((sq, subIdx) => {
+                const sel = document.getElementById(`sel-${idx}-${subIdx}`);
+                if (sel && sel.classList.contains('wrong')) {
+                    hasWrong = true;
+                    reviewDiv.innerHTML += `
+                        <div class="review-item">
+                            <strong>❌ Question ${q.n} (Sub ${sq.label}):</strong> ${sq.text}<br>
+                            <strong>✅ Correct Answer:</strong> ${COMPOUND_OPTIONS[sq.correct]}<br>
+                            <span style="font-size:0.8rem; opacity:0.8;">📖 ${sq.exp}</span>
+                        </div>`;
+                }
+            });
+        } else if (card && card.classList.contains('wrong')) {
             hasWrong = true;
             let correctText = q.isTF ? (q.c === 0 ? 'True ✔️' : 'False ✖️') : q.opts[q.c];
             reviewDiv.innerHTML += `
@@ -401,6 +536,7 @@ function showResults() {
                 </div>`;
         }
     });
+    
     if (!hasWrong) reviewDiv.innerHTML = '<div style="text-align:center;color:#2d6a4f;padding:20px;">🎉 All answers correct! Excellent work!</div>';
     document.getElementById('quizWrapper').style.display = 'none';
     document.getElementById('resultsScreen').style.display = 'block';
